@@ -1,4 +1,4 @@
-import { GlobalStyle, StyledComponentsRegistry } from "@/core";
+import { GlobalStyle, StyledComponentsRegistry } from "@/index";
 import type { Metadata } from "next";
 import { PropsWithChildren } from "react";
 
