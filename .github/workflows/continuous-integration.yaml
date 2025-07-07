@@ -1,0 +1,34 @@
+name: Continuous Integration for Design System
+
+on:
+  push:
+    branches-ignore: ["prod"]
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm clean-install
+
+      - name: Lint with eslint
+        run: npx eslint app/
+
+      - name: Format with prettier
+        run: npx prettier --check app/
+
+      - name: Ensure build passes
+        run: npm run build
