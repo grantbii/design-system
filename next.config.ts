@@ -10,7 +10,10 @@ const nextConfig: NextConfig = {
     config.resolve.alias = {
       ...(config.resolve.alias ?? {}),
       // map '@' → the design-system source folder
-      "@": path.resolve(__dirname, "node_modules/@grantbii/design-system"),
+      "@/core": path.resolve(
+        __dirname,
+        "node_modules/@grantbii/design-system/core",
+      ),
     };
     return config;
   },
