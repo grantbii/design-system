@@ -1,19 +1,20 @@
 {
   "name": "@grantbii/design-system",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Grantbii's Design System",
   "homepage": "https://github.com/grantbii/design-system",
   "license": "UNLICENSED",
   "files": [
-    "out"
+    "dist"
   ],
+  "main": "./dist/index.js",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "prepare": "husky",
-    "prepublishOnly": "npx tsc && cp -r ./public ./out && cp ./package.json ./out"
+    "prepublishOnly": "npx tsc && cp -r ./public ./dist && cp ./package.json ./dist"
   },
   "dependencies": {
     "next": "^15.3.5",
