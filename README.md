@@ -50,6 +50,10 @@ cwebp -exact -lossless -progress your_image.png -o your_image.webp
 
 ## Publish
 
+Bump version in `package.json`
+
+Check which files would be published with `npm publish --dry-run`
+
 Publishing to NPM is automatic with [GitHub Actions](.github/workflows/continuous-delivery.yaml).
 
 Once a commit has been made on the `prod` branch, a build would be triggered.

@@ -1,28 +1,32 @@
 {
   "name": "@grantbii/design-system",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Grantbii's Design System",
   "homepage": "https://github.com/grantbii/design-system",
   "license": "UNLICENSED",
+  "files": [
+    "out"
+  ],
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prepare": "husky"
+    "prepare": "husky",
+    "prepublishOnly": "npx tsc && cp -r ./public ./out && cp ./package.json ./out"
   },
   "dependencies": {
-    "next": "15.3.5",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "next": "^15.3.5",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "styled-components": "^6.1.19"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
+    "@eslint/eslintrc": "^3.3.1",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint": "^9",
+    "eslint": "^9.30.1",
     "eslint-config-next": "15.3.5",
     "husky": "^9.1.7",
     "lint-staged": "^16.1.2",

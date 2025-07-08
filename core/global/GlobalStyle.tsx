@@ -1,8 +1,8 @@
 "use client";
 
-import { BLACK_WHITE_COLOR, TYPOGRAPHY_COLOR } from "@/core/tokens/colors";
-import "@/public/fonts/satoshi/css/satoshi.css";
 import { createGlobalStyle } from "styled-components";
+import { BLACK_WHITE_COLOR, TYPOGRAPHY_COLOR } from "../../core/tokens/colors";
+import "../../public/fonts/satoshi/css/satoshi.css";
 
 const GlobalStyle = createGlobalStyle`
   html,
