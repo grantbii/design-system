@@ -1,3 +1,3 @@
-export { default as StyledComponentsRegistry } from "@/core/integrations/StyledComponentsRegistry";
-export { default as GlobalStyle } from "@/core/global/GlobalStyle";
-export * from "@/core/tokens/colors";
+export { default as GlobalStyle } from "./core/global/GlobalStyle";
+export { default as StyledComponentsRegistry } from "./core/integrations/StyledComponentsRegistry";
+export * from "./core/tokens/colors";
