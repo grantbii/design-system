@@ -1,0 +1,32 @@
+import { BrandLogo } from "@/index";
+import { Meta } from "@storybook/nextjs-vite";
+import type { StoryObj } from "@storybook/nextjs-vite";
+
+const meta: Meta<typeof BrandLogo> = {
+  title: "Design System/Atoms/Brand Logo",
+  component: BrandLogo,
+  tags: ["autodocs"],
+  parameters: {
+    layout: "centered",
+  },
+};
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {},
+};
+
+export const Dark: Story = {
+  args: {
+    isDarkTheme: true,
+  },
+};
+
+export const Light: Story = {
+  args: {
+    isDarkTheme: false,
+  },
+};

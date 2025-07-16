@@ -1,6 +1,6 @@
 {
   "name": "@grantbii/design-system",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Grantbii's Design System",
   "homepage": "https://github.com/grantbii/design-system",
   "license": "UNLICENSED",
@@ -9,12 +9,12 @@
   ],
   "main": "./dist/index.js",
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
+    "build": "storybook build",
     "lint": "next lint",
     "prepare": "husky",
-    "prepublishOnly": "npx tsc && cp -r ./public ./dist && cp ./package.json ./dist"
+    "prepublishOnly": "npx tsc && cp -r ./public ./dist && cp ./package.json ./dist",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "next": "^15.3.5",
@@ -23,16 +23,28 @@
     "styled-components": "^6.1.19"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^4.0.1",
     "@eslint/eslintrc": "^3.3.1",
+    "@storybook/addon-a11y": "^9.0.17",
+    "@storybook/addon-docs": "^9.0.17",
+    "@storybook/addon-onboarding": "^9.0.17",
+    "@storybook/addon-vitest": "^9.0.17",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9.30.1",
     "eslint-config-next": "15.3.5",
+    "eslint-plugin-storybook": "^9.0.17",
     "husky": "^9.1.7",
     "lint-staged": "^16.1.2",
     "prettier": "^3.6.2",
-    "typescript": "^5.8.3"
+    "storybook": "^9.0.17",
+    "typescript": "^5.8.3",
+    "@storybook/nextjs-vite": "^9.0.17",
+    "vitest": "^3.2.4",
+    "@vitest/browser": "^3.2.4",
+    "playwright": "^1.54.1",
+    "@vitest/coverage-v8": "^3.2.4"
   },
   "lint-staged": {
     "**/*.{html,css,json,md,yaml}": [

@@ -2,6 +2,8 @@
 
 Based on Grantbii's Global Design Library in Figma.
 
+Approach: Atomic Design
+
 ## Prerequisites
 
 Node 22
@@ -54,6 +56,8 @@ Bump version in `package.json`
 
 Check which files would be published with `npm publish --dry-run`
 
-Publishing to NPM is automatic with [GitHub Actions](.github/workflows/continuous-delivery.yaml).
+The package is published to npm automatically with [GitHub Actions](.github/workflows/continuous-delivery.yaml).
+
+Documentation is published automatically with AWS Amplify.
 
 Once a commit has been made on the `prod` branch, a build would be triggered.
