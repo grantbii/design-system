@@ -19,14 +19,14 @@ export const Default: Story = {
   args: {},
 };
 
-export const Dark: Story = {
-  args: {
-    isDarkTheme: true,
-  },
-};
-
 export const Light: Story = {
   args: {
     isDarkTheme: false,
+  },
+};
+
+export const Dark: Story = {
+  args: {
+    isDarkTheme: true,
   },
 };
