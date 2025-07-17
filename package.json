@@ -1,6 +1,6 @@
 {
   "name": "@grantbii/design-system",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "Grantbii's Design System",
   "homepage": "https://github.com/grantbii/design-system",
   "license": "UNLICENSED",
@@ -39,7 +39,6 @@
     "eslint": "^9.30.1",
     "eslint-config-next": "15.3.5",
     "eslint-plugin-storybook": "^9.0.17",
-    "gh-pages": "^6.3.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.1.2",
     "playwright": "^1.54.1",
