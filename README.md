@@ -22,13 +22,11 @@ npm i
 
 ## Run
 
-First, run the development server:
-
 ```bash
-npm run dev
+npm run storybook
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:6006](http://localhost:6006) with your browser to see the result.
 
 The pages auto-updates as you edit the files.
 
@@ -58,6 +56,6 @@ Check which files would be published with `npm publish --dry-run`
 
 The package is published to npm automatically with [GitHub Actions](.github/workflows/continuous-delivery.yaml).
 
-Documentation is published automatically with AWS Amplify.
+Documentation is published automatically to GitHub pages with [GitHub Actions](.github/workflows/continuous-delivery.yaml).
 
 Once a commit has been made on the `prod` branch, a build would be triggered.
