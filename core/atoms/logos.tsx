@@ -1,6 +1,6 @@
 import Image from "next/image";
-import darkLogo from "./images/brand_logo-dark.webp";
-import lightLogo from "./images/brand_logo-light.webp";
+import darkLogo from "../../public/logos/brand_logo-dark.webp";
+import lightLogo from "../../public/logos/brand_logo-light.webp";
 
 type BrandLogoProps = {
   isDarkTheme?: boolean;
