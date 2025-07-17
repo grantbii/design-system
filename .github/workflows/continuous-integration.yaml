@@ -31,4 +31,4 @@ jobs:
         run: npx prettier --check app/
 
       - name: Ensure build passes
-        run: npm run build
+        run: npm run build-storybook
