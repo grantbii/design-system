@@ -1,8 +1,12 @@
 {
   "name": "@grantbii/design-system",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "description": "Grantbii's Design System",
-  "homepage": "https://github.com/grantbii/design-system",
+  "homepage": "https://design.grantbii.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/grantbii/design-system.git"
+  },
   "license": "UNLICENSED",
   "files": [
     "dist"
