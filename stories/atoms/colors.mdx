@@ -1,0 +1,94 @@
+import { ColorItem, ColorPalette, Meta } from "@storybook/addon-docs/blocks";
+import {
+  ACCENT_COLOR,
+  BLACK_COLOR,
+  MAIN_COLOR,
+  NEUTRAL_COLOR,
+  OVERLAY_COLOR,
+  TYPOGRAPHY_COLOR,
+  WHITE_COLOR,
+} from "../../index";
+
+<Meta title="Colors" />
+
+<ColorPalette>
+  <ColorItem
+    title="Main"
+    subtitle="Represents Grantbii"
+    colors={{
+      "Grantbii Blue": MAIN_COLOR.grantbiiBlue,
+      "Grantbii Orange": MAIN_COLOR.grantbiiOrange,
+    }}
+  />
+  <ColorItem title="Black" colors={{ Black: BLACK_COLOR }} />
+  <ColorItem title="White" colors={{ White: WHITE_COLOR }} />
+  <ColorItem
+    title="Neutral"
+    subtitle="Greyscale"
+    colors={{
+      "Grey 1": NEUTRAL_COLOR.grey1,
+      "Grey 2": NEUTRAL_COLOR.grey2,
+      "Grey 3": NEUTRAL_COLOR.grey3,
+      "Grey 4": NEUTRAL_COLOR.grey4,
+    }}
+  />
+  <ColorItem
+    title="Overlay"
+    subtitle="Usually used for overlay effects on popup or bottom sheet components"
+    colors={{ Overlay: OVERLAY_COLOR }}
+  />
+</ColorPalette>
+
+<ColorPalette>
+  <ColorItem
+    title="Red"
+    subtitle="Usually indicates dangerous, wrong, or rejected information"
+    colors={{
+      "Red 1": ACCENT_COLOR.red1,
+      "Red 2": ACCENT_COLOR.red2,
+      "Red 3": ACCENT_COLOR.red3,
+    }}
+  />
+  <ColorItem
+    title="Yellow"
+    subtitle="Usually indicates warning, progressing, etc"
+    colors={{
+      "Yellow 1": ACCENT_COLOR.yellow1,
+      "Yellow 2": ACCENT_COLOR.yellow2,
+      "Yellow 3": ACCENT_COLOR.yellow3,
+    }}
+  />
+  <ColorItem
+    title="Green"
+    subtitle="Usually indicates success, correct, passed, etc"
+    colors={{
+      "Green 1": ACCENT_COLOR.green1,
+      "Green 2": ACCENT_COLOR.green2,
+      "Green 3": ACCENT_COLOR.green3,
+    }}
+  />
+  <ColorItem
+    title="Blue"
+    subtitle="Usually indicates info, no emotion"
+    colors={{
+      "Blue 1": ACCENT_COLOR.blue1,
+      "Blue 2": ACCENT_COLOR.blue2,
+      "Blue 3": ACCENT_COLOR.blue3,
+    }}
+  />
+</ColorPalette>
+
+<ColorPalette>
+  <ColorItem
+    title="Typography"
+    subtitle="For text"
+    colors={{
+      "Black/High": TYPOGRAPHY_COLOR.blackHigh,
+      "Black/Medium": TYPOGRAPHY_COLOR.blackMedium,
+      "Black/Low": TYPOGRAPHY_COLOR.blackLow,
+      "White/High": TYPOGRAPHY_COLOR.whiteHigh,
+      "White/Medium": TYPOGRAPHY_COLOR.whiteMedium,
+      "White/Low": TYPOGRAPHY_COLOR.whiteLow,
+    }}
+  />
+</ColorPalette>

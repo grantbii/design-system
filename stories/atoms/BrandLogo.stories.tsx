@@ -1,6 +1,6 @@
-import { BrandLogo } from "@/index";
-import { Meta } from "@storybook/nextjs-vite";
+import { BrandLogo } from "@/.";
 import type { StoryObj } from "@storybook/nextjs-vite";
+import { Meta } from "@storybook/nextjs-vite";
 
 const meta: Meta<typeof BrandLogo> = {
   title: "Design System/Atoms/Brand Logo",
