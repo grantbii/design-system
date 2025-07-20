@@ -1,12 +1,11 @@
 export const MAIN_COLOR = {
-  primary: "#16538a",
-  secondary: "#f3924d",
+  grantbiiBlue: "#16538a",
+  grantbiiOrange: "#f3924d",
 };
 
-export const BLACK_WHITE_COLOR = {
-  black: "#232022",
-  white: "#ffffff",
-};
+export const BLACK_COLOR = "#232022";
+
+export const WHITE_COLOR = "#ffffff";
 
 export const NEUTRAL_COLOR = {
   grey1: "#999999",

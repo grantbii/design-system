@@ -9,7 +9,7 @@ type BrandLogoProps = {
   alt?: string;
 };
 
-export const BrandLogo = ({
+const BrandLogo = ({
   width = 250,
   height = 80,
   isDarkTheme = true,
@@ -22,3 +22,5 @@ export const BrandLogo = ({
     height={height}
   />
 );
+
+export default BrandLogo;
