@@ -28,7 +28,7 @@ jobs:
         run: npx eslint core/
 
       - name: Format with prettier
-        run: npx prettier --check app/
+        run: npx prettier --check core/
 
       - name: Ensure build passes
         run: npm run build-storybook

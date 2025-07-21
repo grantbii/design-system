@@ -1,6 +1,6 @@
 {
   "name": "@grantbii/design-system",
-  "version": "1.0.22",
+  "version": "1.0.23",
   "description": "Grantbii's Design System",
   "homepage": "https://design.grantbii.com",
   "repository": {
@@ -8,15 +8,11 @@
     "url": "https://github.com/grantbii/design-system.git"
   },
   "license": "UNLICENSED",
-  "files": [
-    "dist"
-  ],
-  "main": "./dist/index.js",
+  "main": "./index.js",
   "scripts": {
-    "build": "storybook build",
     "lint": "next lint",
     "prepare": "husky",
-    "prepublishOnly": "npx tsc && cp -r ./public ./dist && cp ./package.json ./dist",
+    "build": "npx tsc && cp -r ./public ./dist && cp ./package.json ./dist && cp README.md ./dist",
     "postpublish": "rm -rf dist/",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
@@ -30,6 +26,7 @@
   "devDependencies": {
     "@chromatic-com/storybook": "^4.0.1",
     "@eslint/eslintrc": "^3.3.1",
+    "@next/eslint-plugin-next": "^15.4.2",
     "@storybook/addon-a11y": "^9.0.17",
     "@storybook/addon-docs": "^9.0.17",
     "@storybook/addon-onboarding": "^9.0.17",
