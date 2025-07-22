@@ -28,7 +28,7 @@ npm run storybook
 
 Open [http://localhost:6006](http://localhost:6006) with your browser to see the result.
 
-The pages auto-updates as you edit the files.
+The pages auto-update as you edit the files.
 
 ## Develop
 

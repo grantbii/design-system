@@ -1,6 +1,6 @@
 {
   "name": "@grantbii/design-system",
-  "version": "1.0.24",
+  "version": "1.0.25",
   "description": "Grantbii's Design System",
   "homepage": "https://design.grantbii.com",
   "repository": {
@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",
+    "country-flag-icons": "^1.5.19",
     "next": "^15.3.5",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
