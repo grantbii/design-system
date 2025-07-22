@@ -2,7 +2,7 @@
 
 import { createGlobalStyle } from "styled-components";
 import "../../public/fonts/satoshi/css/satoshi.css";
-import { TYPOGRAPHY_COLOR, WHITE_COLOR } from "../atoms/colors";
+import * as Colors from "../atoms/colors";
 
 const GlobalStyle = createGlobalStyle`
   html,
@@ -11,8 +11,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    color: ${TYPOGRAPHY_COLOR.blackHigh};
-    background: ${WHITE_COLOR};
+    color: ${Colors.typography.blackHigh};
+    background: ${Colors.base.white};
     font-family: Satoshi;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
