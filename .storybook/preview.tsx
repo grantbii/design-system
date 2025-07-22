@@ -1,4 +1,5 @@
 import type { Preview } from "@storybook/nextjs-vite";
+import { GlobalStyle } from "../index";
 
 const preview: Preview = {
   parameters: {
@@ -19,3 +20,12 @@ const preview: Preview = {
 };
 
 export default preview;
+
+export const decorators = [
+  (Story) => (
+    <>
+      <GlobalStyle />
+      <Story />
+    </>
+  ),
+];
