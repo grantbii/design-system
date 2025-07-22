@@ -4,3 +4,4 @@ export { default as BrandLogo } from "./core/atoms/BrandLogo";
 export * as Colors from "./core/atoms/colors";
 export { default as GlobalStyle } from "./core/global/GlobalStyle";
 export { default as StyledComponentsRegistry } from "./core/integrations/StyledComponentsRegistry";
+export { default as Badge } from "./core/molecules/Badge";
