@@ -1,20 +1,21 @@
-export const MAIN_COLOR = {
+export const main = {
   grantbiiBlue: "#16538a",
   grantbiiOrange: "#f3924d",
 };
 
-export const BLACK_COLOR = "#232022";
+export const base = {
+  black: "#232022",
+  white: "#ffffff",
+};
 
-export const WHITE_COLOR = "#ffffff";
-
-export const NEUTRAL_COLOR = {
+export const neutral = {
   grey1: "#999999",
   grey2: "#cccccc",
   grey3: "#eeeeee",
   grey4: "#fafafa",
 };
 
-export const ACCENT_COLOR = {
+export const accent = {
   // usually includes dangerous, wrong or rejected information
   red1: "#c02318",
   red2: "#f88e86",
@@ -33,13 +34,15 @@ export const ACCENT_COLOR = {
   blue3: "#bad6f7",
 };
 
-export const OVERLAY_COLOR = "#13131366";
-
-export const TYPOGRAPHY_COLOR = {
+export const typography = {
   blackHigh: "#000000e5",
   blackMedium: "#00000099",
   blackLow: "#0000004d",
   whiteHigh: "#ffffff",
   whiteMedium: "#ffffff99",
   whiteLow: "#0000001a",
+};
+
+export const semantic = {
+  overlay: "#13131366",
 };
