@@ -8,21 +8,24 @@ type BadgeProps = {
   onClickClose?: MouseEventHandler<HTMLButtonElement>;
   backgroundColor?: string;
   color?: string;
+  textWidthPixels?: number;
 };
 
 const Badge = ({
   icon,
   text,
   onClickClose,
-  backgroundColor = Colors.neutral.grey3,
-  color = Colors.typography.blackHigh,
+  backgroundColor,
+  color,
+  textWidthPixels,
 }: BadgeProps) => (
   <BaseBadge $backgroundColor={backgroundColor} $color={color}>
     {icon ? icon : <></>}
-    {text ? <BadgeText>{text}</BadgeText> : <></>}
+    <BadgeText $widthPixels={textWidthPixels}>{text}</BadgeText>
+
     {onClickClose ? (
       <Button type="button" onClick={onClickClose}>
-        <Icons.XIcon size={20} />
+        <Icons.XIcon size={12} />
       </Button>
     ) : (
       <></>
@@ -32,7 +35,7 @@ const Badge = ({
 
 export default Badge;
 
-const BaseBadge = styled.div<{ $backgroundColor: string; $color: string }>`
+const BaseBadge = styled.div<{ $backgroundColor?: string; $color?: string }>`
   display: flex;
   align-items: center;
   gap: 10px;
@@ -40,11 +43,17 @@ const BaseBadge = styled.div<{ $backgroundColor: string; $color: string }>`
   padding: 5px 16px;
   border-radius: 130px;
 
-  background-color: ${({ $backgroundColor }) => $backgroundColor};
-  color: ${({ $color }) => $color};
+  color: ${({ $color = Colors.typography.blackHigh }) => $color};
+  background-color: ${({ $backgroundColor = Colors.neutral.grey3 }) =>
+    $backgroundColor};
 `;
 
-const BadgeText = styled.p`
+const BadgeText = styled.p<{ $widthPixels?: number }>`
+  width: ${({ $widthPixels }) => ($widthPixels ? `${$widthPixels}px` : "auto")};
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
   font-weight: 500;
   font-size: 14px;
 `;
