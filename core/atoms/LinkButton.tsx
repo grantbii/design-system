@@ -38,6 +38,7 @@ const BaseLinkButton = styled.div<{
   $color?: string;
 }>`
   display: flex;
+  align-items: center;
   gap: 10px;
 
   padding: 10px 16px;
