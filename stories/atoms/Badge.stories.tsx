@@ -3,7 +3,7 @@ import type { StoryObj } from "@storybook/nextjs-vite";
 import { Meta } from "@storybook/nextjs-vite";
 
 const meta: Meta<typeof Badge> = {
-  title: "Design System/Atoms/Badge",
+  title: "Atoms/Badge",
   component: Badge,
   tags: ["autodocs"],
   parameters: {
