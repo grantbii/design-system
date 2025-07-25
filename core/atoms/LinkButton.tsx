@@ -1,7 +1,7 @@
-import { Colors } from "@/.";
 import Link from "next/link";
 import { HTMLAttributeAnchorTarget, JSX } from "react";
 import styled from "styled-components";
+import { Colors } from "../../index";
 
 type LinkButtonProps = {
   text: string;
