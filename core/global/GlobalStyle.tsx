@@ -2,7 +2,7 @@
 
 import { createGlobalStyle } from "styled-components";
 import "../../public/fonts/satoshi/css/satoshi.css";
-import * as Colors from "../atoms/colors";
+import * as Colors from "../foundation/colors";
 
 const GlobalStyle = createGlobalStyle`
   html,

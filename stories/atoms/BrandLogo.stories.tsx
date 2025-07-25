@@ -3,7 +3,7 @@ import type { StoryObj } from "@storybook/nextjs-vite";
 import { Meta } from "@storybook/nextjs-vite";
 
 const meta: Meta<typeof BrandLogo> = {
-  title: "Design System/Atoms/Brand Logo",
+  title: "Atoms/Brand Logo",
   component: BrandLogo,
   tags: ["autodocs"],
   parameters: {

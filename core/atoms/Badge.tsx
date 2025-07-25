@@ -6,18 +6,18 @@ type BadgeProps = {
   text: string;
   icon?: JSX.Element;
   onClickClose?: MouseEventHandler<HTMLButtonElement>;
+  textWidthPixels?: number;
   backgroundColor?: string;
   color?: string;
-  textWidthPixels?: number;
 };
 
 const Badge = ({
   icon,
   text,
   onClickClose,
+  textWidthPixels,
   backgroundColor,
   color,
-  textWidthPixels,
 }: BadgeProps) => (
   <BaseBadge $backgroundColor={backgroundColor} $color={color}>
     {icon ? icon : <></>}
