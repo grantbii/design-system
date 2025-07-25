@@ -34,14 +34,14 @@ export const Icon: Story = {
   },
 };
 
-export const Close: Story = {
+export const Closeable: Story = {
   args: {
     text: DEFAULT_TEXT,
     onClickClose: ON_CLICK_CLOSE,
   },
 };
 
-export const Long: Story = {
+export const LongText: Story = {
   args: {
     text: LONG_TEXT,
     textWidthPixels: 160,

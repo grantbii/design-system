@@ -23,7 +23,25 @@ export const Default: Story = {
   },
 };
 
-export const Icon: Story = {
+export const LeftIcon: Story = {
+  args: {
+    text: "Link",
+    href: "https://grantbii.com",
+    target: "_blank",
+    leftIcon: <Icons.PlusIcon size={14} />,
+  },
+};
+
+export const RightIcon: Story = {
+  args: {
+    text: "Link",
+    href: "https://grantbii.com",
+    target: "_blank",
+    rightIcon: <Icons.MinusIcon size={14} />,
+  },
+};
+
+export const BothIcons: Story = {
   args: {
     text: "Link",
     href: "https://grantbii.com",
