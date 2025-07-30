@@ -2,7 +2,8 @@
 
 import { createGlobalStyle } from "styled-components";
 import "../../public/fonts/satoshi/css/satoshi.css";
-import * as Colors from "../foundation/colors";
+import { LAPTOP_WIDTH_PIXELS } from "../foundations/breakpoints";
+import * as Colors from "../foundations/colors";
 
 const GlobalStyle = createGlobalStyle`
   html,
@@ -62,6 +63,14 @@ const GlobalStyle = createGlobalStyle`
   input[type="number"] {
     -moz-appearance: textfield;
     appearance: textfield;
+  }
+
+  @media (width < ${LAPTOP_WIDTH_PIXELS}px) {
+    font-size: 14px;
+  }
+
+  @media (width >= ${LAPTOP_WIDTH_PIXELS}px) {
+    font-size: 16px;
   }
 `;
 
