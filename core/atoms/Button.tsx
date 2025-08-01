@@ -4,6 +4,7 @@ import { ButtonStyle } from "./shared";
 
 type ButtonProps = {
   text: string;
+  disabled?: boolean;
   onClick: MouseEventHandler<HTMLButtonElement>;
   type?: "button" | "submit" | "reset";
   leftIcon?: JSX.Element;
@@ -15,13 +16,14 @@ type ButtonProps = {
 const Button = ({
   text,
   onClick,
+  disabled,
   leftIcon,
   rightIcon,
   backgroundColor,
   color,
   type = "button",
 }: ButtonProps) => (
-  <button type={type} onClick={onClick}>
+  <button type={type} onClick={onClick} disabled={disabled}>
     <BaseButton $backgroundColor={backgroundColor} $color={color}>
       {leftIcon ? leftIcon : <></>}
       <p>{text}</p>
