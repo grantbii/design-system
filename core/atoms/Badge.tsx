@@ -1,6 +1,6 @@
 import { JSX, MouseEventHandler } from "react";
 import styled from "styled-components";
-import { Colors, Icons } from "../../index";
+import { Colors, Icons } from "../foundations";
 
 type BadgeProps = {
   text: string;

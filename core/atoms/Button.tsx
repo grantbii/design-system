@@ -1,39 +1,38 @@
-import Link from "next/link";
-import { HTMLAttributeAnchorTarget, JSX } from "react";
+import { JSX, MouseEventHandler } from "react";
 import styled from "styled-components";
 import { Colors } from "../foundations";
 
-type LinkButtonProps = {
+type ButtonProps = {
   text: string;
-  href: string;
-  target?: HTMLAttributeAnchorTarget;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
+  type?: "button" | "submit" | "reset";
   leftIcon?: JSX.Element;
   rightIcon?: JSX.Element;
   backgroundColor?: string;
   color?: string;
 };
 
-const LinkButton = ({
+const Button = ({
   text,
-  href,
-  target,
+  onClick,
   leftIcon,
   rightIcon,
   backgroundColor,
   color,
-}: LinkButtonProps) => (
-  <Link href={href} target={target}>
-    <BaseLinkButton $backgroundColor={backgroundColor} $color={color}>
+  type = "button",
+}: ButtonProps) => (
+  <button type={type} onClick={onClick}>
+    <BaseButton $backgroundColor={backgroundColor} $color={color}>
       {leftIcon ? leftIcon : <></>}
       <p>{text}</p>
       {rightIcon ? rightIcon : <></>}
-    </BaseLinkButton>
-  </Link>
+    </BaseButton>
+  </button>
 );
 
-export default LinkButton;
+export default Button;
 
-const BaseLinkButton = styled.div<{
+const BaseButton = styled.div<{
   $backgroundColor?: string;
   $color?: string;
 }>`

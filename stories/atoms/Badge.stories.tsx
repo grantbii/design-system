@@ -15,44 +15,44 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const DEFAULT_TEXT = "Badge";
-const LONG_TEXT = "the quick brown fox jumps over the lazy dog";
+const defaultText = "Badge";
+const longText = "the quick brown fox jumps over the lazy dog";
 
-const ICON = <Icons.SmileyXEyesIcon size={20} />;
-const ON_CLICK_CLOSE = () => alert("You have closed the badge!");
+const icon = <Icons.SmileyXEyesIcon size={20} />;
+const onClickClose = () => alert("You have closed the badge.");
 
-export const Default: Story = {
+export const TextOnly: Story = {
   args: {
-    text: DEFAULT_TEXT,
+    text: defaultText,
   },
 };
 
 export const Icon: Story = {
   args: {
-    icon: ICON,
-    text: DEFAULT_TEXT,
+    icon: icon,
+    text: defaultText,
   },
 };
 
 export const Closeable: Story = {
   args: {
-    text: DEFAULT_TEXT,
-    onClickClose: ON_CLICK_CLOSE,
+    text: defaultText,
+    onClickClose: onClickClose,
   },
 };
 
 export const LongText: Story = {
   args: {
-    text: LONG_TEXT,
+    text: longText,
     textWidthPixels: 160,
   },
 };
 
 export const Everything: Story = {
   args: {
-    icon: ICON,
-    text: LONG_TEXT,
+    icon: icon,
+    text: longText,
     textWidthPixels: 160,
-    onClickClose: ON_CLICK_CLOSE,
+    onClickClose: onClickClose,
   },
 };
