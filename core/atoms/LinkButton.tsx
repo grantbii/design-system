@@ -6,6 +6,7 @@ import { ButtonStyle } from "./shared";
 type LinkButtonProps = {
   text: string;
   href: string;
+  disabled?: boolean;
   target?: HTMLAttributeAnchorTarget;
   leftIcon?: JSX.Element;
   rightIcon?: JSX.Element;
@@ -14,24 +15,42 @@ type LinkButtonProps = {
 };
 
 const LinkButton = ({
-  text,
   href,
   target,
+  disabled,
+  ...contentProps
+}: LinkButtonProps) =>
+  disabled ? (
+    <Content {...contentProps} />
+  ) : (
+    <Link href={href} target={target}>
+      <Content {...contentProps} />
+    </Link>
+  );
+
+export default LinkButton;
+
+type ContentProps = {
+  text: string;
+  leftIcon?: JSX.Element;
+  rightIcon?: JSX.Element;
+  backgroundColor?: string;
+  color?: string;
+};
+
+const Content = ({
+  text,
   leftIcon,
   rightIcon,
   backgroundColor,
   color,
-}: LinkButtonProps) => (
-  <Link href={href} target={target}>
-    <BaseLinkButton $backgroundColor={backgroundColor} $color={color}>
-      {leftIcon ? leftIcon : <></>}
-      <p>{text}</p>
-      {rightIcon ? rightIcon : <></>}
-    </BaseLinkButton>
-  </Link>
+}: ContentProps) => (
+  <BaseLinkButton $backgroundColor={backgroundColor} $color={color}>
+    {leftIcon ? leftIcon : <></>}
+    <p>{text}</p>
+    {rightIcon ? rightIcon : <></>}
+  </BaseLinkButton>
 );
-
-export default LinkButton;
 
 const BaseLinkButton = styled.div<{
   $backgroundColor?: string;
