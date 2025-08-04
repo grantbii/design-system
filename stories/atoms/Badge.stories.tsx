@@ -17,8 +17,6 @@ type Story = StoryObj<typeof meta>;
 
 const defaultText = "Badge";
 const longText = "the quick brown fox jumps over the lazy dog";
-
-const icon = <Icons.SmileyXEyesIcon size={20} />;
 const onClickClose = () => alert("You have closed the badge.");
 
 export const TextOnly: Story = {
@@ -29,7 +27,7 @@ export const TextOnly: Story = {
 
 export const Icon: Story = {
   args: {
-    icon: icon,
+    Icon: Icons.SmileyXEyesIcon,
     text: defaultText,
   },
 };
@@ -50,7 +48,7 @@ export const LongText: Story = {
 
 export const Everything: Story = {
   args: {
-    icon: icon,
+    Icon: Icons.SmileyXEyesIcon,
     text: longText,
     textWidthPixels: 160,
     onClickClose: onClickClose,
