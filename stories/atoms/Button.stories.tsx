@@ -27,22 +27,22 @@ export const TextOnly: Story = {
 export const LeftIcon: Story = {
   args: {
     ...baseArgs,
-    leftIcon: <Icons.PlusIcon size={14} />,
+    LeftIcon: Icons.PlusIcon,
   },
 };
 
 export const RightIcon: Story = {
   args: {
     ...baseArgs,
-    rightIcon: <Icons.MinusIcon size={14} />,
+    RightIcon: Icons.MinusIcon,
   },
 };
 
 export const BothIcons: Story = {
   args: {
     ...baseArgs,
-    leftIcon: <Icons.SmileyXEyesIcon size={20} />,
-    rightIcon: <Icons.SmileyMeltingIcon size={20} />,
+    LeftIcon: Icons.SmileyXEyesIcon,
+    RightIcon: Icons.SmileyMeltingIcon,
   },
 };
 

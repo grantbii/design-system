@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { HTMLAttributeAnchorTarget, JSX } from "react";
+import { ComponentType, HTMLAttributeAnchorTarget } from "react";
 import styled from "styled-components";
+import { Icons } from "../foundations";
 import { ButtonStyle } from "./shared";
 
 type LinkButtonProps = {
@@ -8,8 +9,8 @@ type LinkButtonProps = {
   href: string;
   disabled?: boolean;
   target?: HTMLAttributeAnchorTarget;
-  leftIcon?: JSX.Element;
-  rightIcon?: JSX.Element;
+  LeftIcon?: ComponentType<Icons.IconProps>;
+  RightIcon?: ComponentType<Icons.IconProps>;
   backgroundColor?: string;
   color?: string;
 };
@@ -32,23 +33,23 @@ export default LinkButton;
 
 type ContentProps = {
   text: string;
-  leftIcon?: JSX.Element;
-  rightIcon?: JSX.Element;
+  LeftIcon?: ComponentType<Icons.IconProps>;
+  RightIcon?: ComponentType<Icons.IconProps>;
   backgroundColor?: string;
   color?: string;
 };
 
 const Content = ({
   text,
-  leftIcon,
-  rightIcon,
+  LeftIcon,
+  RightIcon,
   backgroundColor,
   color,
 }: ContentProps) => (
   <BaseLinkButton $backgroundColor={backgroundColor} $color={color}>
-    {leftIcon ? leftIcon : <></>}
+    {LeftIcon ? <LeftIcon color={color} size={20} /> : <></>}
     <p>{text}</p>
-    {rightIcon ? rightIcon : <></>}
+    {RightIcon ? <RightIcon color={color} size={20} /> : <></>}
   </BaseLinkButton>
 );
 

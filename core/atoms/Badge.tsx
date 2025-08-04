@@ -1,10 +1,10 @@
-import { JSX, MouseEventHandler } from "react";
+import { ComponentType, MouseEventHandler } from "react";
 import styled from "styled-components";
 import { Colors, Icons } from "../foundations";
 
 type BadgeProps = {
   text: string;
-  icon?: JSX.Element;
+  Icon?: ComponentType<Icons.IconProps>;
   onClickClose?: MouseEventHandler<HTMLButtonElement>;
   textWidthPixels?: number;
   backgroundColor?: string;
@@ -12,7 +12,7 @@ type BadgeProps = {
 };
 
 const Badge = ({
-  icon,
+  Icon,
   text,
   onClickClose,
   textWidthPixels,
@@ -20,7 +20,7 @@ const Badge = ({
   color,
 }: BadgeProps) => (
   <BaseBadge $backgroundColor={backgroundColor} $color={color}>
-    {icon ? icon : <></>}
+    {Icon ? <Icon color={color} size={20} /> : <></>}
     <BadgeText $widthPixels={textWidthPixels}>{text}</BadgeText>
 
     {onClickClose ? (
