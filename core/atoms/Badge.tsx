@@ -5,6 +5,8 @@ import { Colors, Icons } from "../foundations";
 type BadgeProps = {
   text: string;
   Icon?: ComponentType<Icons.IconProps>;
+  iconSize?: string | number;
+  iconWeight?: Icons.IconWeight;
   onClickClose?: MouseEventHandler<HTMLButtonElement>;
   textWidthPixels?: number;
   backgroundColor?: string;
@@ -12,15 +14,17 @@ type BadgeProps = {
 };
 
 const Badge = ({
-  Icon,
   text,
+  Icon,
+  iconSize = 20,
+  iconWeight = "regular",
   onClickClose,
   textWidthPixels,
   backgroundColor,
   color,
 }: BadgeProps) => (
   <BaseBadge $backgroundColor={backgroundColor} $color={color}>
-    {Icon ? <Icon color={color} size={20} /> : <></>}
+    {Icon ? <Icon color={color} size={iconSize} weight={iconWeight} /> : <></>}
     <BadgeText $widthPixels={textWidthPixels}>{text}</BadgeText>
 
     {onClickClose ? (

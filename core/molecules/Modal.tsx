@@ -118,7 +118,7 @@ const ModalBody = styled.div<{ $isFullScreen?: boolean; $height?: string }>`
     width: 100%;
     height: 100%;
 
-    padding: 0px 24px;
+    padding: 2px 24px;
     border: none;
 
     overflow-y: auto;
