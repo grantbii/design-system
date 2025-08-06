@@ -1,27 +1,55 @@
-import {
-  MouseEventHandler,
-  ReactElement,
-  ReactNode,
-  useCallback,
-  useState,
-} from "react";
+import { MouseEventHandler, ReactNode, useCallback, useState } from "react";
 import styled from "styled-components";
 import { Button } from "../atoms";
 import { Colors } from "../foundations";
 
 type ModalProps = {
-  clickable: (openModal: MouseEventHandler<HTMLButtonElement>) => ReactNode;
   header?: ReactNode;
-  content: ReactElement;
+  content: ReactNode;
   footer?: ReactNode;
   width?: string;
   height?: string;
   isFullScreen?: boolean;
+  onClickCancel: MouseEventHandler<HTMLButtonElement>;
 };
 
-const Modal = ({ clickable, ...props }: ModalProps) => {
+const Modal = ({
+  header,
+  content,
+  footer,
+  width,
+  height,
+  isFullScreen,
+  onClickCancel,
+}: ModalProps) => (
+  <Overlay>
+    <ModalWindow $isFullScreen={isFullScreen} $width={width}>
+      {header ? <ModalHeader>{header}</ModalHeader> : <></>}
+
+      <ModalBody $isFullScreen={isFullScreen} $height={height}>
+        {content}
+      </ModalBody>
+
+      <ModalFooter>
+        <CancelButton onClick={onClickCancel} />
+        {footer ? footer : <></>}
+      </ModalFooter>
+    </ModalWindow>
+  </Overlay>
+);
+
+export default Modal;
+
+export const useModal = () => {
   const [showModal, setShowModal] = useState(false);
-  const { lockScroll, unlockScroll } = useScrollLock();
+
+  const lockScroll = useCallback(() => {
+    document.body.style.overflow = "hidden";
+  }, []);
+
+  const unlockScroll = useCallback(() => {
+    document.body.style.overflow = "initial";
+  }, []);
 
   const openModal = () => {
     setShowModal(true);
@@ -33,65 +61,12 @@ const Modal = ({ clickable, ...props }: ModalProps) => {
     unlockScroll();
   };
 
-  return (
-    <>
-      {clickable(openModal)}
-      {showModal ? <PopUp {...props} closeModal={closeModal} /> : <></>}
-    </>
-  );
-};
-
-export default Modal;
-
-const useScrollLock = () => {
-  const lockScroll = useCallback(() => {
-    document.body.style.overflow = "hidden";
-  }, []);
-
-  const unlockScroll = useCallback(() => {
-    document.body.style.overflow = "initial";
-  }, []);
-
   return {
-    lockScroll,
-    unlockScroll,
+    showModal,
+    openModal,
+    closeModal,
   };
 };
-
-type PopUpProps = {
-  header?: ReactNode;
-  content: ReactNode;
-  footer?: ReactNode;
-  width?: string;
-  height?: string;
-  isFullScreen?: boolean;
-  closeModal: () => void;
-};
-
-const PopUp = ({
-  header,
-  content,
-  footer,
-  width,
-  height,
-  isFullScreen,
-  closeModal,
-}: PopUpProps) => (
-  <Overlay>
-    <ModalWindow $isFullScreen={isFullScreen} $width={width}>
-      {header ? <ModalHeader>{header}</ModalHeader> : <></>}
-
-      <ModalBody $isFullScreen={isFullScreen} $height={height}>
-        {content}
-      </ModalBody>
-
-      <ModalFooter>
-        <CancelButton onClick={() => closeModal()} />
-        {footer ? footer : <></>}
-      </ModalFooter>
-    </ModalWindow>
-  </Overlay>
-);
 
 const Overlay = styled.div`
   background-color: ${Colors.semantic.overlay};

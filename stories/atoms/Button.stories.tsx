@@ -45,9 +45,3 @@ export const BothIcons: Story = {
     RightIcon: Icons.SmileyMeltingIcon,
   },
 };
-
-export const Wide: Story = {
-  args: {
-    ...baseArgs,
-  },
-};

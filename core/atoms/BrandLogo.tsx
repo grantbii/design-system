@@ -20,6 +20,7 @@ const BrandLogo = ({
     alt={alt}
     width={width}
     height={height}
+    priority
   />
 );
 
