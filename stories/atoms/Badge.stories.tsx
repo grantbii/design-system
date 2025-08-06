@@ -35,7 +35,7 @@ export const Icon: Story = {
 export const Closeable: Story = {
   args: {
     text: defaultText,
-    onClickClose: onClickClose,
+    onClickClose,
   },
 };
 
@@ -51,6 +51,6 @@ export const Everything: Story = {
     Icon: Icons.SmileyXEyesIcon,
     text: longText,
     textWidthPixels: 160,
-    onClickClose: onClickClose,
+    onClickClose,
   },
 };
