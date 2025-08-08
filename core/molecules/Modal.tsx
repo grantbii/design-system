@@ -23,11 +23,11 @@ const Modal = ({
   onClickCancel,
 }: ModalProps) => (
   <Overlay>
-    <ModalWindow $isFullScreen={isFullScreen} $width={width}>
+    <ModalWindow $isFullScreen={isFullScreen} $width={width} $height={height}>
       {header ? <ModalHeader>{header}</ModalHeader> : <></>}
 
-      <ModalBody $isFullScreen={isFullScreen} $height={height}>
-        {content}
+      <ModalBody>
+        <ModalContent>{content}</ModalContent>
       </ModalBody>
 
       <ModalFooter>
@@ -85,15 +85,24 @@ const Overlay = styled.div`
   align-items: center;
 `;
 
-const ModalWindow = styled.div<{ $isFullScreen?: boolean; $width?: string }>`
+const ModalWindow = styled.div<{
+  $isFullScreen?: boolean;
+  $width?: string;
+  $height?: string;
+}>`
+  display: flex;
+  flex-direction: column;
+
   background-color: ${Colors.base.white};
   border-radius: ${({ $isFullScreen }) => ($isFullScreen ? 0 : 6)}px;
 
   width: ${({ $isFullScreen, $width = "auto" }) =>
     $isFullScreen ? "100%" : $width};
+  height: ${({ $isFullScreen, $height = "auto" }) =>
+    $isFullScreen ? "100%" : $height};
 
-  height: ${({ $isFullScreen }) => ($isFullScreen ? "100%" : "auto")};
   min-height: 100px;
+  max-height: 100vh;
 `;
 
 const ModalHeader = styled.div`
@@ -104,25 +113,22 @@ const ModalHeader = styled.div`
   border-bottom: 1px solid ${Colors.neutral.grey3};
 `;
 
-const ModalBody = styled.div<{ $isFullScreen?: boolean; $height?: string }>`
+const ModalBody = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 12px;
 
-  height: ${({ $isFullScreen, $height = "auto" }) =>
-    $isFullScreen ? "calc(100% - 160px)" : $height};
-
+  height: 100%;
   padding-top: 24px;
+  overflow-y: auto;
+`;
 
-  > * {
-    width: 100%;
-    height: 100%;
+const ModalContent = styled.div`
+  width: 100%;
+  height: 100%;
+  min-height: 100px;
 
-    padding: 2px 24px;
-    border: none;
-
-    overflow-y: auto;
-  }
+  padding: 2px 24px;
+  border: none;
 `;
 
 const ModalFooter = styled.div`
