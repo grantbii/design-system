@@ -1,6 +1,5 @@
 import { Button, Modal, useModal } from "@/.";
-import type { StoryObj } from "@storybook/nextjs-vite";
-import { Meta } from "@storybook/nextjs-vite";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ReactNode } from "react";
 
 type ModalExampleProps = {

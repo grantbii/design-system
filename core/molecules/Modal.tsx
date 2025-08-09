@@ -22,7 +22,7 @@ const Modal = ({
   isFullScreen,
   onClickCancel,
 }: ModalProps) => (
-  <Overlay>
+  <Overlay $isFullScreen={isFullScreen}>
     <ModalWindow $isFullScreen={isFullScreen} $width={width} $height={height}>
       {header ? <ModalHeader>{header}</ModalHeader> : <></>}
 
@@ -68,10 +68,11 @@ export const useModal = () => {
   };
 };
 
-const Overlay = styled.div`
+const Overlay = styled.div<{ $isFullScreen?: boolean }>`
   background-color: ${Colors.semantic.overlay};
 
-  z-index: ${Number.MAX_SAFE_INTEGER};
+  z-index: ${({ $isFullScreen }) =>
+    $isFullScreen ? Number.MAX_SAFE_INTEGER - 1 : Number.MAX_SAFE_INTEGER};
   position: fixed;
   top: 0px;
   left: 0px;
