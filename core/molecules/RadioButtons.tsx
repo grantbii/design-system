@@ -3,25 +3,24 @@ import styled from "styled-components";
 import { RadioButton } from "../atoms";
 import { Option } from "../foundations";
 
-type RadioButtonProps = {
-  options: Option[];
-} & DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
+type RadioOption = Option &
+  DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 
-const RadioButtons = ({
-  options,
-  name,
-  ...radioButtonProps
-}: RadioButtonProps) => {
+type RadioButtonProps = {
+  name: string;
+  options: RadioOption[];
+};
+
+const RadioButtons = ({ name, options }: RadioButtonProps) => {
   return (
     <RadioGroup>
-      {options.map(({ label, value }) => (
+      {options.map(({ value, ...props }) => (
         <RadioButton
-          {...radioButtonProps}
-          key={`${name}-radio-button`}
-          id={`${name}-radio-button`}
-          name={name}
-          label={label}
+          {...props}
+          key={`${value}-radio-button`}
+          id={`${value}-radio-button`}
           value={value}
+          name={name}
         />
       ))}
     </RadioGroup>
