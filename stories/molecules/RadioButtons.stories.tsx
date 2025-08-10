@@ -18,8 +18,16 @@ export const TextOnly: Story = {
   args: {
     name: "location ",
     options: [
-      { label: "Singapore", value: "Singapore" },
-      { label: "Hong Kong", value: "Hong Kong" },
+      {
+        label: "Singapore",
+        value: "Singapore",
+        onChange: () => alert("Selected Singapore!"),
+      },
+      {
+        label: "Hong Kong",
+        value: "Hong Kong",
+        onChange: () => alert("Selected Hong Kong!"),
+      },
     ],
   },
 };
