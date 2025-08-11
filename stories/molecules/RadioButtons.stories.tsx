@@ -14,7 +14,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const TextOnly: Story = {
+export const NoneSelectedByDefault: Story = {
   args: {
     name: "location ",
     options: [
@@ -22,6 +22,25 @@ export const TextOnly: Story = {
         label: "Singapore",
         value: "Singapore",
         onChange: () => alert("Selected Singapore!"),
+      },
+      {
+        label: "Hong Kong",
+        value: "Hong Kong",
+        onChange: () => alert("Selected Hong Kong!"),
+      },
+    ],
+  },
+};
+
+export const OneSelectedByDefault: Story = {
+  args: {
+    name: "location ",
+    options: [
+      {
+        label: "Singapore",
+        value: "Singapore",
+        onChange: () => alert("Selected Singapore!"),
+        defaultChecked: true,
       },
       {
         label: "Hong Kong",
