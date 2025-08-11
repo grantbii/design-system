@@ -7,7 +7,7 @@ export type RadioOption = Option &
   DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 
 type RadioButtonProps = {
-  name: string;
+  name?: string;
   options: RadioOption[];
 };
 

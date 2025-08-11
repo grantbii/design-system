@@ -1,9 +1,58 @@
-import { RadioButtons } from "@/core/molecules";
+import { RadioButtons } from "@/.";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { useState } from "react";
 
-const meta: Meta<typeof RadioButtons> = {
+const SINGAPORE = "Singapore";
+const HONG_KONG = "Hong Kong";
+
+type ExampleProps = {
+  controlled: boolean;
+};
+
+const RadioButtonsExample = ({ controlled }: ExampleProps) => {
+  const [location, setLocation] = useState("");
+
+  const controlledProps = {
+    options: [
+      {
+        label: SINGAPORE,
+        value: SINGAPORE,
+        checked: location === SINGAPORE,
+        onClick: () => setLocation(SINGAPORE),
+      },
+      {
+        label: HONG_KONG,
+        value: HONG_KONG,
+        checked: location === HONG_KONG,
+        onClick: () => setLocation(HONG_KONG),
+      },
+    ],
+  };
+
+  return (
+    <RadioButtons {...(controlled ? controlledProps : uncontrolledProps)} />
+  );
+};
+
+const uncontrolledProps = {
+  name: "location",
+  options: [
+    {
+      label: SINGAPORE,
+      value: SINGAPORE,
+      onChange: () => alert(`Selected ${SINGAPORE}!`),
+    },
+    {
+      label: HONG_KONG,
+      value: HONG_KONG,
+      onChange: () => alert(`Selected ${HONG_KONG}!`),
+    },
+  ],
+};
+
+const meta: Meta<typeof RadioButtonsExample> = {
   title: "Molecules/Radio Buttons",
-  component: RadioButtons,
+  component: RadioButtonsExample,
   tags: ["autodocs"],
   parameters: {
     layout: "centered",
@@ -14,39 +63,14 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const NoneSelectedByDefault: Story = {
+export const Uncontrolled: Story = {
   args: {
-    name: "location ",
-    options: [
-      {
-        label: "Singapore",
-        value: "Singapore",
-        onChange: () => alert("Selected Singapore!"),
-      },
-      {
-        label: "Hong Kong",
-        value: "Hong Kong",
-        onChange: () => alert("Selected Hong Kong!"),
-      },
-    ],
+    controlled: false,
   },
 };
 
-export const OneSelectedByDefault: Story = {
+export const Controlled: Story = {
   args: {
-    name: "location ",
-    options: [
-      {
-        label: "Singapore",
-        value: "Singapore",
-        onChange: () => alert("Selected Singapore!"),
-        defaultChecked: true,
-      },
-      {
-        label: "Hong Kong",
-        value: "Hong Kong",
-        onChange: () => alert("Selected Hong Kong!"),
-      },
-    ],
+    controlled: true,
   },
 };
