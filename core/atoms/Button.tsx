@@ -1,15 +1,15 @@
 import { ComponentType, MouseEventHandler } from "react";
-import styled from "styled-components";
 import { Icons } from "../foundations";
-import { ButtonStyle } from "./shared";
+import { BaseButton } from "./shared";
 
 type ButtonProps = {
   text: string;
-  disabled?: boolean;
   onClick: MouseEventHandler<HTMLButtonElement>;
+  disabled?: boolean;
   type?: "button" | "submit" | "reset";
   LeftIcon?: ComponentType<Icons.IconProps>;
   RightIcon?: ComponentType<Icons.IconProps>;
+  underline?: boolean;
   backgroundColor?: string;
   color?: string;
 };
@@ -20,12 +20,17 @@ const Button = ({
   disabled,
   LeftIcon,
   RightIcon,
+  underline,
   backgroundColor,
   color,
   type = "button",
 }: ButtonProps) => (
   <button type={type} onClick={onClick} disabled={disabled}>
-    <BaseButton $backgroundColor={backgroundColor} $color={color}>
+    <BaseButton
+      $underline={underline}
+      $backgroundColor={backgroundColor}
+      $color={color}
+    >
       {LeftIcon ? <LeftIcon color={color} size={20} /> : <></>}
       <p>{text}</p>
       {RightIcon ? <RightIcon color={color} size={20} /> : <></>}
@@ -34,10 +39,3 @@ const Button = ({
 );
 
 export default Button;
-
-const BaseButton = styled.div<{
-  $backgroundColor?: string;
-  $color?: string;
-}>`
-  ${ButtonStyle}
-`;

@@ -1,7 +1,8 @@
-import { css } from "styled-components";
+import styled from "styled-components";
 import { Colors } from "../foundations";
 
-export const ButtonStyle = css<{
+export const BaseButton = styled.div<{
+  $underline?: boolean;
   $backgroundColor?: string;
   $color?: string;
 }>`
@@ -16,7 +17,12 @@ export const ButtonStyle = css<{
   font-weight: 500;
   font-size: 14px;
 
+  text-decoration: ${({ $underline = false }) =>
+    $underline ? "underline" : "none"};
+
   color: ${({ $color = Colors.typography.whiteHigh }) => $color};
-  background-color: ${({ $backgroundColor = Colors.main.grantbiiBlue }) =>
-    $backgroundColor};
+  background-color: ${({
+    $underline = false,
+    $backgroundColor = Colors.main.grantbiiBlue,
+  }) => ($underline ? "transparent" : $backgroundColor)};
 `;

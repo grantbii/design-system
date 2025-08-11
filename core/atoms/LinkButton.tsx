@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { ComponentType, HTMLAttributeAnchorTarget } from "react";
-import styled from "styled-components";
 import { Icons } from "../foundations";
-import { ButtonStyle } from "./shared";
+import { BaseButton } from "./shared";
 
 type LinkButtonProps = {
   text: string;
@@ -11,6 +10,7 @@ type LinkButtonProps = {
   target?: HTMLAttributeAnchorTarget;
   LeftIcon?: ComponentType<Icons.IconProps>;
   RightIcon?: ComponentType<Icons.IconProps>;
+  underline?: boolean;
   backgroundColor?: string;
   color?: string;
 };
@@ -35,6 +35,7 @@ type ContentProps = {
   text: string;
   LeftIcon?: ComponentType<Icons.IconProps>;
   RightIcon?: ComponentType<Icons.IconProps>;
+  underline?: boolean;
   backgroundColor?: string;
   color?: string;
 };
@@ -43,19 +44,17 @@ const Content = ({
   text,
   LeftIcon,
   RightIcon,
+  underline,
   backgroundColor,
   color,
 }: ContentProps) => (
-  <BaseLinkButton $backgroundColor={backgroundColor} $color={color}>
+  <BaseButton
+    $underline={underline}
+    $backgroundColor={backgroundColor}
+    $color={color}
+  >
     {LeftIcon ? <LeftIcon color={color} size={20} /> : <></>}
     <p>{text}</p>
     {RightIcon ? <RightIcon color={color} size={20} /> : <></>}
-  </BaseLinkButton>
+  </BaseButton>
 );
-
-const BaseLinkButton = styled.div<{
-  $backgroundColor?: string;
-  $color?: string;
-}>`
-  ${ButtonStyle}
-`;

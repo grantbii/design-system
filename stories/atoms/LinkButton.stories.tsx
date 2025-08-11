@@ -1,4 +1,4 @@
-import { Icons, LinkButton } from "@/.";
+import { Colors, Icons, LinkButton } from "@/.";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 
 const meta: Meta<typeof LinkButton> = {
@@ -43,5 +43,13 @@ export const BothIcons: Story = {
     ...baseArgs,
     LeftIcon: Icons.SmileyXEyesIcon,
     RightIcon: Icons.SmileyMeltingIcon,
+  },
+};
+
+export const Underline: Story = {
+  args: {
+    ...baseArgs,
+    underline: true,
+    color: Colors.typography.blackMedium,
   },
 };
