@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { RadioButton } from "../atoms";
 import { Option } from "../foundations";
 
-type RadioOption = Option &
+export type RadioOption = Option &
   DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 
 type RadioButtonProps = {
