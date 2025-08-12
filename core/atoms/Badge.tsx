@@ -24,8 +24,16 @@ const Badge = ({
   color,
 }: BadgeProps) => (
   <BaseBadge $backgroundColor={backgroundColor} $color={color}>
-    {Icon ? <Icon color={color} size={iconSize} weight={iconWeight} /> : <></>}
-    <BadgeText $widthPixels={textWidthPixels}>{text}</BadgeText>
+    <BadgeContent $isCloseable={!!onClickClose} $widthPixels={textWidthPixels}>
+      {Icon ? (
+        <IconContainer>
+          <Icon color={color} size={iconSize} weight={iconWeight} />
+        </IconContainer>
+      ) : (
+        <></>
+      )}
+      <BadgeText>{text}</BadgeText>
+    </BadgeContent>
 
     {onClickClose ? (
       <Button type="button" onClick={onClickClose}>
@@ -42,6 +50,7 @@ export default Badge;
 const BaseBadge = styled.div<{ $backgroundColor?: string; $color?: string }>`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 10px;
 
   padding: 5px 16px;
@@ -52,8 +61,29 @@ const BaseBadge = styled.div<{ $backgroundColor?: string; $color?: string }>`
     $backgroundColor};
 `;
 
-const BadgeText = styled.p<{ $widthPixels?: number }>`
+const BadgeContent = styled.div<{
+  $isCloseable: boolean;
+  $widthPixels?: number;
+}>`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
   width: ${({ $widthPixels }) => ($widthPixels ? `${$widthPixels}px` : "auto")};
+  max-width: ${({ $isCloseable }) =>
+    $isCloseable ? "calc(100% - 20px)" : "auto"};
+`;
+
+const IconContainer = styled.div<{ $iconSize?: string | number }>`
+  display: flex;
+  flex-direction: column;
+
+  width: ${({ $iconSize = "auto" }) => $iconSize};
+  min-width: ${({ $iconSize = "auto" }) => $iconSize};
+  max-width: ${({ $iconSize = "auto" }) => $iconSize};
+`;
+
+const BadgeText = styled.p`
   overflow-x: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -64,4 +94,7 @@ const BadgeText = styled.p<{ $widthPixels?: number }>`
 
 const Button = styled.button`
   display: flex;
+  flex-direction: column;
+
+  min-width: 12px;
 `;

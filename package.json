@@ -1,6 +1,6 @@
 {
   "name": "@grantbii/design-system",
-  "version": "1.0.45",
+  "version": "1.0.46",
   "description": "Grantbii's Design System",
   "homepage": "https://design.grantbii.com",
   "repository": {
@@ -23,6 +23,7 @@
     "next": "^15.3.5",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-dropzone": "^14.3.8",
     "styled-components": "^6.1.19"
   },
   "devDependencies": {
