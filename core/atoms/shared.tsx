@@ -26,3 +26,9 @@ export const BaseButton = styled.div<{
     $backgroundColor = Colors.main.grantbiiBlue,
   }) => ($underline ? "transparent" : $backgroundColor)};
 `;
+
+export const LabelInput = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;

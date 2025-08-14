@@ -31,5 +31,6 @@ export default RadioButtons;
 
 const RadioGroup = styled.div`
   display: flex;
+  align-items: center;
   gap: 12px;
 `;
