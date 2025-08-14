@@ -1,20 +1,15 @@
 import { DetailedHTMLProps, InputHTMLAttributes } from "react";
-import styled from "styled-components";
+import { LabelInput } from "./shared";
 
 type RadioButtonProps = {
   label: string;
 } & DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 
-const RadioButton = ({ label, id, ...radioButtonProps }: RadioButtonProps) => (
-  <BaseRadioButton>
+const RadioButton = ({ id, label, ...radioButtonProps }: RadioButtonProps) => (
+  <LabelInput>
     <input {...radioButtonProps} id={`${id}-radio-button`} type="radio" />
     <label htmlFor={`${id}-radio-button`}>{label}</label>
-  </BaseRadioButton>
+  </LabelInput>
 );
 
 export default RadioButton;
-
-const BaseRadioButton = styled.div`
-  display: flex;
-  gap: 8px;
-`;
