@@ -26,9 +26,7 @@ const Modal = ({
     <ModalWindow $isFullScreen={isFullScreen} $width={width} $height={height}>
       {header ? <ModalHeader>{header}</ModalHeader> : <></>}
 
-      <ModalBody>
-        <ModalContent>{content}</ModalContent>
-      </ModalBody>
+      <ModalBody>{content}</ModalBody>
 
       <ModalFooter>
         <CancelButton onClick={onClickCancel} />
@@ -121,15 +119,15 @@ const ModalBody = styled.div`
   height: 100%;
   padding-top: 24px;
   overflow-y: auto;
-`;
 
-const ModalContent = styled.div`
-  width: 100%;
-  height: 100%;
-  min-height: 100px;
+  > * {
+    width: 100%;
+    height: 100%;
+    min-height: 100px;
 
-  padding: 2px 24px;
-  border: none;
+    padding: 2px 24px;
+    border: none;
+  }
 `;
 
 const ModalFooter = styled.div`
