@@ -1,9 +1,7 @@
 import { RadioButtons } from "@/.";
+import { Location } from "@grantbii/ui-base/enums";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useState } from "react";
-
-const SINGAPORE = "Singapore";
-const HONG_KONG = "Hong Kong";
 
 type ExampleProps = {
   controlled: boolean;
@@ -15,16 +13,16 @@ const RadioButtonsExample = ({ controlled }: ExampleProps) => {
   const controlledProps = {
     options: [
       {
-        label: SINGAPORE,
-        value: SINGAPORE,
-        checked: location === SINGAPORE,
-        onClick: () => setLocation(SINGAPORE),
+        label: Location.SINGAPORE,
+        value: Location.SINGAPORE,
+        checked: location === Location.SINGAPORE,
+        onClick: () => setLocation(Location.SINGAPORE),
       },
       {
-        label: HONG_KONG,
-        value: HONG_KONG,
-        checked: location === HONG_KONG,
-        onClick: () => setLocation(HONG_KONG),
+        label: Location.HONG_KONG,
+        value: Location.HONG_KONG,
+        checked: location === Location.HONG_KONG,
+        onClick: () => setLocation(Location.HONG_KONG),
       },
     ],
   };
@@ -38,14 +36,14 @@ const uncontrolledProps = {
   name: "location",
   options: [
     {
-      label: SINGAPORE,
-      value: SINGAPORE,
-      onChange: () => alert(`Selected ${SINGAPORE}!`),
+      label: Location.SINGAPORE,
+      value: Location.SINGAPORE,
+      onChange: () => alert(`Selected ${Location.SINGAPORE}!`),
     },
     {
-      label: HONG_KONG,
-      value: HONG_KONG,
-      onChange: () => alert(`Selected ${HONG_KONG}!`),
+      label: Location.HONG_KONG,
+      value: Location.HONG_KONG,
+      onChange: () => alert(`Selected ${Location.HONG_KONG}!`),
     },
   ],
 };

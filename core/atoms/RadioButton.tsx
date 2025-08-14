@@ -7,8 +7,8 @@ type RadioButtonProps = {
 
 const RadioButton = ({ label, id, ...radioButtonProps }: RadioButtonProps) => (
   <BaseRadioButton>
-    <input {...radioButtonProps} id={id} type="radio" />
-    <label htmlFor={id}>{label}</label>
+    <input {...radioButtonProps} id={`${id}-radio-button`} type="radio" />
+    <label htmlFor={`${id}-radio-button`}>{label}</label>
   </BaseRadioButton>
 );
 

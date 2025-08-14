@@ -17,8 +17,8 @@ const RadioButtons = ({ name, options }: RadioButtonProps) => {
       {options.map(({ value, ...props }) => (
         <RadioButton
           {...props}
-          key={`${value}-radio-button`}
-          id={`${value}-radio-button`}
+          key={`${name}-${value}`}
+          id={`${name}-${value}`}
           value={value}
           name={name}
         />
