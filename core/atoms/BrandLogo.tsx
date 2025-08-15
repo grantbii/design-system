@@ -1,6 +1,6 @@
 import Image from "next/image";
-import darkLogo from "./logos/brand_logo-dark.webp";
-import lightLogo from "./logos/brand_logo-light.webp";
+import darkLogo from "../assets/logos/brand_logo-dark.webp";
+import lightLogo from "../assets/logos/brand_logo-light.webp";
 
 type BrandLogoProps = {
   width?: number;
