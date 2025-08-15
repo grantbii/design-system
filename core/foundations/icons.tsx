@@ -1,6 +1,6 @@
 export * from "@phosphor-icons/react";
 import Image from "next/image";
-import grantMatchIcon from "./icons/grant_match.webp";
+import grantMatchIcon from "../assets/icons/grant_match.webp";
 
 type GrantMatchIconProps = {
   size?: number;

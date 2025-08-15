@@ -1,9 +1,9 @@
 "use client";
 
 import { createGlobalStyle } from "styled-components";
+import "../assets/fonts/satoshi/css/satoshi.css";
 import { LAPTOP_WIDTH_PIXELS } from "../foundations/breakpoints";
 import * as Colors from "../foundations/colors";
-import "./fonts/satoshi/css/satoshi.css";
 
 const GlobalStyle = createGlobalStyle`
   html,

@@ -1,6 +1,6 @@
 {
   "name": "@grantbii/design-system",
-  "version": "1.0.54",
+  "version": "1.0.55",
   "description": "Grantbii's Design System",
   "homepage": "https://design.grantbii.com",
   "repository": {
@@ -12,7 +12,7 @@
   "scripts": {
     "lint": "next lint",
     "prepare": "husky",
-    "build": "npx tsc && cp ./package.json ./dist && cp README.md ./dist",
+    "build": "npx tsc && cp -r ./core/assets ./dist/core && cp ./package.json ./dist && cp README.md ./dist",
     "postpublish": "rm -rf dist/",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
