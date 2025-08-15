@@ -1,19 +1,16 @@
+import { isGrantMatchActive } from "@grantbii/ui-base/match/mappings";
+import { GrantMatchQuery } from "@grantbii/ui-base/match/models";
 import { ComponentType, MouseEventHandler, useState } from "react";
 import styled from "styled-components";
 import { Badge, Button, Textarea } from "../atoms";
 import { Colors, Icons } from "../foundations";
 import { FileDrop, Modal, useFileDrop, useModal } from "../molecules";
 
-type MatchQuery = {
-  files: File[];
-  text: string;
-};
-
 type GrantMatchProps = {
-  query: MatchQuery;
+  query: GrantMatchQuery;
   updateQueryFiles: (newFiles: File[]) => void;
   updateQueryText: (newText: string) => void;
-  onPerformGrantMatch: (query: MatchQuery) => void;
+  onPerformGrantMatch: (query: GrantMatchQuery) => void;
   onResetGrantMatch: () => void;
 };
 
@@ -40,15 +37,17 @@ const GrantMatch = ({
     closeModal,
   );
 
+  const isActive = isGrantMatchActive(query);
+
   return (
     <Container>
       <GrantMatchButtons
-        active={isQueryActive(query)}
+        isActive={isActive}
         onClickMatch={() => openModal()}
         onClickReset={() => resetGrantMatch()}
       />
 
-      {isQueryActive(query) ? (
+      {isActive ? (
         <QueryItems
           uploadedFiles={query.files}
           removeUploadedFile={removeUploadedFile}
@@ -87,10 +86,10 @@ export const useMatchQuery = () => {
 };
 
 const useGrantMatch = (
-  matchQuery: MatchQuery,
+  query: GrantMatchQuery,
   updateQueryFiles: (newFiles: File[]) => void,
   updateQueryText: (newText: string) => void,
-  onPerformGrantMatch: (query: MatchQuery) => void,
+  onPerformGrantMatch: (query: GrantMatchQuery) => void,
   onResetGrantMatch: () => void,
   closeModal: () => void,
 ) => {
@@ -108,11 +107,11 @@ const useGrantMatch = (
   };
 
   const removeUploadedFile = (fileName: string) => {
-    const newFiles = matchQuery.files.filter((file) => file.name !== fileName);
+    const newFiles = query.files.filter((file) => file.name !== fileName);
     updateQueryFiles(newFiles);
-    const newQuery: MatchQuery = { files: newFiles, text: matchQuery.text };
+    const newQuery: GrantMatchQuery = { files: newFiles, text: query.text };
 
-    if (isQueryActive(newQuery)) {
+    if (isGrantMatchActive(newQuery)) {
       onPerformGrantMatch(newQuery);
     } else {
       onResetGrantMatch();
@@ -121,9 +120,9 @@ const useGrantMatch = (
 
   const removeQueryText = () => {
     updateQueryText("");
-    const newQuery: MatchQuery = { files: matchQuery.files, text: "" };
+    const newQuery: GrantMatchQuery = { files: query.files, text: "" };
 
-    if (isQueryActive(newQuery)) {
+    if (isGrantMatchActive(newQuery)) {
       onPerformGrantMatch(newQuery);
     } else {
       onResetGrantMatch();
@@ -138,9 +137,6 @@ const useGrantMatch = (
   };
 };
 
-const isQueryActive = (query: MatchQuery): boolean =>
-  query.files.length !== 0 || query.text.trim() !== "";
-
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -153,19 +149,19 @@ const Container = styled.div`
 `;
 
 type GrantMatchButtonsProps = {
-  active: boolean;
+  isActive: boolean;
   onClickMatch: MouseEventHandler<HTMLButtonElement>;
   onClickReset: MouseEventHandler<HTMLButtonElement>;
 };
 
 const GrantMatchButtons = ({
-  active,
+  isActive,
   onClickMatch,
   onClickReset,
 }: GrantMatchButtonsProps) => (
   <Buttons>
-    <GrantMatchButton active={active} onClick={onClickMatch} />
-    {active ? (
+    <GrantMatchButton isActive={isActive} onClick={onClickMatch} />
+    {isActive ? (
       <Button
         text="Reset"
         onClick={onClickReset}
@@ -185,19 +181,19 @@ const Buttons = styled.div`
 `;
 
 type GrantMatchButtonProps = {
-  active: boolean;
+  isActive: boolean;
   onClick: MouseEventHandler<HTMLButtonElement>;
 };
 
-const GrantMatchButton = ({ active, onClick }: GrantMatchButtonProps) => (
-  <BaseGrantMatchButton type="button" $active={active} onClick={onClick}>
+const GrantMatchButton = ({ isActive, onClick }: GrantMatchButtonProps) => (
+  <BaseGrantMatchButton type="button" $isActive={isActive} onClick={onClick}>
     <Icons.GrantMatchIcon size={20} />
     <p>Find grants that match your needs</p>
     <Icons.MagnifyingGlassIcon size={20} />
   </BaseGrantMatchButton>
 );
 
-const BaseGrantMatchButton = styled.button<{ $active: boolean }>`
+const BaseGrantMatchButton = styled.button<{ $isActive: boolean }>`
   display: flex;
   align-items: center;
   gap: 8px;
@@ -212,7 +208,8 @@ const BaseGrantMatchButton = styled.button<{ $active: boolean }>`
   color: ${Colors.typography.blackMedium};
   background-color: ${Colors.base.white};
   border: 1px solid
-    ${({ $active }) => ($active ? Colors.accent.yellow1 : Colors.neutral.grey3)};
+    ${({ $isActive }) =>
+      $isActive ? Colors.accent.yellow1 : Colors.neutral.grey3};
 `;
 
 type QueryItemsProps = {
