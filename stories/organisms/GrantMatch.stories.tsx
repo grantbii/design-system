@@ -1,18 +1,17 @@
 import { GrantMatch } from "@/.";
-import { useMatchQuery } from "@/core/organisms/GrantMatch";
+import { useGrantMatchQueryItems } from "@/core/organisms/GrantMatch";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import styled from "styled-components";
 
-const GrantMatchExample = () => {
-  const matchQuery = useMatchQuery();
+type GrantMatchExampleProps = {
+  isModalFullScreen?: boolean;
+};
+const GrantMatchExample = ({ isModalFullScreen }: GrantMatchExampleProps) => {
+  const grantMatchProps = useGrantMatchQueryItems();
 
   return (
     <Container>
-      <GrantMatch
-        {...matchQuery}
-        onPerformGrantMatch={() => console.log("finding grants...")}
-        onResetGrantMatch={() => console.log("resetting grant match...")}
-      />
+      <GrantMatch {...grantMatchProps} isModalFullScreen={isModalFullScreen} />
     </Container>
   );
 };
@@ -34,6 +33,10 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Example: Story = {
+export const PopUp: Story = {
   args: {},
+};
+
+export const FullScreen: Story = {
+  args: { isModalFullScreen: true },
 };
