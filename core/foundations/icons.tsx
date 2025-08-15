@@ -1,15 +1,11 @@
 export * from "@phosphor-icons/react";
 import Image from "next/image";
+import grantMatchIcon from "./icons/grant_match.webp";
 
 type GrantMatchIconProps = {
   size?: number;
 };
 
 export const GrantMatchIcon = ({ size = 20 }: GrantMatchIconProps) => (
-  <Image
-    src="/icons/grant_match.webp"
-    alt="Grant Match"
-    width={size}
-    height={size}
-  />
+  <Image src={grantMatchIcon} alt="Grant Match" width={size} height={size} />
 );
