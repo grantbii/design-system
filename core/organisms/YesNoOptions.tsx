@@ -1,7 +1,7 @@
+import { LogicOption } from "@grantbii/ui-base/grant/enums";
+import { DetailedHTMLProps, InputHTMLAttributes } from "react";
 import styled from "styled-components";
 import { RadioButton } from "../atoms";
-import { LogicOption } from "@grantbii/ui-base/enums";
-import { DetailedHTMLProps, InputHTMLAttributes } from "react";
 
 type YesNoOptionsProps = {
   name: string;

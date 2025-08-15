@@ -1,5 +1,5 @@
 import { RadioButtons } from "@/.";
-import { Location } from "@grantbii/ui-base/enums";
+import { Location } from "@grantbii/ui-base/grant/enums";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useState } from "react";
 
