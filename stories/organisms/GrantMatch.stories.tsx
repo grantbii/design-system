@@ -1,4 +1,4 @@
-import { GrantMatch } from "@/.";
+import { Colors, GrantMatch } from "@/.";
 import { useGrantMatchQueryItems } from "@/core/organisms/GrantMatch";
 import { GrantMatchQuery } from "@grantbii/ui-base/match/models";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
@@ -6,20 +6,20 @@ import { useState } from "react";
 import styled from "styled-components";
 
 type GrantMatchExampleProps = {
-  isModalFullScreen?: boolean;
+  isMobile?: boolean;
 };
-const GrantMatchExample = ({ isModalFullScreen }: GrantMatchExampleProps) => {
-  const [status, setStatus] = useState("Pending input");
+const GrantMatchExample = ({ isMobile }: GrantMatchExampleProps) => {
+  const [status, setStatus] = useState("pending query");
 
   const performGrantMatch = (newQuery: GrantMatchQuery) => {
     const fileNames = newQuery.files.map((file) => file.name).join(", ");
     setStatus(
-      `Finding grants using files [${fileNames}] and text [${newQuery.text}]`,
+      `finding grants using files [${fileNames}] and text [${newQuery.text}]`,
     );
-    setTimeout(() => setStatus("Found grants"), 3000);
+    setTimeout(() => setStatus("found grants"), 3000);
   };
 
-  const resetGrantMatch = () => setStatus("Pending input");
+  const resetGrantMatch = () => setStatus("pending query");
 
   const grantMatchQueryProps = useGrantMatchQueryItems(
     performGrantMatch,
@@ -27,26 +27,26 @@ const GrantMatchExample = ({ isModalFullScreen }: GrantMatchExampleProps) => {
   );
 
   return (
-    <Container>
-      <GrantMatchStatus>Status: {status}</GrantMatchStatus>
-
-      <GrantMatch
-        {...grantMatchQueryProps}
-        isModalFullScreen={isModalFullScreen}
-      />
+    <Container $isMobile={isMobile}>
+      <GrantMatch {...grantMatchQueryProps} isSmallerThanLaptop={isMobile} />
+      <p>Status: {status}</p>
     </Container>
   );
 };
 
-const GrantMatchStatus = styled.p`
-  margin: 0px 16px;
-`;
-
-const Container = styled.div`
+const Container = styled.div<{ $isMobile?: boolean }>`
   display: flex;
   flex-direction: column;
+  gap: 8px;
 
-  width: 90vw;
+  padding: 16px;
+
+  width: ${({ $isMobile = false }) => ($isMobile ? "360px" : "90vw")};
+  height: ${({ $isMobile = false }) => ($isMobile ? "600px" : "100vh")};
+
+  border: ${({ $isMobile = false }) =>
+    $isMobile ? `1px solid ${Colors.neutral.grey2}` : "none"};
+  border-radius: 32px;
 `;
 
 const meta: Meta<typeof GrantMatchExample> = {
@@ -62,10 +62,10 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const PopUp: Story = {
-  args: {},
+export const Desktop: Story = {
+  args: { isMobile: false },
 };
 
-export const FullScreen: Story = {
-  args: { isModalFullScreen: true },
+export const Mobile: Story = {
+  args: { isMobile: true },
 };
