@@ -6,24 +6,19 @@ import { Badge, Button, Textarea } from "../atoms";
 import { Colors, Icons } from "../foundations";
 import { FileDrop, Modal, useFileDrop, useModal } from "../molecules";
 
-type GrantMatchQueryProps = {
+type GrantMatchProps = {
   query: GrantMatchQuery;
-  updateQueryFiles: (newFiles: File[]) => void;
+  onPerformGrantMatch: (newQuery: GrantMatchQuery) => void;
   removeQueryFile: (fileName: string) => void;
-  updateQueryText: (newText: string) => void;
   removeQueryText: () => void;
   resetQuery: () => void;
-};
-
-type GrantMatchProps = GrantMatchQueryProps & {
   isModalFullScreen?: boolean;
 };
 
 const GrantMatch = ({
   query,
-  updateQueryFiles,
+  onPerformGrantMatch,
   removeQueryFile,
-  updateQueryText,
   removeQueryText,
   resetQuery,
   isModalFullScreen,
@@ -31,9 +26,8 @@ const GrantMatch = ({
   const { showModal, openModal, closeModal } = useModal();
   const isActive = isGrantMatchActive(query);
 
-  const performGrantMatch = (newFiles: File[], newText: string) => {
-    updateQueryFiles(newFiles);
-    updateQueryText(newText);
+  const performGrantMatch = (newQuery: GrantMatchQuery) => {
+    onPerformGrantMatch(newQuery);
     closeModal();
   };
 
@@ -75,13 +69,12 @@ export default GrantMatch;
 
 const BLANK_GRANT_MATCH_QUERY: GrantMatchQuery = { files: [], text: "" };
 
-export const useGrantMatchQueryItems = (): GrantMatchQueryProps => {
+export const useGrantMatchQueryItems = () => {
   const [query, setQuery] = useState<GrantMatchQuery>(() => ({
     ...BLANK_GRANT_MATCH_QUERY,
   }));
 
-  const updateQueryFiles = (files: File[]) =>
-    setQuery(({ text }) => ({ files, text }));
+  const updateQuery = (newQuery: GrantMatchQuery) => setQuery({ ...newQuery });
 
   const removeQueryFile = (fileName: string) =>
     setQuery(({ files, text }) => ({
@@ -89,18 +82,14 @@ export const useGrantMatchQueryItems = (): GrantMatchQueryProps => {
       text,
     }));
 
-  const updateQueryText = (text: string) =>
-    setQuery(({ files }) => ({ files, text }));
-
   const removeQueryText = () => setQuery(({ files }) => ({ files, text: "" }));
 
   const resetQuery = () => setQuery({ ...BLANK_GRANT_MATCH_QUERY });
 
   return {
     query,
-    updateQueryFiles,
+    updateQuery,
     removeQueryFile,
-    updateQueryText,
     removeQueryText,
     resetQuery,
   };
@@ -243,7 +232,7 @@ const FILE_TYPE_ICON_MAP: {
 type GrantMatchModalProps = {
   activeFiles: File[];
   activeText: string;
-  performGrantMatch: (newFiles: File[], newText: string) => void;
+  performGrantMatch: (newQuery: GrantMatchQuery) => void;
   onClickCancel: MouseEventHandler<HTMLButtonElement>;
   isFullScreen?: boolean;
 };
@@ -256,8 +245,7 @@ const GrantMatchModal = ({
   isFullScreen,
 }: GrantMatchModalProps) => {
   const { files, uploadFiles, removeFile } = useFileDrop(activeFiles);
-  const [queryText, setQueryText] = useState(activeText);
-  const updateQueryText = (newText: string) => setQueryText(newText);
+  const [text, setText] = useState(activeText);
 
   return (
     <Modal
@@ -267,14 +255,14 @@ const GrantMatchModal = ({
           files={files}
           uploadFiles={uploadFiles}
           removeFile={removeFile}
-          queryText={queryText}
-          updateQueryText={updateQueryText}
+          queryText={text}
+          updateQueryText={(newText: string) => setText(newText)}
         />
       }
       footer={
         <Button
           text="Find My Grants"
-          onClick={() => performGrantMatch(files, queryText)}
+          onClick={() => performGrantMatch({ files, text })}
           backgroundColor={Colors.accent.yellow1}
         />
       }
@@ -311,28 +299,26 @@ const Content = ({
   removeFile,
   queryText,
   updateQueryText,
-}: ContentProps) => {
-  const additionalInformationId = "grant-match-additional-information";
+}: ContentProps) => (
+  <BaseContent>
+    <FileDrop
+      uploadedFiles={files}
+      uploadFiles={uploadFiles}
+      removeFile={removeFile}
+    />
 
-  return (
-    <BaseContent>
-      <FileDrop
-        uploadedFiles={files}
-        uploadFiles={uploadFiles}
-        removeFile={removeFile}
+    <QueryText>
+      <label htmlFor={ADDITIONAL_INFORMATION_ID}>Additional Information</label>
+      <Textarea
+        id={ADDITIONAL_INFORMATION_ID}
+        value={queryText}
+        onChange={(event) => updateQueryText(event.target.value)}
       />
+    </QueryText>
+  </BaseContent>
+);
 
-      <QueryText>
-        <label htmlFor={additionalInformationId}>Additional Information</label>
-        <Textarea
-          id={additionalInformationId}
-          value={queryText}
-          onChange={(event) => updateQueryText(event.target.value)}
-        />
-      </QueryText>
-    </BaseContent>
-  );
-};
+const ADDITIONAL_INFORMATION_ID = "grant-match-additional-information";
 
 const BaseContent = styled.div`
   display: flex;

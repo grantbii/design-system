@@ -1,5 +1,6 @@
 import { GrantMatch } from "@/.";
 import { useGrantMatchQueryItems } from "@/core/organisms/GrantMatch";
+import { GrantMatchQuery } from "@grantbii/ui-base/match/models";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import styled from "styled-components";
 
@@ -7,11 +8,24 @@ type GrantMatchExampleProps = {
   isModalFullScreen?: boolean;
 };
 const GrantMatchExample = ({ isModalFullScreen }: GrantMatchExampleProps) => {
-  const grantMatchProps = useGrantMatchQueryItems();
+  const { query, updateQuery, removeQueryFile, removeQueryText, resetQuery } =
+    useGrantMatchQueryItems();
+
+  const onPerformGrantMatch = (newQuery: GrantMatchQuery) => {
+    updateQuery(newQuery);
+    console.log("finding grants...");
+  };
 
   return (
     <Container>
-      <GrantMatch {...grantMatchProps} isModalFullScreen={isModalFullScreen} />
+      <GrantMatch
+        query={query}
+        onPerformGrantMatch={onPerformGrantMatch}
+        removeQueryFile={removeQueryFile}
+        removeQueryText={removeQueryText}
+        resetQuery={resetQuery}
+        isModalFullScreen={isModalFullScreen}
+      />
     </Container>
   );
 };
