@@ -207,10 +207,7 @@ export const useFileDrop = (
 };
 
 const anyFileTooLarge = (files: File[], maxSizeMB: number): boolean =>
-  files.some((file) => {
-    console.log("file size:", file.size);
-    return file.size > convertMegabytesToBytes(maxSizeMB);
-  });
+  files.some((file) => file.size > convertMegabytesToBytes(maxSizeMB));
 
 const convertMegabytesToBytes = (megabytes: number): number =>
   megabytes * 1024 * 1024;

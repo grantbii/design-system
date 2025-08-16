@@ -7,7 +7,7 @@ import { Colors, Icons } from "../foundations";
 import { FileDrop, Modal, useFileDrop, useModal } from "../molecules";
 
 type GrantMatchProps = GrantMatchQueryProps & {
-  isModalFullScreen?: boolean;
+  isSmallerThanLaptop?: boolean;
 };
 
 const GrantMatch = ({
@@ -16,7 +16,7 @@ const GrantMatch = ({
   removeQueryFile,
   removeQueryText,
   resetQuery,
-  isModalFullScreen,
+  isSmallerThanLaptop,
 }: GrantMatchProps) => {
   const { showModal, openModal, closeModal } = useModal();
   const isActive = isGrantMatchActive(query);
@@ -32,14 +32,22 @@ const GrantMatch = ({
         isActive={isActive}
         onClickMatch={() => openModal()}
         onClickReset={() => resetQuery()}
+        isSmallerThanLaptop={isSmallerThanLaptop}
       />
 
       {isActive ? (
-        <QueryItems
-          activeQuery={query}
-          removeQueryFile={removeQueryFile}
-          removeQueryText={removeQueryText}
-        />
+        <QueryItemsRow>
+          <QueryItems
+            activeQuery={query}
+            removeQueryFile={removeQueryFile}
+            removeQueryText={removeQueryText}
+          />
+          {isSmallerThanLaptop ? (
+            <ResetButton onClick={() => resetQuery()} />
+          ) : (
+            <></>
+          )}
+        </QueryItemsRow>
       ) : (
         <></>
       )}
@@ -49,7 +57,7 @@ const GrantMatch = ({
           activeQuery={query}
           updateActiveQuery={updateActiveQuery}
           onClickCancel={() => closeModal()}
-          isFullScreen={isModalFullScreen}
+          isFullScreen={isSmallerThanLaptop}
         />
       ) : (
         <></>
@@ -133,8 +141,6 @@ const BaseGrantMatch = styled.div`
   flex-direction: column;
   gap: 8px;
 
-  padding: 16px 16px 0px 16px;
-
   width: 100%;
   max-width: 100vw;
 `;
@@ -143,22 +149,23 @@ type GrantMatchButtonsProps = {
   isActive: boolean;
   onClickMatch: MouseEventHandler<HTMLButtonElement>;
   onClickReset: MouseEventHandler<HTMLButtonElement>;
+  isSmallerThanLaptop?: boolean;
 };
 
 const GrantMatchButtons = ({
   isActive,
   onClickMatch,
   onClickReset,
+  isSmallerThanLaptop,
 }: GrantMatchButtonsProps) => (
   <Buttons>
-    <GrantMatchButton isActive={isActive} onClick={onClickMatch} />
-    {isActive ? (
-      <Button
-        text="Reset"
-        onClick={onClickReset}
-        color={Colors.typography.blackMedium}
-        underline
-      />
+    <GrantMatchButton
+      isActive={isActive}
+      isSmallerThanLaptop={isSmallerThanLaptop}
+      onClick={onClickMatch}
+    />
+    {!isSmallerThanLaptop && isActive ? (
+      <ResetButton onClick={onClickReset} />
     ) : (
       <></>
     )}
@@ -174,33 +181,79 @@ const Buttons = styled.div`
 type GrantMatchButtonProps = {
   isActive: boolean;
   onClick: MouseEventHandler<HTMLButtonElement>;
+  isSmallerThanLaptop?: boolean;
 };
 
-const GrantMatchButton = ({ isActive, onClick }: GrantMatchButtonProps) => (
-  <BaseGrantMatchButton type="button" $isActive={isActive} onClick={onClick}>
-    <Icons.GrantMatchIcon size={20} />
-    <p>Find grants that match your needs</p>
+const GrantMatchButton = ({
+  isActive,
+  onClick,
+  isSmallerThanLaptop,
+}: GrantMatchButtonProps) => (
+  <BaseGrantMatchButton
+    type="button"
+    $isSmallerThanLaptop={isSmallerThanLaptop}
+    $isActive={isActive}
+    onClick={onClick}
+  >
+    <GrantMatchButtonContent>
+      <Icons.GrantMatchIcon size={20} />
+      <p>Find grants that match your needs</p>
+    </GrantMatchButtonContent>
+
     <Icons.MagnifyingGlassIcon size={20} />
   </BaseGrantMatchButton>
 );
 
-const BaseGrantMatchButton = styled.button<{ $isActive: boolean }>`
+const BaseGrantMatchButton = styled.button<{
+  $isSmallerThanLaptop?: boolean;
+  $isActive: boolean;
+}>`
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: space-between;
+  gap: 16px;
+
+  padding: 10px 16px;
 
   height: 20px;
-  padding: 10px 16px;
-  border-radius: 200px;
+  width: ${({ $isSmallerThanLaptop = false }) =>
+    $isSmallerThanLaptop ? "100%" : "auto"};
 
   font-size: 14px;
   font-weight: 500;
 
-  color: ${Colors.typography.blackMedium};
   background-color: ${Colors.base.white};
+  color: ${Colors.typography.blackMedium};
+
   border: 1px solid
     ${({ $isActive }) =>
       $isActive ? Colors.accent.yellow1 : Colors.neutral.grey3};
+  border-radius: 200px;
+`;
+
+const GrantMatchButtonContent = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
+type ResetButtonProps = {
+  onClick: MouseEventHandler<HTMLButtonElement>;
+};
+
+const ResetButton = ({ onClick }: ResetButtonProps) => (
+  <Button
+    text="Reset"
+    onClick={onClick}
+    color={Colors.typography.blackMedium}
+    underline
+  />
+);
+
+const QueryItemsRow = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 type QueryItemsProps = {
@@ -244,6 +297,8 @@ const BaseQueryItems = styled.div`
   align-items: center;
   gap: 8px;
 
+  width: 100%;
+
   overflow-x: auto;
 
   /* hide scrollbar but still allow for scrolling */
@@ -252,6 +307,8 @@ const BaseQueryItems = styled.div`
   ::-webkit-scrollbar {
     display: none;
   }
+
+  /* TODO: fade effect on overflow-x */
 `;
 
 const FILE_TYPE_ICON_MAP: {
@@ -297,6 +354,7 @@ const GrantMatchModal = ({
       }
       onClickCancel={onClickCancel}
       isFullScreen={isFullScreen}
+      width="480px"
     />
   );
 };
