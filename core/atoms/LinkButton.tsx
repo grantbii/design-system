@@ -15,6 +15,9 @@ type LinkButtonProps = {
   color?: string;
 };
 
+/**
+ * A link that looks like a button
+ */
 const LinkButton = ({
   href,
   target,
