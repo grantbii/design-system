@@ -2,7 +2,7 @@ import { Colors, Icons, LinkButton } from "@/.";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
 
 const meta: Meta<typeof LinkButton> = {
-  title: "Atoms/LinkButton",
+  title: "Atoms/Link Button",
   component: LinkButton,
   tags: ["autodocs"],
   parameters: {

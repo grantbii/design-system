@@ -3,6 +3,9 @@ import { LoaderSizeProps } from "react-spinners/helpers/props";
 import styled from "styled-components";
 import { Colors } from "../foundations";
 
+/**
+ * The animation to show when loading the whole page
+ */
 const PageLoader = ({
   color = Colors.accent.blue1,
   size = 32,
@@ -16,10 +19,5 @@ const PageLoader = ({
 export default PageLoader;
 
 const BasePageLoader = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 100%;
-  height: 100%;
+  margin: auto;
 `;
