@@ -1,12 +1,24 @@
 import { PageLoader } from "@/.";
 import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import styled from "styled-components";
 
-const meta: Meta<typeof PageLoader> = {
+const PageLoaderExample = () => (
+  <BaseExample>
+    <PageLoader />
+  </BaseExample>
+);
+
+const BaseExample = styled.div`
+  width: 100vw;
+  height: 100vh;
+`;
+
+const meta: Meta<typeof PageLoaderExample> = {
   title: "Atoms/Page Loader",
-  component: PageLoader,
+  component: PageLoaderExample,
   tags: ["autodocs"],
   parameters: {
-    layout: "centered",
+    layout: "fullscreen",
   },
 };
 
