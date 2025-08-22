@@ -1,35 +1,37 @@
-import { MoonLoader } from "react-spinners";
-import { LoaderSizeProps } from "react-spinners/helpers/props";
+import { MoonLoader, PacmanLoader } from "react-spinners";
+import { LoaderSizeMarginProps } from "react-spinners/helpers/props";
 import styled from "styled-components";
 import { Colors } from "../foundations";
 
 type PageLoaderProps = {
-  pageWidth?: string;
-  pageHeight?: string;
-} & LoaderSizeProps;
+  isPacman?: boolean;
+} & LoaderSizeMarginProps;
 
 /**
  * The animation to show when loading the whole page
  */
 const PageLoader = ({
-  pageWidth,
-  pageHeight,
+  isPacman = false,
   color = Colors.accent.blue1,
-  size = 32,
+  size,
   ...restOfProps
 }: PageLoaderProps) => (
-  <Background $pageWidth={pageWidth} $pageHeight={pageHeight}>
-    <MoonLoader color={color} size={size} {...restOfProps} />
+  <Background>
+    {isPacman ? (
+      <PacmanLoader color={color} size={size ? size : 20} {...restOfProps} />
+    ) : (
+      <MoonLoader color={color} size={size ? size : 32} {...restOfProps} />
+    )}
   </Background>
 );
 
 export default PageLoader;
 
-const Background = styled.div<{ $pageWidth?: string; $pageHeight?: string }>`
+const Background = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
 
-  width: ${({ $pageWidth = "100%" }) => $pageWidth};
-  height: ${({ $pageHeight = "100%" }) => $pageHeight};
+  width: 100%;
+  height: 100%;
 `;

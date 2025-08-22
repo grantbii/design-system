@@ -1,5 +1,5 @@
 import { MouseEventHandler, ReactNode, useCallback, useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Button } from "../atoms";
 import { Colors } from "../foundations";
 
@@ -102,6 +102,15 @@ const ModalWindow = styled.div<{
 
   min-height: 100px;
   max-height: 100vh;
+
+  ${({ $isFullScreen = false }) =>
+    $isFullScreen
+      ? css`
+          position: fixed;
+          bottom: 0px;
+          left: 0px;
+        `
+      : ""}
 `;
 
 const ModalHeader = styled.div`
