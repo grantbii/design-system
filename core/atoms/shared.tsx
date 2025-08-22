@@ -5,11 +5,14 @@ export const BaseButton = styled.div<{
   $underline?: boolean;
   $backgroundColor?: string;
   $color?: string;
+  $width?: string;
 }>`
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 10px;
+
+  width: ${({ $width = "auto" }) => $width};
 
   padding: 10px 16px;
   border-radius: 4px;
