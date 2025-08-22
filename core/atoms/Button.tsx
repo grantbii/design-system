@@ -1,6 +1,7 @@
 import { ComponentType, MouseEventHandler } from "react";
 import { Icons } from "../foundations";
-import { BaseButton } from "./shared";
+import { BaseButton as ButtonContent } from "./shared";
+import styled from "styled-components";
 
 type ButtonProps = {
   text: string;
@@ -27,8 +28,8 @@ const Button = ({
   width,
   type = "button",
 }: ButtonProps) => (
-  <button type={type} onClick={onClick} disabled={disabled}>
-    <BaseButton
+  <BaseButton type={type} onClick={onClick} disabled={disabled} $width={width}>
+    <ButtonContent
       $underline={underline}
       $backgroundColor={backgroundColor}
       $color={color}
@@ -37,8 +38,12 @@ const Button = ({
       {LeftIcon ? <LeftIcon color={color} size={20} /> : <></>}
       <p>{text}</p>
       {RightIcon ? <RightIcon color={color} size={20} /> : <></>}
-    </BaseButton>
-  </button>
+    </ButtonContent>
+  </BaseButton>
 );
 
 export default Button;
+
+const BaseButton = styled.button<{ $width?: string }>`
+  width: ${({ $width = "auto" }) => $width};
+`;
