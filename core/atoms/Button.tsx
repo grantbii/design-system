@@ -12,6 +12,7 @@ type ButtonProps = {
   underline?: boolean;
   backgroundColor?: string;
   color?: string;
+  width?: string;
 };
 
 const Button = ({
@@ -23,6 +24,7 @@ const Button = ({
   underline,
   backgroundColor,
   color,
+  width,
   type = "button",
 }: ButtonProps) => (
   <button type={type} onClick={onClick} disabled={disabled}>
@@ -30,6 +32,7 @@ const Button = ({
       $underline={underline}
       $backgroundColor={backgroundColor}
       $color={color}
+      $width={width}
     >
       {LeftIcon ? <LeftIcon color={color} size={20} /> : <></>}
       <p>{text}</p>

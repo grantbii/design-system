@@ -13,6 +13,7 @@ type LinkButtonProps = {
   underline?: boolean;
   backgroundColor?: string;
   color?: string;
+  width?: string;
 };
 
 /**
@@ -41,6 +42,7 @@ type ContentProps = {
   underline?: boolean;
   backgroundColor?: string;
   color?: string;
+  width?: string;
 };
 
 const Content = ({
@@ -50,11 +52,13 @@ const Content = ({
   underline,
   backgroundColor,
   color,
+  width,
 }: ContentProps) => (
   <BaseButton
     $underline={underline}
     $backgroundColor={backgroundColor}
     $color={color}
+    $width={width}
   >
     {LeftIcon ? <LeftIcon color={color} size={20} /> : <></>}
     <p>{text}</p>

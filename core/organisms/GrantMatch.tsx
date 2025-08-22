@@ -355,6 +355,7 @@ const GrantMatchModal = ({
       onClickCancel={onClickCancel}
       isFullScreen={isFullScreen}
       width="480px"
+      height="600px"
     />
   );
 };
