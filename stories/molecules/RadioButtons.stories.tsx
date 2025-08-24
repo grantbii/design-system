@@ -8,23 +8,17 @@ type ExampleProps = {
 };
 
 const RadioButtonsExample = ({ controlled }: ExampleProps) => {
-  const [location, setLocation] = useState("");
+  const [selectedLocation, setSelectedLocation] = useState("");
 
   const controlledProps = {
-    options: [
-      {
-        label: Location.SINGAPORE,
-        value: Location.SINGAPORE,
-        checked: location === Location.SINGAPORE,
-        onClick: () => setLocation(Location.SINGAPORE),
-      },
-      {
-        label: Location.HONG_KONG,
-        value: Location.HONG_KONG,
-        checked: location === Location.HONG_KONG,
-        onClick: () => setLocation(Location.HONG_KONG),
-      },
-    ],
+    options: Object.values(Location)
+      .filter((location) => location !== Location.UNKNOWN)
+      .map((location) => ({
+        label: location,
+        value: location,
+        checked: selectedLocation === location,
+        onClick: () => setSelectedLocation(location),
+      })),
   };
 
   return (
@@ -34,18 +28,13 @@ const RadioButtonsExample = ({ controlled }: ExampleProps) => {
 
 const uncontrolledProps = {
   name: "location",
-  options: [
-    {
-      label: Location.SINGAPORE,
-      value: Location.SINGAPORE,
-      onChange: () => alert(`Selected ${Location.SINGAPORE}!`),
-    },
-    {
-      label: Location.HONG_KONG,
-      value: Location.HONG_KONG,
-      onChange: () => alert(`Selected ${Location.HONG_KONG}!`),
-    },
-  ],
+  options: Object.values(Location)
+    .filter((location) => location !== Location.UNKNOWN)
+    .map((location) => ({
+      label: location,
+      value: location,
+      onChange: () => alert(`Selected ${location}!`),
+    })),
 };
 
 const meta: Meta<typeof RadioButtonsExample> = {
