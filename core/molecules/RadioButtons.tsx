@@ -1,3 +1,5 @@
+"use client";
+
 import { DetailedHTMLProps, InputHTMLAttributes } from "react";
 import styled from "styled-components";
 import { RadioButton } from "../atoms";

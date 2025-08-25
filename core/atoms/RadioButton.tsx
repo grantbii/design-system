@@ -1,3 +1,5 @@
+"use client";
+
 import { DetailedHTMLProps, InputHTMLAttributes } from "react";
 import { LabelInput } from "./shared";
 

@@ -1,3 +1,5 @@
+"use client";
+
 import { isGrantMatchActive } from "@grantbii/ui-base/match/mappings";
 import { GrantMatchQuery } from "@grantbii/ui-base/match/models";
 import { ComponentType, MouseEventHandler, useState } from "react";

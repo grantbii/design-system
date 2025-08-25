@@ -1,3 +1,5 @@
+"use client";
+
 import { MoonLoader, PacmanLoader } from "react-spinners";
 import { LoaderSizeMarginProps } from "react-spinners/helpers/props";
 import styled from "styled-components";
