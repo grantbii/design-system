@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import darkLogo from "../assets/logos/brand_logo-dark.webp";
 import lightLogo from "../assets/logos/brand_logo-light.webp";

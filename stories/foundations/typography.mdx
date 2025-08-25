@@ -1,0 +1,38 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { Colors, Typography } from "../../index";
+
+<Meta title="Foundation/Typography" />
+
+# Typography
+
+## Font
+
+Satoshi
+
+## Font Sizes
+
+### Desktop
+
+<span style={{ fontSize: Typography.FONT_SIZE_PIXELS_DESKTOP.title }}>
+  title (h1) - 24px
+</span>
+
+<span style={{ fontSize: Typography.FONT_SIZE_PIXELS_DESKTOP.header }}>
+  header (h2) - 22px
+</span>
+
+<span style={{ fontSize: Typography.FONT_SIZE_PIXELS_DESKTOP.subheader }}>
+  subheader (h3) - 20px (jump in size to make headers visual distinct from body)
+</span>
+
+<span style={{ fontSize: Typography.FONT_SIZE_PIXELS_DESKTOP.body }}>
+  body text (p, div) - 16px
+</span>
+
+<span style={{ fontSize: Typography.FONT_SIZE_PIXELS_DESKTOP.helper }}>
+  helper text (p, div) - {Typography.FONT_SIZE_PIXELS_DESKTOP.helper}
+</span>
+
+### Mobile
+
+Same as desktop but everything is 2px smaller

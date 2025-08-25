@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { ComponentType, HTMLAttributeAnchorTarget } from "react";
 import { Icons } from "../foundations";

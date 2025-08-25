@@ -1,3 +1,5 @@
+"use client";
+
 import { MouseEventHandler, ReactNode, useCallback, useState } from "react";
 import styled, { css } from "styled-components";
 import { Button } from "../atoms";

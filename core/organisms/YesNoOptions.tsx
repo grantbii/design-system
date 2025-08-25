@@ -1,3 +1,5 @@
+"use client";
+
 import { LogicOption } from "@grantbii/ui-base/grant/enums";
 import { DetailedHTMLProps, InputHTMLAttributes } from "react";
 import styled from "styled-components";

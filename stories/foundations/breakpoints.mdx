@@ -1,10 +1,9 @@
-import { ColorItem, ColorPalette, Meta } from "@storybook/addon-docs/blocks";
-import { LAPTOP_WIDTH_PIXELS } from "../../core/foundations/breakpoints";
-import { Colors } from "../../index";
+import { Meta } from "@storybook/addon-docs/blocks";
+import { Breakpoints } from "../../index";
 
 <Meta title="Foundation/Breakpoints" />
 
 # Breakpoints
 
-- Mobile: < {LAPTOP_WIDTH_PIXELS}px
-- Laptop: >= {LAPTOP_WIDTH_PIXELS}px
+- Mobile: < {Breakpoints.LAPTOP_WIDTH_PIXELS}px
+- Laptop: >= {Breakpoints.LAPTOP_WIDTH_PIXELS}px
