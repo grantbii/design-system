@@ -1,4 +1,4 @@
-export * as Breakpoints from "./breakpoints";
+export * as Responsive from "./responsive";
 export * as Colors from "./colors";
 export * as Flags from "./flags";
 export * as Icons from "./icons";

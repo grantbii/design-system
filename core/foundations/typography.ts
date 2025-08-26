@@ -1,15 +1,28 @@
-export const FONT_SIZE_PIXELS_DESKTOP = {
-  title: "24px",
-  header: "22px",
-  subheader: "20px",
-  body: "16px",
-  helper: "14px",
+import { ScreenSize } from "./types";
+
+type FontSizes = { [screenSize in ScreenSize]: string };
+
+export const TITLE_FONT_SIZES: FontSizes = {
+  big: "24px",
+  small: "22px",
 };
 
-export const FONT_SIZE_PIXELS_MOBILE = {
-  title: "22px",
-  header: "20px",
-  subheader: "18px",
-  body: "14px",
-  helper: "12px",
+export const HEADER_FONT_SIZES: FontSizes = {
+  big: "22px",
+  small: "20px",
+};
+
+export const SUBHEADER_FONT_SIZES: FontSizes = {
+  big: "20px",
+  small: "18px",
+};
+
+export const BODY_FONT_SIZES: FontSizes = {
+  big: "16px",
+  small: "14px",
+};
+
+export const HELPER_FONT_SIZES: FontSizes = {
+  big: "14px",
+  small: "12px",
 };

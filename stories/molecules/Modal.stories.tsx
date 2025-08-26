@@ -8,7 +8,6 @@ type ModalExampleProps = {
   footer?: ReactNode;
   width?: string;
   height?: string;
-  isFullScreen?: boolean;
 };
 
 const ModalExample = (props: ModalExampleProps) => {
@@ -71,35 +70,20 @@ const longContent = (
   </div>
 );
 
-export const PopUpWithShortContent: Story = {
+export const ShortContent: Story = {
   args: {
     header,
     content: shortContent,
     width: "600px",
+    height: "360px",
   },
 };
 
-export const FullScreenWithShortContent: Story = {
-  args: {
-    header,
-    content: shortContent,
-    isFullScreen: true,
-  },
-};
-
-export const PopUpWithLongContent: Story = {
+export const LongContent: Story = {
   args: {
     header,
     content: longContent,
     width: "600px",
-    height: "240px",
-  },
-};
-
-export const FullScreenWithLongContent: Story = {
-  args: {
-    header,
-    content: longContent,
-    isFullScreen: true,
+    height: "360px",
   },
 };
