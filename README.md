@@ -1,5 +1,8 @@
 # Grantbii's Design System
 
+Storybook's viewport triggers media query for small screen (e.g. mobile) by default.  
+View in full screen to see components for big screen (e.g. desktop).
+
 Based on Grantbii's Global Design Library in Figma.
 
 Approach: Atomic Design

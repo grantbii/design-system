@@ -1,9 +1,9 @@
 "use client";
 
 import { MouseEventHandler, ReactNode, useCallback, useState } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { Button } from "../atoms";
-import { Colors } from "../foundations";
+import { Colors, Responsive } from "../foundations";
 
 type ModalProps = {
   header?: ReactNode;
@@ -11,7 +11,6 @@ type ModalProps = {
   footer?: ReactNode;
   width?: string;
   height?: string;
-  isFullScreen?: boolean;
   onClickCancel: MouseEventHandler<HTMLButtonElement>;
 };
 
@@ -21,11 +20,10 @@ const Modal = ({
   footer,
   width,
   height,
-  isFullScreen,
   onClickCancel,
 }: ModalProps) => (
-  <Overlay $isFullScreen={isFullScreen}>
-    <ModalWindow $isFullScreen={isFullScreen} $width={width} $height={height}>
+  <Overlay>
+    <ModalWindow $width={width} $height={height}>
       {header ? <ModalHeader>{header}</ModalHeader> : <></>}
 
       <ModalBody>{content}</ModalBody>
@@ -68,11 +66,10 @@ export const useModal = () => {
   };
 };
 
-const Overlay = styled.div<{ $isFullScreen?: boolean }>`
+const Overlay = styled.div`
   background-color: ${Colors.semantic.overlay};
 
-  z-index: ${({ $isFullScreen }) =>
-    $isFullScreen ? Number.MAX_SAFE_INTEGER - 1 : Number.MAX_SAFE_INTEGER};
+  z-index: ${Number.MAX_SAFE_INTEGER};
   position: fixed;
   top: 0px;
   left: 0px;
@@ -86,33 +83,36 @@ const Overlay = styled.div<{ $isFullScreen?: boolean }>`
   align-items: center;
 `;
 
-const ModalWindow = styled.div<{
-  $isFullScreen?: boolean;
-  $width?: string;
-  $height?: string;
-}>`
+const ModalWindow = styled.div<{ $width?: string; $height?: string }>`
   display: flex;
   flex-direction: column;
 
   background-color: ${Colors.base.white};
-  border-radius: ${({ $isFullScreen }) => ($isFullScreen ? 0 : 6)}px;
-
-  width: ${({ $isFullScreen, $width = "auto" }) =>
-    $isFullScreen ? "100%" : $width};
-  height: ${({ $isFullScreen, $height = "auto" }) =>
-    $isFullScreen ? "100%" : $height};
 
   min-height: 100px;
   max-height: 100vh;
 
-  ${({ $isFullScreen = false }) =>
-    $isFullScreen
-      ? css`
-          position: fixed;
-          bottom: 0px;
-          left: 0px;
-        `
-      : ""}
+  @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+
+    width: 100%;
+    height: 100%;
+
+    border-radius: 0px;
+  }
+
+  @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+    position: static;
+    bottom: auto;
+    left: auto;
+
+    width: ${({ $width }) => $width};
+    height: ${({ $height }) => $height};
+
+    border-radius: 6px;
+  }
 `;
 
 const ModalHeader = styled.div`

@@ -1,65 +1,69 @@
 "use client";
 
+import { GrantFilters } from "@grantbii/ui-base/grant/models";
 import { isGrantMatchActive } from "@grantbii/ui-base/match/mappings";
 import { GrantMatchQuery } from "@grantbii/ui-base/match/models";
 import { ComponentType, MouseEventHandler, useState } from "react";
 import styled from "styled-components";
 import { Badge, Button, Textarea } from "../atoms";
-import { Colors, Icons } from "../foundations";
+import { Colors, Icons, Responsive, Typography } from "../foundations";
 import { FileDrop, Modal, useFileDrop, useModal } from "../molecules";
 
-type GrantMatchProps = GrantMatchQueryProps & {
-  isSmallerThanLaptop?: boolean;
+type GrantMatchProps = {
+  activeQuery: GrantMatchQuery;
+  updateActiveQuery: (newQuery: GrantMatchQuery) => void;
+  removeActiveQueryFile: (fileName: string) => void;
+  removeActiveQueryText: () => void;
+  resetActiveQuery: () => void;
 };
 
 const GrantMatch = ({
-  query,
-  updateQuery,
-  removeQueryFile,
-  removeQueryText,
-  resetQuery,
-  isSmallerThanLaptop,
+  activeQuery,
+  updateActiveQuery,
+  removeActiveQueryFile,
+  removeActiveQueryText,
+  resetActiveQuery,
 }: GrantMatchProps) => {
   const { showModal, openModal, closeModal } = useModal();
-  const isActive = isGrantMatchActive(query);
+  const isActive = isGrantMatchActive(activeQuery);
 
-  const updateActiveQuery = (newQuery: GrantMatchQuery) => {
-    updateQuery(newQuery);
-    closeModal();
-  };
+  const [queryText, setQueryText] = useState(activeQuery.text);
+  const updateQueryText = (newText: string) => setQueryText(newText);
+
+  const onClickSearch = () =>
+    updateActiveQuery({ ...activeQuery, text: queryText });
 
   return (
     <BaseGrantMatch>
-      <GrantMatchButtons
+      <GrantMatchActions
+        queryText={queryText}
+        updateQueryText={updateQueryText}
+        onClickSearch={onClickSearch}
+        onClickFileDrop={() => openModal()}
+        onClickReset={() => resetActiveQuery()}
         isActive={isActive}
-        onClickMatch={() => openModal()}
-        onClickReset={() => resetQuery()}
-        isSmallerThanLaptop={isSmallerThanLaptop}
       />
 
       {isActive ? (
-        <QueryItemsRow>
-          <QueryItems
-            activeQuery={query}
-            removeQueryFile={removeQueryFile}
-            removeQueryText={removeQueryText}
+        <ActiveQueryRow>
+          <ActiveQueryFiles
+            activeQuery={activeQuery}
+            removeQueryFile={removeActiveQueryFile}
+            removeQueryText={removeActiveQueryText}
           />
-          {isSmallerThanLaptop ? (
-            <ResetButton onClick={() => resetQuery()} />
-          ) : (
-            <></>
-          )}
-        </QueryItemsRow>
+          <SmallScreenResetButton onClick={() => resetActiveQuery()} />
+        </ActiveQueryRow>
       ) : (
         <></>
       )}
 
       {showModal ? (
         <GrantMatchModal
-          activeQuery={query}
+          activeQuery={activeQuery}
           updateActiveQuery={updateActiveQuery}
-          onClickCancel={() => closeModal()}
-          isFullScreen={isSmallerThanLaptop}
+          queryText={queryText}
+          updateQueryText={updateQueryText}
+          closeModal={closeModal}
         />
       ) : (
         <></>
@@ -70,69 +74,49 @@ const GrantMatch = ({
 
 export default GrantMatch;
 
-type GrantMatchQueryProps = {
-  query: GrantMatchQuery;
-  updateQuery: (newQuery: GrantMatchQuery) => void;
-  removeQueryFile: (fileName: string) => void;
-  removeQueryText: () => void;
-  resetQuery: () => void;
-};
-
-export const useGrantMatchQueryItems = (
-  performGrantMatch: (newQuery: GrantMatchQuery) => void,
+// TODO: refactor
+export const useGrantMatchActiveQuery = (
+  filters: GrantFilters,
+  performGrantMatch: (newQuery: GrantMatchQuery, filters: GrantFilters) => void,
   resetGrantMatch: () => void,
-): GrantMatchQueryProps => {
-  const [query, setQuery] = useState<GrantMatchQuery>(() => ({
+): GrantMatchProps => {
+  const [activeQuery, setActiveQuery] = useState<GrantMatchQuery>(() => ({
     ...BLANK_GRANT_MATCH_QUERY,
   }));
 
-  const updateQuery = (newQuery: GrantMatchQuery) => {
-    setQuery({ ...newQuery });
+  const updateActiveQuery = (query: GrantMatchQuery) => {
+    setActiveQuery({ ...query });
 
-    if (isGrantMatchActive(newQuery)) {
-      performGrantMatch(newQuery);
+    if (isGrantMatchActive(query)) {
+      performGrantMatch(query, filters);
     } else {
       resetGrantMatch();
     }
   };
 
-  const removeQueryFile = (fileName: string) => {
+  const removeActiveQueryFile = (fileName: string) => {
     const newQuery = {
-      files: query.files.filter((file) => file.name !== fileName),
-      text: query.text,
+      files: activeQuery.files.filter((file) => file.name !== fileName),
+      text: activeQuery.text,
     };
 
-    updateQuery(newQuery);
-
-    if (isGrantMatchActive(newQuery)) {
-      performGrantMatch(newQuery);
-    } else {
-      resetGrantMatch();
-    }
+    updateActiveQuery(newQuery);
   };
 
-  const removeQueryText = () => {
-    const newQuery = { files: query.files, text: "" };
-    updateQuery(newQuery);
-
-    if (isGrantMatchActive(newQuery)) {
-      performGrantMatch(newQuery);
-    } else {
-      resetGrantMatch();
-    }
+  const removeActiveQueryText = () => {
+    const newQuery = { files: activeQuery.files, text: "" };
+    updateActiveQuery(newQuery);
   };
 
-  const resetQuery = () => {
-    setQuery({ ...BLANK_GRANT_MATCH_QUERY });
-    resetGrantMatch();
-  };
+  const resetActiveQuery = () =>
+    updateActiveQuery({ ...BLANK_GRANT_MATCH_QUERY });
 
   return {
-    query,
-    updateQuery,
-    removeQueryFile,
-    removeQueryText,
-    resetQuery,
+    activeQuery,
+    updateActiveQuery,
+    removeActiveQueryFile,
+    removeActiveQueryText,
+    resetActiveQuery,
   };
 };
 
@@ -147,101 +131,181 @@ const BaseGrantMatch = styled.div`
   max-width: 100vw;
 `;
 
-type GrantMatchButtonsProps = {
-  isActive: boolean;
-  onClickMatch: MouseEventHandler<HTMLButtonElement>;
+type GrantMatchActionsProps = {
+  queryText: string;
+  updateQueryText: (newText: string) => void;
+  onClickSearch: MouseEventHandler<HTMLButtonElement>;
+  onClickFileDrop: MouseEventHandler<HTMLButtonElement>;
   onClickReset: MouseEventHandler<HTMLButtonElement>;
-  isSmallerThanLaptop?: boolean;
+  isActive: boolean;
 };
 
-const GrantMatchButtons = ({
-  isActive,
-  onClickMatch,
+const GrantMatchActions = ({
+  queryText,
+  updateQueryText,
+  onClickSearch,
+  onClickFileDrop,
   onClickReset,
-  isSmallerThanLaptop,
-}: GrantMatchButtonsProps) => (
-  <Buttons>
-    <GrantMatchButton
-      isActive={isActive}
-      isSmallerThanLaptop={isSmallerThanLaptop}
-      onClick={onClickMatch}
-    />
-    {!isSmallerThanLaptop && isActive ? (
-      <ResetButton onClick={onClickReset} />
-    ) : (
-      <></>
-    )}
-  </Buttons>
+  isActive,
+}: GrantMatchActionsProps) => (
+  <Actions>
+    <SearchBar $isActive={isActive}>
+      <Input
+        value={queryText}
+        onChange={(event) => updateQueryText(event.target.value)}
+        placeholder="Find grants that match your needs"
+      />
+      <SearchButton onClick={onClickSearch} />
+      <FileDropButton onClick={onClickFileDrop} />
+    </SearchBar>
+
+    {isActive ? <BigScreenResetButton onClick={onClickReset} /> : <></>}
+  </Actions>
 );
 
-const Buttons = styled.div`
+const Actions = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
 `;
 
-type GrantMatchButtonProps = {
-  isActive: boolean;
-  onClick: MouseEventHandler<HTMLButtonElement>;
-  isSmallerThanLaptop?: boolean;
-};
-
-const GrantMatchButton = ({
-  isActive,
-  onClick,
-  isSmallerThanLaptop,
-}: GrantMatchButtonProps) => (
-  <BaseGrantMatchButton
-    type="button"
-    $isSmallerThanLaptop={isSmallerThanLaptop}
-    $isActive={isActive}
-    onClick={onClick}
-  >
-    <GrantMatchButtonContent>
-      <Icons.GrantMatchIcon size={20} />
-      <p>Find grants that match your needs</p>
-    </GrantMatchButtonContent>
-
-    <Icons.MagnifyingGlassIcon size={20} />
-  </BaseGrantMatchButton>
-);
-
-const BaseGrantMatchButton = styled.button<{
-  $isSmallerThanLaptop?: boolean;
-  $isActive: boolean;
-}>`
+const SearchBar = styled.div<{ $isActive: boolean }>`
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
 
-  padding: 10px 16px;
-
-  height: 20px;
-  width: ${({ $isSmallerThanLaptop = false }) =>
-    $isSmallerThanLaptop ? "100%" : "auto"};
-
-  font-size: 14px;
-  font-weight: 500;
+  padding: 6px 16px;
 
   background-color: ${Colors.base.white};
-  color: ${Colors.typography.blackMedium};
+  color: ${Colors.typography.blackHigh};
 
   border: 1px solid
     ${({ $isActive }) =>
       $isActive ? Colors.accent.yellow1 : Colors.neutral.grey3};
-  border-radius: 200px;
+  border-radius: 12px;
+
+  @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+    gap: 8px;
+    width: 100%;
+  }
+
+  @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+    gap: 16px;
+    width: auto;
+  }
 `;
 
-const GrantMatchButtonContent = styled.div`
+const Input = styled.input`
+  width: 300px;
+  border: none;
+  outline: none;
+`;
+
+type SearchButtonProps = {
+  onClick: MouseEventHandler<HTMLButtonElement>;
+};
+
+const SearchButton = ({ onClick }: SearchButtonProps) => (
+  <BaseSearchButton type="button" onClick={onClick}>
+    <Icons.MagnifyingGlassIcon size={16} color={Colors.neutral.grey1} />
+  </BaseSearchButton>
+);
+
+const BaseSearchButton = styled.button`
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+
+  height: 32px;
+  width: 32px;
+  min-width: 32px;
+
+  background-color: ${Colors.neutral.grey3};
+
+  border-radius: 8px;
+`;
+
+type FileDropButtonProps = {
+  onClick: MouseEventHandler<HTMLButtonElement>;
+};
+
+const FileDropButton = ({ onClick }: FileDropButtonProps) => (
+  <BaseFileDropButton onClick={onClick}>
+    <Icons.FileArrowUpIcon size={16} />
+    <FileDropButtonText>File Drop</FileDropButtonText>
+  </BaseFileDropButton>
+);
+
+const BaseFileDropButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+
+  height: 31px;
+  min-width: 31px;
+
+  background-color: ${Colors.base.white};
+  color: ${Colors.accent.blue1};
+
+  border: 1px solid ${Colors.accent.blue1};
+  border-radius: 8px;
+
+  @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+    padding: 0px;
+    font-size: ${Typography.HELPER_FONT_SIZES.small};
+  }
+
+  @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+    padding: 0px 8px;
+    font-size: ${Typography.HELPER_FONT_SIZES.big};
+  }
+`;
+
+const FileDropButtonText = styled.p`
+  @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+    display: none;
+  }
+
+  @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+    display: inline;
+  }
 `;
 
 type ResetButtonProps = {
   onClick: MouseEventHandler<HTMLButtonElement>;
 };
+
+const SmallScreenResetButton = ({ onClick }: ResetButtonProps) => (
+  <SmallScreenReset>
+    <ResetButton onClick={onClick} />
+  </SmallScreenReset>
+);
+
+const SmallScreenReset = styled.div`
+  @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+    display: inline;
+  }
+
+  @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+    display: none;
+  }
+`;
+
+const BigScreenResetButton = ({ onClick }: ResetButtonProps) => (
+  <BigScreenReset>
+    <ResetButton onClick={onClick} />
+  </BigScreenReset>
+);
+
+const BigScreenReset = styled.div`
+  @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+    display: inline;
+  }
+
+  @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+    display: none;
+  }
+`;
 
 const ResetButton = ({ onClick }: ResetButtonProps) => (
   <Button
@@ -252,7 +316,7 @@ const ResetButton = ({ onClick }: ResetButtonProps) => (
   />
 );
 
-const QueryItemsRow = styled.div`
+const ActiveQueryRow = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -264,12 +328,11 @@ type QueryItemsProps = {
   removeQueryText: () => void;
 };
 
-const QueryItems = ({
+const ActiveQueryFiles = ({
   activeQuery,
   removeQueryFile,
-  removeQueryText,
 }: QueryItemsProps) => (
-  <BaseQueryItems>
+  <BaseActiveQueryFiles>
     {activeQuery.files.map((file) => (
       <Badge
         key={file.name}
@@ -279,22 +342,10 @@ const QueryItems = ({
         textWidthPixels={160}
       />
     ))}
-
-    {activeQuery.text === "" ? (
-      <></>
-    ) : (
-      <Badge
-        key="additional-information-query-item"
-        text="Additional Information"
-        Icon={Icons.TextAaIcon}
-        onClickClose={() => removeQueryText()}
-        textWidthPixels={180}
-      />
-    )}
-  </BaseQueryItems>
+  </BaseActiveQueryFiles>
 );
 
-const BaseQueryItems = styled.div`
+const BaseActiveQueryFiles = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
@@ -322,58 +373,50 @@ const FILE_TYPE_ICON_MAP: {
 type GrantMatchModalProps = {
   activeQuery: GrantMatchQuery;
   updateActiveQuery: (query: GrantMatchQuery) => void;
-  onClickCancel: MouseEventHandler<HTMLButtonElement>;
-  isFullScreen?: boolean;
+  queryText: string;
+  updateQueryText: (newText: string) => void;
+  closeModal: () => void;
 };
 
 const GrantMatchModal = ({
   activeQuery,
   updateActiveQuery,
-  onClickCancel,
-  isFullScreen,
+  queryText,
+  updateQueryText,
+  closeModal,
 }: GrantMatchModalProps) => {
   const { files, uploadFiles, removeFile } = useFileDrop(activeQuery.files);
-  const [text, setText] = useState(activeQuery.text);
+
+  const onClickFind = () => {
+    updateActiveQuery({ files, text: queryText });
+    closeModal();
+  };
 
   return (
     <Modal
-      header={<Header />}
+      header={<div>Grant Match</div>}
       content={
         <Content
           files={files}
           uploadFiles={uploadFiles}
           removeFile={removeFile}
-          queryText={text}
-          updateQueryText={(newText: string) => setText(newText)}
+          queryText={queryText}
+          updateQueryText={updateQueryText}
         />
       }
       footer={
         <Button
           text="Find My Grants"
-          onClick={() => updateActiveQuery({ files, text })}
+          onClick={onClickFind}
           backgroundColor={Colors.accent.yellow1}
         />
       }
-      onClickCancel={onClickCancel}
-      isFullScreen={isFullScreen}
+      onClickCancel={() => closeModal()}
       width="480px"
       height="600px"
     />
   );
 };
-
-const Header = () => (
-  <BaseHeader>
-    <Icons.GrantMatchIcon size={24} />
-    <div>Grant Match</div>
-  </BaseHeader>
-);
-
-const BaseHeader = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 12px;
-`;
 
 type ContentProps = {
   files: File[];
@@ -398,17 +441,18 @@ const Content = ({
     />
 
     <QueryText>
-      <label htmlFor={ADDITIONAL_INFORMATION_ID}>Additional Information</label>
+      <label htmlFor={QUERY_TEXTAREA_ID}>Search Grants Opportunities</label>
       <Textarea
-        id={ADDITIONAL_INFORMATION_ID}
+        id={QUERY_TEXTAREA_ID}
         value={queryText}
         onChange={(event) => updateQueryText(event.target.value)}
+        placeholder="Explore by grant name or share what your project is about..."
       />
     </QueryText>
   </BaseContent>
 );
 
-const ADDITIONAL_INFORMATION_ID = "grant-match-additional-information";
+const QUERY_TEXTAREA_ID = "query-textarea";
 
 const BaseContent = styled.div`
   display: flex;

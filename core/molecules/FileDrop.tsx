@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import styled from "styled-components";
 import { Badge } from "../atoms";
-import { Colors, Icons } from "../foundations";
+import { Colors, Icons, Responsive, Typography } from "../foundations";
 
 const DEFAULT_MAX_FILE_SIZE_MB = 5;
 const DEFAULT_MAX_FILES = 5;
@@ -92,22 +92,19 @@ const DropzoneContent = ({ maxFiles, maxSizeMB }: DropzoneContentProps) => (
       size={48}
       color={Colors.neutral.grey1}
     />
-    <DropzoneText>
-      <DropzoneTitle>
+    <AllDropzoneText>
+      <DropzoneText>
         {`Drop up to ${maxFiles} files here ( ${maxSizeMB}MB each)`}
-      </DropzoneTitle>
+      </DropzoneText>
 
-      <DropzoneHighlightedSubtitle>
-        {DROPZONE_BROWSE_TEXT}
-      </DropzoneHighlightedSubtitle>
+      <DropzoneSubtitle $isHighlighted>{DROPZONE_BROWSE_TEXT}</DropzoneSubtitle>
       <DropzoneSubtitle>{FILE_FORMAT_TEXT}</DropzoneSubtitle>
-    </DropzoneText>
+    </AllDropzoneText>
   </BaseDropzoneContent>
 );
 
 const DROPZONE_BROWSE_TEXT = "or click to browse with your file explorer";
-const FILE_FORMAT_TEXT =
-  "Accepted file formats: .pdf (Coming soon: .doc, .ppt, .csv)";
+const FILE_FORMAT_TEXT = "Accepted file formats: .pdf (more coming soon)";
 
 const BaseDropzoneContent = styled.div`
   display: flex;
@@ -116,30 +113,41 @@ const BaseDropzoneContent = styled.div`
   align-items: center;
 `;
 
-const DropzoneText = styled.div`
+const AllDropzoneText = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
 `;
 
-const DropzoneTitle = styled.h3`
+const DropzoneText = styled.p`
+  text-align: center;
+
   font-weight: 500;
-  font-size: 14px;
-  text-align: center;
+
+  @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+    font-size: ${Typography.BODY_FONT_SIZES.small};
+  }
+
+  @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+    font-size: ${Typography.BODY_FONT_SIZES.big};
+  }
 `;
 
-const DropzoneHighlightedSubtitle = styled.p`
-  font-weight: 400;
-  font-size: 12px;
+const DropzoneSubtitle = styled.p<{ $isHighlighted?: boolean }>`
   text-align: center;
-  color: ${Colors.accent.yellow1};
-`;
 
-const DropzoneSubtitle = styled.p`
   font-weight: 400;
-  font-size: 12px;
-  text-align: center;
-  color: ${Colors.typography.blackLow};
+
+  color: ${({ $isHighlighted = false }) =>
+    $isHighlighted ? Colors.accent.yellow1 : Colors.typography.blackLow};
+
+  @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+    font-size: ${Typography.HELPER_FONT_SIZES.small};
+  }
+
+  @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+    font-size: ${Typography.HELPER_FONT_SIZES.big};
+  }
 `;
 
 const ErrorMessage = styled.p`
