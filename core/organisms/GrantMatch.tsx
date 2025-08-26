@@ -1,7 +1,6 @@
 "use client";
 
-import { GrantFilters } from "@grantbii/ui-base/grant/models";
-import { isGrantMatchActive } from "@grantbii/ui-base/match/mappings";
+import { checkGrantMatchActive } from "@grantbii/ui-base/match/mappings";
 import { GrantMatchQuery } from "@grantbii/ui-base/match/models";
 import { ComponentType, MouseEventHandler, useState } from "react";
 import styled from "styled-components";
@@ -12,25 +11,20 @@ import { FileDrop, Modal, useFileDrop, useModal } from "../molecules";
 type GrantMatchProps = {
   activeQuery: GrantMatchQuery;
   updateActiveQuery: (newQuery: GrantMatchQuery) => void;
-  removeActiveQueryFile: (fileName: string) => void;
-  removeActiveQueryText: () => void;
-  resetActiveQuery: () => void;
 };
 
-const GrantMatch = ({
-  activeQuery,
-  updateActiveQuery,
-  removeActiveQueryFile,
-  removeActiveQueryText,
-  resetActiveQuery,
-}: GrantMatchProps) => {
+const GrantMatch = ({ activeQuery, updateActiveQuery }: GrantMatchProps) => {
+  // TODO: refactor into useGrantMatch
   const { showModal, openModal, closeModal } = useModal();
 
   const [queryText, setQueryText] = useState(activeQuery.text);
   const updateQueryText = (newText: string) => setQueryText(newText);
 
+  const { removeActiveQueryFile, removeActiveQueryText, resetActiveQuery } =
+    useGrantMatch(activeQuery, updateActiveQuery);
+
   const onClickSearch = () =>
-    updateActiveQuery({ ...activeQuery, text: queryText });
+    updateActiveQuery({ files: activeQuery.files, text: queryText });
 
   const onClickReset = () => {
     updateQueryText("");
@@ -45,7 +39,7 @@ const GrantMatch = ({
         onClickSearch={onClickSearch}
         onClickFileDrop={() => openModal()}
         onClickReset={onClickReset}
-        isActive={activeQuery.text !== ""}
+        isActive={checkGrantMatchActive(activeQuery)}
       />
 
       {activeQuery.files.length > 0 ? (
@@ -78,26 +72,32 @@ const GrantMatch = ({
 
 export default GrantMatch;
 
-// TODO: refactor
 export const useGrantMatchActiveQuery = (
-  filters: GrantFilters,
-  performGrantMatch: (newQuery: GrantMatchQuery, filters: GrantFilters) => void,
+  performGrantMatch: (newQuery: GrantMatchQuery) => void,
   resetGrantMatch: () => void,
 ): GrantMatchProps => {
-  const [activeQuery, setActiveQuery] = useState<GrantMatchQuery>(() => ({
-    ...BLANK_GRANT_MATCH_QUERY,
-  }));
+  const [activeQuery, setActiveQuery] = useState<GrantMatchQuery>({
+    files: [],
+    text: "",
+  });
 
-  const updateActiveQuery = (query: GrantMatchQuery) => {
-    setActiveQuery({ ...query });
+  const updateActiveQuery = (newQuery: GrantMatchQuery) => {
+    setActiveQuery({ ...newQuery });
 
-    if (isGrantMatchActive(query)) {
-      performGrantMatch(query, filters);
+    if (checkGrantMatchActive(newQuery)) {
+      performGrantMatch(newQuery);
     } else {
       resetGrantMatch();
     }
   };
 
+  return { activeQuery, updateActiveQuery };
+};
+
+const useGrantMatch = (
+  activeQuery: GrantMatchQuery,
+  updateActiveQuery: (query: GrantMatchQuery) => void,
+) => {
   const removeActiveQueryFile = (fileName: string) => {
     const newQuery = {
       files: activeQuery.files.filter((file) => file.name !== fileName),
@@ -112,19 +112,14 @@ export const useGrantMatchActiveQuery = (
     updateActiveQuery(newQuery);
   };
 
-  const resetActiveQuery = () =>
-    updateActiveQuery({ ...BLANK_GRANT_MATCH_QUERY });
+  const resetActiveQuery = () => updateActiveQuery({ files: [], text: "" });
 
   return {
-    activeQuery,
-    updateActiveQuery,
     removeActiveQueryFile,
     removeActiveQueryText,
     resetActiveQuery,
   };
 };
-
-const BLANK_GRANT_MATCH_QUERY: GrantMatchQuery = { files: [], text: "" };
 
 const BaseGrantMatch = styled.div`
   display: flex;
@@ -159,8 +154,11 @@ const GrantMatchActions = ({
         onChange={(event) => updateQueryText(event.target.value)}
         placeholder="Find grants that match your needs"
       />
-      <SearchButton onClick={onClickSearch} />
-      <FileDropButton onClick={onClickFileDrop} />
+
+      <SearchButtons>
+        <SearchButton onClick={onClickSearch} />
+        <FileDropButton onClick={onClickFileDrop} />
+      </SearchButtons>
     </SearchBar>
 
     {isActive ? <BigScreenResetButton onClick={onClickReset} /> : <></>}
@@ -176,6 +174,7 @@ const Actions = styled.div`
 const SearchBar = styled.div<{ $isActive: boolean }>`
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
   padding: 6px 16px;
 
@@ -199,9 +198,22 @@ const SearchBar = styled.div<{ $isActive: boolean }>`
 `;
 
 const Input = styled.input`
-  width: 300px;
+  width: 280px;
   border: none;
   outline: none;
+`;
+
+const SearchButtons = styled.div`
+  display: flex;
+  align-items: center;
+
+  @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+    gap: 8px;
+  }
+
+  @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+    gap: 16px;
+  }
 `;
 
 type SearchButtonProps = {
@@ -266,6 +278,10 @@ const BaseFileDropButton = styled.button`
 `;
 
 const FileDropButtonText = styled.p`
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
   @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
     display: none;
   }

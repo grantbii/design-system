@@ -19,7 +19,6 @@ const GrantMatchExample = () => {
   const resetGrantMatch = () => setStatus("pending query");
 
   const grantMatchQueryProps = useGrantMatchActiveQuery(
-    {},
     performGrantMatch,
     resetGrantMatch,
   );
@@ -40,19 +39,12 @@ const Container = styled.div`
   padding: 16px;
 `;
 
-// width: ${({ $screenSize }) => ($screenSize === "small" ? "360px" : "90vw")};
-// height: ${({ $screenSize }) => ($screenSize === "small" ? "600px" : "100vh")};
-
-// border: ${({ $screenSize }) =>
-//   $screenSize === "small" ? `1px solid ${Colors.neutral.grey2}` : "none"};
-// border-radius: 32px;
-
 const meta: Meta<typeof GrantMatchExample> = {
   title: "Organisms/Grant Match",
   component: GrantMatchExample,
   tags: ["autodocs"],
   parameters: {
-    layout: "centered",
+    layout: "fullscreen",
   },
 };
 
