@@ -1,6 +1,6 @@
 {
   "name": "@grantbii/design-system",
-  "version": "1.0.69",
+  "version": "1.0.70",
   "description": "Grantbii's Design System",
   "homepage": "https://design.grantbii.com",
   "repository": {
@@ -18,7 +18,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@grantbii/ui-base": "1.0.18",
+    "@grantbii/ui-base": "1.0.19",
     "@phosphor-icons/react": "^2.1.10",
     "country-flag-icons": "^1.5.19",
     "next": "^15.5.0",
