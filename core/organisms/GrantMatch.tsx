@@ -25,13 +25,17 @@ const GrantMatch = ({
   resetActiveQuery,
 }: GrantMatchProps) => {
   const { showModal, openModal, closeModal } = useModal();
-  const isActive = isGrantMatchActive(activeQuery);
 
   const [queryText, setQueryText] = useState(activeQuery.text);
   const updateQueryText = (newText: string) => setQueryText(newText);
 
   const onClickSearch = () =>
     updateActiveQuery({ ...activeQuery, text: queryText });
+
+  const onClickReset = () => {
+    updateQueryText("");
+    resetActiveQuery();
+  };
 
   return (
     <BaseGrantMatch>
@@ -40,18 +44,18 @@ const GrantMatch = ({
         updateQueryText={updateQueryText}
         onClickSearch={onClickSearch}
         onClickFileDrop={() => openModal()}
-        onClickReset={() => resetActiveQuery()}
-        isActive={isActive}
+        onClickReset={onClickReset}
+        isActive={activeQuery.text !== ""}
       />
 
-      {isActive ? (
+      {activeQuery.files.length > 0 ? (
         <ActiveQueryRow>
           <ActiveQueryFiles
             activeQuery={activeQuery}
             removeQueryFile={removeActiveQueryFile}
             removeQueryText={removeActiveQueryText}
           />
-          <SmallScreenResetButton onClick={() => resetActiveQuery()} />
+          <SmallScreenResetButton onClick={onClickReset} />
         </ActiveQueryRow>
       ) : (
         <></>
@@ -299,11 +303,11 @@ const BigScreenResetButton = ({ onClick }: ResetButtonProps) => (
 
 const BigScreenReset = styled.div`
   @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
-    display: inline;
+    display: none;
   }
 
   @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
-    display: none;
+    display: inline;
   }
 `;
 

@@ -3,27 +3,31 @@
 import Image from "next/image";
 import darkLogo from "../assets/logos/brand_logo-dark.webp";
 import lightLogo from "../assets/logos/brand_logo-light.webp";
+import styled from "styled-components";
+import { Responsive } from "../foundations";
 
 type BrandLogoProps = {
-  width?: number;
-  height?: number;
   isDarkTheme?: boolean;
   alt?: string;
 };
 
 const BrandLogo = ({
-  width = 250,
-  height = 80,
   isDarkTheme = true,
   alt = "Grantbii",
 }: BrandLogoProps) => (
-  <Image
-    src={isDarkTheme ? darkLogo : lightLogo}
-    alt={alt}
-    width={width}
-    height={height}
-    priority
-  />
+  <CustomImage src={isDarkTheme ? darkLogo : lightLogo} alt={alt} priority />
 );
 
 export default BrandLogo;
+
+const CustomImage = styled(Image)`
+  @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+    width: 125px;
+    height: 40px;
+  }
+
+  @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+    width: 150px;
+    height: 48px;
+  }
+`;
