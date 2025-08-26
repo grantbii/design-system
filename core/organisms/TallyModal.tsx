@@ -7,7 +7,6 @@ type TallyModalProps = {
   header?: ReactNode;
   tallyId: string;
   prefilledFieldsQueryParams?: string;
-  isFullScreen?: boolean;
   onClickCancel: MouseEventHandler<HTMLButtonElement>;
 };
 
