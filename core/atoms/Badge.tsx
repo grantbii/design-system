@@ -2,7 +2,7 @@
 
 import { ComponentType, MouseEventHandler } from "react";
 import styled from "styled-components";
-import { Colors, Icons } from "../foundations";
+import { Colors, Icons, Responsive, Typography } from "../foundations";
 
 type BadgeProps = {
   text: string;
@@ -91,7 +91,14 @@ const BadgeText = styled.p`
   text-overflow: ellipsis;
 
   font-weight: 500;
-  font-size: 14px;
+
+  @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+    font-size: ${Typography.HELPER_FONT_SIZES.small};
+  }
+
+  @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+    font-size: ${Typography.HELPER_FONT_SIZES.big};
+  }
 `;
 
 const Button = styled.button`

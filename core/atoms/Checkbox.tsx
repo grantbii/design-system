@@ -1,7 +1,7 @@
 "use client";
 
 import { DetailedHTMLProps, InputHTMLAttributes } from "react";
-import { LabelInput } from "./shared";
+import { LabelledInput } from "./shared";
 
 type CheckboxProps = {
   label: string;
@@ -14,11 +14,11 @@ const Checkbox = ({
   labelBefore = false,
   ...checkboxProps
 }: CheckboxProps) => (
-  <LabelInput>
+  <LabelledInput>
     {labelBefore ? <label htmlFor={`${id}-checkbox`}>{label}</label> : <></>}
     <input {...checkboxProps} id={`${id}-checkbox`} type="checkbox" />
     {labelBefore ? <></> : <label htmlFor={`${id}-checkbox`}>{label}</label>}
-  </LabelInput>
+  </LabelledInput>
 );
 
 export default Checkbox;
