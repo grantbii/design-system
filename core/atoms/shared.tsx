@@ -30,7 +30,7 @@ export const BaseButton = styled.div<{
   }) => ($underline ? "transparent" : $backgroundColor)};
 `;
 
-export const LabelInput = styled.div`
+export const LabelledInput = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
