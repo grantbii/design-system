@@ -6,6 +6,7 @@ import { ComponentType, MouseEventHandler, useState } from "react";
 import styled from "styled-components";
 import { Badge, Button, Textarea } from "../atoms";
 import { Colors, Icons, Responsive, Typography } from "../foundations";
+import { BigScreenOnly, SmallScreenOnly } from "../foundations/responsive";
 import { FileDrop, Modal, useFileDrop, useModal } from "../molecules";
 
 type GrantMatchProps = {
@@ -14,42 +15,33 @@ type GrantMatchProps = {
 };
 
 const GrantMatch = ({ activeQuery, updateActiveQuery }: GrantMatchProps) => {
-  // TODO: refactor into useGrantMatch
   const { showModal, openModal, closeModal } = useModal();
 
   const [queryText, setQueryText] = useState(activeQuery.text);
   const updateQueryText = (newText: string) => setQueryText(newText);
 
-  const { removeActiveQueryFile, removeActiveQueryText, resetActiveQuery } =
-    useGrantMatch(activeQuery, updateActiveQuery);
-
-  const onClickSearch = () =>
-    updateActiveQuery({ files: activeQuery.files, text: queryText });
-
-  const onClickReset = () => {
-    updateQueryText("");
-    resetActiveQuery();
-  };
-
   return (
     <BaseGrantMatch>
       <GrantMatchActions
+        activeQuery={activeQuery}
+        updateActiveQuery={updateActiveQuery}
         queryText={queryText}
         updateQueryText={updateQueryText}
-        onClickSearch={onClickSearch}
-        onClickFileDrop={() => openModal()}
-        onClickReset={onClickReset}
-        isActive={checkGrantMatchActive(activeQuery)}
+        openModal={openModal}
       />
 
       {activeQuery.files.length > 0 ? (
         <ActiveQueryRow>
           <ActiveQueryFiles
             activeQuery={activeQuery}
-            removeQueryFile={removeActiveQueryFile}
-            removeQueryText={removeActiveQueryText}
+            updateActiveQuery={updateActiveQuery}
           />
-          <SmallScreenResetButton onClick={onClickReset} />
+          <SmallScreenOnly>
+            <ResetButton
+              updateActiveQuery={updateActiveQuery}
+              updateQueryText={updateQueryText}
+            />
+          </SmallScreenOnly>
         </ActiveQueryRow>
       ) : (
         <></>
@@ -94,33 +86,6 @@ export const useGrantMatchActiveQuery = (
   return { activeQuery, updateActiveQuery };
 };
 
-const useGrantMatch = (
-  activeQuery: GrantMatchQuery,
-  updateActiveQuery: (query: GrantMatchQuery) => void,
-) => {
-  const removeActiveQueryFile = (fileName: string) => {
-    const newQuery = {
-      files: activeQuery.files.filter((file) => file.name !== fileName),
-      text: activeQuery.text,
-    };
-
-    updateActiveQuery(newQuery);
-  };
-
-  const removeActiveQueryText = () => {
-    const newQuery = { files: activeQuery.files, text: "" };
-    updateActiveQuery(newQuery);
-  };
-
-  const resetActiveQuery = () => updateActiveQuery({ files: [], text: "" });
-
-  return {
-    removeActiveQueryFile,
-    removeActiveQueryText,
-    resetActiveQuery,
-  };
-};
-
 const BaseGrantMatch = styled.div`
   display: flex;
   flex-direction: column;
@@ -131,39 +96,53 @@ const BaseGrantMatch = styled.div`
 `;
 
 type GrantMatchActionsProps = {
+  activeQuery: GrantMatchQuery;
+  updateActiveQuery: (query: GrantMatchQuery) => void;
   queryText: string;
   updateQueryText: (newText: string) => void;
-  onClickSearch: MouseEventHandler<HTMLButtonElement>;
-  onClickFileDrop: MouseEventHandler<HTMLButtonElement>;
-  onClickReset: MouseEventHandler<HTMLButtonElement>;
-  isActive: boolean;
+  openModal: () => void;
 };
 
 const GrantMatchActions = ({
+  activeQuery,
+  updateActiveQuery,
   queryText,
   updateQueryText,
-  onClickSearch,
-  onClickFileDrop,
-  onClickReset,
-  isActive,
-}: GrantMatchActionsProps) => (
-  <Actions>
-    <SearchBar $isActive={isActive}>
-      <Input
-        value={queryText}
-        onChange={(event) => updateQueryText(event.target.value)}
-        placeholder="Find grants that match your needs"
-      />
+  openModal,
+}: GrantMatchActionsProps) => {
+  const isActive = checkGrantMatchActive(activeQuery);
 
-      <SearchButtons>
-        <SearchButton onClick={onClickSearch} />
-        <FileDropButton onClick={onClickFileDrop} />
-      </SearchButtons>
-    </SearchBar>
+  const onClickSearch = () =>
+    updateActiveQuery({ files: activeQuery.files, text: queryText });
 
-    {isActive ? <BigScreenResetButton onClick={onClickReset} /> : <></>}
-  </Actions>
-);
+  return (
+    <Actions>
+      <SearchBar $isActive={isActive}>
+        <Input
+          value={queryText}
+          onChange={(event) => updateQueryText(event.target.value)}
+          placeholder="Find grants that match your needs"
+        />
+
+        <SearchButtons>
+          <SearchButton onClick={onClickSearch} />
+          <FileDropButton onClick={() => openModal()} />
+        </SearchButtons>
+      </SearchBar>
+
+      {isActive ? (
+        <BigScreenOnly>
+          <ResetButton
+            updateActiveQuery={updateActiveQuery}
+            updateQueryText={updateQueryText}
+          />
+        </BigScreenOnly>
+      ) : (
+        <></>
+      )}
+    </Actions>
+  );
+};
 
 const Actions = styled.div`
   display: flex;
@@ -292,49 +271,28 @@ const FileDropButtonText = styled.p`
 `;
 
 type ResetButtonProps = {
-  onClick: MouseEventHandler<HTMLButtonElement>;
+  updateActiveQuery: (query: GrantMatchQuery) => void;
+  updateQueryText: (newText: string) => void;
 };
 
-const SmallScreenResetButton = ({ onClick }: ResetButtonProps) => (
-  <SmallScreenReset>
-    <ResetButton onClick={onClick} />
-  </SmallScreenReset>
-);
+const ResetButton = ({
+  updateActiveQuery,
+  updateQueryText,
+}: ResetButtonProps) => {
+  const onClickReset = () => {
+    updateQueryText("");
+    updateActiveQuery({ files: [], text: "" });
+  };
 
-const SmallScreenReset = styled.div`
-  @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
-    display: inline;
-  }
-
-  @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
-    display: none;
-  }
-`;
-
-const BigScreenResetButton = ({ onClick }: ResetButtonProps) => (
-  <BigScreenReset>
-    <ResetButton onClick={onClick} />
-  </BigScreenReset>
-);
-
-const BigScreenReset = styled.div`
-  @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
-    display: none;
-  }
-
-  @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
-    display: inline;
-  }
-`;
-
-const ResetButton = ({ onClick }: ResetButtonProps) => (
-  <Button
-    text="Reset"
-    onClick={onClick}
-    color={Colors.typography.blackMedium}
-    underline
-  />
-);
+  return (
+    <Button
+      text="Reset"
+      onClick={onClickReset}
+      color={Colors.typography.blackMedium}
+      underline
+    />
+  );
+};
 
 const ActiveQueryRow = styled.div`
   display: flex;
@@ -344,26 +302,36 @@ const ActiveQueryRow = styled.div`
 
 type QueryItemsProps = {
   activeQuery: GrantMatchQuery;
-  removeQueryFile: (fileName: string) => void;
-  removeQueryText: () => void;
+  updateActiveQuery: (query: GrantMatchQuery) => void;
 };
 
 const ActiveQueryFiles = ({
   activeQuery,
-  removeQueryFile,
-}: QueryItemsProps) => (
-  <BaseActiveQueryFiles>
-    {activeQuery.files.map((file) => (
-      <Badge
-        key={file.name}
-        text={file.name}
-        Icon={FILE_TYPE_ICON_MAP[file.type] ?? Icons.FileIcon}
-        onClickClose={() => removeQueryFile(file.name)}
-        textWidthPixels={160}
-      />
-    ))}
-  </BaseActiveQueryFiles>
-);
+  updateActiveQuery,
+}: QueryItemsProps) => {
+  const removeActiveQueryFile = (fileName: string) => {
+    const newQuery = {
+      files: activeQuery.files.filter((file) => file.name !== fileName),
+      text: activeQuery.text,
+    };
+
+    updateActiveQuery(newQuery);
+  };
+
+  return (
+    <BaseActiveQueryFiles>
+      {activeQuery.files.map((file) => (
+        <Badge
+          key={file.name}
+          text={file.name.substring(0, file.name.lastIndexOf("."))}
+          Icon={FILE_TYPE_ICON_MAP[file.type] ?? Icons.FileIcon}
+          onClickClose={() => removeActiveQueryFile(file.name)}
+          textWidthPixels={160}
+        />
+      ))}
+    </BaseActiveQueryFiles>
+  );
+};
 
 const BaseActiveQueryFiles = styled.div`
   display: flex;
