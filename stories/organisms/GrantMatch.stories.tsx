@@ -12,8 +12,8 @@ const GrantMatchExample = () => {
     const fileNames = newQuery.files.map((file) => file.name).join(", ");
     const printableQuery = `files [${fileNames}] and text [${newQuery.text}]`;
 
-    setStatus(`finding grants using ${printableQuery}`);
-    setTimeout(() => setStatus(`found grants with ${printableQuery}`), 3000);
+    setStatus(`trying to find grants using ${printableQuery}`);
+    setTimeout(() => setStatus(`found grants with ${printableQuery}`), 1000);
   };
 
   const resetGrantMatch = () => setStatus("pending query");
