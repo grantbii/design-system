@@ -4,14 +4,14 @@ import { Colors, Icons, Responsive, Typography } from "../../foundations";
 import { useGrantMatchContext } from "./context";
 
 const SearchBar = () => {
-  const { activeQuery } = useGrantMatchContext();
+  const { activeQuery, queryText } = useGrantMatchContext();
 
   return (
     <BaseSearchBar $hasActiveQueryText={activeQuery.text !== ""}>
       <QueryTextInput />
 
       <Buttons>
-        <ResetTextButton />
+        {queryText !== "" ? <ResetTextButton /> : <></>}
         <SearchButton />
         <FileDropButton />
       </Buttons>
@@ -86,9 +86,9 @@ const BaseIconButton = styled.button`
   align-items: center;
   justify-content: center;
 
-  height: 32px;
-  width: 32px;
-  min-width: 32px;
+  height: 31px;
+  width: 31px;
+  min-width: 31px;
 
   border-radius: 8px;
 `;
@@ -111,6 +111,7 @@ const ResetTextButton = () => {
 
 const BaseResetTextButton = styled(BaseIconButton)`
   background-color: ${Colors.base.white};
+  border: 1px solid ${Colors.base.white};
 `;
 
 const SearchButton = () => {
@@ -126,7 +127,8 @@ const SearchButton = () => {
 };
 
 const BaseSearchButton = styled(BaseIconButton)`
-  background-color: ${Colors.neutral.grey3};
+  background-color: ${Colors.neutral.grey4};
+  border: 1px solid ${Colors.neutral.grey3};
 `;
 
 const FileDropButton = () => {
