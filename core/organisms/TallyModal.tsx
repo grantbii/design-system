@@ -1,6 +1,4 @@
-"use client";
-
-import { MouseEventHandler, ReactNode } from "react";
+import { type MouseEventHandler, type ReactNode } from "react";
 import { Modal } from "../molecules";
 
 type TallyModalProps = {

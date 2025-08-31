@@ -1,6 +1,4 @@
-"use client";
-
-import { ComponentType, MouseEventHandler } from "react";
+import { type ComponentType, type MouseEventHandler } from "react";
 import { Icons } from "../foundations";
 import { BaseButton as ButtonContent } from "./shared";
 import styled from "styled-components";

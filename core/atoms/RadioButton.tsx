@@ -1,6 +1,4 @@
-"use client";
-
-import { DetailedHTMLProps, InputHTMLAttributes } from "react";
+import { type DetailedHTMLProps, type InputHTMLAttributes } from "react";
 import { LabelledInput } from "./shared";
 
 type RadioButtonProps = {

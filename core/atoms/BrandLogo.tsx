@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import styled from "styled-components";
 import darkLogo from "../assets/logos/brand_logo-dark.webp";

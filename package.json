@@ -1,6 +1,6 @@
 {
   "name": "@grantbii/design-system",
-  "version": "1.0.75",
+  "version": "1.0.76",
   "description": "Grantbii's Design System",
   "homepage": "https://design.grantbii.com",
   "repository": {
@@ -9,6 +9,7 @@
   },
   "license": "UNLICENSED",
   "main": "./index.js",
+  "types": "./index.d.ts",
   "scripts": {
     "lint": "next lint",
     "prepare": "husky",
