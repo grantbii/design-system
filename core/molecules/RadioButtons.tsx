@@ -20,7 +20,6 @@ const RadioButtons = ({ name, options }: RadioButtonProps) => {
         <RadioButton
           {...props}
           key={`${name}-${value}`}
-          id={`${name}-${value}`}
           value={value}
           name={name}
         />

@@ -1,6 +1,6 @@
 "use client";
 
-import { LogicOption } from "@grantbii/ui-base/grant/enums";
+import { LogicValue } from "@grantbii/ui-base/grant/enums";
 import { DetailedHTMLProps, InputHTMLAttributes } from "react";
 import styled from "styled-components";
 import { RadioButton } from "../atoms";
@@ -30,24 +30,21 @@ const YesNoOptions = ({
   <RadioGroup>
     <RadioButton
       {...yesProps}
-      id={`${name}-yes`}
-      label={LogicOption.YES}
-      value={LogicOption.YES}
+      label={LogicValue.YES}
+      value={LogicValue.YES}
       name={name}
     />
     <RadioButton
       {...noProps}
-      id={`${name}-no`}
-      label={LogicOption.NO}
-      value={LogicOption.NO}
+      label={LogicValue.NO}
+      value={LogicValue.NO}
       name={name}
     />
     {unsureProps ? (
       <RadioButton
         {...unsureProps}
-        id={`${name}-unsure`}
-        label={LogicOption.UNSURE}
-        value={LogicOption.UNSURE}
+        label={LogicValue.UNSURE}
+        value={LogicValue.UNSURE}
         name={name}
       />
     ) : (
