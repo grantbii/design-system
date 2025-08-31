@@ -1,5 +1,5 @@
 import { Textarea } from "@/.";
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { type Meta, type StoryObj } from "@storybook/nextjs-vite";
 
 const meta: Meta<typeof Textarea> = {
   title: "Atoms/Textarea",
