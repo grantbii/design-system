@@ -1,5 +1,5 @@
 import { Badge, Icons } from "@/.";
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { type Meta, type StoryObj } from "@storybook/nextjs-vite";
 
 const meta: Meta<typeof Badge> = {
   title: "Atoms/Badge",

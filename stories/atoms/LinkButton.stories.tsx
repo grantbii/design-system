@@ -1,5 +1,5 @@
 import { Colors, Icons, LinkButton } from "@/.";
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { type Meta, type StoryObj } from "@storybook/nextjs-vite";
 
 const meta: Meta<typeof LinkButton> = {
   title: "Atoms/Link Button",
