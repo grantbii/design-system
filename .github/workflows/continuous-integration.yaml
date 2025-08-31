@@ -30,5 +30,8 @@ jobs:
       - name: Format with prettier
         run: npx prettier --check core/
 
-      - name: Ensure build passes
+      - name: Ensure package build passes
+        run: npm run build
+
+      - name: Ensure storybook build passes
         run: npm run build-storybook
