@@ -1,6 +1,6 @@
 "use client";
 
-import { checkGrantMatchActive } from "@grantbii/ui-base/match/mappings";
+import { checkGrantMatchActive } from "@grantbii/ui-base/match/validations";
 import { GrantMatchQuery } from "@grantbii/ui-base/match/models";
 import { useState } from "react";
 import styled from "styled-components";

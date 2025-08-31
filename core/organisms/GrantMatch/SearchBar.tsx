@@ -35,15 +35,15 @@ const BaseSearchBar = styled.div<{ $hasActiveQueryText: boolean }>`
   border-radius: 12px;
 
   @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
-    gap: 8px;
+    gap: 6px;
+    padding: 6px;
     width: 100%;
-    padding: 6px 16px;
   }
 
   @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
     gap: 10px;
-    width: 480px;
     padding: 10px;
+    width: 480px;
   }
 `;
 
@@ -78,7 +78,14 @@ const BaseQueryTextInput = styled.input`
 const Buttons = styled.div`
   display: flex;
   align-items: center;
-  gap: 8px;
+
+  @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+    gap: 6px;
+  }
+
+  @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+    gap: 10px;
+  }
 `;
 
 const BaseIconButton = styled.button`
