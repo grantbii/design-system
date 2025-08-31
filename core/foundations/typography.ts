@@ -1,4 +1,4 @@
-import { ScreenSize } from "./types";
+import { type ScreenSize } from "./types";
 
 type FontSizes = { [screenSize in ScreenSize]: string };
 
