@@ -1,7 +1,5 @@
-"use client";
-
 import Link from "next/link";
-import { ComponentType, HTMLAttributeAnchorTarget } from "react";
+import { type ComponentType, type HTMLAttributeAnchorTarget } from "react";
 import { Icons } from "../foundations";
 import { BaseButton } from "./shared";
 

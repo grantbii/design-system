@@ -1,13 +1,17 @@
-"use client";
-
-import { MouseEventHandler, ReactNode, useCallback, useState } from "react";
+import {
+  type JSX,
+  type MouseEventHandler,
+  type ReactNode,
+  useCallback,
+  useState,
+} from "react";
 import styled from "styled-components";
 import { Button } from "../atoms";
 import { Colors, Responsive } from "../foundations";
 
 type ModalProps = {
   header?: ReactNode;
-  content: ReactNode;
+  content: JSX.Element;
   footer?: ReactNode;
   width?: string;
   height?: string;

@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
+    "target": "ES2024",
+    "sourceMap": true,
+    "inlineSources": true,
+    "verbatimModuleSyntax": true,
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": false,
     "skipLibCheck": true,
@@ -24,12 +27,6 @@
     },
     "outDir": "dist"
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    "core/**/*"
-  ],
-  "exclude": ["node_modules", ".next", "app", "next.config.*"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "core/**/*"],
+  "exclude": ["node_modules", ".next", "next.config.*", "app", "dist"]
 }

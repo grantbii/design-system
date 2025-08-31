@@ -1,9 +1,7 @@
-"use client";
-
-import { DetailedHTMLProps, InputHTMLAttributes } from "react";
+import { type DetailedHTMLProps, type InputHTMLAttributes } from "react";
 import styled from "styled-components";
 import { RadioButton } from "../atoms";
-import { Option } from "../foundations";
+import { type Option } from "../foundations";
 
 export type RadioOption = Option &
   DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;

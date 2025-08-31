@@ -1,5 +1,3 @@
-"use client";
-
 import { createGlobalStyle } from "styled-components";
 import "../assets/fonts/satoshi/css/satoshi.css";
 import * as Colors from "../foundations/colors";
