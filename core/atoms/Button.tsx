@@ -1,7 +1,7 @@
-import { type ComponentType, type MouseEventHandler } from "react";
+import type { ComponentType, MouseEventHandler } from "react";
+import styled from "styled-components";
 import { Icons } from "../foundations";
 import { BaseButton as ButtonContent } from "./shared";
-import styled from "styled-components";
 
 type ButtonProps = {
   text: string;

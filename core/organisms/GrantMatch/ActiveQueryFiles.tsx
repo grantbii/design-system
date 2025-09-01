@@ -1,4 +1,4 @@
-import { type ComponentType } from "react";
+import type { ComponentType } from "react";
 import styled from "styled-components";
 import { Badge, Button } from "../../atoms";
 import { Colors, Icons } from "../../foundations";

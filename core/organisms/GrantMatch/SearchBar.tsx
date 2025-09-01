@@ -1,4 +1,4 @@
-import { type KeyboardEvent } from "react";
+import type { KeyboardEvent } from "react";
 import styled, { css } from "styled-components";
 import { Colors, Icons, Responsive, Typography } from "../../foundations";
 import { useGrantMatchContext } from "./context";

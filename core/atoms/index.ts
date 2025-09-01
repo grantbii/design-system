@@ -5,4 +5,5 @@ export { default as Checkbox } from "./Checkbox";
 export { default as LinkButton } from "./LinkButton";
 export { default as PageLoader } from "./PageLoader";
 export { default as RadioButton } from "./RadioButton";
+export { default as Select } from "./Select";
 export { default as Textarea } from "./Textarea";

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Colors } from "../foundations";
 
 export const BaseButton = styled.div<{
@@ -34,4 +34,36 @@ export const LabelledInput = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
+`;
+
+export const InputValidation = css`
+  &:disabled {
+    background-color: ${Colors.neutral.grey4};
+    border: 1px solid ${Colors.neutral.grey3};
+    outline: none;
+  }
+
+  &:valid {
+    background-color: ${Colors.base.white};
+    border: 1px solid ${Colors.neutral.grey3};
+    outline: none;
+  }
+
+  &:valid&:focus {
+    background-color: ${Colors.base.white};
+    border: 1px solid ${Colors.accent.blue1};
+    outline: 1px solid ${Colors.accent.blue1};
+  }
+
+  &:invalid {
+    background-color: ${Colors.base.white};
+    border: 1px solid ${Colors.accent.red1};
+    outline: none;
+  }
+
+  &:invalid&:focus {
+    background-color: ${Colors.base.white};
+    border: 1px solid ${Colors.accent.red1};
+    outline: 1px solid ${Colors.accent.red1};
+  }
 `;

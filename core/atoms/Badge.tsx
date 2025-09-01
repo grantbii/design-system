@@ -1,4 +1,4 @@
-import { type ComponentType, type MouseEventHandler } from "react";
+import type { ComponentType, MouseEventHandler } from "react";
 import styled from "styled-components";
 import { Colors, Icons, Responsive, Typography } from "../foundations";
 
