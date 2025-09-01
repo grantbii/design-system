@@ -1,5 +1,5 @@
 import { LogicValue } from "@grantbii/ui-base/grant/enums";
-import { type DetailedHTMLProps, type InputHTMLAttributes } from "react";
+import type { DetailedHTMLProps, InputHTMLAttributes } from "react";
 import styled from "styled-components";
 import { RadioButton } from "../atoms";
 

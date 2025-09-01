@@ -1,5 +1,5 @@
 import { Button, TallyModal, useModal } from "@/.";
-import { type Meta, type StoryObj } from "@storybook/nextjs-vite";
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { type ReactNode } from "react";
 
 type TallyModalExampleProps = {

@@ -1,5 +1,5 @@
 import { FileDrop, useFileDrop } from "@/.";
-import { type Meta, type StoryObj } from "@storybook/nextjs-vite";
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import styled from "styled-components";
 
 const FileDropExample = () => {

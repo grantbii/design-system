@@ -1,5 +1,5 @@
+import type { GrantMatchQuery } from "@grantbii/ui-base/match/models";
 import { checkGrantMatchActive } from "@grantbii/ui-base/match/validations";
-import { type GrantMatchQuery } from "@grantbii/ui-base/match/models";
 import { useState } from "react";
 import styled from "styled-components";
 import { useModal } from "../../molecules";

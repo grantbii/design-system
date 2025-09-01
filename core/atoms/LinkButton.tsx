@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { type ComponentType, type HTMLAttributeAnchorTarget } from "react";
+import type { ComponentType, HTMLAttributeAnchorTarget } from "react";
 import { Icons } from "../foundations";
 import { BaseButton } from "./shared";
 

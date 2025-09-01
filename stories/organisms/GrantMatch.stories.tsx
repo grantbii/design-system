@@ -1,7 +1,7 @@
 import { GrantMatch } from "@/.";
 import { useGrantMatchActiveQuery } from "@/core/organisms/GrantMatch";
 import { type GrantMatchQuery } from "@grantbii/ui-base/match/models";
-import { type Meta, type StoryObj } from "@storybook/nextjs-vite";
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useState } from "react";
 import styled from "styled-components";
 
