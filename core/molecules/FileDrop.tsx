@@ -92,7 +92,7 @@ const DropzoneContent = ({ maxFiles, maxSizeMB }: DropzoneContentProps) => (
     />
     <AllDropzoneText>
       <DropzoneText>
-        {`Drop up to ${maxFiles} files here ( ${maxSizeMB}MB each)`}
+        {`Drop up to ${maxFiles} files here (${maxSizeMB}MB each)`}
       </DropzoneText>
 
       <DropzoneSubtitle $isHighlighted>{DROPZONE_BROWSE_TEXT}</DropzoneSubtitle>
