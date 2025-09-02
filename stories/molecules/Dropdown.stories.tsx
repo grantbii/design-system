@@ -1,5 +1,5 @@
 import { Dropdown } from "@/.";
-import { Need } from "@grantbii/ui-base/grant/enums";
+import { Need } from "@grantbii/ui-base/filter/enums";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
 const meta: Meta<typeof Dropdown> = {
