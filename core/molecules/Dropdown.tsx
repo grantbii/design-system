@@ -10,9 +10,14 @@ type DropdownProps = {
   HTMLSelectElement
 >;
 
-const Dropdown = ({ options, defaultLabel, ...selectProps }: DropdownProps) => (
-  <Select {...selectProps}>
-    <option hidden disabled selected value="">
+const Dropdown = ({
+  options,
+  defaultLabel,
+  defaultValue = "",
+  ...selectProps
+}: DropdownProps) => (
+  <Select {...selectProps} defaultValue={defaultValue}>
+    <option hidden disabled value={defaultValue}>
       {defaultLabel ? defaultLabel : "-"}
     </option>
 

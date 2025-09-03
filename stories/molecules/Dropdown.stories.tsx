@@ -25,9 +25,18 @@ export const BasicExample: Story = {
   },
 };
 
+export const CustomDefaults: Story = {
+  args: {
+    options,
+    defaultValue: "-",
+    defaultLabel: "Select your grant need",
+  },
+};
+
 export const WithValidation: Story = {
   args: {
     options,
     required: true,
+    defaultLabel: "Select your grant need",
   },
 };
