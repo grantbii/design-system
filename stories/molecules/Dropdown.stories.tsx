@@ -1,10 +1,40 @@
-import { Dropdown } from "@/.";
-import { Need } from "@grantbii/ui-base/filter/enums";
+import { Dropdown, type DropdownProps } from "@/.";
+import { Need, parseNeed } from "@grantbii/ui-base/filter/enums";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { useState } from "react";
 
-const meta: Meta<typeof Dropdown> = {
+type ExampleProps = {
+  controlled: boolean;
+};
+
+const DropdownExample = ({ controlled }: ExampleProps) => {
+  const [selectedNeed, setSelectedNeed] = useState(Need.UNKNOWN);
+
+  const controlledProps: DropdownProps = {
+    options,
+    defaultLabel,
+    value: selectedNeed === Need.UNKNOWN ? "" : selectedNeed,
+    onChange: (event) => setSelectedNeed(parseNeed(event.target.value)),
+  };
+
+  return <Dropdown {...(controlled ? controlledProps : uncontrolledProps)} />;
+};
+
+const defaultLabel = "Select your grant need";
+
+const options = Object.values(Need)
+  .filter((need) => need !== Need.UNKNOWN)
+  .map((need) => ({ label: need, value: need }));
+
+const uncontrolledProps: DropdownProps = {
+  options,
+  defaultLabel,
+  defaultValue: "",
+};
+
+const meta: Meta<typeof DropdownExample> = {
   title: "Molecules/Dropdown",
-  component: Dropdown,
+  component: DropdownExample,
   tags: ["autodocs"],
   parameters: {
     layout: "centered",
@@ -15,28 +45,14 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const options = Object.values(Need)
-  .filter((need) => need !== Need.UNKNOWN)
-  .map((need) => ({ label: need, value: need }));
-
-export const BasicExample: Story = {
+export const Controlled: Story = {
   args: {
-    options,
+    controlled: true,
   },
 };
 
-export const CustomDefaults: Story = {
+export const Uncontrolled: Story = {
   args: {
-    options,
-    defaultValue: "-",
-    defaultLabel: "Select your grant need",
-  },
-};
-
-export const WithValidation: Story = {
-  args: {
-    options,
-    required: true,
-    defaultLabel: "Select your grant need",
+    controlled: false,
   },
 };

@@ -2,7 +2,7 @@ import type { DetailedHTMLProps, SelectHTMLAttributes } from "react";
 import { Select } from "../atoms";
 import type { Option } from "../foundations";
 
-type DropdownProps = {
+export type DropdownProps = {
   options: Option[];
   defaultLabel?: string;
 } & DetailedHTMLProps<
@@ -10,14 +10,9 @@ type DropdownProps = {
   HTMLSelectElement
 >;
 
-const Dropdown = ({
-  options,
-  defaultLabel,
-  defaultValue = "",
-  ...selectProps
-}: DropdownProps) => (
-  <Select {...selectProps} defaultValue={defaultValue}>
-    <option hidden disabled value={defaultValue}>
+const Dropdown = ({ options, defaultLabel, ...selectProps }: DropdownProps) => (
+  <Select {...selectProps}>
+    <option hidden disabled value="">
       {defaultLabel ? defaultLabel : "-"}
     </option>
 
