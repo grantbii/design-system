@@ -1,4 +1,4 @@
-import { LogicValue } from "@grantbii/ui-base/grant/enums";
+import { LogicValue } from "@grantbii/ui-core/grant/enums";
 import type { DetailedHTMLProps, InputHTMLAttributes } from "react";
 import styled from "styled-components";
 import { RadioButton } from "../atoms";
