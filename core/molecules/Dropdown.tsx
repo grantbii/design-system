@@ -1,6 +1,6 @@
 import type { DetailedHTMLProps, SelectHTMLAttributes } from "react";
 import { Select } from "../atoms";
-import type { Option } from "../foundations";
+import { type Option } from "../foundations";
 
 export type DropdownProps = {
   options: Option[];

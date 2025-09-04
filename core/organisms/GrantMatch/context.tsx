@@ -1,4 +1,4 @@
-import type { GrantMatchQuery } from "@grantbii/ui-base/match/models";
+import type { GrantMatchQuery } from "@grantbii/ui-core/match/models";
 import { createContext, useContext } from "react";
 
 type GrantMatchCommonProps = {
