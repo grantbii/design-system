@@ -8,6 +8,7 @@ import {
 import styled from "styled-components";
 import { Button } from "../atoms";
 import { Colors, Responsive } from "../foundations";
+import { createPortal } from "react-dom";
 
 type ModalProps = {
   header?: ReactNode;
@@ -25,20 +26,22 @@ const Modal = ({
   width,
   height,
   onClickCancel,
-}: ModalProps) => (
-  <Overlay>
-    <ModalWindow $width={width} $height={height}>
-      {header ? <ModalHeader>{header}</ModalHeader> : <></>}
+}: ModalProps) =>
+  createPortal(
+    <Overlay>
+      <ModalWindow $width={width} $height={height}>
+        {header ? <ModalHeader>{header}</ModalHeader> : <></>}
 
-      <ModalBody>{content}</ModalBody>
+        <ModalBody>{content}</ModalBody>
 
-      <ModalFooter>
-        <CancelButton onClick={onClickCancel} />
-        {footer ? footer : <></>}
-      </ModalFooter>
-    </ModalWindow>
-  </Overlay>
-);
+        <ModalFooter>
+          <CancelButton onClick={onClickCancel} />
+          {footer ? footer : <></>}
+        </ModalFooter>
+      </ModalWindow>
+    </Overlay>,
+    document.body,
+  );
 
 export default Modal;
 
@@ -73,7 +76,7 @@ export const useModal = () => {
 const Overlay = styled.div`
   background-color: ${Colors.semantic.overlay};
 
-  z-index: ${Number.MAX_SAFE_INTEGER};
+  z-index: 9999;
   position: fixed;
   top: 0px;
   left: 0px;

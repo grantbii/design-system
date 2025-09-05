@@ -1,6 +1,6 @@
 import { Button, Modal, useModal } from "@/.";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { type JSX, type ReactNode } from "react";
+import type { JSX, ReactNode } from "react";
 
 type ModalExampleProps = {
   header?: ReactNode;
@@ -14,14 +14,15 @@ const ModalExample = (props: ModalExampleProps) => {
   const { showModal, openModal, closeModal } = useModal();
 
   return (
-    <>
+    <div>
       <Button text="Click to open modal" onClick={() => openModal()} />
+
       {showModal ? (
         <Modal {...props} onClickCancel={() => closeModal()} />
       ) : (
         <></>
       )}
-    </>
+    </div>
   );
 };
 
@@ -38,11 +39,22 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const header = "Grantbii";
+const baseArgs = {
+  header: "Grantbii",
+  width: "600px",
+  height: "360px",
+};
 
 const shortContent = (
   <p>Amplifying Business Grant Impact for SMEs & Scale-ups</p>
 );
+
+export const ShortContent: Story = {
+  args: {
+    ...baseArgs,
+    content: shortContent,
+  },
+};
 
 const longContent = (
   <div>
@@ -70,20 +82,9 @@ const longContent = (
   </div>
 );
 
-export const ShortContent: Story = {
-  args: {
-    header,
-    content: shortContent,
-    width: "600px",
-    height: "360px",
-  },
-};
-
 export const LongContent: Story = {
   args: {
-    header,
+    ...baseArgs,
     content: longContent,
-    width: "600px",
-    height: "360px",
   },
 };
