@@ -1,25 +1,27 @@
-import type { ComponentType, MouseEventHandler } from "react";
+import type {
+  ButtonHTMLAttributes,
+  ComponentType,
+  DetailedHTMLProps,
+} from "react";
 import styled from "styled-components";
 import { Icons } from "../foundations";
 import { BaseButton as ButtonContent } from "./shared";
 
 type ButtonProps = {
   text: string;
-  onClick: MouseEventHandler<HTMLButtonElement>;
-  disabled?: boolean;
-  type?: "button" | "submit" | "reset";
   LeftIcon?: ComponentType<Icons.IconProps>;
   RightIcon?: ComponentType<Icons.IconProps>;
   underline?: boolean;
   backgroundColor?: string;
   color?: string;
   width?: string;
-};
+} & DetailedHTMLProps<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  HTMLButtonElement
+>;
 
 const Button = ({
   text,
-  onClick,
-  disabled,
   LeftIcon,
   RightIcon,
   underline,
@@ -27,8 +29,9 @@ const Button = ({
   color,
   width,
   type = "button",
+  ...buttonProps
 }: ButtonProps) => (
-  <BaseButton type={type} onClick={onClick} disabled={disabled} $width={width}>
+  <BaseButton {...buttonProps} type={type} $width={width}>
     <ButtonContent
       $underline={underline}
       $backgroundColor={backgroundColor}

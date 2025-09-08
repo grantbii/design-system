@@ -1,5 +1,10 @@
 import Link from "next/link";
-import type { ComponentType, HTMLAttributeAnchorTarget } from "react";
+import type {
+  AnchorHTMLAttributes,
+  ComponentType,
+  DetailedHTMLProps,
+  HTMLAttributeAnchorTarget,
+} from "react";
 import { Icons } from "../foundations";
 import { BaseButton } from "./shared";
 
@@ -14,15 +19,18 @@ type LinkButtonProps = {
   backgroundColor?: string;
   color?: string;
   width?: string;
-};
+} & DetailedHTMLProps<
+  AnchorHTMLAttributes<HTMLAnchorElement>,
+  HTMLAnchorElement
+>;
 
 /**
  * A link that looks like a button
  */
 const LinkButton = ({
   href,
-  target,
   disabled,
+  target = "_blank",
   ...contentProps
 }: LinkButtonProps) =>
   disabled ? (

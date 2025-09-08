@@ -14,11 +14,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const baseArgs = {
-  text: "Link",
-  href: "https://grantbii.com",
-  target: "_blank",
-};
+const baseArgs = { text: "Link", href: "https://grantbii.com" };
 
 export const TextOnly: Story = {
   args: baseArgs,
