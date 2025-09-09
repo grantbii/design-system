@@ -2,7 +2,7 @@ import type { ComponentType, MouseEventHandler } from "react";
 import styled from "styled-components";
 import { Colors, Icons, Responsive, Typography } from "../foundations";
 
-type BadgeProps = {
+export type BadgeProps = {
   text: string;
   Icon?: ComponentType<Icons.IconProps>;
   iconSize?: string | number;

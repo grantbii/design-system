@@ -1,4 +1,4 @@
-export { default as Badge } from "./Badge";
+export { default as Badge, type BadgeProps } from "./Badge";
 export { default as BrandLogo } from "./BrandLogo";
 export { default as Button } from "./Button";
 export { default as Checkbox } from "./Checkbox";
