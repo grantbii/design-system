@@ -17,6 +17,7 @@ type ModalProps = {
   width?: string;
   height?: string;
   onClickCancel: MouseEventHandler<HTMLButtonElement>;
+  cancelText?: string;
 };
 
 const Modal = ({
@@ -26,6 +27,7 @@ const Modal = ({
   width,
   height,
   onClickCancel,
+  cancelText,
 }: ModalProps) =>
   createPortal(
     <Overlay>
@@ -35,7 +37,7 @@ const Modal = ({
         <ModalBody>{content}</ModalBody>
 
         <ModalFooter>
-          <CancelButton onClick={onClickCancel} />
+          <CancelButton onClick={onClickCancel} cancelText={cancelText} />
           {footer ? footer : <></>}
         </ModalFooter>
       </ModalWindow>
@@ -158,11 +160,15 @@ const ModalFooter = styled.div`
 
 type CancelButtonProps = {
   onClick: MouseEventHandler<HTMLButtonElement>;
+  cancelText?: string;
 };
 
-const CancelButton = ({ onClick }: CancelButtonProps) => (
+const CancelButton = ({
+  onClick,
+  cancelText = "Cancel",
+}: CancelButtonProps) => (
   <Button
-    text="Cancel"
+    text={cancelText}
     onClick={onClick}
     backgroundColor={Colors.neutral.grey3}
     color={Colors.typography.blackHigh}

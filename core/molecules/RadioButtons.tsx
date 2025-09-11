@@ -11,20 +11,18 @@ type RadioButtonProps = {
   options: RadioOption[];
 };
 
-const RadioButtons = ({ name, options }: RadioButtonProps) => {
-  return (
-    <RadioGroup>
-      {options.map(({ value, ...props }) => (
-        <RadioButton
-          {...props}
-          key={`${name}-${value}`}
-          value={value}
-          name={name}
-        />
-      ))}
-    </RadioGroup>
-  );
-};
+const RadioButtons = ({ name, options }: RadioButtonProps) => (
+  <RadioGroup>
+    {options.map(({ value, ...props }) => (
+      <RadioButton
+        {...props}
+        key={`${name}-${value}`}
+        value={value}
+        name={name}
+      />
+    ))}
+  </RadioGroup>
+);
 
 export default RadioButtons;
 
