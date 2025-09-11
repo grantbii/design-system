@@ -1,4 +1,5 @@
-import { Input } from "@/.";
+import { Input, mapEnumToOptions } from "@/.";
+import { SupportableCost } from "@grantbii/ui-core/grant/enums";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
 const meta: Meta<typeof Input> = {
@@ -28,4 +29,12 @@ export const EmailField: Story = {
 
 export const MinimumLength: Story = {
   args: { placeholder: "At least 10 characters", minLength: 10 },
+};
+
+export const WithDatalist: Story = {
+  args: {
+    placeholder: "Enter a cost item",
+    datalistId: "supportable-cost-items",
+    datalistOptions: mapEnumToOptions(SupportableCost),
+  },
 };
