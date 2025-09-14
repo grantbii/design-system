@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { Colors } from "../foundations";
+import { Colors, Icons } from "../foundations";
 
 export const BaseButton = styled.div<{
   $underline?: boolean;
@@ -67,3 +67,9 @@ export const InputValidation = css`
     outline: 1px solid ${Colors.accent.red1};
   }
 `;
+
+export const FILE_TYPE_ICON_MAP: { [mimeType: string]: Icons.Icon } = {
+  "application/pdf": Icons.FilePdfIcon,
+  "image/png": Icons.FilePngIcon,
+  "image/jpeg": Icons.FileJpgIcon,
+};

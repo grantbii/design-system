@@ -1,6 +1,6 @@
-import type { ComponentType } from "react";
 import styled from "styled-components";
 import { Badge, Button } from "../../atoms";
+import { FILE_TYPE_ICON_MAP } from "../../atoms/shared";
 import { Colors, Icons } from "../../foundations";
 import { useGrantMatchContext } from "./context";
 
@@ -64,12 +64,6 @@ const BaseFileBadges = styled.div`
 
   /* TODO: fade effect on overflow-x */
 `;
-
-const FILE_TYPE_ICON_MAP: {
-  [itemType: string]: ComponentType<Icons.IconProps>;
-} = {
-  "application/pdf": Icons.FilePdfIcon,
-};
 
 const ResetFilesButton = () => {
   const { activeQuery, updateActiveQuery } = useGrantMatchContext();
