@@ -3,6 +3,7 @@ import { useDropzone } from "react-dropzone";
 import styled from "styled-components";
 import { Badge } from "../atoms";
 import { Colors, Icons, Responsive, Typography } from "../foundations";
+import { FILE_TYPE_ICON_MAP } from "../atoms/shared";
 
 const DEFAULT_MAX_FILE_SIZE_MB = 5;
 const DEFAULT_MAX_FILES = 5;
@@ -28,7 +29,11 @@ const FileDrop = ({
 
   const { getInputProps, getRootProps } = useDropzone({
     onDrop: uploadFiles,
-    accept: { "application/pdf": [".pdf"] },
+    accept: {
+      "application/pdf": [".pdf"],
+      "image/png": [".png"],
+      "image/jpeg": ["jpeg", ".jpg"],
+    },
     disabled: reachedMaxUploads,
     noClick: reachedMaxUploads,
     noDrag: reachedMaxUploads,
@@ -102,7 +107,7 @@ const DropzoneContent = ({ maxFiles, maxSizeMB }: DropzoneContentProps) => (
 );
 
 const DROPZONE_BROWSE_TEXT = "or click to browse with your file explorer";
-const FILE_FORMAT_TEXT = "Accepted file formats: .pdf (more coming soon)";
+const FILE_FORMAT_TEXT = "Accepted file formats: pdf, png, jpg";
 
 const BaseDropzoneContent = styled.div`
   display: flex;
@@ -175,10 +180,6 @@ const BaseUploadedFiles = styled.div`
   flex-direction: column;
   gap: 4px;
 `;
-
-const FILE_TYPE_ICON_MAP: { [itemType: string]: Icons.Icon } = {
-  "application/pdf": Icons.FilePdfIcon,
-};
 
 export const useFileDrop = (
   initialFiles: File[] = [],
