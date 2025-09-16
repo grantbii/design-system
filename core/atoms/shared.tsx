@@ -4,6 +4,7 @@ import { Colors, Icons } from "../foundations";
 export const BaseButton = styled.div<{
   $underline?: boolean;
   $backgroundColor?: string;
+  $borderColor?: string;
   $color?: string;
   $width?: string;
 }>`
@@ -15,7 +16,6 @@ export const BaseButton = styled.div<{
   width: ${({ $width = "auto" }) => $width};
 
   padding: 10px 16px;
-  border-radius: 4px;
 
   font-weight: 500;
   font-size: 14px;
@@ -28,6 +28,9 @@ export const BaseButton = styled.div<{
     $underline = false,
     $backgroundColor = Colors.main.grantbiiBlue,
   }) => ($underline ? "transparent" : $backgroundColor)};
+
+  border: 1px solid ${({ $borderColor = "transparent" }) => $borderColor};
+  border-radius: 4px;
 `;
 
 export const LabelledInput = styled.div`

@@ -13,7 +13,7 @@ const BrandLogo = ({
   isDarkTheme = true,
   alt = "Grantbii",
 }: BrandLogoProps) => (
-  <CustomImage
+  <BrandImage
     src={isDarkTheme ? darkLogo : lightLogo}
     width={250}
     height={80}
@@ -24,7 +24,7 @@ const BrandLogo = ({
 
 export default BrandLogo;
 
-const CustomImage = styled(Image)`
+const BrandImage = styled(Image)`
   @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
     width: 125px;
     height: 40px;

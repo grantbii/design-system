@@ -97,17 +97,17 @@ const DropzoneContent = ({ maxFiles, maxSizeMB }: DropzoneContentProps) => (
     />
     <AllDropzoneText>
       <DropzoneText>
-        {`Drop up to ${maxFiles} files here (${maxSizeMB}MB each)`}
+        {`Drop up to ${maxFiles} files here (up to ${maxSizeMB}MB each)`}
       </DropzoneText>
 
-      <DropzoneSubtitle $isHighlighted>{DROPZONE_BROWSE_TEXT}</DropzoneSubtitle>
-      <DropzoneSubtitle>{FILE_FORMAT_TEXT}</DropzoneSubtitle>
+      <DropzoneSubtitle $isHighlighted>
+        or click to browse with your file explorer
+      </DropzoneSubtitle>
+
+      <DropzoneSubtitle>Accepted file formats: pdf, png, jpg</DropzoneSubtitle>
     </AllDropzoneText>
   </BaseDropzoneContent>
 );
-
-const DROPZONE_BROWSE_TEXT = "or click to browse with your file explorer";
-const FILE_FORMAT_TEXT = "Accepted file formats: pdf, png, jpg";
 
 const BaseDropzoneContent = styled.div`
   display: flex;
