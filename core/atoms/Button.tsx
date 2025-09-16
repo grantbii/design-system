@@ -13,6 +13,7 @@ type ButtonProps = {
   RightIcon?: ComponentType<Icons.IconProps>;
   underline?: boolean;
   backgroundColor?: string;
+  borderColor?: string;
   color?: string;
   width?: string;
 } & DetailedHTMLProps<
@@ -26,6 +27,7 @@ const Button = ({
   RightIcon,
   underline,
   backgroundColor,
+  borderColor,
   color,
   width,
   type = "button",
@@ -35,6 +37,7 @@ const Button = ({
     <ButtonContent
       $underline={underline}
       $backgroundColor={backgroundColor}
+      $borderColor={borderColor}
       $color={color}
       $width={width}
     >

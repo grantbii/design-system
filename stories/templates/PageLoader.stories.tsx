@@ -18,7 +18,7 @@ const BaseExample = styled.div`
 `;
 
 const meta: Meta<typeof PageLoaderExample> = {
-  title: "Atoms/Page Loader",
+  title: "Templates/Page Loader",
   component: PageLoaderExample,
   tags: ["autodocs"],
   parameters: {

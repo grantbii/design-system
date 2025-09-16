@@ -6,7 +6,9 @@ import { useGrantMatchContext } from "./context";
 
 const GrantMatchModal = () => {
   const { activeQuery, closeModal } = useGrantMatchContext();
-  const { files, uploadFiles, removeFile } = useFileDrop(activeQuery.files);
+  const { files, uploadFiles, removeFile, errorMessage } = useFileDrop(
+    activeQuery.files,
+  );
 
   return (
     <Modal
@@ -16,6 +18,7 @@ const GrantMatchModal = () => {
           files={files}
           uploadFiles={uploadFiles}
           removeFile={removeFile}
+          errorMessage={errorMessage}
         />
       }
       footer={<FindGrantsButton files={files} />}
@@ -32,12 +35,14 @@ type ModalContentProps = {
   files: File[];
   uploadFiles: (acceptedFiles: File[]) => void;
   removeFile: (fileName: string) => void;
+  errorMessage?: string;
 };
 
 const ModalContent = ({
   files,
   uploadFiles,
   removeFile,
+  errorMessage,
 }: ModalContentProps) => {
   const { queryText, updateQueryText } = useGrantMatchContext();
 
@@ -47,6 +52,7 @@ const ModalContent = ({
         uploadedFiles={files}
         uploadFiles={uploadFiles}
         removeFile={removeFile}
+        errorMessage={errorMessage}
       />
 
       <ModalQueryText>
