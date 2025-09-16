@@ -1,34 +1,29 @@
 import Image from "next/image";
-import styled from "styled-components";
-import loadFailLogo from "../assets/logos/load_fail_logo.webp";
-import { Colors, Responsive, Typography } from "../foundations";
 import Link from "next/link";
 import type { MouseEventHandler } from "react";
+import styled from "styled-components";
+import loadFailLogo from "../assets/logos/load_fail_logo.webp";
 import { Button } from "../atoms";
+import { Colors, Responsive, Typography } from "../foundations";
 
 type LoadingFailedSignProps = {
+  errorMessage?: string;
   onClickReload?: MouseEventHandler<HTMLButtonElement>;
 };
 
-const LoadingFailedSign = ({ onClickReload }: LoadingFailedSignProps) => (
-  <BaseLoadFail>
-    <LoadFailImage
+const LoadingFailedSign = ({
+  errorMessage = "Failed to load results",
+  onClickReload,
+}: LoadingFailedSignProps) => (
+  <BaseLoadingFailedSign>
+    <LoadingFailedImage
       src={loadFailLogo}
       width={693}
       height={641}
-      alt="Failed to load results"
-      priority
+      alt={errorMessage}
     />
 
-    <Text>
-      <ErrorMessage>Failed to load results</ErrorMessage>
-      <ErrorDescription>
-        Please refresh or try again in a moment <br /> or contact us at{" "}
-        <SupportEmailLink href="mailto:support@grantbii.com">
-          support@grantbii.com
-        </SupportEmailLink>
-      </ErrorDescription>
-    </Text>
+    <LoadingFailedText errorMessage={errorMessage} />
 
     {onClickReload ? (
       <Button
@@ -41,12 +36,12 @@ const LoadingFailedSign = ({ onClickReload }: LoadingFailedSignProps) => (
     ) : (
       <></>
     )}
-  </BaseLoadFail>
+  </BaseLoadingFailedSign>
 );
 
 export default LoadingFailedSign;
 
-const BaseLoadFail = styled.div`
+const BaseLoadingFailedSign = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -55,6 +50,8 @@ const BaseLoadFail = styled.div`
   width: 100%;
   height: 100%;
   padding: 24px;
+
+  background-color: ${Colors.base.white};
 
   @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
     gap: 16px;
@@ -71,7 +68,7 @@ const BaseLoadFail = styled.div`
   }
 `;
 
-const LoadFailImage = styled(Image)`
+const LoadingFailedImage = styled(Image)`
   @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
     width: 151px;
     height: 140px;
@@ -83,7 +80,23 @@ const LoadFailImage = styled(Image)`
   }
 `;
 
-const Text = styled.div`
+type LoadingFailedTextProps = {
+  errorMessage: string;
+};
+
+const LoadingFailedText = ({ errorMessage }: LoadingFailedTextProps) => (
+  <BaseLoadingFailedText>
+    <ErrorMessage>{errorMessage}</ErrorMessage>
+    <ErrorDescription>
+      Please try again in a moment or <br /> contact us at{" "}
+      <SupportEmailLink href="mailto:support@grantbii.com">
+        support@grantbii.com
+      </SupportEmailLink>
+    </ErrorDescription>
+  </BaseLoadingFailedText>
+);
+
+const BaseLoadingFailedText = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
