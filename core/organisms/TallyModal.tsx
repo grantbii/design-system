@@ -5,7 +5,7 @@ type TallyModalProps = {
   header?: ReactNode;
   tallyId: string;
   prefilledFieldsQueryParams?: string;
-  onClickCancel: MouseEventHandler<HTMLButtonElement>;
+  onClickClose: MouseEventHandler<HTMLButtonElement>;
 };
 
 const TallyModal = ({
@@ -22,7 +22,7 @@ const TallyModal = ({
       />
     }
     width="640px"
-    height="480px"
+    height="600px"
   />
 );
 
