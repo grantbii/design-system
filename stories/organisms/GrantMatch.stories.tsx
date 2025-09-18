@@ -5,7 +5,14 @@ import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useState } from "react";
 import styled from "styled-components";
 
-const GrantMatchExample = () => {
+type Callbacks = {
+  textSearchCallback?: () => void;
+  findGrantsCallback?: () => void;
+  closeModalCallback?: () => void;
+  openModalCallback?: () => void;
+};
+
+const GrantMatchExample = (callbacks: Callbacks) => {
   const [status, setStatus] = useState("pending query");
 
   const performGrantMatch = (newQuery: GrantMatchQuery) => {
@@ -25,7 +32,7 @@ const GrantMatchExample = () => {
 
   return (
     <Container>
-      <GrantMatch {...grantMatchQueryProps} />
+      <GrantMatch {...grantMatchQueryProps} {...callbacks} />
       <p>Status: {status}</p>
     </Container>
   );
@@ -52,6 +59,15 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Example: Story = {
+export const DefaultExample: Story = {
   args: {},
+};
+
+export const WithCallbacks: Story = {
+  args: {
+    textSearchCallback: () => alert("doing text search"),
+    findGrantsCallback: () => alert("finding your grants"),
+    closeModalCallback: () => alert("closing modal"),
+    openModalCallback: () => alert("opening modal"),
+  },
 };

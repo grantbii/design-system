@@ -15,7 +15,7 @@ const TallyModalExample = (props: TallyModalExampleProps) => {
     <>
       <Button text="Click to open modal" onClick={() => openModal()} />
       {showModal ? (
-        <TallyModal {...props} onClickCancel={() => closeModal()} />
+        <TallyModal {...props} onClickClose={() => closeModal()} />
       ) : (
         <></>
       )}

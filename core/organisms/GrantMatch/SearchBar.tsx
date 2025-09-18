@@ -3,7 +3,15 @@ import styled, { css } from "styled-components";
 import { Colors, Icons, Responsive, Typography } from "../../foundations";
 import { useGrantMatchContext } from "./context";
 
-const SearchBar = () => {
+type SearchBarProps = {
+  textSearchCallback?: () => void;
+  openModalCallback?: () => void;
+};
+
+const SearchBar = ({
+  textSearchCallback,
+  openModalCallback,
+}: SearchBarProps) => {
   const { activeQuery, queryText } = useGrantMatchContext();
 
   return (
@@ -12,8 +20,8 @@ const SearchBar = () => {
 
       <Buttons>
         {queryText !== "" ? <ResetTextButton /> : <></>}
-        <SearchButton />
-        <FileDropButton />
+        <TextSearchButton textSearchCallback={textSearchCallback} />
+        <OpenModalButton openModalCallback={openModalCallback} />
       </Buttons>
     </BaseSearchBar>
   );
@@ -121,13 +129,23 @@ const BaseResetTextButton = styled(BaseIconButton)`
   border: 1px solid ${Colors.base.white};
 `;
 
-const SearchButton = () => {
+type TextSearchButtonProps = {
+  textSearchCallback?: () => void;
+};
+
+const TextSearchButton = ({ textSearchCallback }: TextSearchButtonProps) => {
   const { activeQuery, updateActiveQuery, queryText } = useGrantMatchContext();
-  const onClick = () =>
+
+  const onClickSearch = () => {
+    if (textSearchCallback) {
+      textSearchCallback();
+    }
+
     updateActiveQuery({ files: activeQuery.files, text: queryText });
+  };
 
   return (
-    <BaseSearchButton type="button" onClick={onClick}>
+    <BaseSearchButton type="button" onClick={onClickSearch}>
       <Icons.MagnifyingGlassIcon size={16} color={Colors.neutral.grey1} />
     </BaseSearchButton>
   );
@@ -138,21 +156,33 @@ const BaseSearchButton = styled(BaseIconButton)`
   border: 1px solid ${Colors.neutral.grey3};
 `;
 
-const FileDropButton = () => {
+type OpenModalButtonProps = {
+  openModalCallback?: () => void;
+};
+
+const OpenModalButton = ({ openModalCallback }: OpenModalButtonProps) => {
   const { activeQuery, openModal } = useGrantMatchContext();
 
+  const onClickOpen = () => {
+    if (openModalCallback) {
+      openModalCallback();
+    }
+
+    openModal();
+  };
+
   return (
-    <BaseFileDropButton
-      onClick={() => openModal()}
+    <BaseOpenModalButton
+      onClick={onClickOpen}
       $hasActiveQueryFiles={activeQuery.files.length > 0}
     >
       <Icons.FileArrowUpIcon size={16} />
-      <FileDropButtonText>File Drop</FileDropButtonText>
-    </BaseFileDropButton>
+      <OpenModalButtonText>File Drop</OpenModalButtonText>
+    </BaseOpenModalButton>
   );
 };
 
-const BaseFileDropButton = styled.button<{ $hasActiveQueryFiles: boolean }>`
+const BaseOpenModalButton = styled.button<{ $hasActiveQueryFiles: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -186,7 +216,7 @@ const BaseFileDropButton = styled.button<{ $hasActiveQueryFiles: boolean }>`
   }
 `;
 
-const FileDropButtonText = styled.p`
+const OpenModalButtonText = styled.p`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;

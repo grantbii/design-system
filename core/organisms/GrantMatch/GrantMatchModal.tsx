@@ -4,11 +4,27 @@ import { Colors } from "../../foundations";
 import { FileDrop, Modal, useFileDrop } from "../../molecules";
 import { useGrantMatchContext } from "./context";
 
-const GrantMatchModal = () => {
+type GrantMatchModalProps = {
+  findGrantsCallback?: () => void;
+  closeModalCallback?: () => void;
+};
+
+const GrantMatchModal = ({
+  findGrantsCallback,
+  closeModalCallback,
+}: GrantMatchModalProps) => {
   const { activeQuery, closeModal } = useGrantMatchContext();
   const { files, uploadFiles, removeFile, errorMessage } = useFileDrop(
     activeQuery.files,
   );
+
+  const onClickClose = () => {
+    if (closeModalCallback) {
+      closeModalCallback();
+    }
+
+    closeModal();
+  };
 
   return (
     <Modal
@@ -21,8 +37,13 @@ const GrantMatchModal = () => {
           errorMessage={errorMessage}
         />
       }
-      footer={<FindGrantsButton files={files} />}
-      onClickCancel={() => closeModal()}
+      footer={
+        <FindGrantsButton
+          files={files}
+          findGrantsCallback={findGrantsCallback}
+        />
+      }
+      onClickClose={onClickClose}
       width="480px"
       height="600px"
     />
@@ -83,12 +104,20 @@ const ModalQueryText = styled.div`
 
 type FindGrantsButtonProps = {
   files: File[];
+  findGrantsCallback?: () => void;
 };
 
-const FindGrantsButton = ({ files }: FindGrantsButtonProps) => {
+const FindGrantsButton = ({
+  files,
+  findGrantsCallback,
+}: FindGrantsButtonProps) => {
   const { updateActiveQuery, queryText, closeModal } = useGrantMatchContext();
 
   const onClick = () => {
+    if (findGrantsCallback) {
+      findGrantsCallback();
+    }
+
     updateActiveQuery({ files, text: queryText });
     closeModal();
   };

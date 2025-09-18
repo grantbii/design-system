@@ -18,7 +18,7 @@ const ModalExample = (props: ModalExampleProps) => {
       <Button text="Click to open modal" onClick={() => openModal()} />
 
       {showModal ? (
-        <Modal {...props} onClickCancel={() => closeModal()} />
+        <Modal {...props} onClickClose={() => closeModal()} />
       ) : (
         <></>
       )}

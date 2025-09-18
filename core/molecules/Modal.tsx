@@ -16,8 +16,8 @@ type ModalProps = {
   footer?: ReactNode;
   width?: string;
   height?: string;
-  onClickCancel: MouseEventHandler<HTMLButtonElement>;
-  cancelText?: string;
+  onClickClose: MouseEventHandler<HTMLButtonElement>;
+  closeText?: string;
 };
 
 const Modal = ({
@@ -26,8 +26,8 @@ const Modal = ({
   footer,
   width,
   height,
-  onClickCancel,
-  cancelText,
+  onClickClose,
+  closeText,
 }: ModalProps) =>
   createPortal(
     <Overlay>
@@ -37,7 +37,7 @@ const Modal = ({
         <ModalBody>{content}</ModalBody>
 
         <ModalFooter>
-          <CancelButton onClick={onClickCancel} cancelText={cancelText} />
+          <CloseButton onClick={onClickClose} closeText={closeText} />
           {footer ? footer : <></>}
         </ModalFooter>
       </ModalWindow>
@@ -158,17 +158,14 @@ const ModalFooter = styled.div`
   padding: 24px;
 `;
 
-type CancelButtonProps = {
+type CloseButtonProps = {
   onClick: MouseEventHandler<HTMLButtonElement>;
-  cancelText?: string;
+  closeText?: string;
 };
 
-const CancelButton = ({
-  onClick,
-  cancelText = "Cancel",
-}: CancelButtonProps) => (
+const CloseButton = ({ onClick, closeText = "Close" }: CloseButtonProps) => (
   <Button
-    text={cancelText}
+    text={closeText}
     onClick={onClick}
     backgroundColor={Colors.neutral.grey3}
     color={Colors.typography.blackHigh}

@@ -11,13 +11,25 @@ import { GrantMatchContext } from "./context";
 type GrantMatchProps = {
   activeQuery: GrantMatchQuery;
   updateActiveQuery: (newQuery: GrantMatchQuery) => void;
+  textSearchCallback?: () => void;
+  findGrantsCallback?: () => void;
+  closeModalCallback?: () => void;
+  openModalCallback?: () => void;
 };
 
-const GrantMatch = ({ activeQuery, updateActiveQuery }: GrantMatchProps) => {
+const GrantMatch = ({
+  activeQuery,
+  updateActiveQuery,
+  textSearchCallback,
+  findGrantsCallback,
+  closeModalCallback,
+  openModalCallback,
+}: GrantMatchProps) => {
   const { showModal, openModal, closeModal } = useModal();
   const [queryText, setQueryText] = useState(activeQuery.text);
   const updateQueryText = (newText: string) => setQueryText(newText);
 
+  // TODO: refactor away?
   const commonProps = {
     activeQuery,
     updateActiveQuery,
@@ -30,9 +42,19 @@ const GrantMatch = ({ activeQuery, updateActiveQuery }: GrantMatchProps) => {
   return (
     <GrantMatchContext.Provider value={commonProps}>
       <BaseGrantMatch>
-        <SearchBar />
+        <SearchBar
+          textSearchCallback={textSearchCallback}
+          openModalCallback={openModalCallback}
+        />
         {activeQuery.files.length > 0 ? <ActiveQueryFiles /> : <></>}
-        {showModal ? <GrantMatchModal /> : <></>}
+        {showModal ? (
+          <GrantMatchModal
+            findGrantsCallback={findGrantsCallback}
+            closeModalCallback={closeModalCallback}
+          />
+        ) : (
+          <></>
+        )}
       </BaseGrantMatch>
     </GrantMatchContext.Provider>
   );
