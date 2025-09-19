@@ -17,7 +17,10 @@ type Story = StoryObj<typeof meta>;
 const baseArgs = { text: "Link", href: "https://grantbii.com" };
 
 export const TextOnly: Story = {
-  args: baseArgs,
+  args: {
+    ...baseArgs,
+    onClick: () => alert("clicked on link"),
+  },
 };
 
 export const LeftIcon: Story = {

@@ -28,18 +28,35 @@ type LinkButtonProps = {
  * A link that looks like a button
  */
 const LinkButton = ({
-  href,
+  text,
+  LeftIcon,
+  RightIcon,
+  underline,
+  backgroundColor,
+  color,
+  width,
   disabled,
   target = "_blank",
-  ...contentProps
-}: LinkButtonProps) =>
-  disabled ? (
+  ...linkProps
+}: LinkButtonProps) => {
+  const contentProps = {
+    text,
+    LeftIcon,
+    RightIcon,
+    underline,
+    backgroundColor,
+    color,
+    width,
+  };
+
+  return disabled ? (
     <Content {...contentProps} />
   ) : (
-    <Link href={href} target={target}>
+    <Link {...linkProps} target={target}>
       <Content {...contentProps} />
     </Link>
   );
+};
 
 export default LinkButton;
 
