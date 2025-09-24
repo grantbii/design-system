@@ -4,11 +4,13 @@ import styled from "styled-components";
 
 type PageLoaderExampleProps = {
   isPacman?: boolean;
+  loadingText?: string;
+  tip?: string;
 };
 
-const PageLoaderExample = ({ isPacman }: PageLoaderExampleProps) => (
+const PageLoaderExample = (props: PageLoaderExampleProps) => (
   <BaseExample>
-    <PageLoader isPacman={isPacman} />
+    <PageLoader {...props} />
   </BaseExample>
 );
 
@@ -30,8 +32,15 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const GrantbiiApp: Story = {
+export const GrantInsights: Story = {
   args: {},
+};
+
+export const GrantbiiDashboard: Story = {
+  args: {
+    loadingText: "Loading...",
+    tip: "Pro tip: go grab a cup of coffee while waiting for the page to load",
+  },
 };
 
 export const AdminConsole: Story = {
