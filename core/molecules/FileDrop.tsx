@@ -32,7 +32,7 @@ const FileDrop = ({
     accept: {
       "application/pdf": [".pdf"],
       "image/png": [".png"],
-      "image/jpeg": ["jpeg", ".jpg"],
+      "image/jpeg": [".jpeg", ".jpg"],
     },
     disabled: reachedMaxUploads,
     noClick: reachedMaxUploads,
