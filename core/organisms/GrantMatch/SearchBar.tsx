@@ -2,6 +2,8 @@ import type { KeyboardEvent } from "react";
 import styled, { css } from "styled-components";
 import { Colors, Icons, Responsive, Typography } from "../../foundations";
 import { useGrantMatchContext } from "./context";
+import grantMatchLogo from "../../assets/logos/grant_match_logo.webp";
+import Image from "next/image";
 
 type SearchBarProps = {
   textSearchCallback?: () => void;
@@ -15,44 +17,62 @@ const SearchBar = ({
   const { activeQuery, queryText } = useGrantMatchContext();
 
   return (
-    <BaseSearchBar $hasActiveQueryText={activeQuery.text !== ""}>
-      <QueryTextInput />
+    <BaseSearchBar>
+      <TextSearchArea $showBorder={activeQuery.text !== ""}>
+        <QueryTextInput />
 
-      <Buttons>
-        {queryText !== "" ? <ResetTextButton /> : <></>}
-        <TextSearchButton textSearchCallback={textSearchCallback} />
-        <OpenModalButton openModalCallback={openModalCallback} />
-      </Buttons>
+        {queryText !== "" ? (
+          <ResetTextButton />
+        ) : (
+          <ResetTextButtonPlaceholder />
+        )}
+      </TextSearchArea>
+
+      <TextSearchButton textSearchCallback={textSearchCallback} />
+      <VerticalDivider />
+      <OpenModalButton openModalCallback={openModalCallback} />
     </BaseSearchBar>
   );
 };
 
 export default SearchBar;
 
-const BaseSearchBar = styled.div<{ $hasActiveQueryText: boolean }>`
+const BaseSearchBar = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  background-color: ${Colors.base.white};
-  color: ${Colors.typography.blackHigh};
+  width: 100%;
+  padding: 12px 16px;
 
-  border: 1px solid
-    ${({ $hasActiveQueryText }) =>
-      $hasActiveQueryText ? Colors.main.grantbiiOrange : Colors.neutral.grey3};
-  border-radius: 12px;
+  color: ${Colors.typography.blackHigh};
+  background-color: ${Colors.base.white};
 
   @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
-    gap: 6px;
-    padding: 6px;
-    width: 100%;
+    gap: 8px;
+    box-shadow: none;
+    border-radius: 0 px;
   }
 
   @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
-    gap: 10px;
-    padding: 10px;
-    width: 480px;
+    gap: 16px;
+    box-shadow: 0px 0px 40px 0px #00000008;
+    border-radius: 12px;
   }
+`;
+
+const TextSearchArea = styled.div<{ $showBorder: boolean }>`
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+
+  background-color: ${Colors.neutral.grey4};
+  border-radius: 8px;
+
+  border: 1px solid
+    ${({ $showBorder }) =>
+      $showBorder ? Colors.main.grantbiiOrange : Colors.neutral.grey4};
 `;
 
 const QueryTextInput = () => {
@@ -71,29 +91,19 @@ const QueryTextInput = () => {
       value={queryText}
       onChange={(event) => updateQueryText(event.target.value)}
       onKeyDown={onKeyDown}
-      placeholder="Find grants that match your needs"
+      placeholder="Search grant or describe your project"
     />
   );
 };
 
 const BaseQueryTextInput = styled.input`
-  border: none;
-  outline: none;
-
   width: 100%;
-`;
+  margin-left: 16px;
+  outline: none;
+  border: none;
 
-const Buttons = styled.div`
-  display: flex;
-  align-items: center;
-
-  @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
-    gap: 6px;
-  }
-
-  @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
-    gap: 10px;
-  }
+  background-color: ${Colors.neutral.grey4};
+  text-overflow: ellipsis;
 `;
 
 const BaseIconButton = styled.button`
@@ -101,9 +111,9 @@ const BaseIconButton = styled.button`
   align-items: center;
   justify-content: center;
 
-  height: 31px;
-  width: 31px;
-  min-width: 31px;
+  width: 38px;
+  min-width: 38px;
+  height: 38px;
 
   border-radius: 8px;
 `;
@@ -119,14 +129,22 @@ const ResetTextButton = () => {
 
   return (
     <BaseResetTextButton type="button" onClick={onClick}>
-      <Icons.XIcon size={16} color={Colors.neutral.grey1} />
+      <Icons.XIcon size={20} color={Colors.neutral.grey1} />
     </BaseResetTextButton>
   );
 };
 
 const BaseResetTextButton = styled(BaseIconButton)`
-  background-color: ${Colors.base.white};
-  border: 1px solid ${Colors.base.white};
+  background-color: ${Colors.neutral.grey4};
+  border: 1px solid ${Colors.neutral.grey4};
+`;
+
+const ResetTextButtonPlaceholder = styled.div`
+  width: 40px;
+  height: 40px;
+
+  background-color: ${Colors.neutral.grey4};
+  border-radius: 8px;
 `;
 
 type TextSearchButtonProps = {
@@ -146,14 +164,19 @@ const TextSearchButton = ({ textSearchCallback }: TextSearchButtonProps) => {
 
   return (
     <BaseSearchButton type="button" onClick={onClickSearch}>
-      <Icons.MagnifyingGlassIcon size={16} color={Colors.neutral.grey1} />
+      <Icons.MagnifyingGlassIcon size={20} color={Colors.base.white} />
     </BaseSearchButton>
   );
 };
 
 const BaseSearchButton = styled(BaseIconButton)`
-  background-color: ${Colors.neutral.grey4};
-  border: 1px solid ${Colors.neutral.grey3};
+  background-color: ${Colors.main.grantbiiBlue};
+  border: 1px solid ${Colors.main.grantbiiBlue};
+`;
+
+const VerticalDivider = styled.div`
+  height: 40px;
+  border-left: 1px solid ${Colors.neutral.grey2};
 `;
 
 type OpenModalButtonProps = {
@@ -176,8 +199,13 @@ const OpenModalButton = ({ openModalCallback }: OpenModalButtonProps) => {
       onClick={onClickOpen}
       $hasActiveQueryFiles={activeQuery.files.length > 0}
     >
-      <Icons.FileArrowUpIcon size={16} />
-      <OpenModalButtonText>File Drop</OpenModalButtonText>
+      <GrantMatchLogo
+        src={grantMatchLogo}
+        alt="Grant Match"
+        width={64}
+        height={64}
+      />
+      <OpenModalButtonText>Get Personalized Grant Matches</OpenModalButtonText>
     </BaseOpenModalButton>
   );
 };
@@ -186,10 +214,10 @@ const BaseOpenModalButton = styled.button<{ $hasActiveQueryFiles: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: 10px;
 
-  height: 31px;
-  min-width: 31px;
+  height: 38px;
+  min-width: 38px;
 
   border: 1px solid ${Colors.main.grantbiiOrange};
   border-radius: 8px;
@@ -206,17 +234,28 @@ const BaseOpenModalButton = styled.button<{ $hasActiveQueryFiles: boolean }>`
         `}
 
   @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+    width: 38px;
     padding: 0px;
     font-size: ${Typography.HELPER_FONT_SIZES.small};
   }
 
   @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
-    padding: 0px 8px;
+    width: 318px;
+    padding: 2px 12px;
     font-size: ${Typography.HELPER_FONT_SIZES.big};
   }
 `;
 
+const GrantMatchLogo = styled(Image)`
+  width: 18px;
+  height: 18px;
+
+  box-shadow: 0px 0px 3px 3px #ffe2b680;
+  border-radius: 120px;
+`;
+
 const OpenModalButtonText = styled.p`
+  font-weight: 500;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;

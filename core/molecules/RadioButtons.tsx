@@ -30,4 +30,7 @@ const RadioGroup = styled.div`
   display: flex;
   align-items: center;
   gap: 12px;
+
+  white-space: nowrap;
+  flex-wrap: wrap;
 `;

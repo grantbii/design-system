@@ -1,9 +1,9 @@
 import type { DetailedHTMLProps, InputHTMLAttributes } from "react";
+import type { Option } from "../foundations";
 import { LabelledInput } from "./shared";
 
-type RadioButtonProps = {
-  label: string;
-} & DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
+type RadioButtonProps = Option &
+  DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 
 const RadioButton = ({ id, label, ...radioButtonProps }: RadioButtonProps) => (
   <LabelledInput>

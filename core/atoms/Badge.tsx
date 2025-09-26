@@ -1,30 +1,30 @@
-import type { ComponentType, MouseEventHandler } from "react";
+import type { ComponentType, MouseEventHandler, ReactNode } from "react";
 import styled from "styled-components";
 import { Colors, Icons, Responsive, Typography } from "../foundations";
 
 export type BadgeProps = {
-  text: string;
+  label: ReactNode;
   Icon?: ComponentType<Icons.IconProps>;
   iconSize?: string | number;
   iconWeight?: Icons.IconWeight;
   onClickClose?: MouseEventHandler<HTMLButtonElement>;
-  textWidthPixels?: number;
+  labelWidthPixels?: number;
   backgroundColor?: string;
   color?: string;
 };
 
 const Badge = ({
-  text,
+  label,
   Icon,
   iconSize = 20,
   iconWeight = "regular",
   onClickClose,
-  textWidthPixels,
+  labelWidthPixels,
   backgroundColor,
   color,
 }: BadgeProps) => (
   <BaseBadge $backgroundColor={backgroundColor} $color={color}>
-    <BadgeContent $isCloseable={!!onClickClose} $widthPixels={textWidthPixels}>
+    <BadgeContent $isCloseable={!!onClickClose} $widthPixels={labelWidthPixels}>
       {Icon ? (
         <IconContainer>
           <Icon color={color} size={iconSize} weight={iconWeight} />
@@ -32,7 +32,7 @@ const Badge = ({
       ) : (
         <></>
       )}
-      <BadgeText>{text}</BadgeText>
+      <BadgeText>{label}</BadgeText>
     </BadgeContent>
 
     {onClickClose ? (

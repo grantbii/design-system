@@ -15,9 +15,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const allBadgeProps: BadgeProps[] = mapEnumToOptions(Objective).map(
-  (option) => ({ text: option.label }),
-);
+const allBadgeProps: BadgeProps[] = mapEnumToOptions(Objective);
 
 export const Scrollable: Story = {
   args: {

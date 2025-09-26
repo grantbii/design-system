@@ -31,8 +31,8 @@ const FileDrop = ({
     onDrop: uploadFiles,
     accept: {
       "application/pdf": [".pdf"],
-      "image/png": [".png"],
       "image/jpeg": [".jpeg", ".jpg"],
+      "image/png": [".png"],
     },
     disabled: reachedMaxUploads,
     noClick: reachedMaxUploads,
@@ -167,7 +167,7 @@ const UploadedFiles = ({ uploadedFiles, removeFile }: UploadedFilesProps) => (
     {uploadedFiles.map(({ name: fileName, type: fileType }) => (
       <Badge
         key={fileName}
-        text={getFileNameWithoutExtension(fileName)}
+        label={getFileNameWithoutExtension(fileName)}
         onClickClose={() => removeFile(fileName)}
         Icon={FILE_TYPE_ICON_MAP[fileType] ?? Icons.FileIcon}
       />

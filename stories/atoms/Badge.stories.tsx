@@ -20,36 +20,36 @@ const onClickClose = () => alert("You have closed the badge.");
 
 export const TextOnly: Story = {
   args: {
-    text: defaultText,
+    label: defaultText,
   },
 };
 
 export const Icon: Story = {
   args: {
     Icon: Icons.SmileyXEyesIcon,
-    text: defaultText,
+    label: defaultText,
   },
 };
 
 export const Closeable: Story = {
   args: {
-    text: defaultText,
+    label: defaultText,
     onClickClose,
   },
 };
 
 export const LongText: Story = {
   args: {
-    text: longText,
-    textWidthPixels: 160,
+    label: longText,
+    labelWidthPixels: 160,
   },
 };
 
 export const Everything: Story = {
   args: {
     Icon: Icons.SmileyXEyesIcon,
-    text: longText,
-    textWidthPixels: 160,
+    label: longText,
+    labelWidthPixels: 160,
     onClickClose,
   },
 };
