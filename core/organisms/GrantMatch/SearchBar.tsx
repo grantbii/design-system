@@ -43,19 +43,22 @@ const BaseSearchBar = styled.div`
   justify-content: space-between;
 
   width: 100%;
-  padding: 12px 16px;
 
   color: ${Colors.typography.blackHigh};
   background-color: ${Colors.base.white};
 
   @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
     gap: 8px;
+    padding: 0px;
+
     box-shadow: none;
-    border-radius: 0 px;
+    border-radius: 0px;
   }
 
   @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
     gap: 16px;
+    padding: 12px 16px;
+
     box-shadow: 0px 0px 40px 0px #00000008;
     border-radius: 12px;
   }
