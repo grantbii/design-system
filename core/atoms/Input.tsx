@@ -25,7 +25,7 @@ export default Input;
 const BaseInput = styled.input`
   padding: 12px 16px;
   background-color: ${Colors.base.white};
-  border-radius: 6px;
+  border-radius: 8px;
 
   ${InputValidation}
 `;

@@ -72,7 +72,7 @@ const Dropzone = styled.div<{
   $hasError: boolean;
 }>`
   padding: 40px;
-  border-radius: 6px;
+  border-radius: 8px;
   border: 1px solid
     ${({ $hasError }) =>
       $hasError ? Colors.accent.red1 : Colors.neutral.grey3};

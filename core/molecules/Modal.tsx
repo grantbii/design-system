@@ -16,7 +16,7 @@ type ModalProps = {
   footer?: ReactNode;
   width?: string;
   height?: string;
-  onClickClose: MouseEventHandler<HTMLButtonElement>;
+  onClickClose?: MouseEventHandler<HTMLButtonElement>;
   closeText?: string;
 };
 
@@ -37,7 +37,11 @@ const Modal = ({
         <ModalBody>{content}</ModalBody>
 
         <ModalFooter>
-          <CloseButton onClick={onClickClose} closeText={closeText} />
+          {onClickClose ? (
+            <CloseButton onClick={onClickClose} closeText={closeText} />
+          ) : (
+            <></>
+          )}
           {footer ? footer : <></>}
         </ModalFooter>
       </ModalWindow>
@@ -120,7 +124,7 @@ const ModalWindow = styled.div<{ $width?: string; $height?: string }>`
     width: ${({ $width }) => $width};
     height: ${({ $height }) => $height};
 
-    border-radius: 6px;
+    border-radius: 8px;
   }
 `;
 
