@@ -137,7 +137,7 @@ const ModalBody = styled.div`
   flex-direction: column;
 
   height: 100%;
-  padding-top: 24px;
+  padding-top: 12px;
   overflow-y: auto;
 
   > * {
@@ -155,7 +155,7 @@ const ModalFooter = styled.div`
   justify-content: space-between;
   gap: 12px;
 
-  padding: 24px;
+  padding: 20px 24px;
 `;
 
 type CloseButtonProps = {

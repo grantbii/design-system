@@ -46,7 +46,9 @@ const GrantMatch = ({
           textSearchCallback={textSearchCallback}
           openModalCallback={openModalCallback}
         />
+
         {activeQuery.files.length > 0 ? <ActiveQueryFiles /> : <></>}
+
         {showModal ? (
           <GrantMatchModal
             findGrantsCallback={findGrantsCallback}

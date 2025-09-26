@@ -1,4 +1,6 @@
+import Image from "next/image";
 import styled from "styled-components";
+import grantMatchLogo from "../../assets/logos/grant_match_logo.webp";
 import { Button, Textarea } from "../../atoms";
 import { Colors } from "../../foundations";
 import { FileDrop, Modal, useFileDrop } from "../../molecules";
@@ -28,7 +30,7 @@ const GrantMatchModal = ({
 
   return (
     <Modal
-      header={<div>Grant Match</div>}
+      header={<ModalHeader />}
       content={
         <ModalContent
           files={files}
@@ -44,13 +46,39 @@ const GrantMatchModal = ({
         />
       }
       onClickClose={onClickClose}
-      width="480px"
-      height="600px"
+      width="600px"
+      height="560px"
     />
   );
 };
 
 export default GrantMatchModal;
+
+const ModalHeader = () => (
+  <BaseModalHeader>
+    <GrantMatchLogo
+      src={grantMatchLogo}
+      alt="Grant Match"
+      width={64}
+      height={64}
+    />
+    <p>Let us get you matched to the most suitable grant</p>
+  </BaseModalHeader>
+);
+
+const BaseModalHeader = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 16px;
+`;
+
+const GrantMatchLogo = styled(Image)`
+  width: 24px;
+  height: 24px;
+
+  box-shadow: 0px 0px 5px 5px #ffe2b680;
+  border-radius: 120px;
+`;
 
 type ModalContentProps = {
   files: File[];
@@ -69,20 +97,23 @@ const ModalContent = ({
 
   return (
     <BaseContent>
-      <FileDrop
-        uploadedFiles={files}
-        uploadFiles={uploadFiles}
-        removeFile={removeFile}
-        errorMessage={errorMessage}
-      />
+      <ModalFileDrop>
+        <p>Upload Files (e.g. Project Plan, Proposal, Company Docs)</p>
+        <FileDrop
+          uploadedFiles={files}
+          uploadFiles={uploadFiles}
+          removeFile={removeFile}
+          errorMessage={errorMessage}
+        />
+      </ModalFileDrop>
 
       <ModalQueryText>
-        <label htmlFor={QUERY_TEXTAREA_ID}>Search Grants Opportunities</label>
+        <label htmlFor={QUERY_TEXTAREA_ID}>Tell us what you intend to do</label>
         <Textarea
           id={QUERY_TEXTAREA_ID}
           value={queryText}
           onChange={(event) => updateQueryText(event.target.value)}
-          placeholder="Explore by grant name or share what your project is about..."
+          placeholder="Give a summary of your project, specifying the key activities you will do & what you intend to achieve"
         />
       </ModalQueryText>
     </BaseContent>
@@ -95,6 +126,11 @@ const BaseContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
+`;
+
+const ModalFileDrop = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 const ModalQueryText = styled.div`
@@ -112,6 +148,7 @@ const FindGrantsButton = ({
   findGrantsCallback,
 }: FindGrantsButtonProps) => {
   const { updateActiveQuery, queryText, closeModal } = useGrantMatchContext();
+  const hasQuery = queryText.trim() !== "" || files.length > 0;
 
   const onClick = () => {
     if (findGrantsCallback) {
@@ -126,7 +163,8 @@ const FindGrantsButton = ({
     <Button
       text="Find My Grants"
       onClick={onClick}
-      backgroundColor={Colors.accent.yellow1}
+      backgroundColor={hasQuery ? Colors.accent.yellow1 : Colors.neutral.grey3}
+      disabled={!hasQuery}
     />
   );
 };

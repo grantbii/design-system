@@ -36,10 +36,10 @@ const FileBadges = () => {
       {activeQuery.files.map((file) => (
         <Badge
           key={file.name}
-          text={file.name.substring(0, file.name.lastIndexOf("."))}
+          label={file.name.substring(0, file.name.lastIndexOf("."))}
           Icon={FILE_TYPE_ICON_MAP[file.type] ?? Icons.FileIcon}
           onClickClose={() => removeActiveQueryFile(file.name)}
-          textWidthPixels={160}
+          labelWidthPixels={160}
         />
       ))}
     </BaseFileBadges>
