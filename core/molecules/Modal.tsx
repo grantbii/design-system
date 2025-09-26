@@ -132,7 +132,7 @@ const ModalHeader = styled.div`
   font-weight: 500;
   font-size: 18px;
 
-  padding: 12px 24px;
+  padding: 12px 20px;
   border-bottom: 1px solid ${Colors.neutral.grey3};
 `;
 
@@ -149,7 +149,7 @@ const ModalBody = styled.div`
     height: 100%;
     min-height: 100px;
 
-    padding: 2px 24px;
+    padding: 2px 20px;
     border: none;
   }
 `;
@@ -159,7 +159,7 @@ const ModalFooter = styled.div`
   justify-content: space-between;
   gap: 12px;
 
-  padding: 20px 24px;
+  padding: 16px 20px;
 `;
 
 type CloseButtonProps = {
