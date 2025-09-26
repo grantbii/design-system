@@ -217,7 +217,6 @@ const BaseOpenModalButton = styled.button<{ $hasActiveQueryFiles: boolean }>`
   gap: 10px;
 
   height: 38px;
-  min-width: 38px;
 
   border: 1px solid ${Colors.main.grantbiiOrange};
   border-radius: 8px;
@@ -235,12 +234,14 @@ const BaseOpenModalButton = styled.button<{ $hasActiveQueryFiles: boolean }>`
 
   @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
     width: 38px;
+    min-width: 38px;
     padding: 0px;
     font-size: ${Typography.HELPER_FONT_SIZES.small};
   }
 
   @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
-    width: 318px;
+    width: 238px;
+    min-width: 238px;
     padding: 2px 12px;
     font-size: ${Typography.HELPER_FONT_SIZES.big};
   }
