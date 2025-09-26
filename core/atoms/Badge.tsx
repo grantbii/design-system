@@ -54,7 +54,7 @@ const BaseBadge = styled.div<{ $backgroundColor?: string; $color?: string }>`
   gap: 10px;
 
   padding: 5px 16px;
-  border-radius: 130px;
+  border-radius: 120px;
 
   color: ${({ $color = Colors.typography.blackHigh }) => $color};
   background-color: ${({ $backgroundColor = Colors.neutral.grey3 }) =>

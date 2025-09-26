@@ -30,7 +30,7 @@ export const BaseButton = styled.div<{
   }) => ($underline ? "transparent" : $backgroundColor)};
 
   border: 1px solid ${({ $borderColor = "transparent" }) => $borderColor};
-  border-radius: 4px;
+  border-radius: 8px;
 `;
 
 export const LabelledInput = styled.div`
