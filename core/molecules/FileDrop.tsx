@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import styled from "styled-components";
-import { Badge } from "../atoms";
-import { Colors, Icons, Responsive, Typography } from "../foundations";
 import { FILE_TYPE_ICON_MAP } from "../atoms/shared";
+import { Colors, Icons, Responsive, Typography } from "../foundations";
+import Badges from "./Badges";
 
 const DEFAULT_MAX_FILE_SIZE_MB = 5;
 const DEFAULT_MAX_FILES = 5;
@@ -162,24 +162,17 @@ type UploadedFilesProps = {
   removeFile: (fileName: string) => void;
 };
 
-const UploadedFiles = ({ uploadedFiles, removeFile }: UploadedFilesProps) => (
-  <BaseUploadedFiles>
-    {uploadedFiles.map(({ name: fileName, type: fileType }) => (
-      <Badge
-        key={fileName}
-        label={getFileNameWithoutExtension(fileName)}
-        onClickClose={() => removeFile(fileName)}
-        Icon={FILE_TYPE_ICON_MAP[fileType] ?? Icons.FileIcon}
-      />
-    ))}
-  </BaseUploadedFiles>
-);
+const UploadedFiles = ({ uploadedFiles, removeFile }: UploadedFilesProps) => {
+  const fileBadgesProps = uploadedFiles.map(
+    ({ name: fileName, type: fileType }) => ({
+      label: getFileNameWithoutExtension(fileName),
+      onClickClose: () => removeFile(fileName),
+      Icon: FILE_TYPE_ICON_MAP[fileType] ?? Icons.FileIcon,
+    }),
+  );
 
-const BaseUploadedFiles = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-`;
+  return <Badges allBadgeProps={fileBadgesProps} vertical />;
+};
 
 export const useFileDrop = (
   initialFiles: File[] = [],

@@ -1,16 +1,12 @@
-import type {
-  ButtonHTMLAttributes,
-  ComponentType,
-  DetailedHTMLProps,
-} from "react";
+import type { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from "react";
 import styled from "styled-components";
 import { Icons } from "../foundations";
 import { BaseButton as ButtonContent } from "./shared";
 
 type ButtonProps = {
-  text: string;
-  LeftIcon?: ComponentType<Icons.IconProps>;
-  RightIcon?: ComponentType<Icons.IconProps>;
+  label: ReactNode;
+  LeftIcon?: Icons.Icon;
+  RightIcon?: Icons.Icon;
   underline?: boolean;
   backgroundColor?: string;
   borderColor?: string;
@@ -22,7 +18,7 @@ type ButtonProps = {
 >;
 
 const Button = ({
-  text,
+  label,
   LeftIcon,
   RightIcon,
   underline,
@@ -42,7 +38,7 @@ const Button = ({
       $width={width}
     >
       {LeftIcon ? <LeftIcon color={color} size={20} /> : <></>}
-      <p>{text}</p>
+      {label}
       {RightIcon ? <RightIcon color={color} size={20} /> : <></>}
     </ButtonContent>
   </BaseButton>

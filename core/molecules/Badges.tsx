@@ -1,13 +1,14 @@
-import styled, { css } from "styled-components";
+import styled, { css, type RuleSet } from "styled-components";
 import { Badge, type BadgeProps } from "../atoms";
 
 type BadgesProps = {
   allBadgeProps: BadgeProps[];
-  isScrollable?: boolean;
+  scrollable?: boolean;
+  vertical?: boolean;
 };
 
-const Badges = ({ allBadgeProps, isScrollable }: BadgesProps) => (
-  <BaseBadges $isScrollable={isScrollable}>
+const Badges = ({ allBadgeProps, scrollable, vertical }: BadgesProps) => (
+  <BaseBadges $scrollable={scrollable} $vertical={vertical}>
     {allBadgeProps.map((badgeProps, index) => (
       <Badge {...badgeProps} key={`badge-${index}`} />
     ))}
@@ -16,25 +17,51 @@ const Badges = ({ allBadgeProps, isScrollable }: BadgesProps) => (
 
 export default Badges;
 
-const BaseBadges = styled.div<{ $isScrollable?: boolean }>`
+const BaseBadges = styled.div<{ $scrollable?: boolean; $vertical?: boolean }>`
   display: flex;
-  gap: 8px;
+  flex-direction: ${({ $vertical = false }) => ($vertical ? "column" : "row")};
+  gap: ${({ $vertical = false }) => ($vertical ? "4px" : "8px")};
 
-  ${({ $isScrollable = false }) =>
-    $isScrollable
-      ? css`
-          flex-wrap: nowrap;
-          overflow-x: auto;
+  ${({ $scrollable = false, $vertical = false }) =>
+    deriveCSS($scrollable, $vertical)}
+`;
 
-          /* hide scrollbar but still allow for scrolling */
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-          ::-webkit-scrollbar {
-            display: none;
-          }
-        `
-      : css`
-          flex-wrap: wrap;
-          overflow-x: visible;
-        `}
+const deriveCSS = (scrollable: boolean, vertical: boolean): RuleSet => {
+  if (vertical && scrollable) {
+    return ScrollableVerticalCSS;
+  } else if (vertical) {
+    // vertical && unscrollable
+    return UnscrollableVerticalCSS;
+  } else if (scrollable) {
+    // horizontal && scrollable
+    return ScrollableHorizontalCSS;
+  } else {
+    // horizontal && unscrollable
+    return UnscrollableHorizontalCSS;
+  }
+};
+
+const ScrollableVerticalCSS = css`
+  overflow-y: auto;
+
+  height: 90px;
+`;
+
+const UnscrollableVerticalCSS = css``;
+
+const ScrollableHorizontalCSS = css`
+  flex-wrap: nowrap;
+  overflow-x: auto;
+
+  /* hide scrollbar but still allow for scrolling */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+const UnscrollableHorizontalCSS = css`
+  flex-wrap: wrap;
+  overflow-x: visible;
 `;

@@ -70,7 +70,7 @@ const ResetFilesButton = () => {
 
   return (
     <Button
-      text="Reset"
+      label="Reset"
       onClick={() => updateActiveQuery({ files: [], text: activeQuery.text })}
       color={Colors.typography.blackMedium}
       underline

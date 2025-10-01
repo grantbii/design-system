@@ -27,7 +27,7 @@ const LoadingFailedSign = ({
 
     {onClickReload ? (
       <Button
-        text="Try Again"
+        label="Try Again"
         onClick={onClickReload}
         backgroundColor={Colors.base.white}
         borderColor={Colors.neutral.grey3}

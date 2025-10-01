@@ -17,16 +17,34 @@ type Story = StoryObj<typeof meta>;
 
 const allBadgeProps: BadgeProps[] = mapEnumToOptions(Objective);
 
-export const Scrollable: Story = {
+export const ScrollableVertical: Story = {
   args: {
     allBadgeProps,
-    isScrollable: true,
+    scrollable: true,
+    vertical: true,
   },
 };
 
-export const WrapAround: Story = {
+export const UnscrollableVertical: Story = {
   args: {
     allBadgeProps,
-    isScrollable: false,
+    scrollable: false,
+    vertical: true,
+  },
+};
+
+export const ScrollableHorizontal: Story = {
+  args: {
+    allBadgeProps,
+    scrollable: true,
+    vertical: false,
+  },
+};
+
+export const UnscrollableHorizontal: Story = {
+  args: {
+    allBadgeProps,
+    scrollable: false,
+    vertical: false,
   },
 };
