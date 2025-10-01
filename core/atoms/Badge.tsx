@@ -54,7 +54,7 @@ const BaseBadge = styled.div<{ $backgroundColor?: string; $color?: string }>`
   justify-content: space-between;
   gap: 10px;
 
-  padding: 5px 16px;
+  padding: 5px 15px;
   border-radius: 120px;
 
   color: ${({ $color = Colors.typography.blackHigh }) => $color};

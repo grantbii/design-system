@@ -4,12 +4,13 @@ import type {
   ComponentType,
   DetailedHTMLProps,
   HTMLAttributeAnchorTarget,
+  ReactNode,
 } from "react";
 import { Icons } from "../foundations";
 import { BaseButton } from "./shared";
 
 type LinkButtonProps = {
-  text: string;
+  label: ReactNode;
   href: string;
   disabled?: boolean;
   target?: HTMLAttributeAnchorTarget;
@@ -28,7 +29,7 @@ type LinkButtonProps = {
  * A link that looks like a button
  */
 const LinkButton = ({
-  text,
+  label,
   LeftIcon,
   RightIcon,
   underline,
@@ -40,7 +41,7 @@ const LinkButton = ({
   ...linkProps
 }: LinkButtonProps) => {
   const contentProps = {
-    text,
+    label,
     LeftIcon,
     RightIcon,
     underline,
@@ -61,7 +62,7 @@ const LinkButton = ({
 export default LinkButton;
 
 type ContentProps = {
-  text: string;
+  label: ReactNode;
   LeftIcon?: ComponentType<Icons.IconProps>;
   RightIcon?: ComponentType<Icons.IconProps>;
   underline?: boolean;
@@ -71,7 +72,7 @@ type ContentProps = {
 };
 
 const Content = ({
-  text,
+  label,
   LeftIcon,
   RightIcon,
   underline,
@@ -86,7 +87,7 @@ const Content = ({
     $width={width}
   >
     {LeftIcon ? <LeftIcon color={color} size={20} /> : <></>}
-    <p>{text}</p>
+    {label}
     {RightIcon ? <RightIcon color={color} size={20} /> : <></>}
   </BaseButton>
 );
