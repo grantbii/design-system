@@ -1,5 +1,6 @@
 import styled, { css, type RuleSet } from "styled-components";
 import { Badge, type BadgeProps } from "../atoms";
+import { Responsive } from "../foundations";
 
 type BadgesProps = {
   allBadgeProps: BadgeProps[];
@@ -44,7 +45,13 @@ const deriveCSS = (scrollable: boolean, vertical: boolean): RuleSet => {
 const ScrollableVerticalCSS = css`
   overflow-y: auto;
 
-  height: 90px;
+  @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+    height: 90px;
+  }
+
+  @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+    height: 100px;
+  }
 `;
 
 const UnscrollableVerticalCSS = css``;
