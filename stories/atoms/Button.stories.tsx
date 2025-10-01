@@ -1,5 +1,6 @@
 import { Button, Colors, Icons } from "@/.";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import styled from "styled-components";
 
 const meta: Meta<typeof Button> = {
   title: "Atoms/Button",
@@ -15,7 +16,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const baseArgs = {
-  text: "Button",
+  label: "Button",
   onClick: () => alert("You have clicked on the button."),
 };
 
@@ -50,5 +51,28 @@ export const Underline: Story = {
     ...baseArgs,
     underline: true,
     color: Colors.typography.blackMedium,
+  },
+};
+
+const Content = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 200px;
+`;
+
+export const GrantObjectivesFilter: Story = {
+  args: {
+    borderColor: Colors.neutral.grey3,
+    backgroundColor: Colors.base.white,
+    color: Colors.typography.blackMedium,
+    onClick: () => alert("You have clicked on the button."),
+    label: (
+      <Content>
+        <p>Select grant objectives</p>
+        <Icons.CaretRightIcon size={20} />
+      </Content>
+    ),
   },
 };

@@ -32,7 +32,8 @@ const Badge = ({
       ) : (
         <></>
       )}
-      <BadgeText>{label}</BadgeText>
+
+      <BadgeLabel>{label}</BadgeLabel>
     </BadgeContent>
 
     {onClickClose ? (
@@ -83,7 +84,7 @@ const IconContainer = styled.div<{ $iconSize?: string | number }>`
   max-width: ${({ $iconSize = "auto" }) => $iconSize};
 `;
 
-const BadgeText = styled.p`
+const BadgeLabel = styled.div`
   overflow-x: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
