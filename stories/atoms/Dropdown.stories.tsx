@@ -1,5 +1,5 @@
 import { Dropdown, mapEnumToOptions, type DropdownProps } from "@/.";
-import { Need } from "@grantbii/ui-core/filter/enums";
+import { Objective } from "@grantbii/ui-core/grant/enums";
 import { parseEnum } from "@grantbii/ui-core/shared/enums";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useState } from "react";
@@ -9,20 +9,21 @@ type ExampleProps = {
 };
 
 const DropdownExample = ({ controlled }: ExampleProps) => {
-  const [selectedNeed, setSelectedNeed] = useState(Need.UNKNOWN);
+  const [selectedObjective, setSelectedObjective] = useState(Objective.UNKNOWN);
 
   const controlledProps: DropdownProps = {
     ...baseProps,
-    value: selectedNeed === Need.UNKNOWN ? "" : selectedNeed,
-    onChange: (event) => setSelectedNeed(parseEnum(event.target.value, Need)),
+    value: selectedObjective === Objective.UNKNOWN ? "" : selectedObjective,
+    onChange: (event) =>
+      setSelectedObjective(parseEnum(event.target.value, Objective)),
   };
 
   return <Dropdown {...(controlled ? controlledProps : uncontrolledProps)} />;
 };
 
 const baseProps: DropdownProps = {
-  options: mapEnumToOptions(Need),
-  defaultLabel: "Select your grant need",
+  options: mapEnumToOptions(Objective),
+  defaultLabel: "Select grant objective",
 };
 
 const uncontrolledProps: DropdownProps = {

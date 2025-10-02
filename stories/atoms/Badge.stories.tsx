@@ -45,11 +45,18 @@ export const LongText: Story = {
   },
 };
 
-export const Everything: Story = {
+export const AlmostEverything: Story = {
   args: {
     Icon: Icons.SmileyXEyesIcon,
     label: longText,
     labelWidthPixels: 160,
     onClickClose,
+  },
+};
+
+export const Clickable: Story = {
+  args: {
+    label: "Click Me",
+    onClick: () => alert("Clicked on badge"),
   },
 };

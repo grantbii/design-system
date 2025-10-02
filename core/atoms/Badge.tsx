@@ -7,6 +7,7 @@ export type BadgeProps = {
   Icon?: ComponentType<Icons.IconProps>;
   iconSize?: string | number;
   iconWeight?: Icons.IconWeight;
+  onClick?: MouseEventHandler<HTMLDivElement>;
   onClickClose?: MouseEventHandler<HTMLButtonElement>;
   labelWidthPixels?: number;
   backgroundColor?: string;
@@ -18,13 +19,19 @@ const Badge = ({
   Icon,
   iconSize = 20,
   iconWeight = "regular",
+  onClick,
   onClickClose,
   labelWidthPixels,
   backgroundColor,
   color,
 }: BadgeProps) => (
-  <BaseBadge $backgroundColor={backgroundColor} $color={color}>
-    <BadgeContent $isCloseable={!!onClickClose} $widthPixels={labelWidthPixels}>
+  <BaseBadge
+    onClick={onClick}
+    $clickable={!!onClick}
+    $backgroundColor={backgroundColor}
+    $color={color}
+  >
+    <BadgeContent $closeable={!!onClickClose} $widthPixels={labelWidthPixels}>
       {Icon ? (
         <IconContainer>
           <Icon color={color} size={iconSize} weight={iconWeight} />
@@ -42,7 +49,11 @@ const Badge = ({
 
 export default Badge;
 
-const BaseBadge = styled.div<{ $backgroundColor?: string; $color?: string }>`
+const BaseBadge = styled.div<{
+  $clickable?: boolean;
+  $backgroundColor?: string;
+  $color?: string;
+}>`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -62,10 +73,12 @@ const BaseBadge = styled.div<{ $backgroundColor?: string; $color?: string }>`
   @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
     min-height: 30px;
   }
+
+  cursor: ${({ $clickable = false }) => ($clickable ? "pointer" : "auto")};
 `;
 
 const BadgeContent = styled.div<{
-  $isCloseable: boolean;
+  $closeable: boolean;
   $widthPixels?: number;
 }>`
   display: flex;
@@ -73,8 +86,7 @@ const BadgeContent = styled.div<{
   gap: 10px;
 
   width: ${({ $widthPixels }) => ($widthPixels ? `${$widthPixels}px` : "auto")};
-  max-width: ${({ $isCloseable }) =>
-    $isCloseable ? "calc(100% - 20px)" : "auto"};
+  max-width: ${({ $closeable }) => ($closeable ? "calc(100% - 20px)" : "auto")};
 `;
 
 const IconContainer = styled.div<{ $iconSize?: string | number }>`
