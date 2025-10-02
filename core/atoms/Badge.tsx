@@ -36,13 +36,7 @@ const Badge = ({
       <BadgeLabel>{label}</BadgeLabel>
     </BadgeContent>
 
-    {onClickClose ? (
-      <Button type="button" onClick={onClickClose}>
-        <Icons.XIcon size={12} />
-      </Button>
-    ) : (
-      <></>
-    )}
+    {onClickClose ? <CloseButton onClick={onClickClose} /> : <></>}
   </BaseBadge>
 );
 
@@ -60,6 +54,14 @@ const BaseBadge = styled.div<{ $backgroundColor?: string; $color?: string }>`
   color: ${({ $color = Colors.typography.blackHigh }) => $color};
   background-color: ${({ $backgroundColor = Colors.neutral.grey3 }) =>
     $backgroundColor};
+
+  @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+    min-height: 27px;
+  }
+
+  @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+    min-height: 30px;
+  }
 `;
 
 const BadgeContent = styled.div<{
@@ -100,7 +102,17 @@ const BadgeLabel = styled.div`
   }
 `;
 
-const Button = styled.button`
+type CloseButtonProps = {
+  onClick: MouseEventHandler<HTMLButtonElement>;
+};
+
+const CloseButton = ({ onClick }: CloseButtonProps) => (
+  <BaseCloseButton type="button" onClick={onClick}>
+    <Icons.XIcon size={12} />
+  </BaseCloseButton>
+);
+
+const BaseCloseButton = styled.button`
   display: flex;
   flex-direction: column;
 

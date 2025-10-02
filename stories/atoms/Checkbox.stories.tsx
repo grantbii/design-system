@@ -14,18 +14,21 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const label = "Grantbii is the best";
+const baseArgs = {
+  id: "best",
+  label: "Grantbii is the best",
+};
 
 export const LabelBefore: Story = {
   args: {
-    label,
+    ...baseArgs,
     labelBefore: true,
   },
 };
 
 export const LabelAfter: Story = {
   args: {
-    label,
+    ...baseArgs,
     labelBefore: false,
   },
 };

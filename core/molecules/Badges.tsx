@@ -31,13 +31,10 @@ const deriveCSS = (scrollable: boolean, vertical: boolean): RuleSet => {
   if (vertical && scrollable) {
     return ScrollableVerticalCSS;
   } else if (vertical) {
-    // vertical && unscrollable
     return UnscrollableVerticalCSS;
   } else if (scrollable) {
-    // horizontal && scrollable
     return ScrollableHorizontalCSS;
   } else {
-    // horizontal && unscrollable
     return UnscrollableHorizontalCSS;
   }
 };
@@ -45,12 +42,15 @@ const deriveCSS = (scrollable: boolean, vertical: boolean): RuleSet => {
 const ScrollableVerticalCSS = css`
   overflow-y: auto;
 
+  /* show 3 badges max */
   @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
-    height: 90px;
+    /* 3 * 27px (badge height) + 2 * 4px (gap) = 89 */
+    height: 89px;
   }
 
   @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
-    height: 100px;
+    /* 3 * 30px (badge height) + 2 * 4px (gap) = 98 */
+    height: 98px;
   }
 `;
 
