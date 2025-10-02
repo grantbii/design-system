@@ -1,8 +1,9 @@
-import type { DetailedHTMLProps, InputHTMLAttributes } from "react";
+import type { DetailedHTMLProps, InputHTMLAttributes, ReactNode } from "react";
 import { LabelledInput } from "./shared";
 
 type CheckboxProps = {
-  label: string;
+  id: string;
+  label: ReactNode;
   labelBefore?: boolean;
 } & DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 
@@ -13,10 +14,19 @@ const Checkbox = ({
   ...checkboxProps
 }: CheckboxProps) => (
   <LabelledInput>
-    {labelBefore ? <label htmlFor={`${id}-checkbox`}>{label}</label> : <></>}
+    {label && labelBefore ? <CheckboxLabel id={id} label={label} /> : <></>}
     <input {...checkboxProps} id={`${id}-checkbox`} type="checkbox" />
-    {labelBefore ? <></> : <label htmlFor={`${id}-checkbox`}>{label}</label>}
+    {label && !labelBefore ? <CheckboxLabel id={id} label={label} /> : <></>}
   </LabelledInput>
 );
 
 export default Checkbox;
+
+type CheckboxLabelProps = {
+  id: string;
+  label: ReactNode;
+};
+
+const CheckboxLabel = ({ id, label }: CheckboxLabelProps) => (
+  <label htmlFor={`${id}-checkbox`}>{label}</label>
+);
