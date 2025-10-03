@@ -44,13 +44,13 @@ const ScrollableVerticalCSS = css`
 
   /* show 3 badges max */
   @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
-    /* 3 * 27px (badge height) + 2 * 4px (gap) = 89 */
-    height: 89px;
+    /* 3.5 * 27px (badge height) + 2 * 4px (gap) = 89 */
+    height: 103px;
   }
 
   @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
-    /* 3 * 30px (badge height) + 2 * 4px (gap) = 98 */
-    height: 98px;
+    /* 3.5 * 30px (badge height) + 2 * 4px (gap) = 113 */
+    height: 113px;
   }
 `;
 
