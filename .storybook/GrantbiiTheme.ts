@@ -1,11 +1,11 @@
 import { create } from "storybook/theming";
 import "../core/assets/fonts/satoshi/css/satoshi.css";
-// import brandLogo from "../core/assets/logos/brand_logo-dark.webp"; TODO
 
 const grantbiiTheme = create({
   base: "light",
   brandTitle: "Grantbii",
-  // brandImage: brandLogo,
+  brandImage:
+    "https://grantbii-logos.s3.ap-southeast-1.amazonaws.com/grantbii_logo.webp",
   brandUrl: "https://grantbii.com",
   brandTarget: "_blank",
   fontBase: "Satoshi",
