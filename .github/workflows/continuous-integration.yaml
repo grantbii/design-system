@@ -4,12 +4,12 @@ on:
   push:
     branches-ignore: ["prod"]
 
-permissions:
-  contents: read
-
 jobs:
   checks:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
 
     steps:
       - name: Git Checkout
@@ -20,6 +20,9 @@ jobs:
         with:
           node-version: 22
           cache: "npm"
+
+      - name: Install latest npm
+        run: npm install -g npm@latest
 
       - name: Install dependencies
         run: npm clean-install
