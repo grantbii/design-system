@@ -1,27 +1,27 @@
-import { FlatCompat } from "@eslint/eslintrc";
+import nextVitals from "eslint-config-next/core-web-vitals";
+import nextTs from "eslint-config-next/typescript";
 import storybook from "eslint-plugin-storybook";
-import { dirname } from "path";
-import { fileURLToPath } from "url";
+import { defineConfig } from "eslint/config";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
-
-const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+const eslintConfig = defineConfig([
+  ...nextTs,
+  ...nextVitals,
   {
+    files: ["**/*.{js,jsx,ts,tsx}"],
     rules: {
+      // allows for <a> instead of restricting to <Link>
       "@next/next/no-html-link-for-pages": "off",
+      // allows for unused variable if it has prefix of _
       "@typescript-eslint/no-unused-vars": [
         "error",
         { argsIgnorePattern: "^_" },
       ],
     },
   },
-  ...storybook.configs["flat/recommended"],
-];
+  {
+    files: ["**/*.stories.{js,jsx,ts,tsx}"],
+    ...storybook.configs["flat/recommended"],
+  },
+]);
 
 export default eslintConfig;

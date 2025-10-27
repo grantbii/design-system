@@ -4,16 +4,17 @@ on:
   push:
     branches: ["prod"]
 
-permissions:
-  contents: write
-  id-token: write
-  pages: write
-
 jobs:
   publish:
     runs-on: ubuntu-latest
+
     environment:
       name: github-pages
+
+    permissions:
+      contents: write
+      id-token: write
+      pages: write
 
     steps:
       - name: Git Checkout
@@ -23,8 +24,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          registry-url: "https://registry.npmjs.org"
           cache: "npm"
+
+      - name: Install latest npm
+        run: npm install -g npm@latest
 
       - name: Install dependencies
         run: npm clean-install
@@ -33,9 +36,8 @@ jobs:
         run: npm run build
 
       - name: Publish package to NPM
-        run: npm publish ./dist --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        working-directory: ./dist
+        run: npm publish --access public
 
       - name: Build storybook
         run: npm run build-storybook
