@@ -8,6 +8,9 @@ const meta: Meta<typeof Badges> = {
   tags: ["autodocs"],
   parameters: {
     layout: "centered",
+    docs: {
+      codePanel: true,
+    },
   },
 };
 

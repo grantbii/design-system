@@ -5,5 +5,6 @@ export { default as Checkbox } from "./Checkbox";
 export { default as Dropdown, type DropdownProps } from "./Dropdown";
 export { default as Input } from "./Input";
 export { default as LinkButton } from "./LinkButton";
+export { default as Overlay } from "./Overlay";
 export { default as RadioButton } from "./RadioButton";
 export { default as Textarea } from "./Textarea";
