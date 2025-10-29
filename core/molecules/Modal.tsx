@@ -6,7 +6,7 @@ import {
   useState,
 } from "react";
 import styled from "styled-components";
-import { Button } from "../atoms";
+import { Button, Overlay } from "../atoms";
 import { Colors, Responsive } from "../foundations";
 import { createPortal } from "react-dom";
 
@@ -30,7 +30,7 @@ const Modal = ({
   closeText,
 }: ModalProps) =>
   createPortal(
-    <Overlay>
+    <Overlay $centerContent>
       <ModalWindow $width={width} $height={height}>
         {header ? <ModalHeader>{header}</ModalHeader> : <></>}
 
@@ -78,23 +78,6 @@ export const useModal = () => {
     closeModal,
   };
 };
-
-const Overlay = styled.div`
-  background-color: ${Colors.semantic.overlay};
-
-  z-index: 9999;
-  position: fixed;
-  top: 0px;
-  left: 0px;
-
-  width: 100vw;
-  height: 100vh;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
 
 const ModalWindow = styled.div<{ $width?: string; $height?: string }>`
   display: flex;

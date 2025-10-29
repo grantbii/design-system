@@ -7,6 +7,9 @@ const meta: Meta<typeof YesNoOptions> = {
   tags: ["autodocs"],
   parameters: {
     layout: "centered",
+    docs: {
+      codePanel: true,
+    },
   },
 };
 

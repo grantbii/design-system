@@ -6,6 +6,7 @@ import { defineConfig } from "eslint/config";
 const eslintConfig = defineConfig([
   ...nextTs,
   ...nextVitals,
+  ...storybook.configs["flat/recommended"],
   {
     files: ["**/*.{js,jsx,ts,tsx}"],
     rules: {
@@ -17,10 +18,6 @@ const eslintConfig = defineConfig([
         { argsIgnorePattern: "^_" },
       ],
     },
-  },
-  {
-    files: ["**/*.stories.{js,jsx,ts,tsx}"],
-    ...storybook.configs["flat/recommended"],
   },
 ]);
 

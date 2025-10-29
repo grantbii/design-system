@@ -7,6 +7,9 @@ const meta: Meta<typeof BrandLogo> = {
   tags: ["autodocs"],
   parameters: {
     layout: "centered",
+    docs: {
+      codePanel: true,
+    },
   },
 };
 
