@@ -1,4 +1,4 @@
-import type { GrantMatchQuery } from "@grantbii/ui-core/match/models";
+import type { GrantMatchQuery } from "@grantbii/ui-core/match/entities";
 import { checkGrantMatchActive } from "@grantbii/ui-core/match/validations";
 import { useState } from "react";
 import styled from "styled-components";

@@ -12,8 +12,9 @@ export const mapEnumToOptions = <EnumType extends BaseEnumType>(
 export const LOCATION_FLAG_MAP: {
   [location in Location]: Flags.FlagComponent;
 } = {
+  [Location.SINGAPORE]: Flags.SG,
   [Location.HONG_KONG]: Flags.HK,
   [Location.MALAYSIA]: Flags.MY,
-  [Location.SINGAPORE]: Flags.SG,
+  [Location.UNITED_KINGDOM]: Flags.GB,
   [Location.UNKNOWN]: Flags.SG,
 };
