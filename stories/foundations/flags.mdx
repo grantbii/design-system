@@ -1,5 +1,6 @@
 import { IconGallery, IconItem, Meta } from "@storybook/addon-docs/blocks";
-import { Flags } from "../../index";
+import { Flags, LOCATION_FLAG_MAP } from "../../index";
+import { Location } from "@grantbii/ui-core/grant/enums";
 
 <Meta title="Foundation/Flags" />
 
@@ -10,15 +11,15 @@ You can find the full gallery on this website:
 [https://catamphetamine.gitlab.io/country-flag-icons/3x2/](https://catamphetamine.gitlab.io/country-flag-icons/3x2/)
 
 <IconGallery>
-  <IconItem name="Hong Kong">
-    <Flags.HK size={32} />
-  </IconItem>
+  {Object.values(Location)
+    .filter((location) => location !== Location.UNKNOWN)
+    .map((location) => {
+      const Flag = LOCATION_FLAG_MAP[location];
 
-  <IconItem name="Malaysia">
-    <Flags.MY size={32} />
-  </IconItem>
-
-  <IconItem name="Singapore">
-    <Flags.SG size={32} />
-  </IconItem>
+      return (
+        <IconItem key={location} name={location}>
+          <Flag size={32} />
+        </IconItem>
+      );
+    })}
 </IconGallery>
