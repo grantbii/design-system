@@ -113,7 +113,7 @@ const ErrorMessage = styled.p`
   }
 
   @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
-    font-size: ${Typography.SUBHEADER_FONT_SIZES.big};
+    font-size: ${Typography.SUBHEADER_FONT_SIZES.large};
   }
 `;
 
@@ -125,7 +125,7 @@ const ErrorDescription = styled.p`
   }
 
   @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
-    font-size: ${Typography.BODY_FONT_SIZES.big};
+    font-size: ${Typography.BODY_FONT_SIZES.large};
   }
 `;
 
