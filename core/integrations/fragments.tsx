@@ -10,7 +10,7 @@ import {
 
 export const SmallScreenOnly = css`
   @media (width < ${WIDTH_BREAKPOINTS.laptop}) {
-    display: inline;
+    display: flex;
   }
 
   @media (width >= ${WIDTH_BREAKPOINTS.laptop}) {
@@ -24,7 +24,7 @@ export const LargeScreenOnly = css`
   }
 
   @media (width >= ${WIDTH_BREAKPOINTS.laptop}) {
-    display: inline;
+    display: flex;
   }
 `;
 
