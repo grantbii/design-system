@@ -1,10 +1,10 @@
-import styled from "styled-components";
+import { css } from "styled-components";
 
 export const WIDTH_BREAKPOINTS = {
   laptop: "1024px",
 };
 
-export const SmallScreenOnly = styled.div`
+export const SmallScreenOnly = css`
   @media (width < ${WIDTH_BREAKPOINTS.laptop}) {
     display: inline;
   }
@@ -14,7 +14,7 @@ export const SmallScreenOnly = styled.div`
   }
 `;
 
-export const BigScreenOnly = styled.div`
+export const LargeScreenOnly = css`
   @media (width < ${WIDTH_BREAKPOINTS.laptop}) {
     display: none;
   }

@@ -1,9 +1,9 @@
+import Image from "next/image";
 import type { KeyboardEvent } from "react";
 import styled, { css } from "styled-components";
+import grantMatchLogo from "../../assets/logos/grant_match_logo.webp";
 import { Colors, Icons, Responsive, Typography } from "../../foundations";
 import { useGrantMatchContext } from "./context";
-import grantMatchLogo from "../../assets/logos/grant_match_logo.webp";
-import Image from "next/image";
 
 type SearchBarProps = {
   textSearchCallback?: () => void;
@@ -109,7 +109,7 @@ const BaseQueryTextInput = styled.input`
   text-overflow: ellipsis;
 `;
 
-const BaseIconButton = styled.button`
+const IconButton = css`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -137,7 +137,9 @@ const ResetTextButton = () => {
   );
 };
 
-const BaseResetTextButton = styled(BaseIconButton)`
+const BaseResetTextButton = styled.button`
+  ${IconButton}
+
   background-color: ${Colors.neutral.grey4};
   border: 1px solid ${Colors.neutral.grey4};
 `;
@@ -172,7 +174,9 @@ const TextSearchButton = ({ textSearchCallback }: TextSearchButtonProps) => {
   );
 };
 
-const BaseSearchButton = styled(BaseIconButton)`
+const BaseSearchButton = styled.button`
+  ${IconButton}
+
   background-color: ${Colors.main.grantbiiBlue};
   border: 1px solid ${Colors.main.grantbiiBlue};
 `;
@@ -246,7 +250,7 @@ const BaseOpenModalButton = styled.button<{ $hasActiveQueryFiles: boolean }>`
     width: 238px;
     min-width: 238px;
     padding: 2px 12px;
-    font-size: ${Typography.HELPER_FONT_SIZES.big};
+    font-size: ${Typography.HELPER_FONT_SIZES.large};
   }
 `;
 

@@ -132,7 +132,7 @@ const DropzoneText = styled.p`
   }
 
   @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
-    font-size: ${Typography.BODY_FONT_SIZES.big};
+    font-size: ${Typography.BODY_FONT_SIZES.large};
   }
 `;
 
@@ -149,7 +149,7 @@ const DropzoneSubtitle = styled.p<{ $isHighlighted?: boolean }>`
   }
 
   @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
-    font-size: ${Typography.HELPER_FONT_SIZES.big};
+    font-size: ${Typography.HELPER_FONT_SIZES.large};
   }
 `;
 

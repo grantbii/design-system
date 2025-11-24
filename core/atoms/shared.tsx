@@ -20,6 +20,7 @@ export const BaseButton = styled.div<{
   font-weight: 500;
   font-size: 14px;
 
+  white-space: nowrap;
   text-decoration: ${({ $underline = false }) =>
     $underline ? "underline" : "none"};
 

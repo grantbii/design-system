@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-export type ScreenSize = "big" | "small";
+export type ScreenSize = "small" | "large";
 
 export type Option = {
   label: ReactNode;

@@ -70,6 +70,6 @@ const Tip = styled.p`
   }
 
   @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
-    font-size: ${Typography.HELPER_FONT_SIZES.big};
+    font-size: ${Typography.HELPER_FONT_SIZES.large};
   }
 `;
