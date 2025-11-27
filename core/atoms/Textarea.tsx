@@ -1,8 +1,10 @@
 import styled from "styled-components";
 import { Colors } from "../foundations";
-import { InputValidation } from "./shared";
+import { InputValidation, type InputValidationProps } from "./shared";
 
-const Textarea = styled.textarea<{ $heightPixels?: number }>`
+type TextareaProps = { $heightPixels?: number } & InputValidationProps;
+
+const Textarea = styled.textarea<TextareaProps>`
   height: ${({ $heightPixels = 100 }) => $heightPixels}px;
 
   padding: 12px 16px;
