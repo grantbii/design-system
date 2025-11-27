@@ -1,12 +1,13 @@
 import type { DetailedHTMLProps, InputHTMLAttributes } from "react";
 import styled from "styled-components";
 import { Colors, type Option } from "../foundations";
-import { InputValidation } from "./shared";
+import { InputValidation, type InputValidationProps } from "./shared";
 
 type InputProps = {
   datalistId?: string;
   datalistOptions?: Option[];
-} & DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
+} & InputValidationProps &
+  DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 
 const Input = ({ datalistOptions, datalistId, ...inputProps }: InputProps) => (
   <>
@@ -22,7 +23,7 @@ const Input = ({ datalistOptions, datalistId, ...inputProps }: InputProps) => (
 
 export default Input;
 
-const BaseInput = styled.input`
+const BaseInput = styled.input<InputValidationProps>`
   padding: 12px 16px;
   background-color: ${Colors.base.white};
   border-radius: 8px;
