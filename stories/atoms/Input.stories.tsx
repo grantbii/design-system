@@ -41,3 +41,9 @@ export const WithDatalist: Story = {
     datalistOptions: mapEnumToOptions(CostItem),
   },
 };
+
+export const CustomError: Story = {
+  args: {
+    $hasError: true,
+  },
+};

@@ -78,16 +78,19 @@ export const InputValidation = css<InputValidationProps>`
   ${({ $hasError = false }) =>
     $hasError
       ? css`
-          background-color: ${Colors.base.white};
-          border: 2px solid ${Colors.accent.red1};
-          outline: none;
+          &:valid {
+            background-color: ${Colors.base.white};
+            border: 1px solid ${Colors.accent.red1};
+            outline: none;
+          }
 
-          &:focus {
-            border: 2px solid ${Colors.accent.red1};
+          &:valid&:focus {
+            background-color: ${Colors.base.white};
+            border: 1px solid ${Colors.accent.red1};
             outline: 1px solid ${Colors.accent.red1};
           }
         `
-      : ""}
+      : css``}
 `;
 
 export const FILE_TYPE_ICON_MAP: { [mimeType: string]: Icons.Icon } = {
