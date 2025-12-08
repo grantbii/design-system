@@ -1,6 +1,6 @@
 import { Dropdown, mapEnumToOptions, type DropdownProps } from "@/.";
 import { Objective } from "@grantbii/ui-core/grant/enums";
-import { parseEnum } from "@grantbii/ui-core/shared/enums";
+import { parseEnum } from "@grantbii/ui-core/enums";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useState } from "react";
 
