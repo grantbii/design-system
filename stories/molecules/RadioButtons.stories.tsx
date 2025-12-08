@@ -1,5 +1,5 @@
 import { LOCATION_FLAG_MAP, RadioButtons } from "@/.";
-import { Location } from "@grantbii/ui-core/grant/enums";
+import { Location } from "@grantbii/ui-core/location/enums";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useState } from "react";
 import styled from "styled-components";
