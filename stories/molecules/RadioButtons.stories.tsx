@@ -1,4 +1,4 @@
-import { LOCATION_FLAG_MAP, RadioButtons } from "@/.";
+import { LocationIcon, RadioButtons } from "@/.";
 import { Location } from "@grantbii/ui-core/location/enums";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useState } from "react";
@@ -8,16 +8,12 @@ type LabelProps = {
   location: Location;
 };
 
-const Label = ({ location }: LabelProps) => {
-  const Flag = LOCATION_FLAG_MAP[location];
-
-  return (
-    <BaseLabel>
-      <Flag width={20} />
-      <p>{location}</p>
-    </BaseLabel>
-  );
-};
+const Label = ({ location }: LabelProps) => (
+  <BaseLabel>
+    <LocationIcon location={location} width={20} />
+    <p>{location}</p>
+  </BaseLabel>
+);
 
 const BaseLabel = styled.div`
   display: flex;

@@ -27,12 +27,6 @@
     },
     "outDir": "dist"
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "core/**/*",
-    "eslint.config.mjs"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "core/**/*"],
   "exclude": ["node_modules", ".next", "next.config.*", "dist"]
 }
