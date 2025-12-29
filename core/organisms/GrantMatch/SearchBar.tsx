@@ -1,7 +1,7 @@
-import { HelperFontSize } from "@/core/integrations";
 import Image from "next/image";
 import type { KeyboardEvent } from "react";
 import styled, { css } from "styled-components";
+import { HelperFontSize } from "../../../core/integrations";
 import grantMatchLogo from "../../assets/logos/grant_match_logo.webp";
 import { Colors, Icons, Responsive } from "../../foundations";
 import { useGrantMatchContext } from "./context";
