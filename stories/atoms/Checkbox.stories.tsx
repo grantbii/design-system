@@ -5,12 +5,6 @@ const meta: Meta<typeof Checkbox> = {
   title: "Atoms/Checkbox",
   component: Checkbox,
   tags: ["autodocs"],
-  parameters: {
-    layout: "centered",
-    docs: {
-      codePanel: true,
-    },
-  },
 };
 
 export default meta;

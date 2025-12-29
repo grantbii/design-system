@@ -6,12 +6,6 @@ const meta: Meta<typeof LocationIcon> = {
   title: "Atoms/Location Icon",
   component: LocationIcon,
   tags: ["autodocs"],
-  parameters: {
-    layout: "centered",
-    docs: {
-      codePanel: true,
-    },
-  },
 };
 
 export default meta;

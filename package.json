@@ -2,7 +2,7 @@
   "name": "@grantbii/design-system",
   "author": "Grantbii",
   "license": "UNLICENSED",
-  "version": "1.10.0",
+  "version": "1.11.0",
   "description": "Grantbii's Design System",
   "homepage": "https://design.grantbii.com",
   "repository": {
@@ -45,7 +45,7 @@
     "@vitest/browser": "4.0.16",
     "@vitest/browser-playwright": "4.0.16",
     "@vitest/coverage-v8": "4.0.16",
-    "baseline-browser-mapping": "^2.9.11",
+    "baseline-browser-mapping": "2.9.11",
     "eslint": "9.39.2",
     "eslint-config-next": "16.1.1",
     "eslint-plugin-storybook": "10.1.10",

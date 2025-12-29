@@ -30,9 +30,6 @@ const meta: Meta<typeof ModalExample> = {
   title: "Molecules/Modal",
   component: ModalExample,
   tags: ["autodocs"],
-  parameters: {
-    layout: "centered",
-  },
 };
 
 export default meta;

@@ -5,12 +5,6 @@ const meta: Meta<typeof Overlay> = {
   title: "Atoms/Overlay",
   component: Overlay,
   tags: ["autodocs"],
-  parameters: {
-    layout: "centered",
-    docs: {
-      codePanel: true,
-    },
-  },
 };
 
 export default meta;

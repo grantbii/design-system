@@ -1,8 +1,9 @@
+import { HelperFontSize } from "@/core/integrations";
 import Image from "next/image";
 import type { KeyboardEvent } from "react";
 import styled, { css } from "styled-components";
 import grantMatchLogo from "../../assets/logos/grant_match_logo.webp";
-import { Colors, Icons, Responsive, Typography } from "../../foundations";
+import { Colors, Icons, Responsive } from "../../foundations";
 import { useGrantMatchContext } from "./context";
 
 type SearchBarProps = {
@@ -239,18 +240,18 @@ const BaseOpenModalButton = styled.button<{ $hasActiveQueryFiles: boolean }>`
           color: ${Colors.main.grantbiiOrange};
         `}
 
+  ${HelperFontSize}
+
   @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
     width: 38px;
     min-width: 38px;
     padding: 0px;
-    font-size: ${Typography.HELPER_FONT_SIZES.small};
   }
 
   @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
     width: 238px;
     min-width: 238px;
     padding: 2px 12px;
-    font-size: ${Typography.HELPER_FONT_SIZES.large};
   }
 `;
 

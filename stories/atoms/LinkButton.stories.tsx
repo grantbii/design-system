@@ -5,12 +5,6 @@ const meta: Meta<typeof LinkButton> = {
   title: "Atoms/Link Button",
   component: LinkButton,
   tags: ["autodocs"],
-  parameters: {
-    layout: "centered",
-    docs: {
-      codePanel: true,
-    },
-  },
 };
 
 export default meta;

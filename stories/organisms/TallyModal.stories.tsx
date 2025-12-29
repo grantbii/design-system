@@ -27,9 +27,6 @@ const meta: Meta<typeof TallyModalExample> = {
   title: "Organisms/Tally Modal",
   component: TallyModalExample,
   tags: ["autodocs"],
-  parameters: {
-    layout: "centered",
-  },
 };
 
 export default meta;

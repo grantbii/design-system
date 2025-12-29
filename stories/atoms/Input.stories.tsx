@@ -6,12 +6,6 @@ const meta: Meta<typeof Input> = {
   title: "Atoms/Input",
   component: Input,
   tags: ["autodocs"],
-  parameters: {
-    layout: "centered",
-    docs: {
-      codePanel: true,
-    },
-  },
 };
 
 export default meta;

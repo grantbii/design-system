@@ -1,10 +1,11 @@
 import { MoonLoader, PacmanLoader } from "react-spinners";
 import type { LoaderSizeMarginProps } from "react-spinners/helpers/props";
 import styled from "styled-components";
-import { Colors, Responsive, Typography } from "../foundations";
+import { Colors } from "../foundations";
+import { HelperFontSize } from "../integrations";
 
 type PageLoaderProps = {
-  isPacman?: boolean;
+  pacman?: boolean;
   loadingText?: string;
   tip?: string;
 } & LoaderSizeMarginProps;
@@ -15,13 +16,13 @@ type PageLoaderProps = {
 const PageLoader = ({
   loadingText,
   tip,
-  isPacman = false,
+  pacman = false,
   color = Colors.accent.blue1,
   size,
   ...restOfProps
 }: PageLoaderProps) => (
   <Background>
-    {isPacman ? (
+    {pacman ? (
       <PacmanLoader color={color} size={size ? size : 20} {...restOfProps} />
     ) : (
       <MoonLoader color={color} size={size ? size : 32} {...restOfProps} />
@@ -65,11 +66,5 @@ const LoadingText = styled.p`
 const Tip = styled.p`
   color: ${Colors.typography.blackMedium};
 
-  @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
-    font-size: ${Typography.HELPER_FONT_SIZES.small};
-  }
-
-  @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
-    font-size: ${Typography.HELPER_FONT_SIZES.large};
-  }
+  ${HelperFontSize}
 `;

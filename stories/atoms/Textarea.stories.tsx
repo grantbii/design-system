@@ -5,12 +5,6 @@ const meta: Meta<typeof Textarea> = {
   title: "Atoms/Textarea",
   component: Textarea,
   tags: ["autodocs"],
-  parameters: {
-    layout: "centered",
-    docs: {
-      codePanel: true,
-    },
-  },
 };
 
 export default meta;

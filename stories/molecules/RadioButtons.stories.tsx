@@ -59,9 +59,6 @@ const meta: Meta<typeof RadioButtonsExample> = {
   title: "Molecules/Radio Buttons",
   component: RadioButtonsExample,
   tags: ["autodocs"],
-  parameters: {
-    layout: "centered",
-  },
 };
 
 export default meta;

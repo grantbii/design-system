@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import styled from "styled-components";
 import { FILE_TYPE_ICON_MAP } from "../atoms/shared";
-import { Colors, Icons, Responsive, Typography } from "../foundations";
+import { Colors, Icons } from "../foundations";
+import { BodyFontSize, HelperFontSize } from "../integrations";
 import Badges from "./Badges";
 
 const DEFAULT_MAX_FILE_SIZE_MB = 5;
@@ -127,13 +128,7 @@ const DropzoneText = styled.p`
 
   font-weight: 500;
 
-  @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
-    font-size: ${Typography.BODY_FONT_SIZES.small};
-  }
-
-  @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
-    font-size: ${Typography.BODY_FONT_SIZES.large};
-  }
+  ${BodyFontSize}
 `;
 
 const DropzoneSubtitle = styled.p<{ $isHighlighted?: boolean }>`
@@ -144,13 +139,7 @@ const DropzoneSubtitle = styled.p<{ $isHighlighted?: boolean }>`
   color: ${({ $isHighlighted = false }) =>
     $isHighlighted ? Colors.accent.yellow1 : Colors.typography.blackLow};
 
-  @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
-    font-size: ${Typography.HELPER_FONT_SIZES.small};
-  }
-
-  @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
-    font-size: ${Typography.HELPER_FONT_SIZES.large};
-  }
+  ${HelperFontSize}
 `;
 
 const ErrorMessage = styled.p`
