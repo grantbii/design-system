@@ -8,7 +8,7 @@ import { BodyFontSize, SubheaderFontSize } from "../integrations";
 
 type ErrorFallbackProps = {
   errorMessage?: string;
-  errorDescription: ReactNode;
+  errorDescription?: ReactNode;
   onClickReload?: MouseEventHandler<HTMLButtonElement>;
 };
 
@@ -84,7 +84,7 @@ const ErrorLogo = styled(Image)`
 
 type LoadingFailedTextProps = {
   errorMessage: string;
-  errorDescription: ReactNode;
+  errorDescription?: ReactNode;
 };
 
 const ErrorText = ({
@@ -93,7 +93,12 @@ const ErrorText = ({
 }: LoadingFailedTextProps) => (
   <BaseErrorText>
     <ErrorMessage>{errorMessage}</ErrorMessage>
-    <ErrorDescription>{errorDescription}</ErrorDescription>
+
+    {errorDescription ? (
+      <ErrorDescription>{errorDescription}</ErrorDescription>
+    ) : (
+      <></>
+    )}
   </BaseErrorText>
 );
 
