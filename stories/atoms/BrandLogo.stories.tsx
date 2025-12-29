@@ -5,12 +5,6 @@ const meta: Meta<typeof BrandLogo> = {
   title: "Atoms/Brand Logo",
   component: BrandLogo,
   tags: ["autodocs"],
-  parameters: {
-    layout: "centered",
-    docs: {
-      codePanel: true,
-    },
-  },
 };
 
 export default meta;

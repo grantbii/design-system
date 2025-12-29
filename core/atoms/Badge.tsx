@@ -1,6 +1,7 @@
 import type { ComponentType, MouseEventHandler, ReactNode } from "react";
 import styled from "styled-components";
-import { Colors, Icons, Responsive, Typography } from "../foundations";
+import { Colors, Icons, Responsive } from "../foundations";
+import { HelperFontSize } from "../integrations";
 
 export type BadgeProps = {
   label: ReactNode;
@@ -105,13 +106,7 @@ const BadgeLabel = styled.div`
 
   font-weight: 500;
 
-  @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
-    font-size: ${Typography.HELPER_FONT_SIZES.small};
-  }
-
-  @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
-    font-size: ${Typography.HELPER_FONT_SIZES.large};
-  }
+  ${HelperFontSize}
 `;
 
 type CloseButtonProps = {

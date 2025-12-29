@@ -6,12 +6,6 @@ const meta: Meta<typeof Button> = {
   title: "Atoms/Button",
   component: Button,
   tags: ["autodocs"],
-  parameters: {
-    layout: "centered",
-    docs: {
-      codePanel: true,
-    },
-  },
 };
 
 export default meta;

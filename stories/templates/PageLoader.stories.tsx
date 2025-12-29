@@ -1,31 +1,10 @@
 import { PageLoader } from "@/.";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import styled from "styled-components";
 
-type PageLoaderExampleProps = {
-  isPacman?: boolean;
-  loadingText?: string;
-  tip?: string;
-};
-
-const PageLoaderExample = (props: PageLoaderExampleProps) => (
-  <BaseExample>
-    <PageLoader {...props} />
-  </BaseExample>
-);
-
-const BaseExample = styled.div`
-  width: 100vw;
-  height: 100vh;
-`;
-
-const meta: Meta<typeof PageLoaderExample> = {
+const meta: Meta<typeof PageLoader> = {
   title: "Templates/Page Loader",
-  component: PageLoaderExample,
+  component: PageLoader,
   tags: ["autodocs"],
-  parameters: {
-    layout: "fullscreen",
-  },
 };
 
 export default meta;
@@ -44,5 +23,5 @@ export const GrantbiiDashboard: Story = {
 };
 
 export const AdminConsole: Story = {
-  args: { isPacman: true },
+  args: { pacman: true },
 };

@@ -1,16 +1,10 @@
-import { LoadingFailedSign } from "@/.";
+import { ErrorFallback } from "@/.";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
-const meta: Meta<typeof LoadingFailedSign> = {
-  title: "Templates/Loading-Failed Sign",
-  component: LoadingFailedSign,
+const meta: Meta<typeof ErrorFallback> = {
+  title: "Templates/Error Fallback",
+  component: ErrorFallback,
   tags: ["autodocs"],
-  parameters: {
-    layout: "centered",
-    docs: {
-      codePanel: true,
-    },
-  },
 };
 
 export default meta;

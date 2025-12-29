@@ -5,12 +5,6 @@ const meta: Meta<typeof YesNoOptions> = {
   title: "Organisms/Yes-No Options",
   component: YesNoOptions,
   tags: ["autodocs"],
-  parameters: {
-    layout: "centered",
-    docs: {
-      codePanel: true,
-    },
-  },
 };
 
 export default meta;

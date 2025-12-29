@@ -25,9 +25,6 @@ const meta: Meta<typeof FileDropExample> = {
   title: "Molecules/File Drop",
   component: FileDropExample,
   tags: ["autodocs"],
-  parameters: {
-    layout: "centered",
-  },
 };
 
 export default meta;

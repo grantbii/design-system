@@ -35,9 +35,6 @@ const meta: Meta<typeof DropdownExample> = {
   title: "Atoms/Dropdown",
   component: DropdownExample,
   tags: ["autodocs"],
-  parameters: {
-    layout: "centered",
-  },
 };
 
 export default meta;

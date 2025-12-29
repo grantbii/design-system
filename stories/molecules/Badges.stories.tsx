@@ -6,12 +6,6 @@ const meta: Meta<typeof Badges> = {
   title: "Molecules/Badges",
   component: Badges,
   tags: ["autodocs"],
-  parameters: {
-    layout: "centered",
-    docs: {
-      codePanel: true,
-    },
-  },
 };
 
 export default meta;

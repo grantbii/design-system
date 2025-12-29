@@ -1,6 +1,6 @@
 import type { Preview } from "@storybook/nextjs-vite";
-import { GlobalStyle } from "../index";
 import { FunctionComponent } from "react";
+import { GlobalStyle } from "../index";
 
 const preview: Preview = {
   parameters: {
@@ -16,6 +16,10 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
+    docs: {
+      codePanel: true,
+    },
+    layout: "centered",
   },
 };
 
