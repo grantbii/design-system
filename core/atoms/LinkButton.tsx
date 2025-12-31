@@ -18,6 +18,7 @@ type LinkButtonProps = {
   RightIcon?: ComponentType<Icons.IconProps>;
   underline?: boolean;
   backgroundColor?: string;
+  borderColor?: string;
   color?: string;
   width?: string;
 } & DetailedHTMLProps<
@@ -34,6 +35,7 @@ const LinkButton = ({
   RightIcon,
   underline,
   backgroundColor,
+  borderColor,
   color,
   width,
   disabled,
@@ -46,6 +48,7 @@ const LinkButton = ({
     RightIcon,
     underline,
     backgroundColor,
+    borderColor,
     color,
     width,
   };
@@ -67,6 +70,7 @@ type ContentProps = {
   RightIcon?: ComponentType<Icons.IconProps>;
   underline?: boolean;
   backgroundColor?: string;
+  borderColor?: string;
   color?: string;
   width?: string;
 };
@@ -77,12 +81,14 @@ const Content = ({
   RightIcon,
   underline,
   backgroundColor,
+  borderColor,
   color,
   width,
 }: ContentProps) => (
   <BaseButton
     $underline={underline}
     $backgroundColor={backgroundColor}
+    $borderColor={borderColor}
     $color={color}
     $width={width}
   >
