@@ -36,14 +36,19 @@ const Modal = ({
 
         <ModalBody>{content}</ModalBody>
 
-        <ModalFooter>
-          {onClickClose ? (
-            <CloseButton onClick={onClickClose} closeText={closeText} />
-          ) : (
-            <></>
-          )}
-          {footer ? footer : <></>}
-        </ModalFooter>
+        {onClickClose || footer ? (
+          <ModalFooter>
+            {onClickClose ? (
+              <CloseButton onClick={onClickClose} closeText={closeText} />
+            ) : (
+              <></>
+            )}
+
+            {footer ? footer : <></>}
+          </ModalFooter>
+        ) : (
+          <></>
+        )}
       </ModalWindow>
     </Overlay>,
     document.body,
@@ -116,6 +121,8 @@ const ModalHeader = styled.div`
   font-size: 18px;
 
   padding: 12px 20px;
+  margin-bottom: 12px;
+
   border-bottom: 1px solid ${Colors.neutral.grey3};
 `;
 
@@ -124,7 +131,6 @@ const ModalBody = styled.div`
   flex-direction: column;
 
   height: 100%;
-  padding-top: 12px;
   overflow-y: auto;
 
   > * {
