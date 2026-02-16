@@ -13,10 +13,11 @@ type RadioButtonProps = {
 
 const RadioButtons = ({ name, options }: RadioButtonProps) => (
   <RadioGroup>
-    {options.map(({ value, ...props }) => (
+    {options.map(({ id, value, ...props }) => (
       <RadioButton
         {...props}
         key={`${name}-${value}`}
+        id={id ? id : value} // assume mutually exclusive values
         value={value}
         name={name}
       />
