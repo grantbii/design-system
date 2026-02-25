@@ -1,4 +1,4 @@
-import { Input, mapEnumToOptions } from "@/.";
+import { Icons, Input, mapEnumToOptions } from "@/.";
 import { CostItem } from "@grantbii/ui-core/grant/enums";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
@@ -28,7 +28,7 @@ export const MinimumLength: Story = {
   args: { placeholder: "At least 10 characters", minLength: 10 },
 };
 
-export const WithDatalist: Story = {
+export const Datalist: Story = {
   args: {
     placeholder: "Enter a cost item",
     datalistId: "supportable-cost-items",
@@ -39,5 +39,27 @@ export const WithDatalist: Story = {
 export const CustomError: Story = {
   args: {
     $hasError: true,
+  },
+};
+
+export const LeftIcon: Story = {
+  args: {
+    placeholder: "Type here",
+    LeftIcon: Icons.PlusIcon,
+  },
+};
+
+export const RightIcon: Story = {
+  args: {
+    placeholder: "Type here",
+    RightIcon: Icons.MinusIcon,
+  },
+};
+
+export const BothIcons: Story = {
+  args: {
+    placeholder: "Type here",
+    LeftIcon: Icons.SmileyXEyesIcon,
+    RightIcon: Icons.SmileyMeltingIcon,
   },
 };
