@@ -1,4 +1,4 @@
-import { Icons, Input, mapEnumToOptions } from "@/.";
+import { Colors, Icons, Input, mapEnumToOptions } from "@/.";
 import { CostItem } from "@grantbii/ui-core/grant/enums";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
@@ -46,6 +46,7 @@ export const LeftIcon: Story = {
   args: {
     placeholder: "Type here",
     LeftIcon: Icons.PlusIcon,
+    iconColor: Colors.neutral.grey2,
   },
 };
 
@@ -53,13 +54,15 @@ export const RightIcon: Story = {
   args: {
     placeholder: "Type here",
     RightIcon: Icons.MinusIcon,
+    iconColor: Colors.neutral.grey2,
   },
 };
 
 export const BothIcons: Story = {
   args: {
     placeholder: "Type here",
-    LeftIcon: Icons.SmileyXEyesIcon,
-    RightIcon: Icons.SmileyMeltingIcon,
+    LeftIcon: Icons.CurrencyDollarIcon,
+    RightIcon: Icons.PencilSimpleIcon,
+    iconColor: Colors.neutral.grey2,
   },
 };
