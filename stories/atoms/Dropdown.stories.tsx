@@ -1,4 +1,4 @@
-import { Dropdown, mapEnumToOptions, type DropdownProps } from "@/.";
+import { Dropdown, enumToOptions, type DropdownProps } from "@/.";
 import { Objective } from "@grantbii/ui-core/grant/enums";
 import { parseEnum } from "@grantbii/ui-core/enums";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
@@ -22,7 +22,7 @@ const DropdownExample = ({ controlled }: ExampleProps) => {
 };
 
 const baseProps: DropdownProps = {
-  options: mapEnumToOptions(Objective),
+  options: enumToOptions(Objective),
   defaultLabel: "Select grant objective",
 };
 

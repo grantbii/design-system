@@ -1,4 +1,4 @@
-import { Badges, mapEnumToOptions, type BadgeProps } from "@/.";
+import { Badges, enumToOptions, type BadgeProps } from "@/.";
 import { Objective } from "@grantbii/ui-core/grant/enums";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
@@ -12,7 +12,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const allBadgeProps: BadgeProps[] = mapEnumToOptions(Objective);
+const allBadgeProps: BadgeProps[] = enumToOptions(Objective);
 
 export const ScrollableVertical: Story = {
   args: {
