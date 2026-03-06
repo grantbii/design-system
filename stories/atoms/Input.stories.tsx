@@ -1,4 +1,4 @@
-import { Input, mapEnumToOptions } from "@/.";
+import { Input, enumToOptions } from "@/.";
 import { CostItem } from "@grantbii/ui-core/grant/enums";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
@@ -32,7 +32,7 @@ export const Datalist: Story = {
   args: {
     placeholder: "Enter a cost item",
     datalistId: "supportable-cost-items",
-    datalistOptions: mapEnumToOptions(CostItem),
+    datalistOptions: enumToOptions(CostItem),
   },
 };
 
