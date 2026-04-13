@@ -2,7 +2,6 @@ import Image from "next/image";
 import type { KeyboardEvent } from "react";
 import styled, { css } from "styled-components";
 import { HelperFontSize } from "../../../core/integrations";
-import grantMatchLogo from "../../assets/logos/grant_match_logo.webp";
 import { Colors, Icons, Responsive } from "../../foundations";
 import { useGrantMatchContext } from "./context";
 
@@ -207,13 +206,8 @@ const OpenModalButton = ({ openModalCallback }: OpenModalButtonProps) => {
       onClick={onClickOpen}
       $hasActiveQueryFiles={activeQuery.files.length > 0}
     >
-      <GrantMatchLogo
-        src={grantMatchLogo}
-        alt="Grant Match"
-        width={64}
-        height={64}
-      />
-      <OpenModalButtonText>Get Personalized Grant Matches</OpenModalButtonText>
+      <Icons.FileArrowUpIcon size={20} />
+      <OpenModalButtonText>File Drop</OpenModalButtonText>
     </BaseOpenModalButton>
   );
 };
@@ -249,8 +243,8 @@ const BaseOpenModalButton = styled.button<{ $hasActiveQueryFiles: boolean }>`
   }
 
   @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
-    width: 238px;
-    min-width: 238px;
+    width: 88px;
+    min-width: 88px;
     padding: 2px 12px;
   }
 `;
