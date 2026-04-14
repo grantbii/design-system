@@ -1,4 +1,3 @@
-import Image from "next/image";
 import type { KeyboardEvent } from "react";
 import styled, { css } from "styled-components";
 import { HelperFontSize } from "../../../core/integrations";
@@ -109,7 +108,7 @@ const BaseQueryTextInput = styled.input`
   text-overflow: ellipsis;
 `;
 
-const IconButton = css`
+const IconOnlyButton = css`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -138,7 +137,7 @@ const ResetTextButton = () => {
 };
 
 const BaseResetTextButton = styled.button`
-  ${IconButton}
+  ${IconOnlyButton}
 
   background-color: ${Colors.neutral.grey4};
   border: 1px solid ${Colors.neutral.grey4};
@@ -175,7 +174,7 @@ const TextSearchButton = ({ textSearchCallback }: TextSearchButtonProps) => {
 };
 
 const BaseSearchButton = styled.button`
-  ${IconButton}
+  ${IconOnlyButton}
 
   background-color: ${Colors.main.grantbiiBlue};
   border: 1px solid ${Colors.main.grantbiiBlue};
@@ -191,7 +190,7 @@ type OpenModalButtonProps = {
 };
 
 const OpenModalButton = ({ openModalCallback }: OpenModalButtonProps) => {
-  const { activeQuery, openModal } = useGrantMatchContext();
+  const { openModal } = useGrantMatchContext();
 
   const onClickOpen = () => {
     if (openModalCallback) {
@@ -202,17 +201,14 @@ const OpenModalButton = ({ openModalCallback }: OpenModalButtonProps) => {
   };
 
   return (
-    <BaseOpenModalButton
-      onClick={onClickOpen}
-      $hasActiveQueryFiles={activeQuery.files.length > 0}
-    >
+    <BaseOpenModalButton onClick={onClickOpen}>
       <Icons.FileArrowUpIcon size={20} />
       <OpenModalButtonText>File Drop</OpenModalButtonText>
     </BaseOpenModalButton>
   );
 };
 
-const BaseOpenModalButton = styled.button<{ $hasActiveQueryFiles: boolean }>`
+const BaseOpenModalButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -220,19 +216,11 @@ const BaseOpenModalButton = styled.button<{ $hasActiveQueryFiles: boolean }>`
 
   height: 38px;
 
-  border: 1px solid ${Colors.main.grantbiiOrange};
+  border: 1px solid ${Colors.neutral.grey3};
   border-radius: 8px;
 
-  ${({ $hasActiveQueryFiles }) =>
-    $hasActiveQueryFiles
-      ? css`
-          background-color: ${Colors.main.grantbiiOrange};
-          color: ${Colors.typography.whiteHigh};
-        `
-      : css`
-          background-color: ${Colors.base.white};
-          color: ${Colors.main.grantbiiOrange};
-        `}
+  background-color: ${Colors.neutral.grey3};
+  color: ${Colors.typography.blackHigh};
 
   ${HelperFontSize}
 
@@ -243,18 +231,10 @@ const BaseOpenModalButton = styled.button<{ $hasActiveQueryFiles: boolean }>`
   }
 
   @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
-    width: 88px;
+    width: auto;
     min-width: 88px;
-    padding: 2px 12px;
+    padding: 2px 16px;
   }
-`;
-
-const GrantMatchLogo = styled(Image)`
-  width: 18px;
-  height: 18px;
-
-  box-shadow: 0px 0px 3px 3px #ffe2b680;
-  border-radius: 120px;
 `;
 
 const OpenModalButtonText = styled.p`
