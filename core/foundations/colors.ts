@@ -28,6 +28,7 @@ export const accent = {
   green1: "#08A45E",
   green2: "#6BC89E",
   green3: "#EBFFF6",
+  green4: "#F5FFFA",
   // usually indicates info, no emotion
   blue1: "#1878E4",
   blue2: "#74AEEF",
@@ -35,12 +36,12 @@ export const accent = {
 };
 
 export const typography = {
-  blackHigh: "#000000E5",
-  blackMedium: "#00000099",
-  blackLow: "#0000004D",
+  blackHigh: "#1A1A1A",
+  blackMedium: "#666666",
+  blackLow: "#B2B2B2",
   whiteHigh: "#FFFFFF",
-  whiteMedium: "#FFFFFF99",
-  whiteLow: "#0000001A",
+  whiteMedium: "#F5F5F5",
+  whiteLow: "#E5E5E5",
 };
 
 export const semantic = {
