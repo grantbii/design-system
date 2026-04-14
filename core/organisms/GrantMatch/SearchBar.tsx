@@ -28,7 +28,6 @@ const SearchBar = ({
       </TextSearchArea>
 
       <TextSearchButton textSearchCallback={textSearchCallback} />
-      <VerticalDivider />
       <OpenModalButton openModalCallback={openModalCallback} />
     </BaseSearchBar>
   );
@@ -178,11 +177,6 @@ const BaseSearchButton = styled.button`
 
   background-color: ${Colors.main.grantbiiBlue};
   border: 1px solid ${Colors.main.grantbiiBlue};
-`;
-
-const VerticalDivider = styled.div`
-  height: 40px;
-  border-left: 1px solid ${Colors.neutral.grey2};
 `;
 
 type OpenModalButtonProps = {
