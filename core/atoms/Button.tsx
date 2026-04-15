@@ -1,7 +1,7 @@
 import type { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from "react";
 import styled from "styled-components";
 import { Icons } from "../foundations";
-import { BaseButton as ButtonContent } from "./shared";
+import { BaseButton as ButtonContent } from "../shared";
 
 type ButtonProps = {
   label: ReactNode;

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Badge, Button } from "../../atoms";
-import { FILE_TYPE_ICON_MAP } from "../../atoms/shared";
 import { Colors, Icons } from "../../foundations";
+import { FILE_TYPE_ICON_MAP } from "../../shared";
 import { useGrantMatchContext } from "./context";
 
 const ActiveQueryFiles = () => (

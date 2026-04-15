@@ -7,7 +7,7 @@ import type {
   ReactNode,
 } from "react";
 import { Icons } from "../foundations";
-import { BaseButton } from "./shared";
+import { BaseButton } from "../shared";
 
 type LinkButtonProps = {
   label: ReactNode;

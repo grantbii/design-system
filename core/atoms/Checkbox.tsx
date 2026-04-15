@@ -1,5 +1,5 @@
 import type { DetailedHTMLProps, InputHTMLAttributes, ReactNode } from "react";
-import { LabelledInput } from "./shared";
+import { LabelledInput } from "../shared";
 
 type CheckboxProps = {
   id: string;

@@ -1,7 +1,7 @@
 import type { DetailedHTMLProps, InputHTMLAttributes } from "react";
 import styled from "styled-components";
 import { Colors, type Option } from "../foundations";
-import { InputValidation, type InputValidationProps } from "./shared";
+import { InputValidation, type InputValidationProps } from "../shared";
 
 type InputProps = {
   datalistId?: string;
