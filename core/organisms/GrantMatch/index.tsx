@@ -2,7 +2,7 @@ import type { GrantMatchQuery } from "@grantbii/ui-core/match/entities";
 import { checkGrantMatchActive } from "@grantbii/ui-core/match/validations";
 import { useState } from "react";
 import styled from "styled-components";
-import { useModal } from "../../molecules";
+import { useModal } from "../../organisms/Modal";
 import ActiveQueryFiles from "./ActiveQueryFiles";
 import GrantMatchModal from "./GrantMatchModal";
 import SearchBar from "./SearchBar";

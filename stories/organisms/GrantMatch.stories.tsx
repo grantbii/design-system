@@ -47,7 +47,7 @@ const Container = styled.div`
 `;
 
 const meta: Meta<typeof GrantMatchExample> = {
-  title: "Organisms/Search Bar",
+  title: "Organisms/Grant Match",
   component: GrantMatchExample,
   tags: ["autodocs"],
   parameters: {
