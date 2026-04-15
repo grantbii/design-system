@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Colors } from "../foundations";
-import { InputValidation, type InputValidationProps } from "./shared";
+import { InputValidation, type InputValidationProps } from "../shared";
 
 type TextareaProps = { $heightPixels?: number } & InputValidationProps;
 

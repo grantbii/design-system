@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { Colors, Icons } from "../foundations";
+import { Colors, Icons } from "./foundations";
 
 export const BaseButton = styled.div<{
   $underline?: boolean;
