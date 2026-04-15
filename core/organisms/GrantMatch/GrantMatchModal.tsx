@@ -3,7 +3,8 @@ import styled from "styled-components";
 import grantMatchLogo from "../../assets/logos/grant_match_logo.webp";
 import { Button, Textarea } from "../../atoms";
 import { Colors } from "../../foundations";
-import { FileDrop, Modal, useFileDrop } from "../../molecules";
+import FileDrop, { useFileDrop } from "../../organisms/FileDrop";
+import Modal from "../../organisms/Modal";
 import { useGrantMatchContext } from "./context";
 
 type GrantMatchModalProps = {

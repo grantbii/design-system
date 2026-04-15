@@ -1,5 +1,5 @@
 import type { MouseEventHandler, ReactNode } from "react";
-import { Modal } from "../molecules";
+import Modal from "../organisms/Modal";
 
 type TallyModalProps = {
   header?: ReactNode;
