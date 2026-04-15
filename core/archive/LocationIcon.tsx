@@ -1,6 +1,6 @@
 import { Location } from "@grantbii/ui-core/location/enums";
 import type { JSX } from "react";
-import { Flags, Icons } from "../foundations";
+import { Flags, Icons } from "../atoms";
 
 type LocationIconProps = {
   location: Location;

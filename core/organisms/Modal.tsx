@@ -7,8 +7,7 @@ import {
 } from "react";
 import { createPortal } from "react-dom";
 import styled from "styled-components";
-import { Overlay } from "../atoms";
-import { Colors, Responsive } from "../foundations";
+import { Colors, Overlay, Responsive } from "../atoms";
 import { Button } from "../molecules";
 
 type ModalProps = {

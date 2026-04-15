@@ -2,7 +2,7 @@ import Image from "next/image";
 import styled from "styled-components";
 import darkLogo from "../assets/logos/brand_logo-dark.webp";
 import lightLogo from "../assets/logos/brand_logo-light.webp";
-import { Responsive } from "../foundations";
+import { Responsive } from "../atoms";
 
 type BrandLogoProps = {
   isDarkTheme?: boolean;

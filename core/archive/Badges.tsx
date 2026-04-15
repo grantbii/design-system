@@ -1,5 +1,5 @@
 import styled, { css, type RuleSet } from "styled-components";
-import { Responsive } from "../foundations";
+import { Responsive } from "../atoms";
 import Badge, { type BadgeProps } from "../molecules/Badge";
 
 type BadgesProps = {

@@ -6,7 +6,7 @@ import type {
   HTMLAttributeAnchorTarget,
   ReactNode,
 } from "react";
-import { Icons } from "../foundations";
+import { Icons } from "../atoms";
 import { BaseButton } from "../shared";
 
 type LinkButtonProps = {

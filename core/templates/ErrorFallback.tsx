@@ -2,7 +2,7 @@ import Image from "next/image";
 import type { MouseEventHandler, ReactNode } from "react";
 import styled from "styled-components";
 import errorLogo from "../assets/logos/error_logo.webp";
-import { Colors, Responsive } from "../foundations";
+import { Colors, Responsive } from "../atoms";
 import { BodyFontSize, SubheaderFontSize } from "../integrations";
 import { Button } from "../molecules";
 

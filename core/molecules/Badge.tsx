@@ -1,6 +1,6 @@
 import type { ComponentType, MouseEventHandler, ReactNode } from "react";
 import styled from "styled-components";
-import { Colors, Icons, Responsive } from "../foundations";
+import { Colors, Icons, Responsive } from "../atoms";
 import { HelperFontSize } from "../integrations";
 
 export type BadgeProps = {

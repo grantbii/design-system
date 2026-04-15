@@ -1,7 +1,7 @@
 import type { DetailedHTMLProps, InputHTMLAttributes } from "react";
 import styled from "styled-components";
 import { RadioButton } from "../molecules";
-import type { Option } from "../foundations";
+import type { Option } from "../types";
 
 export type RadioOption = Option &
   DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;

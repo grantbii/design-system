@@ -1,7 +1,7 @@
 import { MoonLoader, PacmanLoader } from "react-spinners";
 import type { LoaderSizeMarginProps } from "react-spinners/helpers/props";
 import styled from "styled-components";
-import { Colors } from "../foundations";
+import { Colors } from "../atoms";
 import { HelperFontSize } from "../integrations";
 
 type PageLoaderProps = {

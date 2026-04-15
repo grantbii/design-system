@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Colors } from "../foundations";
+import { Colors } from "../atoms";
 
 const Overlay = styled.div<{ $centerContent?: boolean }>`
   display: flex;

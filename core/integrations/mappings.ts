@@ -1,5 +1,5 @@
 import type { BaseEnumType } from "@grantbii/ui-core/enums";
-import type { Option } from "../foundations";
+import type { Option } from "../types";
 
 export const enumToOptions = <EnumType extends BaseEnumType>(
   enumType: EnumType,
