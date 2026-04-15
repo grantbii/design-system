@@ -1,6 +1,6 @@
 import styled, { css, type RuleSet } from "styled-components";
-import { Badge, type BadgeProps } from "../atoms";
 import { Responsive } from "../foundations";
+import Badge, { type BadgeProps } from "../molecules/Badge";
 
 type BadgesProps = {
   allBadgeProps: BadgeProps[];

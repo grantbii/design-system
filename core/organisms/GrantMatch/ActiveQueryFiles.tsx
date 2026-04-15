@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { Badge, Button } from "../../atoms";
 import { Colors, Icons } from "../../foundations";
+import { Badge, Button } from "../../molecules";
 import { FILE_TYPE_ICON_MAP } from "../../shared";
 import { useGrantMatchContext } from "./context";
 

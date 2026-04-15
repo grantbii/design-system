@@ -2,9 +2,9 @@ import Image from "next/image";
 import type { MouseEventHandler, ReactNode } from "react";
 import styled from "styled-components";
 import errorLogo from "../assets/logos/error_logo.webp";
-import { Button } from "../atoms";
 import { Colors, Responsive } from "../foundations";
 import { BodyFontSize, SubheaderFontSize } from "../integrations";
+import { Button } from "../molecules";
 
 type ErrorFallbackProps = {
   errorMessage?: string;

@@ -2,7 +2,7 @@ import { Textarea } from "@/.";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
 const meta: Meta<typeof Textarea> = {
-  title: "Molecules/Multiline",
+  title: "Molecules/Textarea",
   component: Textarea,
   tags: ["autodocs"],
 };

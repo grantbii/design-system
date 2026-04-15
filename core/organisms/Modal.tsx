@@ -5,10 +5,11 @@ import {
   useCallback,
   useState,
 } from "react";
-import styled from "styled-components";
-import { Button, Overlay } from "../atoms";
-import { Colors, Responsive } from "../foundations";
 import { createPortal } from "react-dom";
+import styled from "styled-components";
+import { Overlay } from "../atoms";
+import { Colors, Responsive } from "../foundations";
+import { Button } from "../molecules";
 
 type ModalProps = {
   header?: ReactNode;
