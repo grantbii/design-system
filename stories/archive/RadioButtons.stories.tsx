@@ -56,7 +56,7 @@ const uncontrolledProps = {
 };
 
 const meta: Meta<typeof RadioButtonsExample> = {
-  title: "Molecules/Radio Buttons",
+  title: "Archive/Radio Buttons",
   component: RadioButtonsExample,
   tags: ["autodocs"],
 };

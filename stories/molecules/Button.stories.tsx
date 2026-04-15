@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import styled from "styled-components";
 
 const meta: Meta<typeof Button> = {
-  title: "Atoms/Button",
+  title: "Molecules/Button",
   component: Button,
   tags: ["autodocs"],
 };

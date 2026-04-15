@@ -3,7 +3,7 @@ import { Location } from "@grantbii/ui-core/location/enums";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
 const meta: Meta<typeof LocationIcon> = {
-  title: "Atoms/Location Icon",
+  title: "Archive/Location Icon",
   component: LocationIcon,
   tags: ["autodocs"],
 };

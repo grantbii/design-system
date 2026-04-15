@@ -24,7 +24,7 @@ const TallyModalExample = (props: TallyModalExampleProps) => {
 };
 
 const meta: Meta<typeof TallyModalExample> = {
-  title: "Organisms/Tally Modal",
+  title: "Archive/Tally Modal",
   component: TallyModalExample,
   tags: ["autodocs"],
 };
