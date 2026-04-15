@@ -22,7 +22,7 @@ const Container = styled.div`
 `;
 
 const meta: Meta<typeof FileDropExample> = {
-  title: "Molecules/File Drop",
+  title: "Organisms/File Drop",
   component: FileDropExample,
   tags: ["autodocs"],
 };

@@ -2,7 +2,7 @@ import { PageLoader } from "@/.";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
 const meta: Meta<typeof PageLoader> = {
-  title: "Templates/Page Loader",
+  title: "Molecules/Page Loader",
   component: PageLoader,
   tags: ["autodocs"],
 };

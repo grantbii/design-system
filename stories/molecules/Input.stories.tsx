@@ -3,7 +3,7 @@ import { CostItem } from "@grantbii/ui-core/grant/enums";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
 const meta: Meta<typeof Input> = {
-  title: "Atoms/Input",
+  title: "Molecules/Input",
   component: Input,
   tags: ["autodocs"],
 };

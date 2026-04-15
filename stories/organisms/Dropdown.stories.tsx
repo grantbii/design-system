@@ -32,7 +32,7 @@ const uncontrolledProps: DropdownProps = {
 };
 
 const meta: Meta<typeof DropdownExample> = {
-  title: "Atoms/Dropdown",
+  title: "Organisms/Dropdown",
   component: DropdownExample,
   tags: ["autodocs"],
 };

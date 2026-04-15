@@ -27,7 +27,7 @@ const ModalExample = (props: ModalExampleProps) => {
 };
 
 const meta: Meta<typeof ModalExample> = {
-  title: "Molecules/Modal",
+  title: "Organisms/Modal",
   component: ModalExample,
   tags: ["autodocs"],
 };

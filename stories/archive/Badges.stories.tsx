@@ -3,7 +3,7 @@ import { Objective } from "@grantbii/ui-core/grant/enums";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
 const meta: Meta<typeof Badges> = {
-  title: "Molecules/Badges",
+  title: "Archive/Badges",
   component: Badges,
   tags: ["autodocs"],
 };
