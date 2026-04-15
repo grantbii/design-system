@@ -1,5 +1,5 @@
 import type { DetailedHTMLProps, InputHTMLAttributes } from "react";
-import type { Option } from "../foundations";
+import type { Option } from "../types";
 import { LabelledInput } from "../shared";
 
 type RadioButtonProps = Option &

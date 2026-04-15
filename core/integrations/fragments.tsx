@@ -1,12 +1,12 @@
 import { css } from "styled-components";
-import { WIDTH_BREAKPOINTS } from "../foundations/responsive";
+import { WIDTH_BREAKPOINTS } from "../atoms/Responsive";
 import {
   BODY_FONT_SIZES,
   HEADER_FONT_SIZES,
   HELPER_FONT_SIZES,
   SUBHEADER_FONT_SIZES,
   TITLE_FONT_SIZES,
-} from "../foundations/typography";
+} from "../atoms/Typography";
 
 export const SmallScreenOnly = css`
   @media (width < ${WIDTH_BREAKPOINTS.laptop}) {

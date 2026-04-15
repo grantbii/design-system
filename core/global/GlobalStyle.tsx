@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import "../assets/fonts/satoshi/css/satoshi.css";
-import * as Colors from "../foundations/colors";
+import * as Colors from "../atoms/Color";
 
 const GlobalStyle = createGlobalStyle`
   html,

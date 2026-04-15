@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import styled from "styled-components";
-import { Colors, Icons } from "../foundations";
+import Badges from "../archive/Badges";
+import { Colors, Icons } from "../atoms";
 import { BodyFontSize, HelperFontSize } from "../integrations";
 import { FILE_TYPE_ICON_MAP } from "../shared";
-import Badges from "../archive/Badges";
 
 const DEFAULT_MAX_FILE_SIZE_MB = 5;
 const DEFAULT_MAX_FILES = 5;

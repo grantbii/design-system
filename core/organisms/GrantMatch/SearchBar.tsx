@@ -1,7 +1,7 @@
 import type { KeyboardEvent } from "react";
 import styled, { css } from "styled-components";
 import { HelperFontSize } from "../../../core/integrations";
-import { Colors, Icons, Responsive } from "../../foundations";
+import { Colors, Icons, Responsive } from "../../atoms";
 import { useGrantMatchContext } from "./context";
 
 type SearchBarProps = {

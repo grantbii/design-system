@@ -1,6 +1,6 @@
 import type { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from "react";
 import styled from "styled-components";
-import { Icons } from "../foundations";
+import { Icons } from "../atoms";
 import { BaseButton as ButtonContent } from "../shared";
 
 type ButtonProps = {
