@@ -1,0 +1,12 @@
+export const FOUR_PIXELS = "4px";
+export const EIGHT_PIXELS = "8px";
+export const TWELVE_PIXELS = "12px";
+export const SIXTEEN_PIXELS = "16px";
+export const TWENTY_PIXELS = "20px";
+export const TWENTY_FOUR_PIXELS = "24px";
+export const THIRTY_TWO_PIXELS = "32px";
+export const FORTY_PIXELS = "40px";
+export const FORTY_EIGHT_PIXELS = "48px";
+export const SIXTY_FOUR_PIXELS = "64px";
+export const EIGHTY_EIGHT_PIXELS = "88px";
+export const ONE_HUNDRED_PIXELS = "100px";
