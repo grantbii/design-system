@@ -20,31 +20,31 @@ import { Color, Spacing } from "../../index";
 </Table>
 
 export const spacingScale = [
-  Spacing.FOUR_PIXELS,
-  Spacing.EIGHT_PIXELS,
-  Spacing.TWELVE_PIXELS,
-  Spacing.SIXTEEN_PIXELS,
-  Spacing.TWENTY_PIXELS,
-  Spacing.TWENTY_FOUR_PIXELS,
-  Spacing.THIRTY_TWO_PIXELS,
-  Spacing.FORTY_PIXELS,
-  Spacing.FORTY_EIGHT_PIXELS,
-  Spacing.SIXTY_FOUR_PIXELS,
-  Spacing.EIGHTY_EIGHT_PIXELS,
-  Spacing.ONE_HUNDRED_PIXELS,
+  Spacing.px4,
+  Spacing.px8,
+  Spacing.px12,
+  Spacing.px16,
+  Spacing.px20,
+  Spacing.px24,
+  Spacing.px32,
+  Spacing.px40,
+  Spacing.px48,
+  Spacing.px64,
+  Spacing.px88,
+  Spacing.px100,
 ];
 
 export const Table = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${Spacing.TWELVE_PIXELS};
+  gap: ${Spacing.px12};
 `;
 
 export const Row = styled.div`
   display: grid;
   grid-template-columns: 64px minmax(0, 1fr);
   align-items: center;
-  column-gap: ${Spacing.TWENTY_FOUR_PIXELS};
+  column-gap: ${Spacing.px24};
 `;
 
 export const Label = styled.p`
