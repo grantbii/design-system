@@ -1,7 +1,7 @@
 import type { KeyboardEvent } from "react";
 import styled, { css } from "styled-components";
 import { HelperFontSize } from "../../../core/integrations";
-import { Colors, Icons, Responsive } from "../../atoms";
+import { Color, Icons, Responsive } from "../../atoms";
 import { useGrantMatchContext } from "./context";
 
 type SearchBarProps = {
@@ -42,8 +42,8 @@ const BaseSearchBar = styled.div`
 
   width: 100%;
 
-  color: ${Colors.typography.blackHigh};
-  background-color: ${Colors.base.white};
+  color: ${Color.typography.blackHigh};
+  background-color: ${Color.neutral.white};
 
   @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
     gap: 8px;
@@ -68,12 +68,12 @@ const TextSearchArea = styled.div<{ $showBorder: boolean }>`
 
   width: 100%;
 
-  background-color: ${Colors.neutral.grey4};
+  background-color: ${Color.neutral.grey4};
   border-radius: 8px;
 
   border: 1px solid
     ${({ $showBorder }) =>
-      $showBorder ? Colors.main.grantbiiOrange : Colors.neutral.grey4};
+      $showBorder ? Color.brand.grantbiiYellow : Color.neutral.grey4};
 `;
 
 const QueryTextInput = () => {
@@ -103,7 +103,7 @@ const BaseQueryTextInput = styled.input`
   outline: none;
   border: none;
 
-  background-color: ${Colors.neutral.grey4};
+  background-color: ${Color.neutral.grey4};
   text-overflow: ellipsis;
 `;
 
@@ -130,7 +130,7 @@ const ResetTextButton = () => {
 
   return (
     <BaseResetTextButton type="button" onClick={onClick}>
-      <Icons.XIcon size={20} color={Colors.neutral.grey1} />
+      <Icons.XIcon size={20} color={Color.neutral.grey1} />
     </BaseResetTextButton>
   );
 };
@@ -138,15 +138,15 @@ const ResetTextButton = () => {
 const BaseResetTextButton = styled.button`
   ${IconOnlyButton}
 
-  background-color: ${Colors.neutral.grey4};
-  border: 1px solid ${Colors.neutral.grey4};
+  background-color: ${Color.neutral.grey4};
+  border: 1px solid ${Color.neutral.grey4};
 `;
 
 const ResetTextButtonPlaceholder = styled.div`
   width: 40px;
   height: 40px;
 
-  background-color: ${Colors.neutral.grey4};
+  background-color: ${Color.neutral.grey4};
   border-radius: 8px;
 `;
 
@@ -167,7 +167,7 @@ const TextSearchButton = ({ textSearchCallback }: TextSearchButtonProps) => {
 
   return (
     <BaseSearchButton type="button" onClick={onClickSearch}>
-      <Icons.MagnifyingGlassIcon size={20} color={Colors.base.white} />
+      <Icons.MagnifyingGlassIcon size={20} color={Color.neutral.white} />
     </BaseSearchButton>
   );
 };
@@ -175,8 +175,8 @@ const TextSearchButton = ({ textSearchCallback }: TextSearchButtonProps) => {
 const BaseSearchButton = styled.button`
   ${IconOnlyButton}
 
-  background-color: ${Colors.main.grantbiiBlue};
-  border: 1px solid ${Colors.main.grantbiiBlue};
+  background-color: ${Color.brand.grantbiiBlue};
+  border: 1px solid ${Color.brand.grantbiiBlue};
 `;
 
 type OpenModalButtonProps = {
@@ -210,11 +210,11 @@ const BaseOpenModalButton = styled.button`
 
   height: 38px;
 
-  border: 1px solid ${Colors.neutral.grey3};
+  border: 1px solid ${Color.neutral.grey3};
   border-radius: 8px;
 
-  background-color: ${Colors.neutral.grey3};
-  color: ${Colors.typography.blackHigh};
+  background-color: ${Color.neutral.grey3};
+  color: ${Color.typography.blackHigh};
 
   ${HelperFontSize}
 

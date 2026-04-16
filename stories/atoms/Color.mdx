@@ -1,31 +1,52 @@
 import { ColorItem, ColorPalette, Meta } from "@storybook/addon-docs/blocks";
-import { Colors } from "../../index";
+import { Color } from "../../index";
 
 <Meta title="Atoms/Color" />
 
-# Colors
+# Color
+
+<br />
+
+## Brand Colors
 
 <ColorPalette>
   <ColorItem
-    title="Main"
-    subtitle="Represents Grantbii"
+    title="Brand Colors"
     colors={{
-      "Grantbii Blue": Colors.main.grantbiiBlue,
-      "Grantbii Orange": Colors.main.grantbiiOrange,
+      "Grantbii Yellow": Color.brand.grantbiiYellow,
+      "Grantbii Blue": Color.brand.grantbiiBlue,
     }}
   />
+</ColorPalette>
+
+## Neutrals
+
+<ColorPalette>
   <ColorItem
-    title="Base"
-    colors={{ Black: Colors.base.black, White: Colors.base.white }}
-  />
-  <ColorItem
-    title="Neutral"
-    subtitle="Greyscale"
+    title="Neutrals"
     colors={{
-      "Grey 1": Colors.neutral.grey1,
-      "Grey 2": Colors.neutral.grey2,
-      "Grey 3": Colors.neutral.grey3,
-      "Grey 4": Colors.neutral.grey4,
+      Black: Color.neutral.black,
+      "Grey 1": Color.neutral.grey1,
+      "Grey 2": Color.neutral.grey2,
+      "Grey 3": Color.neutral.grey3,
+      "Grey 4": Color.neutral.grey4,
+      White: Color.neutral.white
+    }}
+  />
+</ColorPalette>
+
+## Typography
+
+<ColorPalette>
+  <ColorItem
+    title="Typography"
+    colors={{
+      "Black/High": Color.typography.blackHigh,
+      "Black/Medium": Color.typography.blackMedium,
+      "Black/Low": Color.typography.blackLow,
+      "White/High": Color.typography.whiteHigh,
+      "White/Medium": Color.typography.whiteMedium,
+      "White/Low": Color.typography.whiteLow,
     }}
   />
 </ColorPalette>
@@ -37,64 +58,40 @@ import { Colors } from "../../index";
     title="Red"
     subtitle="Usually indicates dangerous, wrong, or rejected information"
     colors={{
-      "Red 1": Colors.accent.red1,
-      "Red 2": Colors.accent.red2,
-      "Red 3": Colors.accent.red3,
+      "Red 1": Color.accent.red1,
+      "Red 2": Color.accent.red2,
+      "Red 3": Color.accent.red3,
+      "Red 4": Color.accent.red4,
     }}
   />
   <ColorItem
     title="Yellow"
     subtitle="Usually indicates warning, progressing, etc"
     colors={{
-      "Yellow 1": Colors.accent.yellow1,
-      "Yellow 2": Colors.accent.yellow2,
-      "Yellow 3": Colors.accent.yellow3,
+      "Yellow 1": Color.accent.yellow1,
+      "Yellow 2": Color.accent.yellow2,
+      "Yellow 3": Color.accent.yellow3,
+      "Yellow 4": Color.accent.yellow4,
     }}
   />
   <ColorItem
     title="Green"
     subtitle="Usually indicates success, correct, passed, etc"
     colors={{
-      "Green 1": Colors.accent.green1,
-      "Green 2": Colors.accent.green2,
-      "Green 3": Colors.accent.green3,
-      "Green 4": Colors.accent.green4,
+      "Green 1": Color.accent.green1,
+      "Green 2": Color.accent.green2,
+      "Green 3": Color.accent.green3,
+      "Green 4": Color.accent.green4,
     }}
   />
   <ColorItem
     title="Blue"
     subtitle="Usually indicates info, no emotion"
     colors={{
-      "Blue 1": Colors.accent.blue1,
-      "Blue 2": Colors.accent.blue2,
-      "Blue 3": Colors.accent.blue3,
+      "Blue 1": Color.accent.blue1,
+      "Blue 2": Color.accent.blue2,
+      "Blue 3": Color.accent.blue3,
+      "Blue 4": Color.accent.blue4,
     }}
-  />
-</ColorPalette>
-
-## Typography
-
-<ColorPalette>
-  <ColorItem
-    title="Typography"
-    subtitle="For text"
-    colors={{
-      "Black/High": Colors.typography.blackHigh,
-      "Black/Medium": Colors.typography.blackMedium,
-      "Black/Low": Colors.typography.blackLow,
-      "White/High": Colors.typography.whiteHigh,
-      "White/Medium": Colors.typography.whiteMedium,
-      "White/Low": Colors.typography.whiteLow,
-    }}
-  />
-</ColorPalette>
-
-## Semantic
-
-<ColorPalette>
-  <ColorItem
-    title="Overlay"
-    subtitle="Usually used for overlay effects on popup or bottom sheet components"
-    colors={{ Overlay: Colors.semantic.overlay }}
   />
 </ColorPalette>

@@ -1,4 +1,6 @@
 import type { DetailedHTMLProps, InputHTMLAttributes, ReactNode } from "react";
+import styled from "styled-components";
+import { Color } from "../atoms";
 import { LabelledInput } from "../shared";
 
 type CheckboxProps = {
@@ -15,12 +17,16 @@ const Checkbox = ({
 }: CheckboxProps) => (
   <LabelledInput>
     {label && labelBefore ? <CheckboxLabel id={id} label={label} /> : <></>}
-    <input {...checkboxProps} id={`${id}-checkbox`} type="checkbox" />
+    <BaseCheckbox {...checkboxProps} id={`${id}-checkbox`} type="checkbox" />
     {label && !labelBefore ? <CheckboxLabel id={id} label={label} /> : <></>}
   </LabelledInput>
 );
 
 export default Checkbox;
+
+const BaseCheckbox = styled.input`
+  accent-color: ${Color.brand.grantbiiBlue};
+`;
 
 type CheckboxLabelProps = {
   id: string;

@@ -1,7 +1,7 @@
 import { MoonLoader, PacmanLoader } from "react-spinners";
 import type { LoaderSizeMarginProps } from "react-spinners/helpers/props";
 import styled from "styled-components";
-import { Colors } from "../atoms";
+import { Color } from "../atoms";
 import { HelperFontSize } from "../integrations";
 
 type PageLoaderProps = {
@@ -17,7 +17,7 @@ const PageLoader = ({
   loadingText,
   tip,
   pacman = false,
-  color = Colors.accent.blue1,
+  color = Color.accent.blue1,
   size,
   ...restOfProps
 }: PageLoaderProps) => (
@@ -64,7 +64,7 @@ const LoadingText = styled.p`
 `;
 
 const Tip = styled.p`
-  color: ${Colors.typography.blackMedium};
+  color: ${Color.typography.blackMedium};
 
   ${HelperFontSize}
 `;

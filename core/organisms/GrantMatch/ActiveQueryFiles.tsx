@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Colors, Icons } from "../../atoms";
+import { Color, Icons } from "../../atoms";
 import { Badge, Button } from "../../molecules";
 import { FILE_TYPE_ICON_MAP } from "../../shared";
 import { useGrantMatchContext } from "./context";
@@ -72,7 +72,7 @@ const ResetFilesButton = () => {
     <Button
       label="Reset"
       onClick={() => updateActiveQuery({ files: [], text: activeQuery.text })}
-      color={Colors.typography.blackMedium}
+      color={Color.typography.blackMedium}
       underline
     />
   );

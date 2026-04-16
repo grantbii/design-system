@@ -1,6 +1,6 @@
 import type { DetailedHTMLProps, SelectHTMLAttributes } from "react";
 import styled from "styled-components";
-import { Colors } from "../atoms";
+import { Color } from "../atoms";
 import { InputValidation, type InputValidationProps } from "../shared";
 import { type Option } from "../types";
 
@@ -30,7 +30,7 @@ export default Dropdown;
 
 const Select = styled.select<InputValidationProps>`
   padding: 12px 16px;
-  background-color: ${Colors.base.white};
+  background-color: ${Color.neutral.white};
   border-radius: 8px;
 
   ${InputValidation}

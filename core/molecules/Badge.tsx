@@ -1,6 +1,6 @@
 import type { ComponentType, MouseEventHandler, ReactNode } from "react";
 import styled from "styled-components";
-import { Colors, Icons, Responsive } from "../atoms";
+import { Color, Icons, Responsive } from "../atoms";
 import { HelperFontSize } from "../integrations";
 
 export type BadgeProps = {
@@ -63,8 +63,8 @@ const BaseBadge = styled.div<{
   padding: 5px 15px;
   border-radius: 120px;
 
-  color: ${({ $color = Colors.typography.blackHigh }) => $color};
-  background-color: ${({ $backgroundColor = Colors.neutral.grey3 }) =>
+  color: ${({ $color = Color.typography.blackHigh }) => $color};
+  background-color: ${({ $backgroundColor = Color.neutral.grey3 }) =>
     $backgroundColor};
 
   @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
