@@ -1,0 +1,58 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import styled from "styled-components";
+import { Colors, Spacing } from "../../index";
+
+<Meta title="Atoms/Spacing" />
+
+# Spacing
+
+<Table>
+  <Row>
+    <b>value</b>
+    <b>visual</b>
+  </Row>
+  {spacingScale.map((spacingValue) => (
+    <Row key={spacingValue}>
+      <Label>{spacingValue}</Label>
+      <Bar $width={spacingValue} />
+    </Row>
+  ))}
+</Table>
+
+export const spacingScale = [
+  Spacing.FOUR_PIXELS,
+  Spacing.EIGHT_PIXELS,
+  Spacing.TWELVE_PIXELS,
+  Spacing.SIXTEEN_PIXELS,
+  Spacing.TWENTY_PIXELS,
+  Spacing.TWENTY_FOUR_PIXELS,
+  Spacing.THIRTY_TWO_PIXELS,
+  Spacing.FORTY_PIXELS,
+  Spacing.FORTY_EIGHT_PIXELS,
+  Spacing.SIXTY_FOUR_PIXELS,
+  Spacing.EIGHTY_EIGHT_PIXELS,
+  Spacing.ONE_HUNDRED_PIXELS,
+];
+
+export const Table = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${Spacing.TWELVE_PIXELS};
+`;
+
+export const Row = styled.div`
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  align-items: center;
+  column-gap: ${Spacing.TWENTY_FOUR_PIXELS};
+`;
+
+export const Label = styled.p`
+  margin: 0px;
+`;
+
+export const Bar = styled.div`
+  width: ${(props) => props.$width};
+  height: 32px;
+  background: ${Colors.main.grantbiiOrange};
+`;

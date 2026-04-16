@@ -1,6 +1,8 @@
 import styled, { css } from "styled-components";
 import { Colors, Icons } from "./atoms";
 
+// TODO: refactor away
+
 export const BaseButton = styled.div<{
   $underline?: boolean;
   $backgroundColor?: string;
