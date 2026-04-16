@@ -7,7 +7,7 @@ import {
 } from "react";
 import { createPortal } from "react-dom";
 import styled from "styled-components";
-import { Colors, Overlay, Responsive } from "../atoms";
+import { Color, Overlay, Responsive } from "../atoms";
 import { Button } from "../molecules";
 
 type ModalProps = {
@@ -88,7 +88,7 @@ const ModalWindow = styled.div<{ $width?: string; $height?: string }>`
   display: flex;
   flex-direction: column;
 
-  background-color: ${Colors.base.white};
+  background-color: ${Color.neutral.white};
 
   min-height: 100px;
   max-height: 100vh;
@@ -123,7 +123,7 @@ const ModalHeader = styled.div`
   padding: 12px 20px;
   margin-bottom: 12px;
 
-  border-bottom: 1px solid ${Colors.neutral.grey3};
+  border-bottom: 1px solid ${Color.neutral.grey3};
 `;
 
 const ModalBody = styled.div`
@@ -160,7 +160,7 @@ const CloseButton = ({ onClick, closeText = "Close" }: CloseButtonProps) => (
   <Button
     label={closeText}
     onClick={onClick}
-    backgroundColor={Colors.neutral.grey3}
-    color={Colors.typography.blackHigh}
+    backgroundColor={Color.neutral.grey3}
+    color={Color.typography.blackHigh}
   />
 );

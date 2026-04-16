@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Colors } from "../atoms";
+import { Color } from "../atoms";
 
 const Overlay = styled.div<{ $centerContent?: boolean }>`
   display: flex;
@@ -18,7 +18,7 @@ const Overlay = styled.div<{ $centerContent?: boolean }>`
   width: 100vw;
   height: 100vh;
 
-  background-color: ${Colors.semantic.overlay};
+  background-color: "#13131366";
 `;
 
 export default Overlay;

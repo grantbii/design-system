@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styled from "styled-components";
 import grantMatchLogo from "../../assets/logos/grant_match_logo.webp";
-import { Colors } from "../../atoms";
+import { Color } from "../../atoms";
 import { Button, Textarea } from "../../molecules";
 import FileDrop, { useFileDrop } from "../../organisms/FileDrop";
 import Modal from "../../organisms/Modal";
@@ -164,7 +164,7 @@ const FindGrantsButton = ({
     <Button
       label="Find My Grants"
       onClick={onClick}
-      backgroundColor={hasQuery ? Colors.accent.yellow1 : Colors.neutral.grey3}
+      backgroundColor={hasQuery ? Color.accent.yellow1 : Color.neutral.grey3}
       disabled={!hasQuery}
     />
   );

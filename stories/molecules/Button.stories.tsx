@@ -1,4 +1,4 @@
-import { Button, Colors, Icons } from "@/.";
+import { Button, Color, Icons } from "@/.";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import styled from "styled-components";
 
@@ -47,7 +47,7 @@ export const Underline: Story = {
   args: {
     ...baseArgs,
     underline: true,
-    color: Colors.typography.blackMedium,
+    color: Color.typography.blackMedium,
   },
 };
 
@@ -61,9 +61,9 @@ const Content = styled.div`
 
 export const GrantObjectivesFilter: Story = {
   args: {
-    borderColor: Colors.neutral.grey3,
-    backgroundColor: Colors.base.white,
-    color: Colors.typography.blackMedium,
+    borderColor: Color.neutral.grey3,
+    backgroundColor: Color.neutral.white,
+    color: Color.typography.blackMedium,
     onClick: () => alert("You have clicked on the button."),
     label: (
       <Content>

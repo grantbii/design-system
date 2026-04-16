@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import styled from "styled-components";
 import Badges from "../archive/Badges";
-import { Colors, Icons } from "../atoms";
+import { Color, Icons } from "../atoms";
 import { BodyFontSize, HelperFontSize } from "../integrations";
 import { FILE_TYPE_ICON_MAP } from "../shared";
 
@@ -75,8 +75,7 @@ const Dropzone = styled.div<{
   padding: 40px;
   border-radius: 8px;
   border: 1px solid
-    ${({ $hasError }) =>
-      $hasError ? Colors.accent.red1 : Colors.neutral.grey3};
+    ${({ $hasError }) => ($hasError ? Color.accent.red1 : Color.neutral.grey3)};
 
   &:hover {
     cursor: ${({ $reachedMaxUploads }) =>
@@ -91,11 +90,7 @@ type DropzoneContentProps = {
 
 const DropzoneContent = ({ maxFiles, maxSizeMB }: DropzoneContentProps) => (
   <BaseDropzoneContent>
-    <Icons.FileDashedIcon
-      weight="thin"
-      size={48}
-      color={Colors.neutral.grey1}
-    />
+    <Icons.FileDashedIcon weight="thin" size={48} color={Color.neutral.grey1} />
     <AllDropzoneText>
       <DropzoneText>
         {`Drop up to ${maxFiles} files here (up to ${maxSizeMB}MB each)`}
@@ -137,13 +132,13 @@ const DropzoneSubtitle = styled.p<{ $isHighlighted?: boolean }>`
   font-weight: 400;
 
   color: ${({ $isHighlighted = false }) =>
-    $isHighlighted ? Colors.accent.yellow1 : Colors.typography.blackLow};
+    $isHighlighted ? Color.accent.yellow1 : Color.typography.blackLow};
 
   ${HelperFontSize}
 `;
 
 const ErrorMessage = styled.p`
-  color: ${Colors.accent.red1};
+  color: ${Color.accent.red1};
 `;
 
 type UploadedFilesProps = {

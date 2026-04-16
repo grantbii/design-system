@@ -2,7 +2,7 @@ import Image from "next/image";
 import type { MouseEventHandler, ReactNode } from "react";
 import styled from "styled-components";
 import errorLogo from "../assets/logos/error_logo.webp";
-import { Colors, Responsive } from "../atoms";
+import { Color, Responsive } from "../atoms";
 import { BodyFontSize, SubheaderFontSize } from "../integrations";
 import { Button } from "../molecules";
 
@@ -29,9 +29,9 @@ const ErrorFallback = ({
       <Button
         label="Try Again"
         onClick={onClickReload}
-        backgroundColor={Colors.base.white}
-        borderColor={Colors.neutral.grey3}
-        color={Colors.typography.blackHigh}
+        backgroundColor={Color.neutral.white}
+        borderColor={Color.neutral.grey3}
+        color={Color.typography.blackHigh}
       />
     ) : (
       <></>
@@ -53,7 +53,7 @@ const BaseErrorFallback = styled.div`
   height: 100%;
   padding: 24px;
 
-  background-color: ${Colors.base.white};
+  background-color: ${Color.neutral.white};
 
   @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
     gap: 16px;
@@ -65,7 +65,7 @@ const BaseErrorFallback = styled.div`
   @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
     gap: 24px;
 
-    border: 1px solid ${Colors.neutral.grey3};
+    border: 1px solid ${Color.neutral.grey3};
     border-radius: 12px;
   }
 `;

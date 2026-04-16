@@ -1,6 +1,6 @@
 import type { DetailedHTMLProps, InputHTMLAttributes } from "react";
 import styled from "styled-components";
-import { Colors } from "../atoms";
+import { Color } from "../atoms";
 import { InputValidation, type InputValidationProps } from "../shared";
 import { type Option } from "../types";
 
@@ -26,7 +26,7 @@ export default Input;
 
 const BaseInput = styled.input<InputValidationProps>`
   padding: 12px 16px;
-  background-color: ${Colors.base.white};
+  background-color: ${Color.neutral.white};
   border-radius: 8px;
 
   ${InputValidation}

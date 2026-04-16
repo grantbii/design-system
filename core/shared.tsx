@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { Colors, Icons } from "./atoms";
+import { Color, Icons } from "./atoms";
 
 // TODO: refactor away
 
@@ -26,10 +26,10 @@ export const BaseButton = styled.div<{
   text-decoration: ${({ $underline = false }) =>
     $underline ? "underline" : "none"};
 
-  color: ${({ $color = Colors.typography.whiteHigh }) => $color};
+  color: ${({ $color = Color.typography.whiteHigh }) => $color};
   background-color: ${({
     $underline = false,
-    $backgroundColor = Colors.main.grantbiiBlue,
+    $backgroundColor = Color.brand.grantbiiBlue,
   }) => ($underline ? "transparent" : $backgroundColor)};
 
   border: 1px solid ${({ $borderColor = "transparent" }) => $borderColor};
@@ -48,48 +48,48 @@ export type InputValidationProps = {
 
 export const InputValidation = css<InputValidationProps>`
   &:disabled {
-    background-color: ${Colors.neutral.grey4};
-    border: 1px solid ${Colors.neutral.grey3};
+    background-color: ${Color.neutral.grey4};
+    border: 1px solid ${Color.neutral.grey3};
     outline: none;
   }
 
   &:valid {
-    background-color: ${Colors.base.white};
-    border: 1px solid ${Colors.neutral.grey3};
+    background-color: ${Color.neutral.white};
+    border: 1px solid ${Color.neutral.grey3};
     outline: none;
   }
 
   &:valid&:focus {
-    background-color: ${Colors.base.white};
-    border: 1px solid ${Colors.accent.blue1};
-    outline: 1px solid ${Colors.accent.blue1};
+    background-color: ${Color.neutral.white};
+    border: 1px solid ${Color.accent.blue1};
+    outline: 1px solid ${Color.accent.blue1};
   }
 
   &:invalid {
-    background-color: ${Colors.base.white};
-    border: 1px solid ${Colors.accent.red1};
+    background-color: ${Color.neutral.white};
+    border: 1px solid ${Color.accent.red1};
     outline: none;
   }
 
   &:invalid&:focus {
-    background-color: ${Colors.base.white};
-    border: 1px solid ${Colors.accent.red1};
-    outline: 1px solid ${Colors.accent.red1};
+    background-color: ${Color.neutral.white};
+    border: 1px solid ${Color.accent.red1};
+    outline: 1px solid ${Color.accent.red1};
   }
 
   ${({ $hasError = false }) =>
     $hasError
       ? css`
           &:valid {
-            background-color: ${Colors.base.white};
-            border: 1px solid ${Colors.accent.red1};
+            background-color: ${Color.neutral.white};
+            border: 1px solid ${Color.accent.red1};
             outline: none;
           }
 
           &:valid&:focus {
-            background-color: ${Colors.base.white};
-            border: 1px solid ${Colors.accent.red1};
-            outline: 1px solid ${Colors.accent.red1};
+            background-color: ${Color.neutral.white};
+            border: 1px solid ${Color.accent.red1};
+            outline: 1px solid ${Color.accent.red1};
           }
         `
       : css``}
