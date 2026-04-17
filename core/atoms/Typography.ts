@@ -1,5 +1,6 @@
 import type { ScreenSize } from "../types";
 
+type FontWeightLabel = "regular" | "medium" | "bold";
 type FontWeight = 400 | 500 | 700;
 type ResponsiveValue = Record<ScreenSize, string>;
 
@@ -19,7 +20,7 @@ export const family = {
   satoshi: "Satoshi",
 };
 
-export const weight: { [label: string]: FontWeight } = {
+export const weight: { [label in FontWeightLabel]: FontWeight } = {
   regular: 400,
   medium: 500,
   bold: 700,
