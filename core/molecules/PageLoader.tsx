@@ -1,8 +1,8 @@
 import { MoonLoader, PacmanLoader } from "react-spinners";
 import type { LoaderSizeMarginProps } from "react-spinners/helpers/props";
 import styled from "styled-components";
-import { Color } from "../atoms";
-import { HelperFontSize } from "../integrations";
+import { Color, Spacing, Typography } from "../atoms";
+import { applyTypography } from "../integrations";
 
 type PageLoaderProps = {
   pacman?: boolean;
@@ -57,6 +57,10 @@ const Text = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 8px;
+
+  margin: 0px ${Spacing.px32};
+
+  text-align: center;
 `;
 
 const LoadingText = styled.p`
@@ -66,5 +70,5 @@ const LoadingText = styled.p`
 const Tip = styled.p`
   color: ${Color.typography.blackMedium};
 
-  ${HelperFontSize}
+  ${applyTypography(Typography.bodySecondaryRegular)}
 `;

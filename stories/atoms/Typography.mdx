@@ -1,39 +1,213 @@
 import { Meta } from "@storybook/addon-docs/blocks";
-import { Typography } from "../../index";
+import styled from "styled-components";
+import { applyTypography, Color, Spacing, Typography } from "../../index";
 
 <Meta title="Atoms/Typography" />
 
 # Typography
 
-## Font
+<Note>
+  Mobile font sizes are 2px smaller than desktop for every text style except
+  caption.
+</Note>
 
-Satoshi
+## Font Family
 
-## Font Sizes
+<FontFamilySection>
+  <FontTile>
+    <FontPreview>Aa</FontPreview>
+    <FontLabel>Satoshi</FontLabel>
+  </FontTile>
 
-### Desktop
+  <FontSampleCard>
+    <FontSampleLine style={{ fontFamily: Typography.family.satoshi }}>
+      The quick brown fox jumps over the lazy dog.
+    </FontSampleLine>
+    <FontSampleLine style={{ fontFamily: Typography.family.satoshi }}>
+      1234567890
+    </FontSampleLine>
+  </FontSampleCard>
+</FontFamilySection>
 
-<span style={{ fontSize: Typography.TITLE_FONT_SIZES.large }}>
-  title (h1) - {Typography.TITLE_FONT_SIZES.large}
-</span>
+## Type scale
 
-<span style={{ fontSize: Typography.HEADER_FONT_SIZES.large }}>
-  header (h2) - {Typography.HEADER_FONT_SIZES.large}
-</span>
+{TYPE_SCALE.map(({ section, usage, rows }) => (
 
-<span style={{ fontSize: Typography.SUBHEADER_FONT_SIZES.large }}>
-  subheader (h3) - {Typography.SUBHEADER_FONT_SIZES.large} (jump in size to make
-  headers visual distinct from body)
-</span>
+  <Section key={section}>
+    <SectionTitle>{section}</SectionTitle>
+    <SectionUsage>{usage}</SectionUsage>
 
-<span style={{ fontSize: Typography.BODY_FONT_SIZES.large }}>
-  body text (p, div) - {Typography.BODY_FONT_SIZES.large}
-</span>
+    <HeaderRow>
+      <HeaderCell>Style</HeaderCell>
+      <HeaderCell>Font Weight</HeaderCell>
+      <HeaderCell>Font size/line height</HeaderCell>
+    </HeaderRow>
 
-<span style={{ fontSize: Typography.HELPER_FONT_SIZES.large}}>
-  helper text (p, div) - {Typography.HELPER_FONT_SIZES.large}
-</span>
+    {rows.map(([label, weight, size, style]) => (
+      <TypeRow
+        key={`${section}-${label}-${weight}`}
+        label={label}
+        weight={weight}
+        size={size}
+        style={style}
+      />
+    ))}
 
-### Mobile
+  </Section>
+))}
 
-Same as desktop but everything is 2px smaller
+export const TYPE_SCALE = [
+  {
+    section: "Headers",
+    usage:
+      "Display headline, section title, card component title, modal title.",
+    rows: [
+      ["Heading 1", "Bold", "32/43", Typography.heading1],
+      ["Heading 2", "Bold", "28/38", Typography.heading2],
+      ["Heading 3", "Bold", "24/32", Typography.heading3],
+      ["Subheading 1", "Bold", "20/27", Typography.subheading1Bold],
+      ["Subheading 1", "Medium", "20/27", Typography.subheading1Medium],
+      ["Subheading 1", "Regular", "20/27", Typography.subheading1Regular],
+      ["Subheading 2", "Bold", "18/24", Typography.subheading2Bold],
+      ["Subheading 2", "Medium", "18/24", Typography.subheading2Medium],
+      ["Subheading 2", "Regular", "18/24", Typography.subheading2Regular],
+    ],
+  },
+  {
+    section: "Body",
+    usage:
+      "Primary fonts for default reading, Secondary fonts for secondary reading.",
+    rows: [
+      ["Primary", "Bold", "16/22", Typography.bodyPrimaryBold],
+      ["Primary", "Medium", "16/22", Typography.bodyPrimaryMedium],
+      ["Primary", "Regular", "16/22", Typography.bodyPrimaryRegular],
+      ["Secondary", "Bold", "14/19", Typography.bodySecondaryBold],
+      ["Secondary", "Medium", "14/19", Typography.bodySecondaryMedium],
+      ["Secondary", "Regular", "14/19", Typography.bodySecondaryRegular],
+    ],
+  },
+  {
+    section: "Caption",
+    usage: "Chips, badges, status tags.",
+    rows: [
+      ["Caption", "Bold", "12/16", Typography.captionBold],
+      ["Caption", "Medium", "12/16", Typography.captionMedium],
+      ["Caption", "Regular", "12/16", Typography.captionRegular],
+    ],
+  },
+];
+export const Note = styled.p`
+  margin: 0 0 32px 0;
+  color: ${Color.typography.blackMedium};
+`;
+
+export const FontFamilySection = styled.div`
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: ${Spacing.px24};
+  margin-bottom: 56px;
+`;
+
+export const FontTile = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${Spacing.px12};
+`;
+
+export const FontPreview = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+  border-radius: 12px;
+  background: ${Color.neutral.grey4};
+  font-family: ${Typography.family.satoshi};
+  font-size: 48px;
+  color: ${Color.typography.blackHigh};
+`;
+
+export const FontLabel = styled.div`
+  color: ${Color.typography.blackMedium};
+`;
+
+export const FontSampleCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: ${Spacing.px16};
+  min-height: 120px;
+  padding: ${Spacing.px32};
+  border-radius: 12px;
+  background: ${Color.neutral.grey4};
+`;
+
+export const FontSampleLine = styled.div`
+  font-size: 24px;
+  line-height: 32px;
+  color: ${Color.typography.blackHigh};
+`;
+
+export const Section = styled.section`
+  margin-bottom: 56px;
+`;
+
+export const SectionTitle = styled.h2`
+  margin: 0 0 4px 0;
+  color: ${Color.typography.blackHigh};
+`;
+
+export const SectionUsage = styled.p`
+  margin: 0 0 20px 0;
+  color: ${Color.typography.blackMedium};
+`;
+
+export const HeaderRow = styled.div`
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: ${Spacing.px24};
+  padding: 0 ${Spacing.px24};
+  margin-bottom: ${Spacing.px8};
+`;
+
+export const HeaderCell = styled.div`
+  color: ${Color.typography.blackMedium};
+`;
+
+export const Row = styled.div`
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: ${Spacing.px24};
+  align-items: center;
+  padding: ${Spacing.px20} ${Spacing.px24};
+  margin-bottom: ${Spacing.px12};
+  border-radius: 12px;
+  background: ${Color.neutral.grey4};
+`;
+
+export const StyleCell = styled.div``;
+
+export const WeightCell = styled.div`
+  color: ${Color.typography.blackHigh};
+`;
+
+export const SizeCell = styled.div`
+  color: ${Color.typography.blackHigh};
+`;
+
+export const PreviewText = styled.div`
+  ${({ $style }) => applyTypography($style)};
+  color: ${Color.typography.blackHigh};
+`;
+
+export const TypeRow = ({ label, weight, size, style }) => (
+  <Row>
+    <StyleCell>
+      <PreviewText $style={style}>{label}</PreviewText>
+    </StyleCell>
+
+    <WeightCell>{weight}</WeightCell>
+    <SizeCell>{size}</SizeCell>
+
+  </Row>
+);
+

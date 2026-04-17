@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import styled from "styled-components";
 import Badges from "../archive/Badges";
-import { Color, SystemIcon } from "../atoms";
-import { BodyFontSize, HelperFontSize } from "../integrations";
+import { Color, SystemIcon, Typography } from "../atoms";
+import { applyTypography } from "../integrations";
 import { FILE_TYPE_ICON_MAP } from "../shared";
 
 const DEFAULT_MAX_FILE_SIZE_MB = 5;
@@ -125,20 +125,16 @@ const AllDropzoneText = styled.div`
 const DropzoneText = styled.p`
   text-align: center;
 
-  font-weight: 500;
-
-  ${BodyFontSize}
+  ${applyTypography(Typography.bodyPrimaryMedium)}
 `;
 
 const DropzoneSubtitle = styled.p<{ $isHighlighted?: boolean }>`
   text-align: center;
 
-  font-weight: 400;
-
   color: ${({ $isHighlighted = false }) =>
     $isHighlighted ? Color.accent.yellow1 : Color.typography.blackLow};
 
-  ${HelperFontSize}
+  ${applyTypography(Typography.bodySecondaryRegular)}
 `;
 
 const ErrorMessage = styled.p`

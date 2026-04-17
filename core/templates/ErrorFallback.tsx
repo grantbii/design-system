@@ -2,8 +2,8 @@ import Image from "next/image";
 import type { MouseEventHandler, ReactNode } from "react";
 import styled from "styled-components";
 import errorLogo from "../assets/logos/error_logo.webp";
-import { Color, Responsive } from "../atoms";
-import { BodyFontSize, SubheaderFontSize } from "../integrations";
+import { Color, Responsive, Typography } from "../atoms";
+import { applyTypography } from "../integrations";
 import { Button } from "../molecules";
 
 type ErrorFallbackProps = {
@@ -112,13 +112,9 @@ const BaseErrorText = styled.div`
 `;
 
 const ErrorMessage = styled.p`
-  font-weight: 700;
-
-  ${SubheaderFontSize}
+  ${applyTypography(Typography.heading3)}
 `;
 
 const ErrorDescription = styled.div`
-  font-weight: 400;
-
-  ${BodyFontSize}
+  ${applyTypography(Typography.bodyPrimaryRegular)}
 `;
