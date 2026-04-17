@@ -1,12 +1,12 @@
 import type { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from "react";
 import styled from "styled-components";
-import { Icons } from "../atoms";
+import { SystemIcon } from "../atoms";
 import { BaseButton as ButtonContent } from "../shared";
 
 type ButtonProps = {
   label: ReactNode;
-  LeftIcon?: Icons.Icon;
-  RightIcon?: Icons.Icon;
+  LeftIcon?: SystemIcon.Icon;
+  RightIcon?: SystemIcon.Icon;
   underline?: boolean;
   backgroundColor?: string;
   borderColor?: string;

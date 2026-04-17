@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { Color, Icons } from "./atoms";
+import { Color, SystemIcon } from "./atoms";
 
 // TODO: refactor away
 
@@ -95,8 +95,8 @@ export const InputValidation = css<InputValidationProps>`
       : css``}
 `;
 
-export const FILE_TYPE_ICON_MAP: { [mimeType: string]: Icons.Icon } = {
-  "application/pdf": Icons.FilePdfIcon,
-  "image/png": Icons.FilePngIcon,
-  "image/jpeg": Icons.FileJpgIcon,
+export const FILE_TYPE_ICON_MAP: { [mimeType: string]: SystemIcon.Icon } = {
+  "application/pdf": SystemIcon.FilePdfIcon,
+  "image/png": SystemIcon.FilePngIcon,
+  "image/jpeg": SystemIcon.FileJpgIcon,
 };

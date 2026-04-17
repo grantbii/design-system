@@ -1,7 +1,7 @@
 import type { KeyboardEvent } from "react";
 import styled, { css } from "styled-components";
 import { HelperFontSize } from "../../../core/integrations";
-import { Color, Icons, Responsive } from "../../atoms";
+import { Color, SystemIcon, Responsive } from "../../atoms";
 import { useGrantMatchContext } from "./context";
 
 type SearchBarProps = {
@@ -130,7 +130,7 @@ const ResetTextButton = () => {
 
   return (
     <BaseResetTextButton type="button" onClick={onClick}>
-      <Icons.XIcon size={20} color={Color.neutral.grey1} />
+      <SystemIcon.XIcon size={20} color={Color.neutral.grey1} />
     </BaseResetTextButton>
   );
 };
@@ -167,7 +167,7 @@ const TextSearchButton = ({ textSearchCallback }: TextSearchButtonProps) => {
 
   return (
     <BaseSearchButton type="button" onClick={onClickSearch}>
-      <Icons.MagnifyingGlassIcon size={20} color={Color.neutral.white} />
+      <SystemIcon.MagnifyingGlassIcon size={20} color={Color.neutral.white} />
     </BaseSearchButton>
   );
 };
@@ -196,7 +196,7 @@ const OpenModalButton = ({ openModalCallback }: OpenModalButtonProps) => {
 
   return (
     <BaseOpenModalButton onClick={onClickOpen}>
-      <Icons.FileArrowUpIcon size={20} />
+      <SystemIcon.FileArrowUpIcon size={20} />
       <OpenModalButtonText>File Drop</OpenModalButtonText>
     </BaseOpenModalButton>
   );

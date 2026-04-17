@@ -1,6 +1,6 @@
 import { Location } from "@grantbii/ui-core/location/enums";
 import type { JSX } from "react";
-import { Flags, Icons } from "../atoms";
+import { Flags, SystemIcon } from "../atoms";
 
 type LocationIconProps = {
   location: Location;
@@ -9,7 +9,7 @@ type LocationIconProps = {
 
 const LocationIcon = ({ location, width }: LocationIconProps): JSX.Element => {
   if (location === Location.OTHERS || location === Location.UNKNOWN) {
-    return <Icons.GlobeIcon size={width} />;
+    return <SystemIcon.GlobeIcon size={width} />;
   } else {
     const Flag = LOCATION_FLAG_MAP[location] ?? Flags.EU;
     return <Flag width={width} />;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Color, Icons } from "../../atoms";
+import { Color, SystemIcon } from "../../atoms";
 import { Badge, Button } from "../../molecules";
 import { FILE_TYPE_ICON_MAP } from "../../shared";
 import { useGrantMatchContext } from "./context";
@@ -37,7 +37,7 @@ const FileBadges = () => {
         <Badge
           key={file.name}
           label={file.name.substring(0, file.name.lastIndexOf("."))}
-          Icon={FILE_TYPE_ICON_MAP[file.type] ?? Icons.FileIcon}
+          Icon={FILE_TYPE_ICON_MAP[file.type] ?? SystemIcon.FileIcon}
           onClickClose={() => removeActiveQueryFile(file.name)}
           labelWidthPixels={160}
         />

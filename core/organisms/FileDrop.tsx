@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import styled from "styled-components";
 import Badges from "../archive/Badges";
-import { Color, Icons } from "../atoms";
+import { Color, SystemIcon } from "../atoms";
 import { BodyFontSize, HelperFontSize } from "../integrations";
 import { FILE_TYPE_ICON_MAP } from "../shared";
 
@@ -90,7 +90,11 @@ type DropzoneContentProps = {
 
 const DropzoneContent = ({ maxFiles, maxSizeMB }: DropzoneContentProps) => (
   <BaseDropzoneContent>
-    <Icons.FileDashedIcon weight="thin" size={48} color={Color.neutral.grey1} />
+    <SystemIcon.FileDashedIcon
+      weight="thin"
+      size={48}
+      color={Color.neutral.grey1}
+    />
     <AllDropzoneText>
       <DropzoneText>
         {`Drop up to ${maxFiles} files here (up to ${maxSizeMB}MB each)`}
@@ -151,7 +155,7 @@ const UploadedFiles = ({ uploadedFiles, removeFile }: UploadedFilesProps) => {
     ({ name: fileName, type: fileType }) => ({
       label: getFileNameWithoutExtension(fileName),
       onClickClose: () => removeFile(fileName),
-      Icon: FILE_TYPE_ICON_MAP[fileType] ?? Icons.FileIcon,
+      Icon: FILE_TYPE_ICON_MAP[fileType] ?? SystemIcon.FileIcon,
     }),
   );
 
