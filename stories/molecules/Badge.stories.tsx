@@ -1,4 +1,4 @@
-import { Badge, Icons } from "@/.";
+import { Badge, SystemIcon } from "@/.";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
 const meta: Meta<typeof Badge> = {
@@ -23,7 +23,7 @@ export const TextOnly: Story = {
 
 export const Icon: Story = {
   args: {
-    Icon: Icons.SmileyXEyesIcon,
+    Icon: SystemIcon.SmileyXEyesIcon,
     label: defaultText,
   },
 };
@@ -44,7 +44,7 @@ export const LongText: Story = {
 
 export const AlmostEverything: Story = {
   args: {
-    Icon: Icons.SmileyXEyesIcon,
+    Icon: SystemIcon.SmileyXEyesIcon,
     label: longText,
     labelWidthPixels: 160,
     onClickClose,

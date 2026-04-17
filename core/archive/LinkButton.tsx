@@ -6,7 +6,7 @@ import type {
   HTMLAttributeAnchorTarget,
   ReactNode,
 } from "react";
-import { Icons } from "../atoms";
+import { SystemIcon } from "../atoms";
 import { BaseButton } from "../shared";
 
 type LinkButtonProps = {
@@ -14,8 +14,8 @@ type LinkButtonProps = {
   href: string;
   disabled?: boolean;
   target?: HTMLAttributeAnchorTarget;
-  LeftIcon?: ComponentType<Icons.IconProps>;
-  RightIcon?: ComponentType<Icons.IconProps>;
+  LeftIcon?: ComponentType<SystemIcon.IconProps>;
+  RightIcon?: ComponentType<SystemIcon.IconProps>;
   underline?: boolean;
   backgroundColor?: string;
   borderColor?: string;
@@ -66,8 +66,8 @@ export default LinkButton;
 
 type ContentProps = {
   label: ReactNode;
-  LeftIcon?: ComponentType<Icons.IconProps>;
-  RightIcon?: ComponentType<Icons.IconProps>;
+  LeftIcon?: ComponentType<SystemIcon.IconProps>;
+  RightIcon?: ComponentType<SystemIcon.IconProps>;
   underline?: boolean;
   backgroundColor?: string;
   borderColor?: string;

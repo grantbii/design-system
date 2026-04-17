@@ -1,13 +1,13 @@
 import type { ComponentType, MouseEventHandler, ReactNode } from "react";
 import styled from "styled-components";
-import { Color, Icons, Responsive } from "../atoms";
+import { Color, SystemIcon, Responsive } from "../atoms";
 import { HelperFontSize } from "../integrations";
 
 export type BadgeProps = {
   label: ReactNode;
-  Icon?: ComponentType<Icons.IconProps>;
+  Icon?: ComponentType<SystemIcon.IconProps>;
   iconSize?: string | number;
-  iconWeight?: Icons.IconWeight;
+  iconWeight?: SystemIcon.IconWeight;
   onClick?: MouseEventHandler<HTMLDivElement>;
   onClickClose?: MouseEventHandler<HTMLButtonElement>;
   labelWidthPixels?: number;
@@ -115,7 +115,7 @@ type CloseButtonProps = {
 
 const CloseButton = ({ onClick }: CloseButtonProps) => (
   <BaseCloseButton type="button" onClick={onClick}>
-    <Icons.XIcon size={12} />
+    <SystemIcon.XIcon size={12} />
   </BaseCloseButton>
 );
 

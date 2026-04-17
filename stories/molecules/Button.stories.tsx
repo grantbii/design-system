@@ -1,4 +1,4 @@
-import { Button, Color, Icons } from "@/.";
+import { Button, Color, SystemIcon } from "@/.";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import styled from "styled-components";
 
@@ -24,22 +24,22 @@ export const TextOnly: Story = {
 export const LeftIcon: Story = {
   args: {
     ...baseArgs,
-    LeftIcon: Icons.PlusIcon,
+    LeftIcon: SystemIcon.PlusIcon,
   },
 };
 
 export const RightIcon: Story = {
   args: {
     ...baseArgs,
-    RightIcon: Icons.MinusIcon,
+    RightIcon: SystemIcon.MinusIcon,
   },
 };
 
-export const BothIcons: Story = {
+export const BothSystemIcon: Story = {
   args: {
     ...baseArgs,
-    LeftIcon: Icons.SmileyXEyesIcon,
-    RightIcon: Icons.SmileyMeltingIcon,
+    LeftIcon: SystemIcon.SmileyXEyesIcon,
+    RightIcon: SystemIcon.SmileyMeltingIcon,
   },
 };
 
@@ -68,7 +68,7 @@ export const GrantObjectivesFilter: Story = {
     label: (
       <Content>
         <p>Select grant objectives</p>
-        <Icons.CaretRightIcon size={20} />
+        <SystemIcon.CaretRightIcon size={20} />
       </Content>
     ),
   },
