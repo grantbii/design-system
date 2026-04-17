@@ -17,8 +17,8 @@ export const GrantInsights: Story = {
 
 export const GrantbiiDashboard: Story = {
   args: {
-    loadingText: "Loading...",
-    tip: "Pro tip: go grab a cup of coffee while waiting for the page to load",
+    loadingText: "Loading Forever...",
+    tip: "Pro tip: grab a cup of coffee while waiting for it to load. Or watch The Lord of the Rings. Or whatever",
   },
 };
 

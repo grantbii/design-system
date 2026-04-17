@@ -1,7 +1,7 @@
 import type { KeyboardEvent } from "react";
 import styled, { css } from "styled-components";
-import { HelperFontSize } from "../../../core/integrations";
-import { Color, SystemIcon, Responsive } from "../../atoms";
+import { applyTypography } from "../../../core/integrations";
+import { Color, Responsive, SystemIcon, Typography } from "../../atoms";
 import { useGrantMatchContext } from "./context";
 
 type SearchBarProps = {
@@ -216,7 +216,7 @@ const BaseOpenModalButton = styled.button`
   background-color: ${Color.neutral.grey3};
   color: ${Color.typography.blackHigh};
 
-  ${HelperFontSize}
+  ${applyTypography(Typography.bodySecondaryRegular)}
 
   @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
     width: 38px;

@@ -1,7 +1,7 @@
 import type { ComponentType, MouseEventHandler, ReactNode } from "react";
 import styled from "styled-components";
-import { Color, SystemIcon, Responsive } from "../atoms";
-import { HelperFontSize } from "../integrations";
+import { Color, SystemIcon, Responsive, Typography } from "../atoms";
+import { applyTypography } from "../integrations";
 
 export type BadgeProps = {
   label: ReactNode;
@@ -104,9 +104,7 @@ const BadgeLabel = styled.div`
   white-space: nowrap;
   text-overflow: ellipsis;
 
-  font-weight: 500;
-
-  ${HelperFontSize}
+  ${applyTypography(Typography.bodySecondaryMedium)}
 `;
 
 type CloseButtonProps = {

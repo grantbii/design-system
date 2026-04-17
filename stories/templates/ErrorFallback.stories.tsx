@@ -12,7 +12,9 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: {},
+  args: {
+    errorDescription: "It's not you; it's us",
+  },
 };
 
 export const Reload: Story = {
