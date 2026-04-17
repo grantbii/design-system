@@ -96,6 +96,7 @@ export const TYPE_SCALE = [
     ],
   },
 ];
+
 export const Note = styled.p`
   margin: 0 0 32px 0;
   color: ${Color.typography.blackMedium};
@@ -151,7 +152,7 @@ export const Section = styled.section`
   margin-bottom: 56px;
 `;
 
-export const SectionTitle = styled.h2`
+export const SectionTitle = styled.h3`
   margin: 0 0 4px 0;
   color: ${Color.typography.blackHigh};
 `;
@@ -195,8 +196,10 @@ export const SizeCell = styled.div`
 `;
 
 export const PreviewText = styled.div`
-  ${({ $style }) => applyTypography($style)};
-  color: ${Color.typography.blackHigh};
+  && {
+    ${({ $style }) => applyTypography($style)};
+    color: ${Color.typography.blackHigh};
+  }
 `;
 
 export const TypeRow = ({ label, weight, size, style }) => (
@@ -210,4 +213,3 @@ export const TypeRow = ({ label, weight, size, style }) => (
 
   </Row>
 );
-

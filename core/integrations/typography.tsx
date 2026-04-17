@@ -1,17 +1,16 @@
 import { css } from "styled-components";
-import { WIDTH_BREAKPOINTS } from "../atoms/Responsive";
-import type { TextStyle } from "../atoms/Typography";
+import { Responsive, Typography } from "../atoms";
 
-export const applyTypography = (style: TextStyle) => css`
+export const applyTypography = (style: Typography.TextStyle) => css`
   font-family: ${style.fontFamily};
   font-weight: ${style.fontWeight};
 
-  @media (width < ${WIDTH_BREAKPOINTS.laptop}) {
+  @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
     font-size: ${style.fontSize.small};
     line-height: ${style.lineHeight.small};
   }
 
-  @media (width >= ${WIDTH_BREAKPOINTS.laptop}) {
+  @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
     font-size: ${style.fontSize.large};
     line-height: ${style.lineHeight.large};
   }
