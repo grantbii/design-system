@@ -2,7 +2,7 @@ import { Overlay } from "@/.";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
 const meta: Meta<typeof Overlay> = {
-  title: "Atoms/Overlay",
+  title: "Molecules/Overlay",
   component: Overlay,
   tags: ["autodocs"],
 };
