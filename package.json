@@ -2,7 +2,7 @@
   "name": "@grantbii/design-system",
   "author": "Grantbii",
   "license": "UNLICENSED",
-  "version": "1.16.0",
+  "version": "1.16.1",
   "description": "Grantbii's Design System",
   "homepage": "https://design.grantbii.com",
   "repository": {
@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "5.1.2",
-    "@grantbii/ui-core": "1.8.4",
+    "@grantbii/ui-core": "1.8.5",
     "@storybook/addon-a11y": "10.3.5",
     "@storybook/addon-docs": "10.3.5",
     "@storybook/addon-onboarding": "10.3.5",
@@ -59,7 +59,7 @@
     "react-dom": "19.2.5",
     "storybook": "10.3.5",
     "styled-components": "6.4.0",
-    "typescript": "6.0.2",
+    "typescript": "6.0.3",
     "vitest": "4.1.4"
   },
   "lint-staged": {

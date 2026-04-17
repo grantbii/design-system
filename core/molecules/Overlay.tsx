@@ -18,7 +18,7 @@ const Overlay = styled.div<{ $centerContent?: boolean }>`
   width: 100vw;
   height: 100vh;
 
-  background-color: "#13131366";
+  background-color: ${Color.neutral.black}80;
 `;
 
 export default Overlay;
