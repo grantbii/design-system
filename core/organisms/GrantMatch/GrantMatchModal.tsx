@@ -1,7 +1,6 @@
 import Image from "next/image";
 import styled from "styled-components";
 import grantMatchLogo from "../../assets/logos/grant_match_logo.webp";
-import { Color } from "../../atoms";
 import { Button, Textarea } from "../../molecules";
 import FileDrop, { useFileDrop } from "../../organisms/FileDrop";
 import Modal from "../../organisms/Modal";
