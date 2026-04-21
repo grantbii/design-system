@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type {
+  ButtonHTMLAttributes,
   HTMLAttributeAnchorTarget,
   MouseEventHandler,
   ReactNode,
@@ -133,6 +134,7 @@ type CustomButtonProps = {
   Icon?: SystemIcon.Icon;
   iconRight?: boolean;
   onClick?: MouseEventHandler<HTMLElement>;
+  type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
   disabled?: boolean;
   target?: HTMLAttributeAnchorTarget;
   href?: string;
@@ -147,6 +149,7 @@ export const RawButton = ({
   href,
   target,
   disabled,
+  type,
   height,
   padding,
   fontSize,
@@ -194,7 +197,12 @@ export const RawButton = ({
       {content}
     </BaseLink>
   ) : (
-    <BaseButton {...restOfProps} {...styleProps} disabled={disabled}>
+    <BaseButton
+      {...restOfProps}
+      {...styleProps}
+      disabled={disabled}
+      type={type}
+    >
       {content}
     </BaseButton>
   );
