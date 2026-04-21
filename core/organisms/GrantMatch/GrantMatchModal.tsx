@@ -164,7 +164,7 @@ const FindGrantsButton = ({
     <Button
       label="Find My Grants"
       onClick={onClick}
-      backgroundColor={hasQuery ? Color.accent.yellow1 : Color.neutral.grey3}
+      variant="secondary"
       disabled={!hasQuery}
     />
   );

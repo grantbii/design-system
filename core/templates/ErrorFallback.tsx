@@ -26,13 +26,7 @@ const ErrorFallback = ({
     />
 
     {onClickReload ? (
-      <Button
-        label="Try Again"
-        onClick={onClickReload}
-        backgroundColor={Color.neutral.white}
-        borderColor={Color.neutral.grey3}
-        color={Color.typography.blackHigh}
-      />
+      <Button label="Try Again" onClick={onClickReload} variant="outline" />
     ) : (
       <></>
     )}

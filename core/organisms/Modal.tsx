@@ -157,10 +157,5 @@ type CloseButtonProps = {
 };
 
 const CloseButton = ({ onClick, closeText = "Close" }: CloseButtonProps) => (
-  <Button
-    label={closeText}
-    onClick={onClick}
-    backgroundColor={Color.neutral.grey3}
-    color={Color.typography.blackHigh}
-  />
+  <Button label={closeText} onClick={onClick} variant="tertiary" />
 );

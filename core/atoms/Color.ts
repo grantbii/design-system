@@ -43,3 +43,16 @@ export const accent = {
   blue3: "#ECF5FF",
   blue4: "#F5F9FF",
 } as const;
+
+const allColors = {
+  brand,
+  neutral,
+  typography,
+  accent,
+} as const;
+
+type ValueOf<T> = T[keyof T];
+
+export type DesignColor = ValueOf<{
+  [K in keyof typeof allColors]: ValueOf<(typeof allColors)[K]>;
+}>;
