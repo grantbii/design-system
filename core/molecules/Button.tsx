@@ -73,7 +73,7 @@ const VARIANT_PROPS_MAP: { [variant in ButtonVariant]: VariantStyleProps } = {
   outline: {
     defaultColor: Color.typography.blackHigh,
     disabledColor: Color.typography.blackLow,
-    defaultBackgroundColor: Color.neutral.white,
+    defaultBackgroundColor: "transparent",
     hoverBackgroundColor: Color.accent.blue3,
     borderColor: Color.neutral.grey2,
     disabledBackgroundColor: Color.neutral.grey3,
@@ -81,7 +81,7 @@ const VARIANT_PROPS_MAP: { [variant in ButtonVariant]: VariantStyleProps } = {
   ghost: {
     defaultColor: Color.typography.blackHigh,
     disabledColor: Color.typography.blackLow,
-    defaultBackgroundColor: Color.neutral.white,
+    defaultBackgroundColor: "transparent",
     hoverBackgroundColor: Color.accent.blue3,
     disabledBackgroundColor: Color.neutral.grey3,
   },
@@ -89,7 +89,7 @@ const VARIANT_PROPS_MAP: { [variant in ButtonVariant]: VariantStyleProps } = {
     defaultColor: Color.typography.blackHigh,
     hoverColor: Color.typography.blackMedium,
     disabledColor: Color.typography.blackLow,
-    defaultBackgroundColor: Color.neutral.white,
+    defaultBackgroundColor: "transparent",
     textDecoration: "underline",
   },
   danger: {
@@ -227,6 +227,7 @@ type ButtonStyleProps = {
 const ButtonStyle = css<ButtonStyleProps>`
   display: flex;
   flex-direction: row;
+  justify-content: center;
   align-items: center;
   gap: ${Spacing.px8};
 

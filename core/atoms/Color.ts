@@ -53,6 +53,8 @@ const allColors = {
 
 type ValueOf<T> = T[keyof T];
 
-export type DesignColor = ValueOf<{
+type TokenColor = ValueOf<{
   [K in keyof typeof allColors]: ValueOf<(typeof allColors)[K]>;
 }>;
+
+export type DesignColor = TokenColor | "transparent";
