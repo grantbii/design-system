@@ -7,11 +7,9 @@ export const applyTypography = (style: Typography.TextStyle) => css`
 
   @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
     font-size: ${style.fontSize.small};
-    line-height: ${style.lineHeight.small};
   }
 
   @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
     font-size: ${style.fontSize.large};
-    line-height: ${style.lineHeight.large};
   }
 `;
