@@ -20,6 +20,19 @@ const preview: Preview = {
       codePanel: true,
     },
     layout: "centered",
+    options: {
+      storySort: {
+        order: [
+          "Governance",
+          "Atoms",
+          "Molecules",
+          "Organisms",
+          "Templates",
+          "Pages",
+          "Archive",
+        ],
+      },
+    },
   },
 };
 
