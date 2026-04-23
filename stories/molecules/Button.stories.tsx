@@ -25,7 +25,7 @@ export const Primary: Story = {
 export const DisabledPrimary: Story = {
   args: {
     onClick,
-    label: "Primary (Disabled)",
+    label: "Primary",
     variant: "primary",
     Icon: SystemIcon.PlusIcon,
     disabled: true,
@@ -44,7 +44,7 @@ export const Secondary: Story = {
 export const DisabledSecondary: Story = {
   args: {
     onClick,
-    label: "Secondary (Disabled)",
+    label: "Secondary",
     variant: "secondary",
     Icon: SystemIcon.PlusIcon,
     disabled: true,
@@ -63,7 +63,7 @@ export const Tertiary: Story = {
 export const DisabledTertiary: Story = {
   args: {
     onClick,
-    label: "Tertiary (Disabled)",
+    label: "Tertiary",
     variant: "tertiary",
     Icon: SystemIcon.PlusIcon,
     disabled: true,
@@ -82,7 +82,7 @@ export const Outline: Story = {
 export const DisabledOutline: Story = {
   args: {
     onClick,
-    label: "Outline (Disabled)",
+    label: "Outline",
     variant: "outline",
     Icon: SystemIcon.PlusIcon,
     disabled: true,
@@ -101,7 +101,7 @@ export const Ghost: Story = {
 export const DisabledGhost: Story = {
   args: {
     onClick,
-    label: "Ghost (Disabled)",
+    label: "Ghost",
     variant: "ghost",
     Icon: SystemIcon.PlusIcon,
     disabled: true,
@@ -115,7 +115,7 @@ export const Text: Story = {
 export const DisabledText: Story = {
   args: {
     onClick,
-    label: "Text (Disabled)",
+    label: "Text",
     variant: "text",
     Icon: SystemIcon.PlusIcon,
     disabled: true,
@@ -134,7 +134,7 @@ export const Danger: Story = {
 export const DisabledDanger: Story = {
   args: {
     onClick,
-    label: "Danger (Disabled)",
+    label: "Danger",
     variant: "danger",
     Icon: SystemIcon.PlusIcon,
     disabled: true,

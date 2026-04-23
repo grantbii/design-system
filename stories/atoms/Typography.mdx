@@ -40,7 +40,7 @@ import { applyTypography, Color, Spacing, Typography } from "../../index";
     <HeaderRow>
       <HeaderCell>Style</HeaderCell>
       <HeaderCell>Font Weight</HeaderCell>
-      <HeaderCell>Font size/line height</HeaderCell>
+      <HeaderCell>Font size</HeaderCell>
     </HeaderRow>
 
     {rows.map(([label, weight, size, style]) => (
@@ -62,15 +62,15 @@ export const TYPE_SCALE = [
     usage:
       "Display headline, section title, card component title, modal title.",
     rows: [
-      ["Heading 1", "Bold", "32/43", Typography.heading1],
-      ["Heading 2", "Bold", "28/38", Typography.heading2],
-      ["Heading 3", "Bold", "24/32", Typography.heading3],
-      ["Subheading 1", "Bold", "20/27", Typography.subheading1Bold],
-      ["Subheading 1", "Medium", "20/27", Typography.subheading1Medium],
-      ["Subheading 1", "Regular", "20/27", Typography.subheading1Regular],
-      ["Subheading 2", "Bold", "18/24", Typography.subheading2Bold],
-      ["Subheading 2", "Medium", "18/24", Typography.subheading2Medium],
-      ["Subheading 2", "Regular", "18/24", Typography.subheading2Regular],
+      ["Heading 1", "Bold", "32", Typography.heading1],
+      ["Heading 2", "Bold", "28", Typography.heading2],
+      ["Heading 3", "Bold", "24", Typography.heading3],
+      ["Subheading 1", "Bold", "20", Typography.subheading1Bold],
+      ["Subheading 1", "Medium", "20", Typography.subheading1Medium],
+      ["Subheading 1", "Regular", "20", Typography.subheading1Regular],
+      ["Subheading 2", "Bold", "18", Typography.subheading2Bold],
+      ["Subheading 2", "Medium", "18", Typography.subheading2Medium],
+      ["Subheading 2", "Regular", "18", Typography.subheading2Regular],
     ],
   },
   {
@@ -78,21 +78,21 @@ export const TYPE_SCALE = [
     usage:
       "Primary fonts for default reading, Secondary fonts for secondary reading.",
     rows: [
-      ["Primary", "Bold", "16/22", Typography.bodyPrimaryBold],
-      ["Primary", "Medium", "16/22", Typography.bodyPrimaryMedium],
-      ["Primary", "Regular", "16/22", Typography.bodyPrimaryRegular],
-      ["Secondary", "Bold", "14/19", Typography.bodySecondaryBold],
-      ["Secondary", "Medium", "14/19", Typography.bodySecondaryMedium],
-      ["Secondary", "Regular", "14/19", Typography.bodySecondaryRegular],
+      ["Primary", "Bold", "16", Typography.bodyPrimaryBold],
+      ["Primary", "Medium", "16", Typography.bodyPrimaryMedium],
+      ["Primary", "Regular", "16", Typography.bodyPrimaryRegular],
+      ["Secondary", "Bold", "14", Typography.bodySecondaryBold],
+      ["Secondary", "Medium", "14", Typography.bodySecondaryMedium],
+      ["Secondary", "Regular", "14", Typography.bodySecondaryRegular],
     ],
   },
   {
     section: "Caption",
     usage: "Chips, badges, status tags.",
     rows: [
-      ["Caption", "Bold", "12/16", Typography.captionBold],
-      ["Caption", "Medium", "12/16", Typography.captionMedium],
-      ["Caption", "Regular", "12/16", Typography.captionRegular],
+      ["Caption", "Bold", "12", Typography.captionBold],
+      ["Caption", "Medium", "12", Typography.captionMedium],
+      ["Caption", "Regular", "12", Typography.captionRegular],
     ],
   },
 ];

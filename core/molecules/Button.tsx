@@ -103,9 +103,8 @@ const VARIANT_PROPS_MAP: { [variant in ButtonVariant]: VariantStyleProps } = {
 
 type SizeStyleProps = {
   height: string;
-  fontSize: string;
-  lineHeight: string;
   padding: string;
+  fontSize: string;
 };
 
 const SIZE_PROPS_MAP: { [size in ButtonSize]: SizeStyleProps } = {
@@ -113,19 +112,16 @@ const SIZE_PROPS_MAP: { [size in ButtonSize]: SizeStyleProps } = {
     height: "40px",
     padding: "10px", // not following spacing scale
     fontSize: "14px",
-    lineHeight: "100%",
   },
   medium: {
     height: "46px",
     padding: "12px", // not following spacing scale
     fontSize: "16px",
-    lineHeight: "100%",
   },
   large: {
     height: "52px",
     padding: "14px", // not following spacing scale
     fontSize: "18px",
-    lineHeight: "24px",
   },
 };
 
@@ -153,7 +149,6 @@ export const RawButton = ({
   height,
   padding,
   fontSize,
-  lineHeight,
   textDecoration = "none",
   defaultColor,
   hoverColor = defaultColor,
@@ -170,7 +165,6 @@ export const RawButton = ({
     $isActionIcon: isActionIcon,
     $height: height,
     $fontSize: fontSize,
-    $lineHeight: lineHeight,
     $padding: padding,
     $textDecoration: textDecoration,
     $defaultColor: defaultColor,
@@ -213,7 +207,6 @@ type ButtonStyleProps = {
   $height: string;
   $padding: string;
   $fontSize: string;
-  $lineHeight: string;
   $textDecoration: string;
   $defaultColor: Color.DesignColor;
   $hoverColor: Color.DesignColor;
@@ -239,7 +232,6 @@ const ButtonStyle = css<ButtonStyleProps>`
 
   font-weight: ${Typography.weight.medium};
   font-size: ${(props) => props.$fontSize};
-  line-height: ${(props) => props.$lineHeight};
   white-space: nowrap;
 
   color: ${(props) => props.$defaultColor};
