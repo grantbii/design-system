@@ -1,0 +1,65 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Governance" />
+
+# Governance
+
+## Purpose
+
+The design system exists to create consistency, efficiency, and scalability across all product experiences. It serves as a single source of truth for design and engineering, helping teams:
+
+- Build faster with reusable components and patterns
+- Maintain visual and interaction consistency across products
+- Reduce design and development debt
+- Align design and engineering decisions through shared standards
+- Improve overall user experience quality
+
+## Access & Editing Permissions
+
+### View Access (Everyone)
+
+- All team members can view and use the design system
+- Encouraged to reference components, patterns, and guidelines in daily work
+
+### Contributors (Design & Engineering)
+
+- Can propose updates or new components
+- Responsible for following contribution guidelines and documentation standards
+- Must ensure proposals are reusable, scalable, and aligned with system principles
+
+## What NOT to do
+
+- Do not modify components locally without proposing it back to the system
+- Do not duplicate components just to fit a specific use case
+- Do not bypass existing patterns without strong justification
+- Do not introduce one-off styles that break consistency
+- Do not push unreviewed changes directly to shared libraries or Storybook
+- Do not treat the design system as static or optional
+
+## Best Practices
+
+### For Designers
+
+- Always start with existing components before creating new ones
+- Design for reusability, not just the current use case
+- Document edge cases and states (empty, error, loading, etc.)
+- Use consistent naming and structure
+
+### For Engineers
+
+- Follow established components and patterns
+- Keep components flexible but not overly complex
+- Sync implementation with design specs before release
+- Ensure Storybook reflects the latest approved version
+
+### Component Status & Tracking
+
+To keep visibility across design and engineering, components are tagged with the following statuses:
+
+- 💤 = backlog (lowest priority) / not yet ready to be ported
+- 🌟 = priority / not yet ready to be ported
+- 👓 = for sanity check / review (design + dev)
+- ⌛️ = currently being ported
+- 🟢 = synced to Storybook
+
+These statuses help communicate progress clearly and avoid misalignment between design and implementation.
