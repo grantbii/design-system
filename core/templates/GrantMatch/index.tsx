@@ -2,10 +2,11 @@ import type { GrantMatchQuery } from "@grantbii/ui-core/match/entities";
 import { checkGrantMatchActive } from "@grantbii/ui-core/match/validations";
 import { useMemo, useState } from "react";
 import styled from "styled-components";
-import { useModal } from "../../organisms/Modal";
+import { Color, Responsive } from "../../atoms";
+import { SearchBar, useModal } from "../../organisms";
 import ActiveQueryFiles from "./ActiveQueryFiles";
 import GrantMatchModal from "./GrantMatchModal";
-import SearchBar from "./SearchBar";
+import OpenModalButton from "./OpenModalButton";
 import { GrantMatchContext } from "./context";
 
 type GrantMatchProps = {
@@ -51,10 +52,16 @@ const GrantMatch = ({
   return (
     <GrantMatchContext.Provider value={commonProps}>
       <BaseGrantMatch>
-        <SearchBar
-          textSearchCallback={textSearchCallback}
-          openModalCallback={openModalCallback}
-        />
+        <SearchBarContainer>
+          <SearchBar
+            activeQuery={activeQuery}
+            updateActiveQuery={updateActiveQuery}
+            queryText={queryText}
+            updateQueryText={updateQueryText}
+            textSearchCallback={textSearchCallback}
+          />
+          <OpenModalButton openModalCallback={openModalCallback} />
+        </SearchBarContainer>
 
         {activeQuery.files.length > 0 ? <ActiveQueryFiles /> : <></>}
 
@@ -80,6 +87,33 @@ const BaseGrantMatch = styled.div`
 
   width: 100%;
   max-width: 100vw;
+`;
+
+const SearchBarContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+
+  color: ${Color.typography.blackHigh};
+  background-color: ${Color.neutral.white};
+
+  @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+    gap: 8px;
+    padding: 0px;
+
+    box-shadow: none;
+    border-radius: 0px;
+  }
+
+  @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+    gap: 16px;
+    padding: 12px 16px;
+
+    box-shadow: 0px 0px 40px 0px #00000008;
+    border-radius: 12px;
+  }
 `;
 
 export const useGrantMatchActiveQuery = (
