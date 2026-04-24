@@ -31,7 +31,7 @@ const SearchBar = ({
 
   return (
     <BaseSearchBar>
-      <TextSearchArea $showBorder={activeQuery.text !== ""}>
+      <TextSearchArea $hasQueryText={queryText !== ""}>
         <TextInput
           queryText={queryText}
           updateQueryText={updateQueryText}
@@ -73,15 +73,18 @@ const BaseSearchBar = styled.div`
   }
 `;
 
-const TextSearchArea = styled.div<{ $showBorder: boolean }>`
+const TextSearchArea = styled.div<{ $hasQueryText: boolean }>`
   display: flex;
   align-items: center;
 
   height: 40px;
   width: 100%;
 
-  background-color: ${Color.neutral.grey4};
-  border: 1px solid ${Color.neutral.grey2};
+  background-color: ${(props) =>
+    props.$hasQueryText ? Color.neutral.white : Color.neutral.grey4};
+  border: 1px solid
+    ${(props) =>
+      props.$hasQueryText ? Color.accent.yellow1 : Color.neutral.grey2};
   border-radius: 8px;
 
   &:focus-within {
