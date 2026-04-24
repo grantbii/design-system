@@ -175,8 +175,16 @@ export const RightIcon: Story = {
   },
 };
 
-export const ActionIcon: Story = {
-  args: { onClick, Icon: SystemIcon.PlusIcon },
+export const SmallActionIcon: Story = {
+  args: { onClick, Icon: SystemIcon.PlusIcon, size: "small" },
+};
+
+export const MediumActionIcon: Story = {
+  args: { onClick, Icon: SystemIcon.PlusIcon, size: "medium" },
+};
+
+export const LargeActionIcon: Story = {
+  args: { onClick, Icon: SystemIcon.PlusIcon, size: "large" },
 };
 
 export const WithHref: Story = {

@@ -3,7 +3,11 @@ import type { GrantMatchQuery } from "@grantbii/ui-core/match/entities";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useState } from "react";
 
-const SearchBarExample = () => {
+type SearchBarExampleProps = {
+  size?: "small" | "medium";
+};
+
+const SearchBarExample = ({ size }: SearchBarExampleProps) => {
   const [activeQuery, setActiveQuery] = useState<GrantMatchQuery>(emptyQuery);
   const updateActiveQuery = (newQuery: GrantMatchQuery) =>
     setActiveQuery(newQuery);
@@ -17,6 +21,7 @@ const SearchBarExample = () => {
       updateActiveQuery={updateActiveQuery}
       queryText={queryText}
       updateQueryText={updateQueryText}
+      size={size}
     />
   );
 };
@@ -39,6 +44,10 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  args: {},
+export const Small: Story = {
+  args: { size: "small" },
+};
+
+export const Medium: Story = {
+  args: { size: "medium" },
 };

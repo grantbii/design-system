@@ -10,7 +10,10 @@ type SearchBarProps = {
   queryText: string;
   updateQueryText: (newText: string) => void;
   textSearchCallback?: () => void;
+  size?: SearchBarSize;
 };
+
+type SearchBarSize = "small" | "medium";
 
 const SearchBar = ({
   activeQuery,
@@ -18,7 +21,10 @@ const SearchBar = ({
   queryText,
   updateQueryText,
   textSearchCallback,
+  size = "medium",
 }: SearchBarProps) => {
+  const { height, fontSize } = SIZE_PROPS_MAP[size];
+
   const resetSearch = () => {
     updateQueryText("");
     updateActiveQuery({ files: activeQuery.files, text: "" });
@@ -31,11 +37,12 @@ const SearchBar = ({
 
   return (
     <BaseSearchBar>
-      <TextSearchArea $hasQueryText={queryText !== ""}>
+      <SearchArea $height={height} $hasQueryText={queryText !== ""}>
         <TextInput
           queryText={queryText}
           updateQueryText={updateQueryText}
           executeSearch={executeSearch}
+          fontSize={fontSize}
         />
 
         {queryText === "" ? (
@@ -43,18 +50,34 @@ const SearchBar = ({
         ) : (
           <ResetButton resetSearch={resetSearch} />
         )}
-      </TextSearchArea>
+      </SearchArea>
 
       <Button
         Icon={SystemIcon.MagnifyingGlassIcon}
         onClick={executeSearch}
-        size="small"
+        size={size}
       />
     </BaseSearchBar>
   );
 };
 
 export default SearchBar;
+
+type SizeStyleProps = {
+  height: string;
+  fontSize: string;
+};
+
+const SIZE_PROPS_MAP: { [size in SearchBarSize]: SizeStyleProps } = {
+  small: {
+    height: "40px",
+    fontSize: "12px",
+  },
+  medium: {
+    height: "44px",
+    fontSize: "14px",
+  },
+};
 
 const BaseSearchBar = styled.div`
   display: flex;
@@ -73,23 +96,29 @@ const BaseSearchBar = styled.div`
   }
 `;
 
-const TextSearchArea = styled.div<{ $hasQueryText: boolean }>`
+type SearchAreaProps = {
+  $height: string;
+  $hasQueryText: boolean;
+};
+
+const SearchArea = styled.div<SearchAreaProps>`
   display: flex;
   align-items: center;
 
-  height: 40px;
+  box-sizing: border-box;
+  height: ${(props) => props.$height};
   width: 100%;
 
   background-color: ${(props) =>
     props.$hasQueryText ? Color.neutral.white : Color.neutral.grey4};
-  border: 1px solid
+  border: 0.5px solid
     ${(props) =>
       props.$hasQueryText ? Color.accent.yellow1 : Color.neutral.grey2};
   border-radius: 8px;
 
   &:focus-within {
     background-color: ${Color.neutral.white};
-    border: 1px solid ${Color.accent.yellow1};
+    border: 0.5px solid ${Color.accent.yellow1};
   }
 `;
 
@@ -97,12 +126,14 @@ type TextInputProps = {
   queryText: string;
   updateQueryText: (newText: string) => void;
   executeSearch: () => void;
+  fontSize: string;
 };
 
 const TextInput = ({
   queryText,
   updateQueryText,
   executeSearch,
+  fontSize,
 }: TextInputProps) => {
   const onKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter" && !event.repeat) {
@@ -114,17 +145,19 @@ const TextInput = ({
   return (
     <BaseTextInput
       value={queryText}
+      placeholder="Search grant or describe your project"
       onChange={(event) => updateQueryText(event.target.value)}
       onKeyDown={onKeyDown}
-      placeholder="Search grant or describe your project"
+      $fontSize={fontSize}
     />
   );
 };
 
-const BaseTextInput = styled.input`
+const BaseTextInput = styled.input<{ $fontSize: string }>`
   width: 100%;
   margin-left: 16px;
 
+  font-size: ${(props) => props.$fontSize};
   text-overflow: ellipsis;
 
   background-color: transparent;
@@ -137,7 +170,7 @@ type ResetButtonProps = {
 };
 
 const ResetButton = ({ resetSearch }: ResetButtonProps) => (
-  <BaseResetButton type="button" onClick={resetSearch}>
+  <BaseResetButton onClick={resetSearch} type="button">
     <SystemIcon.XIcon size={14} color={Color.neutral.black} />
   </BaseResetButton>
 );
