@@ -100,7 +100,7 @@ const SearchBarContainer = styled.div`
   color: ${Color.typography.blackHigh};
   background-color: ${Color.neutral.white};
 
-  @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+  @media (width < ${Responsive.widthBreakpoint.laptop}) {
     gap: 8px;
     padding: 0px;
 
@@ -108,7 +108,7 @@ const SearchBarContainer = styled.div`
     border-radius: 0px;
   }
 
-  @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+  @media (width >= ${Responsive.widthBreakpoint.laptop}) {
     gap: 16px;
     padding: 12px 16px;
 

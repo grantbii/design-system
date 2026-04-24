@@ -87,11 +87,11 @@ const BaseSearchBar = styled.div`
 
   width: 100%;
 
-  @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+  @media (width < ${Responsive.widthBreakpoint.laptop}) {
     border-radius: 0px;
   }
 
-  @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+  @media (width >= ${Responsive.widthBreakpoint.laptop}) {
     border-radius: 12px;
   }
 `;

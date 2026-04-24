@@ -93,7 +93,7 @@ const ModalWindow = styled.div<{ $width?: string; $height?: string }>`
   min-height: 100px;
   max-height: 100vh;
 
-  @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+  @media (width < ${Responsive.widthBreakpoint.laptop}) {
     position: fixed;
     bottom: 0px;
     left: 0px;
@@ -104,7 +104,7 @@ const ModalWindow = styled.div<{ $width?: string; $height?: string }>`
     border-radius: 0px;
   }
 
-  @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+  @media (width >= ${Responsive.widthBreakpoint.laptop}) {
     position: static;
     bottom: auto;
     left: auto;

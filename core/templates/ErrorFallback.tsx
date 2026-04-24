@@ -49,14 +49,14 @@ const BaseErrorFallback = styled.div`
 
   background-color: ${Color.neutral.white};
 
-  @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+  @media (width < ${Responsive.widthBreakpoint.laptop}) {
     gap: 16px;
 
     border: none;
     border-radius: 0px;
   }
 
-  @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+  @media (width >= ${Responsive.widthBreakpoint.laptop}) {
     gap: 24px;
 
     border: 1px solid ${Color.neutral.grey3};
@@ -65,12 +65,12 @@ const BaseErrorFallback = styled.div`
 `;
 
 const ErrorLogo = styled(Image)`
-  @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+  @media (width < ${Responsive.widthBreakpoint.laptop}) {
     width: 151px;
     height: 140px;
   }
 
-  @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+  @media (width >= ${Responsive.widthBreakpoint.laptop}) {
     width: 173px;
     height: 160px;
   }

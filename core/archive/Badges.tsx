@@ -43,12 +43,12 @@ const ScrollableVerticalCSS = css`
   overflow-y: auto;
 
   /* show 3 badges max */
-  @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+  @media (width < ${Responsive.widthBreakpoint.laptop}) {
     /* 3.5 * 27px (badge height) + 2 * 4px (gap) = 89 */
     height: 103px;
   }
 
-  @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+  @media (width >= ${Responsive.widthBreakpoint.laptop}) {
     /* 3.5 * 30px (badge height) + 2 * 4px (gap) = 113 */
     height: 113px;
   }

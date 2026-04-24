@@ -1,4 +1,3 @@
-// TODO: refactor
-export const WIDTH_BREAKPOINTS = {
+export const widthBreakpoint = {
   laptop: "1024px",
 };

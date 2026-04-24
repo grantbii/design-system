@@ -67,11 +67,11 @@ const BaseBadge = styled.div<{
   background-color: ${({ $backgroundColor = Color.neutral.grey3 }) =>
     $backgroundColor};
 
-  @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+  @media (width < ${Responsive.widthBreakpoint.laptop}) {
     min-height: 27px;
   }
 
-  @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+  @media (width >= ${Responsive.widthBreakpoint.laptop}) {
     min-height: 30px;
   }
 
