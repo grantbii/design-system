@@ -23,9 +23,9 @@ const PageLoader = ({
 }: PageLoaderProps) => (
   <Background>
     {pacman ? (
-      <PacmanLoader color={color} size={size ? size : 20} {...restOfProps} />
+      <PacmanLoader color={color} size={size ?? 20} {...restOfProps} />
     ) : (
-      <MoonLoader color={color} size={size ? size : 32} {...restOfProps} />
+      <MoonLoader color={color} size={size ?? 32} {...restOfProps} />
     )}
 
     {loadingText || tip ? (
