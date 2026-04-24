@@ -1,5 +1,5 @@
 import { GrantMatch } from "@/.";
-import { useGrantMatchActiveQuery } from "@/core/organisms/GrantMatch";
+import { useGrantMatchActiveQuery } from "@/core/templates/GrantMatch";
 import { type GrantMatchQuery } from "@grantbii/ui-core/match/entities";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useState } from "react";
@@ -47,7 +47,7 @@ const Container = styled.div`
 `;
 
 const meta: Meta<typeof GrantMatchExample> = {
-  title: "Organisms/Grant Match",
+  title: "Templates/Grant Match",
   component: GrantMatchExample,
   tags: ["autodocs"],
   parameters: {

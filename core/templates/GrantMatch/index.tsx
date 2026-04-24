@@ -1,6 +1,6 @@
 import type { GrantMatchQuery } from "@grantbii/ui-core/match/entities";
 import { checkGrantMatchActive } from "@grantbii/ui-core/match/validations";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import styled from "styled-components";
 import { useModal } from "../../organisms/Modal";
 import ActiveQueryFiles from "./ActiveQueryFiles";
@@ -29,15 +29,24 @@ const GrantMatch = ({
   const [queryText, setQueryText] = useState(activeQuery.text);
   const updateQueryText = (newText: string) => setQueryText(newText);
 
-  // TODO: refactor away?
-  const commonProps = {
-    activeQuery,
-    updateActiveQuery,
-    queryText,
-    updateQueryText,
-    openModal,
-    closeModal,
-  };
+  const commonProps = useMemo(
+    () => ({
+      activeQuery,
+      updateActiveQuery,
+      queryText,
+      updateQueryText,
+      openModal,
+      closeModal,
+    }),
+    [
+      activeQuery,
+      updateActiveQuery,
+      queryText,
+      updateQueryText,
+      openModal,
+      closeModal,
+    ],
+  );
 
   return (
     <GrantMatchContext.Provider value={commonProps}>

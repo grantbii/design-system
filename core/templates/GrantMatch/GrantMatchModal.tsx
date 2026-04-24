@@ -162,9 +162,10 @@ const FindGrantsButton = ({
   return (
     <Button
       label="Find My Grants"
+      disabled={!hasQuery}
       onClick={onClick}
       variant="secondary"
-      disabled={!hasQuery}
+      size="small"
     />
   );
 };

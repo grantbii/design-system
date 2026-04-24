@@ -1,7 +1,8 @@
 import type { KeyboardEvent } from "react";
-import styled, { css } from "styled-components";
-import { applyTypography } from "../../../core/integrations";
+import styled from "styled-components";
+import { applyTypography } from "../../integrations";
 import { Color, Responsive, SystemIcon, Typography } from "../../atoms";
+import { Button } from "../../molecules";
 import { useGrantMatchContext } from "./context";
 
 type SearchBarProps = {
@@ -20,10 +21,10 @@ const SearchBar = ({
       <TextSearchArea $showBorder={activeQuery.text !== ""}>
         <QueryTextInput />
 
-        {queryText !== "" ? (
-          <ResetTextButton />
-        ) : (
+        {queryText === "" ? (
           <ResetTextButtonPlaceholder />
+        ) : (
+          <ResetTextButton />
         )}
       </TextSearchArea>
 
@@ -66,6 +67,7 @@ const TextSearchArea = styled.div<{ $showBorder: boolean }>`
   display: flex;
   align-items: center;
 
+  height: 40px;
   width: 100%;
 
   background-color: ${Color.neutral.grey4};
@@ -73,7 +75,11 @@ const TextSearchArea = styled.div<{ $showBorder: boolean }>`
 
   border: 1px solid
     ${({ $showBorder }) =>
-      $showBorder ? Color.brand.grantbiiYellow : Color.neutral.grey4};
+      $showBorder ? Color.accent.yellow1 : Color.neutral.grey2};
+
+  &:focus-within {
+    border: 1px solid ${Color.accent.yellow1};
+  }
 `;
 
 const QueryTextInput = () => {
@@ -107,18 +113,6 @@ const BaseQueryTextInput = styled.input`
   text-overflow: ellipsis;
 `;
 
-const IconOnlyButton = css`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 38px;
-  min-width: 38px;
-  height: 38px;
-
-  border-radius: 8px;
-`;
-
 const ResetTextButton = () => {
   const { activeQuery, updateActiveQuery, updateQueryText } =
     useGrantMatchContext();
@@ -130,23 +124,28 @@ const ResetTextButton = () => {
 
   return (
     <BaseResetTextButton type="button" onClick={onClick}>
-      <SystemIcon.XIcon size={20} color={Color.neutral.grey1} />
+      <SystemIcon.XIcon size={14} color={Color.neutral.black} />
     </BaseResetTextButton>
   );
 };
 
 const BaseResetTextButton = styled.button`
-  ${IconOnlyButton}
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 38px;
+  min-width: 38px;
+  height: 38px;
 
   background-color: ${Color.neutral.grey4};
-  border: 1px solid ${Color.neutral.grey4};
+  border-radius: 8px;
 `;
 
 const ResetTextButtonPlaceholder = styled.div`
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
 
-  background-color: ${Color.neutral.grey4};
   border-radius: 8px;
 `;
 
@@ -157,7 +156,7 @@ type TextSearchButtonProps = {
 const TextSearchButton = ({ textSearchCallback }: TextSearchButtonProps) => {
   const { activeQuery, updateActiveQuery, queryText } = useGrantMatchContext();
 
-  const onClickSearch = () => {
+  const onClick = () => {
     if (textSearchCallback) {
       textSearchCallback();
     }
@@ -166,18 +165,13 @@ const TextSearchButton = ({ textSearchCallback }: TextSearchButtonProps) => {
   };
 
   return (
-    <BaseSearchButton type="button" onClick={onClickSearch}>
-      <SystemIcon.MagnifyingGlassIcon size={20} color={Color.neutral.white} />
-    </BaseSearchButton>
+    <Button
+      Icon={SystemIcon.MagnifyingGlassIcon}
+      onClick={onClick}
+      size="small"
+    />
   );
 };
-
-const BaseSearchButton = styled.button`
-  ${IconOnlyButton}
-
-  background-color: ${Color.brand.grantbiiBlue};
-  border: 1px solid ${Color.brand.grantbiiBlue};
-`;
 
 type OpenModalButtonProps = {
   openModalCallback?: () => void;
@@ -208,9 +202,8 @@ const BaseOpenModalButton = styled.button`
   justify-content: center;
   gap: 10px;
 
-  height: 38px;
+  height: 40px;
 
-  border: 1px solid ${Color.neutral.grey3};
   border-radius: 8px;
 
   background-color: ${Color.neutral.grey3};
@@ -218,15 +211,19 @@ const BaseOpenModalButton = styled.button`
 
   ${applyTypography(Typography.bodySecondaryRegular)}
 
+  &:hover {
+    background-color: ${Color.accent.blue3};
+  }
+
   @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
-    width: 38px;
-    min-width: 38px;
+    width: 40px;
+    min-width: 40px;
     padding: 0px;
   }
 
   @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
     width: auto;
-    min-width: 88px;
+    min-width: 90px;
     padding: 2px 16px;
   }
 `;

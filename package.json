@@ -2,7 +2,7 @@
   "name": "@grantbii/design-system",
   "author": "Grantbii",
   "license": "UNLICENSED",
-  "version": "1.19.5",
+  "version": "1.19.6",
   "description": "Grantbii's Design System",
   "homepage": "https://design.grantbii.com",
   "repository": {
@@ -58,7 +58,7 @@
     "react": "19.2.5",
     "react-dom": "19.2.5",
     "storybook": "10.3.5",
-    "styled-components": "6.4.0",
+    "styled-components": "6.4.1",
     "typescript": "6.0.3",
     "vitest": "4.1.5"
   },
