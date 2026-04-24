@@ -202,9 +202,9 @@ const combineFilesWithoutDuplicates = (
   oldFiles: File[],
   newFiles: File[],
 ): File[] => {
-  const newFileNames = newFiles.map((file) => file.name);
+  const newFileNames = new Set(newFiles.map((file) => file.name));
   const keptOldFiles = oldFiles.filter(
-    (oldFile) => !newFileNames.includes(oldFile.name),
+    (oldFile) => !newFileNames.has(oldFile.name),
   );
 
   return [...keptOldFiles, ...newFiles];

@@ -10,8 +10,8 @@ type BadgesProps = {
 
 const Badges = ({ allBadgeProps, scrollable, vertical }: BadgesProps) => (
   <BaseBadges $scrollable={scrollable} $vertical={vertical}>
-    {allBadgeProps.map((badgeProps, index) => (
-      <Badge {...badgeProps} key={`badge-${index}`} />
+    {allBadgeProps.map((badgeProps) => (
+      <Badge {...badgeProps} key={`badge-${badgeProps.label}`} />
     ))}
   </BaseBadges>
 );

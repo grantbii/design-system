@@ -19,6 +19,7 @@ const TallyModal = ({
       <iframe
         src={constructIframeSrc(tallyId, prefilledFieldsQueryParams)}
         loading="lazy"
+        title="Tally Modal"
       />
     }
     width="640px"
@@ -31,8 +32,13 @@ export default TallyModal;
 const constructIframeSrc = (
   tallyId: string,
   prefilledFieldsQueryParams?: string,
-) =>
-  `https://tally.so/embed/${tallyId}?${TALLY_QUERIES}${prefilledFieldsQueryParams ? `&${prefilledFieldsQueryParams}` : ""}`;
+) => {
+  const queryParams = prefilledFieldsQueryParams
+    ? `&${prefilledFieldsQueryParams}`
+    : "";
+
+  return `https://tally.so/embed/${tallyId}?${TALLY_QUERIES}${queryParams}`;
+};
 
 const TALLY_QUERIES =
   "alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=0";

@@ -44,7 +44,7 @@ const Modal = ({
               <></>
             )}
 
-            {footer ? footer : <></>}
+            {footer}
           </ModalFooter>
         ) : (
           <></>

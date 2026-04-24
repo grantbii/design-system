@@ -15,7 +15,7 @@ export type DropdownProps = {
 const Dropdown = ({ options, defaultLabel, ...selectProps }: DropdownProps) => (
   <Select {...selectProps}>
     <option hidden disabled value="">
-      {defaultLabel ? defaultLabel : "-"}
+      {defaultLabel ?? "-"}
     </option>
 
     {options.map((option) => (

@@ -17,7 +17,6 @@ const RadioButtons = ({ name, options }: RadioButtonProps) => (
       <RadioButton
         {...props}
         key={`${name}-${value}`}
-        id={id ? id : value} // assume mutually exclusive values
         value={value}
         name={name}
       />

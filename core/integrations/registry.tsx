@@ -13,12 +13,12 @@ const StyledComponentsRegistry = ({ children }: PropsWithChildren) => {
     return <>{styles}</>;
   });
 
-  return typeof window !== "undefined" ? (
-    <>{children}</>
-  ) : (
+  return typeof globalThis.window === "undefined" ? (
     <StyleSheetManager sheet={styledComponentsStyleSheet.instance}>
       {children}
     </StyleSheetManager>
+  ) : (
+    <>{children}</>
   );
 };
 
