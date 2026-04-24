@@ -102,6 +102,7 @@ const VARIANT_PROPS_MAP: { [variant in ButtonVariant]: VariantStyleProps } = {
 };
 
 type SizeStyleProps = {
+  actionIconSize: string;
   height: string;
   padding: string;
   fontSize: string;
@@ -109,16 +110,19 @@ type SizeStyleProps = {
 
 const SIZE_PROPS_MAP: { [size in ButtonSize]: SizeStyleProps } = {
   small: {
+    actionIconSize: "40px",
     height: "40px",
     padding: "10px", // not following spacing scale
     fontSize: "14px",
   },
   medium: {
+    actionIconSize: "44px",
     height: "46px",
     padding: "12px", // not following spacing scale
     fontSize: "16px",
   },
   large: {
+    actionIconSize: "48px",
     height: "52px",
     padding: "14px", // not following spacing scale
     fontSize: "18px",
@@ -146,6 +150,7 @@ export const RawButton = ({
   target,
   disabled,
   type,
+  actionIconSize,
   height,
   padding,
   fontSize,
@@ -163,6 +168,7 @@ export const RawButton = ({
 
   const styleProps: ButtonStyleProps = {
     $isActionIcon: isActionIcon,
+    $actionIconSize: actionIconSize,
     $height: height,
     $fontSize: fontSize,
     $padding: padding,
@@ -204,6 +210,7 @@ export const RawButton = ({
 
 type ButtonStyleProps = {
   $isActionIcon: boolean;
+  $actionIconSize: string;
   $height: string;
   $padding: string;
   $fontSize: string;
@@ -225,8 +232,9 @@ const ButtonStyle = css<ButtonStyleProps>`
   gap: ${Spacing.px8};
 
   box-sizing: border-box;
-  width: ${(props) => (props.$isActionIcon ? props.$height : "auto")};
-  height: ${(props) => props.$height};
+  width: ${(props) => (props.$isActionIcon ? props.$actionIconSize : "auto")};
+  height: ${(props) =>
+    props.$isActionIcon ? props.$actionIconSize : props.$height};
   padding: ${(props) =>
     props.$isActionIcon ? props.$padding : `${props.$padding} ${Spacing.px16}`};
 

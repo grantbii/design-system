@@ -59,6 +59,7 @@ const GrantMatch = ({
             queryText={queryText}
             updateQueryText={updateQueryText}
             textSearchCallback={textSearchCallback}
+            size="small"
           />
           <OpenModalButton openModalCallback={openModalCallback} />
         </SearchBarContainer>
