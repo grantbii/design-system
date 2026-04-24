@@ -5,11 +5,11 @@ export const applyTypography = (style: Typography.TextStyle) => css`
   font-family: ${style.fontFamily};
   font-weight: ${style.fontWeight};
 
-  @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+  @media (width < ${Responsive.widthBreakpoint.laptop}) {
     font-size: ${style.fontSize.small};
   }
 
-  @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+  @media (width >= ${Responsive.widthBreakpoint.laptop}) {
     font-size: ${style.fontSize.large};
   }
 `;

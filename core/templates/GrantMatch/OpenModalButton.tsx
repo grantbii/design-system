@@ -47,13 +47,13 @@ const BaseOpenModalButton = styled.button`
     background-color: ${Color.accent.blue3};
   }
 
-  @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+  @media (width < ${Responsive.widthBreakpoint.laptop}) {
     width: 40px;
     min-width: 40px;
     padding: 0px;
   }
 
-  @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+  @media (width >= ${Responsive.widthBreakpoint.laptop}) {
     width: auto;
     min-width: 90px;
     padding: 2px 16px;
@@ -66,11 +66,11 @@ const OpenModalButtonText = styled.p`
   white-space: nowrap;
   text-overflow: ellipsis;
 
-  @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+  @media (width < ${Responsive.widthBreakpoint.laptop}) {
     display: none;
   }
 
-  @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+  @media (width >= ${Responsive.widthBreakpoint.laptop}) {
     display: inline;
   }
 `;

@@ -25,12 +25,12 @@ const BrandLogo = ({
 export default BrandLogo;
 
 const BrandImage = styled(Image)`
-  @media (width < ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+  @media (width < ${Responsive.widthBreakpoint.laptop}) {
     width: 125px;
     height: 40px;
   }
 
-  @media (width >= ${Responsive.WIDTH_BREAKPOINTS.laptop}) {
+  @media (width >= ${Responsive.widthBreakpoint.laptop}) {
     width: 150px;
     height: 48px;
   }
