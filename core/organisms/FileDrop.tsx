@@ -3,8 +3,8 @@ import { useDropzone } from "react-dropzone";
 import styled from "styled-components";
 import { Color, Spacing, SystemIcon, Typography } from "../atoms";
 import { applyTypography } from "../integrations";
-import { FILE_TYPE_ICON_MAP } from "../shared";
 import { Badge } from "../molecules";
+import { FILE_TYPE_ICON_MAP } from "../shared";
 
 const DEFAULT_MAX_FILE_SIZE_MB = 5;
 const DEFAULT_MAX_FILES = 5;
@@ -151,10 +151,9 @@ const UploadedFiles = ({ uploadedFiles, removeFile }: UploadedFilesProps) => (
     {uploadedFiles.map(({ name: fileName, type: fileType }) => (
       <Badge
         key={fileName}
-        label={getFileNameWithoutExtension(fileName)}
+        label={fileName}
         onClickX={() => removeFile(fileName)}
         Icon={FILE_TYPE_ICON_MAP[fileType] ?? SystemIcon.FileIcon}
-        variant="neutral"
       />
     ))}
   </BaseUploadedFiles>
@@ -220,6 +219,3 @@ const combineFilesWithoutDuplicates = (
 
 const filterFilesByName = (files: File[], fileName: string): File[] =>
   files.filter((file) => file.name !== fileName);
-
-const getFileNameWithoutExtension = (fileName: string): string =>
-  fileName.substring(0, fileName.lastIndexOf("."));

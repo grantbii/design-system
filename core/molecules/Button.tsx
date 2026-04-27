@@ -122,19 +122,19 @@ type SizeStyleProps = {
 const SIZE_PROPS_MAP: { [size in ButtonSize]: SizeStyleProps } = {
   small: {
     height: "40px",
-    padding: "10px", // not following spacing scale
+    padding: `10px ${Spacing.px16}`, // not following spacing scale
     fontSize: "14px",
     actionIconSize: "40px",
   },
   medium: {
     height: "46px",
-    padding: "12px", // not following spacing scale
+    padding: `12px ${Spacing.px16}`, // not following spacing scale
     fontSize: "16px",
     actionIconSize: "44px",
   },
   large: {
     height: "52px",
-    padding: "14px", // not following spacing scale
+    padding: `14px ${Spacing.px16}`, // not following spacing scale
     fontSize: "18px",
     actionIconSize: "48px",
   },
@@ -235,8 +235,7 @@ const ButtonStyle = css<ButtonStyleProps>`
   width: ${(props) => (props.$isActionIcon ? props.$actionIconSize : "auto")};
   height: ${(props) =>
     props.$isActionIcon ? props.$actionIconSize : props.$height};
-  padding: ${(props) =>
-    props.$isActionIcon ? props.$padding : `${props.$padding} ${Spacing.px16}`};
+  padding: ${(props) => (props.$isActionIcon ? "0px" : props.$padding)};
 
   font-weight: ${Typography.weight.medium};
   font-size: ${(props) => props.$fontSize};
