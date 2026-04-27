@@ -62,6 +62,6 @@ export const InputValidation = css<InputValidationProps>`
 
 export const FILE_TYPE_ICON_MAP: { [mimeType: string]: SystemIcon.Icon } = {
   "application/pdf": SystemIcon.FilePdfIcon,
-  "image/png": SystemIcon.FilePngIcon,
-  "image/jpeg": SystemIcon.FileJpgIcon,
+  "image/png": SystemIcon.ImageIcon,
+  "image/jpeg": SystemIcon.ImageIcon,
 };

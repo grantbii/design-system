@@ -19,6 +19,17 @@ type ButtonVariant =
 
 type ButtonSize = "small" | "medium" | "large";
 
+type CustomButtonProps = {
+  label?: ReactNode;
+  Icon?: SystemIcon.Icon;
+  iconRight?: boolean;
+  onClick?: MouseEventHandler<HTMLElement>;
+  type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
+  disabled?: boolean;
+  target?: HTMLAttributeAnchorTarget;
+  href?: string;
+};
+
 type ButtonProps = {
   variant?: ButtonVariant;
   size?: ButtonSize;
@@ -102,42 +113,31 @@ const VARIANT_PROPS_MAP: { [variant in ButtonVariant]: VariantStyleProps } = {
 };
 
 type SizeStyleProps = {
-  actionIconSize: string;
   height: string;
   padding: string;
   fontSize: string;
+  actionIconSize?: string;
 };
 
 const SIZE_PROPS_MAP: { [size in ButtonSize]: SizeStyleProps } = {
   small: {
-    actionIconSize: "40px",
     height: "40px",
     padding: "10px", // not following spacing scale
     fontSize: "14px",
+    actionIconSize: "40px",
   },
   medium: {
-    actionIconSize: "44px",
     height: "46px",
     padding: "12px", // not following spacing scale
     fontSize: "16px",
+    actionIconSize: "44px",
   },
   large: {
-    actionIconSize: "48px",
     height: "52px",
     padding: "14px", // not following spacing scale
     fontSize: "18px",
+    actionIconSize: "48px",
   },
-};
-
-type CustomButtonProps = {
-  label?: ReactNode;
-  Icon?: SystemIcon.Icon;
-  iconRight?: boolean;
-  onClick?: MouseEventHandler<HTMLElement>;
-  type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
-  disabled?: boolean;
-  target?: HTMLAttributeAnchorTarget;
-  href?: string;
 };
 
 type RawButtonProps = CustomButtonProps & VariantStyleProps & SizeStyleProps;
@@ -150,10 +150,10 @@ export const RawButton = ({
   target,
   disabled,
   type,
-  actionIconSize,
   height,
   padding,
   fontSize,
+  actionIconSize = height,
   textDecoration = "none",
   defaultColor,
   hoverColor = defaultColor,
