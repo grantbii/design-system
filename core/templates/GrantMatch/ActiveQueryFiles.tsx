@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { SystemIcon } from "../../atoms";
-import { Badge, Button } from "../../molecules";
+import { Color, SystemIcon } from "../../atoms";
+import { Badge, RawButton } from "../../molecules";
 import { FILE_TYPE_ICON_MAP } from "../../shared";
 import { useGrantMatchContext } from "./context";
 
@@ -36,11 +36,10 @@ const FileBadges = () => {
       {activeQuery.files.map((file) => (
         <Badge
           key={file.name}
-          label={file.name.substring(0, file.name.lastIndexOf("."))}
+          label={file.name}
           Icon={FILE_TYPE_ICON_MAP[file.type] ?? SystemIcon.FileIcon}
           onClickX={() => removeActiveQueryFile(file.name)}
           labelWidthPixels={160}
-          variant="neutral"
         />
       ))}
     </BaseFileBadges>
@@ -53,7 +52,6 @@ const BaseFileBadges = styled.div`
   gap: 8px;
 
   width: 100%;
-
   overflow-x: auto;
 
   /* hide scrollbar but still allow for scrolling */
@@ -70,10 +68,17 @@ const ResetFilesButton = () => {
   const { activeQuery, updateActiveQuery } = useGrantMatchContext();
 
   return (
-    <Button
+    <RawButton
       label="Reset"
       onClick={() => updateActiveQuery({ files: [], text: activeQuery.text })}
-      variant="text"
+      defaultColor={Color.typography.blackHigh}
+      hoverColor={Color.typography.blackMedium}
+      disabledColor={Color.typography.blackLow}
+      defaultBackgroundColor="transparent"
+      textDecoration="underline"
+      height="26px"
+      padding="10px 0px"
+      fontSize="14px"
     />
   );
 };
