@@ -12,10 +12,10 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const defaultText = "Badge";
-const longText = "the quick brown fox jumps over the lazy dog";
+const longText = "super_long_file_name.pdf";
 const onClickClose = () => alert("You have closed the badge.");
 
-export const TextOnly: Story = {
+export const DefaultTextOnly: Story = {
   args: {
     label: defaultText,
   },
@@ -23,15 +23,15 @@ export const TextOnly: Story = {
 
 export const Icon: Story = {
   args: {
-    Icon: SystemIcon.SmileyXEyesIcon,
+    Icon: SystemIcon.FilePdfIcon,
     label: defaultText,
   },
 };
 
-export const Closeable: Story = {
+export const ClickableX: Story = {
   args: {
     label: defaultText,
-    onClickClose,
+    onClickX: onClickClose,
   },
 };
 
@@ -44,10 +44,10 @@ export const LongText: Story = {
 
 export const AlmostEverything: Story = {
   args: {
-    Icon: SystemIcon.SmileyXEyesIcon,
     label: longText,
+    Icon: SystemIcon.FilePdfIcon,
     labelWidthPixels: 160,
-    onClickClose,
+    onClickX: onClickClose,
   },
 };
 
@@ -55,5 +55,95 @@ export const Clickable: Story = {
   args: {
     label: "Click Me",
     onClick: () => alert("Clicked on badge"),
+  },
+};
+
+export const Neutral: Story = {
+  args: {
+    label: longText,
+    Icon: SystemIcon.FilePdfIcon,
+    labelWidthPixels: 160,
+    onClickX: onClickClose,
+    variant: "neutral",
+  },
+};
+
+export const ClickableNeutral: Story = {
+  args: {
+    label: "Click Me",
+    onClick: () => alert("Clicked on badge"),
+    variant: "neutral",
+  },
+};
+
+export const Blue: Story = {
+  args: {
+    label: longText,
+    Icon: SystemIcon.FilePdfIcon,
+    labelWidthPixels: 160,
+    onClickX: onClickClose,
+    variant: "blue",
+  },
+};
+
+export const ClickableBlue: Story = {
+  args: {
+    label: "Click Me",
+    onClick: () => alert("Clicked on badge"),
+    variant: "blue",
+  },
+};
+
+export const Green: Story = {
+  args: {
+    label: longText,
+    Icon: SystemIcon.FilePdfIcon,
+    labelWidthPixels: 160,
+    onClickX: onClickClose,
+    variant: "green",
+  },
+};
+
+export const ClickableGreen: Story = {
+  args: {
+    label: "Click Me",
+    onClick: () => alert("Clicked on badge"),
+    variant: "green",
+  },
+};
+
+export const Yellow: Story = {
+  args: {
+    label: longText,
+    Icon: SystemIcon.FilePdfIcon,
+    labelWidthPixels: 160,
+    onClickX: onClickClose,
+    variant: "yellow",
+  },
+};
+
+export const ClickableYellow: Story = {
+  args: {
+    label: "Click Me",
+    onClick: () => alert("Clicked on badge"),
+    variant: "yellow",
+  },
+};
+
+export const Red: Story = {
+  args: {
+    label: longText,
+    Icon: SystemIcon.FilePdfIcon,
+    labelWidthPixels: 160,
+    onClickX: onClickClose,
+    variant: "red",
+  },
+};
+
+export const ClickableRed: Story = {
+  args: {
+    label: "Click Me",
+    onClick: () => alert("Clicked on badge"),
+    variant: "red",
   },
 };

@@ -152,8 +152,9 @@ const UploadedFiles = ({ uploadedFiles, removeFile }: UploadedFilesProps) => (
       <Badge
         key={fileName}
         label={getFileNameWithoutExtension(fileName)}
-        onClickClose={() => removeFile(fileName)}
+        onClickX={() => removeFile(fileName)}
         Icon={FILE_TYPE_ICON_MAP[fileType] ?? SystemIcon.FileIcon}
+        variant="neutral"
       />
     ))}
   </BaseUploadedFiles>
