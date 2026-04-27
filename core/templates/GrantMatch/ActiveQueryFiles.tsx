@@ -38,8 +38,9 @@ const FileBadges = () => {
           key={file.name}
           label={file.name.substring(0, file.name.lastIndexOf("."))}
           Icon={FILE_TYPE_ICON_MAP[file.type] ?? SystemIcon.FileIcon}
-          onClickClose={() => removeActiveQueryFile(file.name)}
+          onClickX={() => removeActiveQueryFile(file.name)}
           labelWidthPixels={160}
+          variant="neutral"
         />
       ))}
     </BaseFileBadges>

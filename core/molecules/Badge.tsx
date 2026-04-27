@@ -1,41 +1,91 @@
 import type { ComponentType, MouseEventHandler, ReactNode } from "react";
 import styled from "styled-components";
-import { Color, SystemIcon, Responsive, Typography } from "../atoms";
+import { Color, SystemIcon, Responsive, Typography, Spacing } from "../atoms";
 import { applyTypography } from "../integrations";
 
-export type BadgeProps = {
+type BadgeVariant = "default" | "neutral" | "blue" | "green" | "yellow" | "red";
+
+type CustomBadgeProps = {
   label: ReactNode;
   Icon?: ComponentType<SystemIcon.IconProps>;
-  iconSize?: string | number;
-  iconWeight?: SystemIcon.IconWeight;
   onClick?: MouseEventHandler<HTMLDivElement>;
-  onClickClose?: MouseEventHandler<HTMLButtonElement>;
+  onClickX?: MouseEventHandler<HTMLButtonElement>;
   labelWidthPixels?: number;
-  backgroundColor?: string;
-  color?: string;
 };
 
-const Badge = ({
+type BadgeProps = {
+  variant?: BadgeVariant;
+} & CustomBadgeProps;
+
+const Badge = ({ variant = "default", ...restOfProps }: BadgeProps) => {
+  const variantProps = VARIANT_PROPS_MAP[variant];
+  return <RawBadge {...variantProps} {...restOfProps} />;
+};
+
+export default Badge;
+
+type VariantStyleProps = {
+  color: Color.DesignColor;
+  defaultBackgroundColor: Color.DesignColor;
+  hoverBackgroundColor?: Color.DesignColor;
+};
+
+const VARIANT_PROPS_MAP: { [variant in BadgeVariant]: VariantStyleProps } = {
+  default: {
+    color: Color.typography.blackHigh,
+    defaultBackgroundColor: Color.accent.blue3,
+    hoverBackgroundColor: Color.accent.blue4,
+  },
+  neutral: {
+    color: Color.typography.blackHigh,
+    defaultBackgroundColor: Color.neutral.grey4,
+    hoverBackgroundColor: Color.neutral.grey3,
+  },
+  blue: {
+    color: Color.accent.blue1,
+    defaultBackgroundColor: Color.accent.blue3,
+    hoverBackgroundColor: Color.accent.blue4,
+  },
+  green: {
+    color: Color.accent.green1,
+    defaultBackgroundColor: Color.accent.green3,
+    hoverBackgroundColor: Color.accent.green4,
+  },
+  yellow: {
+    color: Color.accent.yellow1,
+    defaultBackgroundColor: Color.accent.yellow3,
+    hoverBackgroundColor: Color.accent.yellow4,
+  },
+  red: {
+    color: Color.accent.red1,
+    defaultBackgroundColor: Color.accent.red3,
+    hoverBackgroundColor: Color.accent.red4,
+  },
+};
+
+type RawBadgeProps = CustomBadgeProps & VariantStyleProps;
+
+export const RawBadge = ({
   label,
   Icon,
-  iconSize = 20,
-  iconWeight = "regular",
   onClick,
-  onClickClose,
+  onClickX,
   labelWidthPixels,
-  backgroundColor,
+  defaultBackgroundColor,
+  hoverBackgroundColor = defaultBackgroundColor,
   color,
-}: BadgeProps) => (
+}: RawBadgeProps) => (
   <BaseBadge
     onClick={onClick}
-    $clickable={!!onClick}
-    $backgroundColor={backgroundColor}
+    $isClickable={!!onClick}
+    $defaultBackgroundColor={defaultBackgroundColor}
+    $hoverBackgroundColor={hoverBackgroundColor}
     $color={color}
   >
-    <BadgeContent $closeable={!!onClickClose} $widthPixels={labelWidthPixels}>
+    <BadgeContent hasX={!!onClickX} $widthPixels={labelWidthPixels}>
       {Icon ? (
         <IconContainer>
-          <Icon color={color} size={iconSize} weight={iconWeight} />
+          <Icon color={color} size={12} />
         </IconContainer>
       ) : (
         <></>
@@ -44,42 +94,43 @@ const Badge = ({
       <BadgeLabel>{label}</BadgeLabel>
     </BadgeContent>
 
-    {onClickClose ? <CloseButton onClick={onClickClose} /> : <></>}
+    {onClickX ? <XButton onClick={onClickX} /> : <></>}
   </BaseBadge>
 );
 
-export default Badge;
-
 const BaseBadge = styled.div<{
-  $clickable?: boolean;
-  $backgroundColor?: string;
-  $color?: string;
+  $isClickable: boolean;
+  $defaultBackgroundColor: Color.DesignColor;
+  $hoverBackgroundColor: Color.DesignColor;
+  $color: Color.DesignColor;
 }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
 
-  padding: 5px 15px;
-  border-radius: 120px;
+  height: 26px;
+  padding: 5px ${Spacing.px12};
+  border-radius: 100px;
 
-  color: ${({ $color = Color.typography.blackHigh }) => $color};
-  background-color: ${({ $backgroundColor = Color.neutral.grey3 }) =>
-    $backgroundColor};
+  font-size: 12px;
+  font-weight: ${Typography.weight.medium};
 
-  @media (width < ${Responsive.widthBreakpoint.laptop}) {
-    min-height: 27px;
+  color: ${(props) => props.$color};
+  background-color: ${(props) => props.$defaultBackgroundColor};
+
+  cursor: ${(props) => (props.$isClickable ? "pointer" : "auto")};
+
+  &:hover {
+    background-color: ${(props) =>
+      props.$isClickable
+        ? props.$hoverBackgroundColor
+        : props.$defaultBackgroundColor};
   }
-
-  @media (width >= ${Responsive.widthBreakpoint.laptop}) {
-    min-height: 30px;
-  }
-
-  cursor: ${({ $clickable = false }) => ($clickable ? "pointer" : "auto")};
 `;
 
 const BadgeContent = styled.div<{
-  $closeable: boolean;
+  hasX: boolean;
   $widthPixels?: number;
 }>`
   display: flex;
@@ -87,7 +138,8 @@ const BadgeContent = styled.div<{
   gap: 10px;
 
   width: ${({ $widthPixels }) => ($widthPixels ? `${$widthPixels}px` : "auto")};
-  max-width: ${({ $closeable }) => ($closeable ? "calc(100% - 20px)" : "auto")};
+  max-width: ${({ hasX: $closeable }) =>
+    $closeable ? "calc(100% - 20px)" : "auto"};
 `;
 
 const IconContainer = styled.div<{ $iconSize?: string | number }>`
@@ -107,13 +159,13 @@ const BadgeLabel = styled.div`
   ${applyTypography(Typography.bodySecondaryMedium)}
 `;
 
-type CloseButtonProps = {
+type XButtonProps = {
   onClick: MouseEventHandler<HTMLButtonElement>;
 };
 
-const CloseButton = ({ onClick }: CloseButtonProps) => (
+const XButton = ({ onClick }: XButtonProps) => (
   <BaseCloseButton type="button" onClick={onClick}>
-    <SystemIcon.XIcon size={12} />
+    <SystemIcon.XIcon color={Color.typography.blackMedium} size={12} />
   </BaseCloseButton>
 );
 
