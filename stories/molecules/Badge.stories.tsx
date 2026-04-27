@@ -11,6 +11,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+const Icon = SystemIcon.FilePdfIcon;
 const defaultText = "Badge";
 const longText = "super_long_file_name.pdf";
 const onClickClose = () => alert("You have closed the badge.");
@@ -21,9 +22,9 @@ export const DefaultTextOnly: Story = {
   },
 };
 
-export const Icon: Story = {
+export const WithIcon: Story = {
   args: {
-    Icon: SystemIcon.FilePdfIcon,
+    Icon,
     label: defaultText,
   },
 };
@@ -45,7 +46,7 @@ export const LongText: Story = {
 export const AlmostEverything: Story = {
   args: {
     label: longText,
-    Icon: SystemIcon.FilePdfIcon,
+    Icon,
     labelWidthPixels: 160,
     onClickX: onClickClose,
   },
@@ -61,7 +62,7 @@ export const Clickable: Story = {
 export const Neutral: Story = {
   args: {
     label: longText,
-    Icon: SystemIcon.FilePdfIcon,
+    Icon,
     labelWidthPixels: 160,
     onClickX: onClickClose,
     variant: "neutral",
@@ -79,7 +80,7 @@ export const ClickableNeutral: Story = {
 export const Blue: Story = {
   args: {
     label: longText,
-    Icon: SystemIcon.FilePdfIcon,
+    Icon,
     labelWidthPixels: 160,
     onClickX: onClickClose,
     variant: "blue",
@@ -97,7 +98,7 @@ export const ClickableBlue: Story = {
 export const Green: Story = {
   args: {
     label: longText,
-    Icon: SystemIcon.FilePdfIcon,
+    Icon: SystemIcon.FilePngIcon,
     labelWidthPixels: 160,
     onClickX: onClickClose,
     variant: "green",
@@ -115,7 +116,7 @@ export const ClickableGreen: Story = {
 export const Yellow: Story = {
   args: {
     label: longText,
-    Icon: SystemIcon.FilePdfIcon,
+    Icon,
     labelWidthPixels: 160,
     onClickX: onClickClose,
     variant: "yellow",
@@ -133,7 +134,7 @@ export const ClickableYellow: Story = {
 export const Red: Story = {
   args: {
     label: longText,
-    Icon: SystemIcon.FilePdfIcon,
+    Icon,
     labelWidthPixels: 160,
     onClickX: onClickClose,
     variant: "red",
