@@ -82,7 +82,7 @@ export const RawBadge = ({
     $hoverBackgroundColor={hoverBackgroundColor}
     $color={color}
   >
-    <BadgeContent hasX={!!onClickX} $widthPixels={labelWidthPixels}>
+    <BadgeContent $hasX={!!onClickX} $widthPixels={labelWidthPixels}>
       {Icon ? (
         <IconContainer>
           <Icon color={color} size={12} />
@@ -130,7 +130,7 @@ const BaseBadge = styled.div<{
 `;
 
 const BadgeContent = styled.div<{
-  hasX: boolean;
+  $hasX: boolean;
   $widthPixels?: number;
 }>`
   display: flex;
@@ -138,7 +138,7 @@ const BadgeContent = styled.div<{
   gap: 10px;
 
   width: ${({ $widthPixels }) => ($widthPixels ? `${$widthPixels}px` : "auto")};
-  max-width: ${({ hasX: $closeable }) =>
+  max-width: ${({ $hasX: $closeable }) =>
     $closeable ? "calc(100% - 20px)" : "auto"};
 `;
 
