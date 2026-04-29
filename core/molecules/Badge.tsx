@@ -1,6 +1,6 @@
 import type { ComponentType, MouseEventHandler, ReactNode } from "react";
 import styled from "styled-components";
-import { Color, SystemIcon, Responsive, Typography, Spacing } from "../atoms";
+import { Color, Spacing, SystemIcon, Typography } from "../atoms";
 import { applyTypography } from "../integrations";
 
 type BadgeVariant = "default" | "neutral" | "blue" | "green" | "yellow" | "red";

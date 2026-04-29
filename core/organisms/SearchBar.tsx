@@ -9,29 +9,38 @@ type SearchBarProps = {
   updateActiveQuery: (query: GrantMatchQuery) => void;
   queryText: string;
   updateQueryText: (newText: string) => void;
-  textSearchCallback?: () => void;
+  onSearch?: () => void;
+  placeholder?: string;
+  runSearchOnReset?: boolean;
   size?: SearchBarSize;
 };
 
 type SearchBarSize = "small" | "medium";
+
+const DEFAULT_PLACEHOLDER = "Search grant or describe your project";
 
 const SearchBar = ({
   activeQuery,
   updateActiveQuery,
   queryText,
   updateQueryText,
-  textSearchCallback,
+  onSearch,
+  placeholder = DEFAULT_PLACEHOLDER,
+  runSearchOnReset = false,
   size = "medium",
 }: SearchBarProps) => {
   const { height, fontSize } = SIZE_PROPS_MAP[size];
 
   const resetSearch = () => {
     updateQueryText("");
-    updateActiveQuery({ files: activeQuery.files, text: "" });
+
+    if (runSearchOnReset) {
+      updateActiveQuery({ files: activeQuery.files, text: "" });
+    }
   };
 
   const executeSearch = () => {
-    textSearchCallback?.();
+    onSearch?.();
     updateActiveQuery({ files: activeQuery.files, text: queryText });
   };
 
@@ -42,6 +51,7 @@ const SearchBar = ({
           queryText={queryText}
           updateQueryText={updateQueryText}
           executeSearch={executeSearch}
+          placeholder={placeholder}
           fontSize={fontSize}
         />
 
@@ -126,6 +136,7 @@ type TextInputProps = {
   queryText: string;
   updateQueryText: (newText: string) => void;
   executeSearch: () => void;
+  placeholder: string;
   fontSize: string;
 };
 
@@ -133,6 +144,7 @@ const TextInput = ({
   queryText,
   updateQueryText,
   executeSearch,
+  placeholder,
   fontSize,
 }: TextInputProps) => {
   const onKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -145,7 +157,7 @@ const TextInput = ({
   return (
     <BaseTextInput
       value={queryText}
-      placeholder="Search grant or describe your project"
+      placeholder={placeholder}
       onChange={(event) => updateQueryText(event.target.value)}
       onKeyDown={onKeyDown}
       $fontSize={fontSize}

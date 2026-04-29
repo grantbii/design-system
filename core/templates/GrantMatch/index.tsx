@@ -58,7 +58,7 @@ const GrantMatch = ({
             updateActiveQuery={updateActiveQuery}
             queryText={queryText}
             updateQueryText={updateQueryText}
-            textSearchCallback={textSearchCallback}
+            onSearch={textSearchCallback}
             size="small"
           />
           <OpenModalButton openModalCallback={openModalCallback} />
