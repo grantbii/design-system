@@ -116,7 +116,6 @@ type SizeStyleProps = {
   height: string;
   padding: string;
   fontSize: string;
-  actionIconSize?: string;
 };
 
 const SIZE_PROPS_MAP: { [size in ButtonSize]: SizeStyleProps } = {
@@ -124,19 +123,16 @@ const SIZE_PROPS_MAP: { [size in ButtonSize]: SizeStyleProps } = {
     height: "40px",
     padding: `10px ${Spacing.px16}`, // not following spacing scale
     fontSize: "14px",
-    actionIconSize: "40px",
   },
   medium: {
     height: "46px",
     padding: `12px ${Spacing.px16}`, // not following spacing scale
     fontSize: "16px",
-    actionIconSize: "44px",
   },
   large: {
     height: "52px",
     padding: `14px ${Spacing.px16}`, // not following spacing scale
     fontSize: "18px",
-    actionIconSize: "48px",
   },
 };
 
@@ -153,7 +149,6 @@ export const RawButton = ({
   height,
   padding,
   fontSize,
-  actionIconSize = height,
   textDecoration = "none",
   defaultColor,
   hoverColor = defaultColor,
@@ -168,7 +163,6 @@ export const RawButton = ({
 
   const styleProps: ButtonStyleProps = {
     $isActionIcon: isActionIcon,
-    $actionIconSize: actionIconSize,
     $height: height,
     $fontSize: fontSize,
     $padding: padding,
@@ -210,7 +204,6 @@ export const RawButton = ({
 
 type ButtonStyleProps = {
   $isActionIcon: boolean;
-  $actionIconSize: string;
   $height: string;
   $padding: string;
   $fontSize: string;
@@ -232,9 +225,9 @@ const ButtonStyle = css<ButtonStyleProps>`
   gap: ${Spacing.px8};
 
   box-sizing: border-box;
-  width: ${(props) => (props.$isActionIcon ? props.$actionIconSize : "auto")};
-  height: ${(props) =>
-    props.$isActionIcon ? props.$actionIconSize : props.$height};
+  width: ${(props) => (props.$isActionIcon ? props.$height : "auto")};
+  min-width: ${(props) => (props.$isActionIcon ? props.$height : "auto")};
+  height: ${(props) => props.$height};
   padding: ${(props) => (props.$isActionIcon ? "0px" : props.$padding)};
 
   font-weight: ${Typography.weight.medium};
