@@ -11,18 +11,30 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  args: {},
-};
-
-export const Light: Story = {
+export const FullColor: Story = {
   args: {
-    isDarkTheme: false,
+    colorVariant: "full",
+    isLogomark: false,
   },
 };
 
-export const Dark: Story = {
+export const ReversedColor: Story = {
   args: {
-    isDarkTheme: true,
+    colorVariant: "reversed",
+    isLogomark: false,
+  },
+};
+
+export const FullColorLogomark: Story = {
+  args: {
+    colorVariant: "full",
+    isLogomark: true,
+  },
+};
+
+export const ReversedColorLogomark: Story = {
+  args: {
+    colorVariant: "reversed",
+    isLogomark: true,
   },
 };
