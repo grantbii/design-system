@@ -4,7 +4,6 @@ import { Color } from "../atoms";
 import { LabelledInput } from "../shared";
 
 type CheckboxProps = {
-  id: string;
   label: ReactNode;
   labelBefore?: boolean;
 } & DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
@@ -29,10 +28,18 @@ const BaseCheckbox = styled.input`
 `;
 
 type CheckboxLabelProps = {
-  id: string;
+  id?: string;
   label: ReactNode;
 };
 
 const CheckboxLabel = ({ id, label }: CheckboxLabelProps) => (
-  <label htmlFor={`${id}-checkbox`}>{label}</label>
+  <BaseCheckboxLabel htmlFor={`${id ?? label}-checkbox`}>
+    {label}
+  </BaseCheckboxLabel>
 );
+
+const BaseCheckboxLabel = styled.label`
+  &:hover {
+    cursor: pointer;
+  }
+`;
