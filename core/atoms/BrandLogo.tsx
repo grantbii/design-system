@@ -71,6 +71,7 @@ type BrandImageProps = {
 };
 
 const BrandImage = styled(Image)<BrandImageProps>`
+  display: block;
   border-radius: ${(props) => props.$borderRadius};
 
   @media (width < ${Responsive.widthBreakpoint.laptop}) {
