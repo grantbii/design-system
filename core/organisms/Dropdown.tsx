@@ -1,11 +1,17 @@
-import type { DetailedHTMLProps, SelectHTMLAttributes } from "react";
+import type {
+  ComponentPropsWithoutRef,
+  DetailedHTMLProps,
+  SelectHTMLAttributes,
+} from "react";
 import styled from "styled-components";
-import { Color } from "../atoms";
-import { InputValidation, type InputValidationProps } from "../shared";
+import { Color, Typography } from "../atoms";
 import { type Option } from "../types";
 
+type DropdownOption = Option &
+  Omit<ComponentPropsWithoutRef<"option">, keyof Option | "children">;
+
 export type DropdownProps = {
-  options: Option[];
+  options: DropdownOption[];
   defaultLabel?: string;
 } & DetailedHTMLProps<
   SelectHTMLAttributes<HTMLSelectElement>,
@@ -18,9 +24,9 @@ const Dropdown = ({ options, defaultLabel, ...selectProps }: DropdownProps) => (
       {defaultLabel ?? "-"}
     </option>
 
-    {options.map((option) => (
-      <option key={option.value} value={option.value}>
-        {option.label}
+    {options.map(({ label, ...optionProps }) => (
+      <option key={optionProps.value} {...optionProps}>
+        {label}
       </option>
     ))}
   </Select>
@@ -28,10 +34,17 @@ const Dropdown = ({ options, defaultLabel, ...selectProps }: DropdownProps) => (
 
 export default Dropdown;
 
-const Select = styled.select<InputValidationProps>`
+const Select = styled.select`
   padding: 12px 16px;
-  background-color: ${Color.neutral.white};
   border-radius: 8px;
 
-  ${InputValidation}
+  font-size: 16px;
+  font-weight: ${Typography.weight.medium};
+
+  background-color: transparent;
+  border: 1px solid ${Color.neutral.grey2};
+
+  &:active {
+    background-color: ${Color.accent.blue3};
+  }
 `;
