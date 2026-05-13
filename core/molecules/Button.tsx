@@ -113,9 +113,10 @@ const VARIANT_PROPS_MAP: { [variant in ButtonVariant]: VariantStyleProps } = {
 };
 
 type SizeStyleProps = {
-  height: string;
-  padding: string;
-  fontSize: string;
+  width?: string;
+  height?: string;
+  padding?: string;
+  fontSize?: string;
 };
 
 const SIZE_PROPS_MAP: { [size in ButtonSize]: SizeStyleProps } = {
@@ -146,9 +147,10 @@ export const RawButton = ({
   target,
   disabled,
   type,
-  height,
-  padding,
-  fontSize,
+  width = "auto",
+  height = "46px",
+  padding = `12px ${Spacing.px16}`,
+  fontSize = "16px",
   textDecoration = "none",
   defaultColor,
   hoverColor = defaultColor,
@@ -163,9 +165,10 @@ export const RawButton = ({
 
   const styleProps: ButtonStyleProps = {
     $isActionIcon: isActionIcon,
+    $width: width,
     $height: height,
-    $fontSize: fontSize,
     $padding: padding,
+    $fontSize: fontSize,
     $textDecoration: textDecoration,
     $defaultColor: defaultColor,
     $hoverColor: hoverColor,
@@ -204,6 +207,7 @@ export const RawButton = ({
 
 type ButtonStyleProps = {
   $isActionIcon: boolean;
+  $width: string;
   $height: string;
   $padding: string;
   $fontSize: string;
@@ -225,7 +229,7 @@ const ButtonStyle = css<ButtonStyleProps>`
   gap: ${Spacing.px8};
 
   box-sizing: border-box;
-  width: ${(props) => (props.$isActionIcon ? props.$height : "auto")};
+  width: ${(props) => (props.$isActionIcon ? props.$height : props.$width)};
   min-width: ${(props) => (props.$isActionIcon ? props.$height : "auto")};
   height: ${(props) => props.$height};
   padding: ${(props) => (props.$isActionIcon ? "0px" : props.$padding)};
