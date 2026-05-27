@@ -1,0 +1,50 @@
+name: Promote Dev to Prod
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: "Type promote to confirm"
+        required: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: promote-dev-to-prod
+  cancel-in-progress: false
+
+jobs:
+  promote-dev-to-prod:
+    runs-on: ubuntu-latest
+
+    if: >
+      ${{ 
+        github.event.inputs.confirm == 'promote'
+        && github.actor == vars.PROD_PROMOTER_ALLOWED_ACTOR
+      }}
+
+    steps:
+      - name: Generate app token
+        id: app-token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1
+        with:
+          client-id: ${{ vars.PROD_PROMOTER_CLIENT_ID }}
+          private-key: ${{ secrets.PROD_PROMOTER_PRIVATE_KEY }}
+          permission-contents: write
+
+      - name: Git checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          fetch-depth: 0
+
+      - name: Promote dev to prod
+        run: |
+          git fetch origin \
+            dev:refs/remotes/origin/dev \
+            prod:refs/remotes/origin/prod
+
+          git checkout -B prod origin/prod
+          git merge --ff-only origin/dev
+          git push origin HEAD:prod
