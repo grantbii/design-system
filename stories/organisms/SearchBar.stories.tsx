@@ -1,5 +1,4 @@
 import { SearchBar } from "@/.";
-import type { GrantMatchQuery } from "@grantbii/ui-core/match/entities";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useState } from "react";
 
@@ -8,27 +7,24 @@ type SearchBarExampleProps = {
 };
 
 const SearchBarExample = ({ size }: SearchBarExampleProps) => {
-  const [activeQuery, setActiveQuery] = useState<GrantMatchQuery>(emptyQuery);
-  const updateActiveQuery = (newQuery: GrantMatchQuery) =>
-    setActiveQuery(newQuery);
-
   const [queryText, setQueryText] = useState("");
-  const updateQueryText = (newText: string) => setQueryText(newText);
+
+  const performSearch = () => {
+    if (queryText.trim() !== "") {
+      alert(`Searching for ${queryText}`);
+    }
+  };
 
   return (
     <SearchBar
-      activeQuery={activeQuery}
-      updateActiveQuery={updateActiveQuery}
       queryText={queryText}
-      updateQueryText={updateQueryText}
+      onChangeQueryText={(event) => setQueryText(event.target.value)}
+      handlePressEnter={() => performSearch()}
+      onClickSearch={() => performSearch()}
+      onClickReset={() => setQueryText("")}
       size={size}
     />
   );
-};
-
-const emptyQuery = {
-  text: "",
-  files: [],
 };
 
 const meta: Meta<typeof SearchBar> = {
