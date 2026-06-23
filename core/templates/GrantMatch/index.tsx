@@ -2,7 +2,7 @@ import type { GrantMatchQuery } from "@grantbii/ui-core/match/entities";
 import { checkGrantMatchActive } from "@grantbii/ui-core/match/validations";
 import { useMemo, useState } from "react";
 import styled from "styled-components";
-import { Color, Responsive } from "../../atoms";
+import { Color, Responsive, Spacing } from "../../atoms";
 import { SearchBar, useModal } from "../../organisms";
 import ActiveQueryFiles from "./ActiveQueryFiles";
 import GrantMatchModal from "./GrantMatchModal";
@@ -49,17 +49,26 @@ const GrantMatch = ({
     ],
   );
 
+  const handleSearch = () => {
+    updateActiveQuery({ files: activeQuery.files, text: queryText });
+    textSearchCallback?.();
+  };
+
+  const handleReset = () => {
+    updateQueryText("");
+    updateActiveQuery({ files: activeQuery.files, text: "" });
+  };
+
   return (
     <GrantMatchContext.Provider value={commonProps}>
       <BaseGrantMatch>
         <SearchBarContainer>
           <SearchBar
-            activeQuery={activeQuery}
-            updateActiveQuery={updateActiveQuery}
             queryText={queryText}
-            updateQueryText={updateQueryText}
-            onSearch={textSearchCallback}
-            runSearchOnReset
+            onChangeQueryText={(event) => setQueryText(event.target.value)}
+            handlePressEnter={() => handleSearch()}
+            onClickSearch={() => handleSearch()}
+            onClickReset={() => handleReset()}
             size="small"
           />
           <OpenModalButton openModalCallback={openModalCallback} />
@@ -85,7 +94,7 @@ export default GrantMatch;
 const BaseGrantMatch = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: ${Spacing.px8};
 
   width: 100%;
   max-width: 100vw;
@@ -102,7 +111,7 @@ const SearchBarContainer = styled.div`
   background-color: ${Color.neutral.white};
 
   @media (width < ${Responsive.widthBreakpoint.laptop}) {
-    gap: 8px;
+    gap: ${Spacing.px8};
     padding: 0px;
 
     box-shadow: none;
@@ -110,11 +119,11 @@ const SearchBarContainer = styled.div`
   }
 
   @media (width >= ${Responsive.widthBreakpoint.laptop}) {
-    gap: 16px;
-    padding: 12px 16px;
+    gap: ${Spacing.px16};
+    padding: ${Spacing.px12} ${Spacing.px16};
 
-    box-shadow: 0px 0px 40px 0px #00000008;
-    border-radius: 12px;
+    box-shadow: 0px 0px ${Spacing.px40} 0px #00000008;
+    border-radius: ${Spacing.px12};
   }
 `;
 

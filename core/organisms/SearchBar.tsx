@@ -1,56 +1,48 @@
-import type { GrantMatchQuery } from "@grantbii/ui-core/match/entities";
-import type { KeyboardEvent } from "react";
+import type {
+  ChangeEventHandler,
+  KeyboardEvent,
+  MouseEventHandler,
+} from "react";
 import styled from "styled-components";
-import { Color, Responsive, SystemIcon } from "../atoms";
+import { Color, Responsive, Spacing, SystemIcon } from "../atoms";
 import { Button } from "../molecules";
 
 type SearchBarProps = {
-  activeQuery: GrantMatchQuery;
-  updateActiveQuery: (query: GrantMatchQuery) => void;
   queryText: string;
-  updateQueryText: (newText: string) => void;
-  onSearch?: () => void;
+  onChangeQueryText: ChangeEventHandler<HTMLInputElement, HTMLInputElement>;
+  onClickReset: MouseEventHandler<HTMLButtonElement>;
+  onClickSearch: MouseEventHandler<HTMLButtonElement>;
+  handlePressEnter: () => void;
+  autoFocus?: boolean;
+  disableSearch?: boolean;
   placeholder?: string;
-  runSearchOnReset?: boolean;
   size?: SearchBarSize;
 };
 
 type SearchBarSize = "small" | "medium";
 
-const DEFAULT_PLACEHOLDER = "Search grant or describe your project";
-
 const SearchBar = ({
-  activeQuery,
-  updateActiveQuery,
   queryText,
-  updateQueryText,
-  onSearch,
-  placeholder = DEFAULT_PLACEHOLDER,
-  runSearchOnReset = false,
+  onChangeQueryText,
+  onClickSearch,
+  onClickReset,
+  handlePressEnter,
+  autoFocus = false,
+  disableSearch = false,
+  placeholder = "Search grant or describe your project",
   size = "medium",
 }: SearchBarProps) => {
-  const { height, fontSize } = SIZE_PROPS_MAP[size];
-
-  const resetSearch = () => {
-    updateQueryText("");
-
-    if (runSearchOnReset) {
-      updateActiveQuery({ files: activeQuery.files, text: "" });
-    }
-  };
-
-  const executeSearch = () => {
-    onSearch?.();
-    updateActiveQuery({ files: activeQuery.files, text: queryText });
-  };
+  const { height, fontSize } = sizePropsMap[size];
 
   return (
     <BaseSearchBar>
       <SearchArea $height={height} $hasQueryText={queryText !== ""}>
         <TextInput
           queryText={queryText}
-          updateQueryText={updateQueryText}
-          executeSearch={executeSearch}
+          onChangeQueryText={onChangeQueryText}
+          handlePressEnter={handlePressEnter}
+          autoFocus={autoFocus}
+          disableSearch={disableSearch}
           placeholder={placeholder}
           fontSize={fontSize}
         />
@@ -58,13 +50,14 @@ const SearchBar = ({
         {queryText === "" ? (
           <ResetButtonPlaceholder />
         ) : (
-          <ResetButton resetSearch={resetSearch} />
+          <ResetButton onClickReset={onClickReset} />
         )}
       </SearchArea>
 
       <Button
+        disabled={disableSearch}
         Icon={SystemIcon.MagnifyingGlassIcon}
-        onClick={executeSearch}
+        onClick={onClickSearch}
         size={size}
       />
     </BaseSearchBar>
@@ -78,9 +71,9 @@ type SizeStyleProps = {
   fontSize: string;
 };
 
-const SIZE_PROPS_MAP: { [size in SearchBarSize]: SizeStyleProps } = {
+const sizePropsMap: { [size in SearchBarSize]: SizeStyleProps } = {
   small: {
-    height: "40px",
+    height: Spacing.px40,
     fontSize: "12px",
   },
   medium: {
@@ -93,7 +86,7 @@ const BaseSearchBar = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
+  gap: ${Spacing.px8};
 
   width: 100%;
 
@@ -102,7 +95,7 @@ const BaseSearchBar = styled.div`
   }
 
   @media (width >= ${Responsive.widthBreakpoint.laptop}) {
-    border-radius: 12px;
+    border-radius: ${Spacing.px12};
   }
 `;
 
@@ -124,7 +117,7 @@ const SearchArea = styled.div<SearchAreaProps>`
   border: 0.5px solid
     ${(props) =>
       props.$hasQueryText ? Color.accent.yellow1 : Color.neutral.grey2};
-  border-radius: 8px;
+  border-radius: ${Spacing.px8};
 
   &:focus-within {
     background-color: ${Color.neutral.white};
@@ -134,23 +127,27 @@ const SearchArea = styled.div<SearchAreaProps>`
 
 type TextInputProps = {
   queryText: string;
-  updateQueryText: (newText: string) => void;
-  executeSearch: () => void;
+  onChangeQueryText?: ChangeEventHandler<HTMLInputElement, HTMLInputElement>;
+  handlePressEnter: () => void;
+  autoFocus: boolean;
+  disableSearch: boolean;
   placeholder: string;
   fontSize: string;
 };
 
 const TextInput = ({
   queryText,
-  updateQueryText,
-  executeSearch,
+  onChangeQueryText,
+  handlePressEnter,
+  autoFocus,
+  disableSearch,
   placeholder,
   fontSize,
 }: TextInputProps) => {
   const onKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter" && !event.repeat) {
+    if (event.key === "Enter" && !event.repeat && !disableSearch) {
       event.preventDefault();
-      executeSearch();
+      handlePressEnter();
     }
   };
 
@@ -158,8 +155,9 @@ const TextInput = ({
     <BaseTextInput
       value={queryText}
       placeholder={placeholder}
-      onChange={(event) => updateQueryText(event.target.value)}
+      onChange={onChangeQueryText}
       onKeyDown={onKeyDown}
+      autoFocus={autoFocus}
       $fontSize={fontSize}
     />
   );
@@ -167,7 +165,7 @@ const TextInput = ({
 
 const BaseTextInput = styled.input<{ $fontSize: string }>`
   width: 100%;
-  margin-left: 16px;
+  margin-left: ${Spacing.px16};
 
   font-size: ${(props) => props.$fontSize};
   text-overflow: ellipsis;
@@ -178,11 +176,11 @@ const BaseTextInput = styled.input<{ $fontSize: string }>`
 `;
 
 type ResetButtonProps = {
-  resetSearch: () => void;
+  onClickReset: MouseEventHandler<HTMLButtonElement>;
 };
 
-const ResetButton = ({ resetSearch }: ResetButtonProps) => (
-  <BaseResetButton onClick={resetSearch} type="button">
+const ResetButton = ({ onClickReset }: ResetButtonProps) => (
+  <BaseResetButton onClick={onClickReset} type="button">
     <SystemIcon.XIcon size={14} color={Color.neutral.black} />
   </BaseResetButton>
 );
@@ -196,12 +194,12 @@ const BaseResetButton = styled.button`
   min-width: 38px;
   height: 38px;
 
-  border-radius: 8px;
+  border-radius: ${Spacing.px8};
 `;
 
 const ResetButtonPlaceholder = styled.div`
   width: 38px;
   height: 38px;
 
-  border-radius: 8px;
+  border-radius: ${Spacing.px8};
 `;
