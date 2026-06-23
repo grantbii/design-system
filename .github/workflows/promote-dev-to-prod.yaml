@@ -18,13 +18,19 @@ jobs:
   promote-dev-to-prod:
     runs-on: ubuntu-latest
 
-    if: >
-      ${{ 
-        github.event.inputs.confirm == 'promote'
-        && github.actor == vars.PROD_PROMOTER_ALLOWED_ACTOR
-      }}
-
     steps:
+      - name: Validate promotion request
+        run: |
+          if [ "${{ github.event.inputs.confirm }}" != "promote" ]; then
+            echo "Confirmation failed. You must type: promote"
+            exit 1
+          fi
+
+          if [ "${{ github.actor }}" != "${{ vars.PROD_PROMOTER_ALLOWED_ACTOR }}" ]; then
+            echo "Unauthorized: ${{ github.actor }}"
+            exit 1
+          fi
+
       - name: Generate app token
         id: app-token
         uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1
