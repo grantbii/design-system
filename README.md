@@ -59,6 +59,6 @@ Check which files would be published with `npm publish --dry-run`
 
 The package is published to npm automatically with [GitHub Actions](.github/workflows/continuous-delivery.yaml).
 
-Documentation is published automatically to GitHub pages with [GitHub Actions](.github/workflows/continuous-delivery.yaml).
+The corresponding documentation is published to GitHub pages automatically with [GitHub Actions](.github/workflows/continuous-delivery.yaml).
 
 Once a commit has been made on the `prod` branch, a build would be triggered.

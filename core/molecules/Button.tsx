@@ -8,7 +8,7 @@ import type {
 import styled, { css } from "styled-components";
 import { Color, Spacing, SystemIcon, Typography } from "../atoms";
 
-type ButtonVariant =
+export type ButtonVariant =
   | "primary"
   | "secondary"
   | "tertiary"
@@ -17,7 +17,7 @@ type ButtonVariant =
   | "text"
   | "danger";
 
-type ButtonSize = "small" | "medium" | "large";
+export type ButtonSize = "small" | "medium" | "large";
 
 type CustomButtonProps = {
   label?: ReactNode;

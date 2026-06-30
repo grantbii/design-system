@@ -1,12 +1,16 @@
-import { SearchBar } from "@/.";
+import { SearchBar, type ButtonVariant, type SearchBarSize } from "@/.";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useState } from "react";
 
 type SearchBarExampleProps = {
-  size?: "small" | "medium";
+  size?: SearchBarSize;
+  searchButtonVariant?: ButtonVariant;
 };
 
-const SearchBarExample = ({ size }: SearchBarExampleProps) => {
+const SearchBarExample = ({
+  size,
+  searchButtonVariant,
+}: SearchBarExampleProps) => {
   const [queryText, setQueryText] = useState("");
 
   const performSearch = () => {
@@ -18,10 +22,11 @@ const SearchBarExample = ({ size }: SearchBarExampleProps) => {
   return (
     <SearchBar
       queryText={queryText}
-      onChangeQueryText={(event) => setQueryText(event.target.value)}
-      handlePressEnter={() => performSearch()}
-      onClickSearch={() => performSearch()}
       onClickReset={() => setQueryText("")}
+      onClickSearch={() => performSearch()}
+      handlePressEnter={() => performSearch()}
+      onChangeQueryText={(event) => setQueryText(event.target.value)}
+      searchButtonVariant={searchButtonVariant}
       size={size}
     />
   );
@@ -46,4 +51,8 @@ export const Small: Story = {
 
 export const Medium: Story = {
   args: { size: "medium" },
+};
+
+export const OutlineSearchButton: Story = {
+  args: { size: "medium", searchButtonVariant: "outline" },
 };
