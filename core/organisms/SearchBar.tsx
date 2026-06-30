@@ -5,7 +5,9 @@ import type {
 } from "react";
 import styled from "styled-components";
 import { Color, Responsive, Spacing, SystemIcon } from "../atoms";
-import { Button } from "../molecules";
+import { Button, type ButtonVariant } from "../molecules";
+
+export type SearchBarSize = "small" | "medium";
 
 type SearchBarProps = {
   queryText: string;
@@ -15,11 +17,10 @@ type SearchBarProps = {
   handlePressEnter: () => void;
   autoFocus?: boolean;
   disableSearch?: boolean;
+  searchButtonVariant?: ButtonVariant;
   placeholder?: string;
   size?: SearchBarSize;
 };
-
-type SearchBarSize = "small" | "medium";
 
 const SearchBar = ({
   queryText,
@@ -29,6 +30,7 @@ const SearchBar = ({
   handlePressEnter,
   autoFocus = false,
   disableSearch = false,
+  searchButtonVariant = "primary",
   placeholder = "Search grant or describe your project",
   size = "medium",
 }: SearchBarProps) => {
@@ -55,9 +57,10 @@ const SearchBar = ({
       </SearchArea>
 
       <Button
+        onClick={onClickSearch}
         disabled={disableSearch}
         Icon={SystemIcon.MagnifyingGlassIcon}
-        onClick={onClickSearch}
+        variant={searchButtonVariant}
         size={size}
       />
     </BaseSearchBar>
