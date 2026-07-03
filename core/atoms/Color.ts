@@ -44,17 +44,17 @@ export const accent = {
   blue4: "#F5F9FF",
 } as const;
 
-const allColors = {
-  brand,
-  neutral,
-  typography,
-  accent,
-} as const;
+type ValueOf<ObjectType> = ObjectType[keyof ObjectType];
 
-type ValueOf<T> = T[keyof T];
+type ColorGroups = {
+  brand: typeof brand;
+  neutral: typeof neutral;
+  typography: typeof typography;
+  accent: typeof accent;
+};
 
 type TokenColor = ValueOf<{
-  [K in keyof typeof allColors]: ValueOf<(typeof allColors)[K]>;
+  [GroupName in keyof ColorGroups]: ValueOf<ColorGroups[GroupName]>;
 }>;
 
 export type DesignColor = TokenColor | "transparent";

@@ -2,7 +2,7 @@
   "name": "@grantbii/design-system",
   "author": "Grantbii",
   "license": "UNLICENSED",
-  "version": "1.28.0",
+  "version": "1.28.1",
   "description": "Grantbii's Design System",
   "homepage": "https://design.grantbii.com",
   "repository": {
@@ -12,7 +12,7 @@
   "main": "./index.js",
   "types": "./index.d.ts",
   "scripts": {
-    "lint": "next lint",
+    "lint": "eslint . --max-warnings=0",
     "prepare": "husky",
     "build": "npx tsc && cp -r ./core/assets ./dist/core && cp ./package.json ./dist && cp README.md ./dist",
     "postpublish": "rm -rf dist/",
@@ -67,7 +67,7 @@
       "prettier --write"
     ],
     "**/*.{mjs,ts,tsx}": [
-      "eslint --fix",
+      "eslint --fix --max-warnings=0",
       "prettier --write"
     ]
   }
