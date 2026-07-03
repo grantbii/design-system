@@ -1,9 +1,12 @@
 import Image from "next/image";
+import type { MouseEventHandler } from "react";
 import styled from "styled-components";
 import grantMatchLogo from "../../assets/logos/grant_match_logo.webp";
+import { Color, Spacing, Typography } from "../../atoms";
+import { applyTypography } from "../../integrations";
 import { Button, Textarea } from "../../molecules";
+import { Modal } from "../../organisms";
 import FileDrop, { useFileDrop } from "../../organisms/FileDrop";
-import Modal from "../../organisms/Modal";
 import { useGrantMatchContext } from "./context";
 
 type GrantMatchModalProps = {
@@ -15,40 +18,42 @@ const GrantMatchModal = ({
   findGrantsCallback,
   closeModalCallback,
 }: GrantMatchModalProps) => {
-  const { activeQuery, closeModal } = useGrantMatchContext();
+  const { closeModal, updateActiveQuery, queryText, activeQuery } =
+    useGrantMatchContext();
   const { files, uploadFiles, removeFile, errorMessage } = useFileDrop(
     activeQuery.files,
   );
 
-  const onClickClose = () => {
-    if (closeModalCallback) {
-      closeModalCallback();
-    }
+  const onClickFind = () => {
+    findGrantsCallback?.();
+    updateActiveQuery({ files, text: queryText });
+    closeModal();
+  };
 
+  const onClickClose = () => {
+    closeModalCallback?.();
     closeModal();
   };
 
   return (
-    <Modal
-      header={<ModalHeader />}
-      content={
+    <Modal width="600px" height="560px">
+      <ModalHeader />
+
+      <ModalBody>
         <ModalContent
           files={files}
           uploadFiles={uploadFiles}
           removeFile={removeFile}
           errorMessage={errorMessage}
         />
-      }
-      footer={
-        <FindGrantsButton
-          files={files}
-          findGrantsCallback={findGrantsCallback}
-        />
-      }
-      onClickClose={onClickClose}
-      width="600px"
-      height="560px"
-    />
+      </ModalBody>
+
+      <ModalFooter
+        files={files}
+        onClickFind={onClickFind}
+        onClickClose={onClickClose}
+      />
+    </Modal>
   );
 };
 
@@ -69,15 +74,30 @@ const ModalHeader = () => (
 const BaseModalHeader = styled.div`
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: ${Spacing.px16};
+
+  margin-bottom: ${Spacing.px12};
+  padding: ${Spacing.px12} ${Spacing.px20};
+
+  border-bottom: 1px solid ${Color.neutral.grey3};
+
+  ${applyTypography(Typography.subheading2Medium)}
 `;
 
 const GrantMatchLogo = styled(Image)`
-  width: 24px;
-  height: 24px;
+  width: ${Spacing.px24};
+  height: ${Spacing.px24};
 
   box-shadow: 0px 0px 5px 5px #ffe2b680;
   border-radius: 120px;
+`;
+
+const ModalBody = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+  overflow-y: auto;
 `;
 
 type ModalContentProps = {
@@ -108,24 +128,33 @@ const ModalContent = ({
       </ModalFileDrop>
 
       <ModalQueryText>
-        <label htmlFor={QUERY_TEXTAREA_ID}>Tell us what you intend to do</label>
+        <label htmlFor={textareaId}>Tell us what you intend to do</label>
         <Textarea
-          id={QUERY_TEXTAREA_ID}
+          id={textareaId}
           value={queryText}
           onChange={(event) => updateQueryText(event.target.value)}
-          placeholder="Give a summary of your project, specifying the key activities you will do & what you intend to achieve"
+          placeholder={textareaPlaceholder}
         />
       </ModalQueryText>
     </BaseContent>
   );
 };
 
-const QUERY_TEXTAREA_ID = "query-textarea";
+const textareaId = "query-textarea";
+const textareaPlaceholder =
+  "Give a summary of your project, specifying the key activities you will do & what you intend to achieve";
 
 const BaseContent = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: ${Spacing.px12};
+
+  width: 100%;
+  height: 100%;
+  min-height: ${Spacing.px100};
+
+  padding: ${Spacing.px4} ${Spacing.px20};
+  border: none;
 `;
 
 const ModalFileDrop = styled.div`
@@ -138,34 +167,44 @@ const ModalQueryText = styled.div`
   flex-direction: column;
 `;
 
-type FindGrantsButtonProps = {
+type ModalFooterProps = {
   files: File[];
-  findGrantsCallback?: () => void;
+  onClickFind: MouseEventHandler<HTMLElement>;
+  onClickClose: MouseEventHandler<HTMLElement>;
 };
 
-const FindGrantsButton = ({
+const ModalFooter = ({
   files,
-  findGrantsCallback,
-}: FindGrantsButtonProps) => {
-  const { updateActiveQuery, queryText, closeModal } = useGrantMatchContext();
+  onClickFind,
+  onClickClose,
+}: ModalFooterProps) => {
+  const { queryText } = useGrantMatchContext();
   const hasQuery = queryText.trim() !== "" || files.length > 0;
 
-  const onClick = () => {
-    if (findGrantsCallback) {
-      findGrantsCallback();
-    }
-
-    updateActiveQuery({ files, text: queryText });
-    closeModal();
-  };
-
   return (
-    <Button
-      label="Find My Grants"
-      disabled={!hasQuery}
-      onClick={onClick}
-      variant="secondary"
-      size="small"
-    />
+    <BaseModalFooter>
+      <Button
+        label="Close"
+        onClick={onClickClose}
+        variant="tertiary"
+        size="small"
+      />
+
+      <Button
+        label="Find My Grants"
+        disabled={!hasQuery}
+        onClick={onClickFind}
+        variant="secondary"
+        size="small"
+      />
+    </BaseModalFooter>
   );
 };
+
+const BaseModalFooter = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: ${Spacing.px12};
+
+  padding: ${Spacing.px16} ${Spacing.px20};
+`;

@@ -1,87 +1,118 @@
-import { Button, Modal, useModal } from "@/.";
+import {
+  applyTypography,
+  Button,
+  Modal,
+  Spacing,
+  SystemIcon,
+  Typography,
+  useModal,
+} from "@/.";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import type { JSX, ReactNode } from "react";
+import type { MouseEventHandler, PropsWithChildren } from "react";
+import styled from "styled-components";
 
-type ModalExampleProps = {
-  header?: ReactNode;
-  content: JSX.Element;
-  footer?: ReactNode;
+type ModalDemoProps = {
   width?: string;
   height?: string;
-};
+} & PropsWithChildren;
 
-const ModalExample = (props: ModalExampleProps) => {
-  const { showModal, openModal, closeModal } = useModal();
+const ModalDemo = ({ width, height, children }: ModalDemoProps) => {
+  const { isModalOpen, openModal, closeModal } = useModal();
 
   return (
-    <div>
+    <>
       <Button label="Click to open modal" onClick={() => openModal()} />
 
-      {showModal ? (
-        <Modal {...props} onClickClose={() => closeModal()} />
+      {isModalOpen ? (
+        <Modal width={width} height={height}>
+          <ModalContent>
+            <ModalHeader onClickClose={() => closeModal()} />
+            {children}
+          </ModalContent>
+        </Modal>
       ) : (
         <></>
       )}
-    </div>
+    </>
   );
 };
 
-const meta: Meta<typeof ModalExample> = {
+const ModalContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${Spacing.px8};
+
+  padding: ${Spacing.px20};
+`;
+
+type ModalHeaderProps = {
+  onClickClose: MouseEventHandler<HTMLElement>;
+};
+
+const ModalHeader = ({ onClickClose }: ModalHeaderProps) => (
+  <BaseModalHeader>
+    <ModalTitle>Sample Modal Header</ModalTitle>
+    <Button onClick={onClickClose} Icon={SystemIcon.XIcon} variant="ghost" />
+  </BaseModalHeader>
+);
+
+const BaseModalHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const ModalTitle = styled.h3`
+  ${applyTypography(Typography.heading3)}
+`;
+
+const meta: Meta<typeof ModalDemo> = {
   title: "Organisms/Modal",
-  component: ModalExample,
+  component: Modal,
   tags: ["autodocs"],
+  render: (args) => <ModalDemo {...args} />,
+  args: {
+    width: "600px",
+    height: "360px",
+  },
 };
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const baseArgs = {
-  header: "Grantbii",
-  width: "600px",
-  height: "360px",
-};
-
-const shortContent = (
-  <p>Amplifying Business Grant Impact for SMEs & Scale-ups</p>
-);
-
 export const ShortContent: Story = {
   args: {
-    ...baseArgs,
-    content: shortContent,
+    children: <p>Amplifying Business Grant Impact for SMEs & Scale-ups</p>,
   },
 };
 
-const longContent = (
-  <div>
-    <p>
-      Grantbii is an AI-powered grant intelligence and matching platform that
-      helps grant seekers effortlessly find, match, prep & apply for the right
-      business grants - maximizing grant funding success with minimal effort.
-      Our platform connects businesses with a trusted Grant Enabler Network -
-      solution providers, consulting experts, and delivery partners - ensuring
-      that every dollar of grant funding leads to real business transformation
-      impact.
-    </p>
-
-    <p>
-      In the future, Grantbii aims to automate the entire grant application
-      lifecycle, from discovery to claims submission and guide you through the
-      application process with minimal effort on your part.
-    </p>
-
-    <p>
-      To maximize your chances of grant success, you can expect to leverage on
-      tools to assess your chances of success and offer expert support to ensure
-      your application meets all necessary requirements.
-    </p>
-  </div>
-);
-
 export const LongContent: Story = {
   args: {
-    ...baseArgs,
-    content: longContent,
+    children: (
+      <div>
+        <p>
+          Grantbii is an AI-powered grant intelligence and matching platform
+          that helps grant seekers effortlessly find, match, prep & apply for
+          the right business grants - maximizing grant funding success with
+          minimal effort. Our platform connects businesses with a trusted Grant
+          Enabler Network - solution providers, consulting experts, and delivery
+          partners - ensuring that every dollar of grant funding leads to real
+          business transformation impact.
+        </p>
+
+        <p>
+          In the future, Grantbii aims to automate the entire grant application
+          lifecycle, from discovery to claims submission and guide you through
+          the application process with minimal effort on your part.
+        </p>
+
+        <p>
+          To maximize your chances of grant success, you can expect to leverage
+          on tools to assess your chances of success and offer expert support to
+          ensure your application meets all necessary requirements.
+        </p>
+      </div>
+    ),
   },
 };

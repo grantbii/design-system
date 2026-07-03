@@ -1,54 +1,19 @@
-import {
-  type JSX,
-  type MouseEventHandler,
-  type ReactNode,
-  useCallback,
-  useState,
-} from "react";
+import { type PropsWithChildren, useCallback, useState } from "react";
 import { createPortal } from "react-dom";
 import styled from "styled-components";
-import { Color, Responsive } from "../atoms";
-import { Button, Overlay } from "../molecules";
+import { Color, Responsive, Spacing } from "../atoms";
+import { Overlay } from "../molecules";
 
 type ModalProps = {
-  header?: ReactNode;
-  content: JSX.Element;
-  footer?: ReactNode;
   width?: string;
   height?: string;
-  onClickClose?: MouseEventHandler<HTMLButtonElement>;
-  closeText?: string;
-};
+} & PropsWithChildren;
 
-const Modal = ({
-  header,
-  content,
-  footer,
-  width,
-  height,
-  onClickClose,
-  closeText,
-}: ModalProps) =>
+const Modal = ({ width, height, children }: ModalProps) =>
   createPortal(
     <Overlay $centerContent>
       <ModalWindow $width={width} $height={height}>
-        {header ? <ModalHeader>{header}</ModalHeader> : <></>}
-
-        <ModalBody>{content}</ModalBody>
-
-        {onClickClose || footer ? (
-          <ModalFooter>
-            {onClickClose ? (
-              <CloseButton onClick={onClickClose} closeText={closeText} />
-            ) : (
-              <></>
-            )}
-
-            {footer}
-          </ModalFooter>
-        ) : (
-          <></>
-        )}
+        {children}
       </ModalWindow>
     </Overlay>,
     document.body,
@@ -57,7 +22,7 @@ const Modal = ({
 export default Modal;
 
 export const useModal = () => {
-  const [showModal, setShowModal] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const lockScroll = useCallback(() => {
     document.body.style.overflow = "hidden";
@@ -68,19 +33,19 @@ export const useModal = () => {
   }, []);
 
   const openModal = () => {
-    setShowModal(true);
+    setIsModalOpen(true);
     lockScroll();
   };
 
   const closeModal = () => {
-    setShowModal(false);
+    setIsModalOpen(false);
     unlockScroll();
   };
 
   return {
-    showModal,
     openModal,
     closeModal,
+    isModalOpen,
   };
 };
 
@@ -90,7 +55,7 @@ const ModalWindow = styled.div<{ $width?: string; $height?: string }>`
 
   background-color: ${Color.neutral.white};
 
-  min-height: 100px;
+  min-height: ${Spacing.px100};
   max-height: 100vh;
 
   @media (width < ${Responsive.widthBreakpoint.laptop}) {
@@ -112,50 +77,6 @@ const ModalWindow = styled.div<{ $width?: string; $height?: string }>`
     width: ${({ $width }) => $width};
     height: ${({ $height }) => $height};
 
-    border-radius: 8px;
+    border-radius: ${Spacing.px8};
   }
 `;
-
-const ModalHeader = styled.div`
-  font-weight: 500;
-  font-size: 18px;
-
-  padding: 12px 20px;
-  margin-bottom: 12px;
-
-  border-bottom: 1px solid ${Color.neutral.grey3};
-`;
-
-const ModalBody = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  height: 100%;
-  overflow-y: auto;
-
-  > * {
-    width: 100%;
-    height: 100%;
-    min-height: 100px;
-
-    padding: 2px 20px;
-    border: none;
-  }
-`;
-
-const ModalFooter = styled.div`
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-
-  padding: 16px 20px;
-`;
-
-type CloseButtonProps = {
-  onClick: MouseEventHandler<HTMLButtonElement>;
-  closeText?: string;
-};
-
-const CloseButton = ({ onClick, closeText = "Close" }: CloseButtonProps) => (
-  <Button label={closeText} onClick={onClick} variant="tertiary" size="small" />
-);

@@ -1,5 +1,9 @@
 import type { MouseEventHandler, ReactNode } from "react";
-import Modal from "../organisms/Modal";
+import styled from "styled-components";
+import { Color, Spacing, Typography } from "../atoms";
+import { applyTypography } from "../integrations";
+import { Button } from "../molecules";
+import { Modal } from "../organisms";
 
 type TallyModalProps = {
   header?: ReactNode;
@@ -9,25 +13,68 @@ type TallyModalProps = {
 };
 
 const TallyModal = ({
+  header,
   tallyId,
   prefilledFieldsQueryParams,
-  ...modalProps
+  onClickClose,
 }: TallyModalProps) => (
-  <Modal
-    {...modalProps}
-    content={
-      <iframe
+  <Modal width="640px" height="600px">
+    {header ? <ModalHeader>{header}</ModalHeader> : <></>}
+
+    <ModalBody>
+      <ModalIframe
         src={constructIframeSrc(tallyId, prefilledFieldsQueryParams)}
         loading="lazy"
         title="Tally Modal"
       />
-    }
-    width="640px"
-    height="600px"
-  />
+    </ModalBody>
+
+    <ModalFooter>
+      <Button
+        label="Close"
+        onClick={onClickClose}
+        variant="tertiary"
+        size="small"
+      />
+    </ModalFooter>
+  </Modal>
 );
 
 export default TallyModal;
+
+const ModalHeader = styled.div`
+  margin-bottom: ${Spacing.px12};
+  padding: ${Spacing.px12} ${Spacing.px20};
+
+  border-bottom: 1px solid ${Color.neutral.grey3};
+
+  ${applyTypography(Typography.subheading2Medium)}
+`;
+
+const ModalBody = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+  overflow-y: auto;
+`;
+
+const ModalIframe = styled.iframe`
+  width: 100%;
+  height: 100%;
+  min-height: ${Spacing.px100};
+
+  padding: ${Spacing.px4} ${Spacing.px20};
+  border: none;
+`;
+
+const ModalFooter = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: ${Spacing.px12};
+
+  padding: ${Spacing.px16} ${Spacing.px20};
+`;
 
 const constructIframeSrc = (
   tallyId: string,
@@ -37,8 +84,8 @@ const constructIframeSrc = (
     ? `&${prefilledFieldsQueryParams}`
     : "";
 
-  return `https://tally.so/embed/${tallyId}?${TALLY_QUERIES}${queryParams}`;
+  return `https://tally.so/embed/${tallyId}?${tallyQueryParams}${queryParams}`;
 };
 
-const TALLY_QUERIES =
+const tallyQueryParams =
   "alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=0";

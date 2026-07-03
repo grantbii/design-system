@@ -50,9 +50,6 @@ const meta: Meta<typeof GrantMatchExample> = {
   title: "Templates/Grant Match",
   component: GrantMatchExample,
   tags: ["autodocs"],
-  parameters: {
-    layout: "fullscreen",
-  },
 };
 
 export default meta;
