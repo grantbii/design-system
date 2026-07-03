@@ -26,27 +26,19 @@ const GrantMatch = ({
   closeModalCallback,
   openModalCallback,
 }: GrantMatchProps) => {
-  const { showModal, openModal, closeModal } = useModal();
+  const { isModalOpen, openModal, closeModal } = useModal();
   const [queryText, setQueryText] = useState(activeQuery.text);
-  const updateQueryText = (newText: string) => setQueryText(newText);
 
   const commonProps = useMemo(
     () => ({
       activeQuery,
       updateActiveQuery,
       queryText,
-      updateQueryText,
+      updateQueryText: setQueryText,
       openModal,
       closeModal,
     }),
-    [
-      activeQuery,
-      updateActiveQuery,
-      queryText,
-      updateQueryText,
-      openModal,
-      closeModal,
-    ],
+    [activeQuery, updateActiveQuery, queryText, openModal, closeModal],
   );
 
   const handleSearch = () => {
@@ -55,7 +47,7 @@ const GrantMatch = ({
   };
 
   const handleReset = () => {
-    updateQueryText("");
+    setQueryText("");
     updateActiveQuery({ files: activeQuery.files, text: "" });
   };
 
@@ -76,7 +68,7 @@ const GrantMatch = ({
 
         {activeQuery.files.length > 0 ? <ActiveQueryFiles /> : <></>}
 
-        {showModal ? (
+        {isModalOpen ? (
           <GrantMatchModal
             findGrantsCallback={findGrantsCallback}
             closeModalCallback={closeModalCallback}

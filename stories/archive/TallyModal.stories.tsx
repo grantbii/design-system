@@ -9,12 +9,12 @@ type TallyModalExampleProps = {
 };
 
 const TallyModalExample = (props: TallyModalExampleProps) => {
-  const { showModal, openModal, closeModal } = useModal();
+  const { isModalOpen, openModal, closeModal } = useModal();
 
   return (
     <>
       <Button label="Click to open modal" onClick={() => openModal()} />
-      {showModal ? (
+      {isModalOpen ? (
         <TallyModal {...props} onClickClose={() => closeModal()} />
       ) : (
         <></>
