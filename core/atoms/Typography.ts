@@ -10,12 +10,6 @@ const responsivePx = (desktopPx: number, mobilePx: number): ResponsiveValue =>
     large: `${desktopPx}px`,
   }) as const;
 
-const fixedPx = (px: number): ResponsiveValue =>
-  ({
-    small: `${px}px`,
-    large: `${px}px`,
-  }) as const;
-
 export const family = {
   satoshi: "Satoshi",
 };
