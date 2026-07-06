@@ -9,7 +9,7 @@ type ModalProps = {
   height?: string;
 } & PropsWithChildren;
 
-const Modal = ({ width, height, children }: ModalProps) =>
+const Modal = ({ width = "auto", height = "auto", children }: ModalProps) =>
   createPortal(
     <Overlay $centerContent>
       <ModalWindow $width={width} $height={height}>
@@ -49,7 +49,7 @@ export const useModal = () => {
   };
 };
 
-const ModalWindow = styled.div<{ $width?: string; $height?: string }>`
+const ModalWindow = styled.div<{ $width: string; $height: string }>`
   display: flex;
   flex-direction: column;
 

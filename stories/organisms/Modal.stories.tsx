@@ -42,6 +42,7 @@ const ModalContent = styled.div`
   flex-direction: column;
   gap: ${Spacing.px8};
 
+  height: 100%;
   padding: ${Spacing.px20};
 `;
 
@@ -71,10 +72,6 @@ const meta: Meta<typeof ModalDemo> = {
   component: Modal,
   tags: ["autodocs"],
   render: (args) => <ModalDemo {...args} />,
-  args: {
-    width: "600px",
-    height: "360px",
-  },
 };
 
 export default meta;
@@ -87,10 +84,16 @@ export const ShortContent: Story = {
   },
 };
 
+const ModalBody = styled.div`
+  overflow-y: auto;
+`;
+
 export const LongContent: Story = {
   args: {
+    width: "500px",
+    height: "300px",
     children: (
-      <div>
+      <ModalBody>
         <p>
           Grantbii is an AI-powered grant intelligence and matching platform
           that helps grant seekers effortlessly find, match, prep & apply for
@@ -112,7 +115,7 @@ export const LongContent: Story = {
           on tools to assess your chances of success and offer expert support to
           ensure your application meets all necessary requirements.
         </p>
-      </div>
+      </ModalBody>
     ),
   },
 };
