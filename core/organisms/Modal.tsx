@@ -77,6 +77,6 @@ const ModalWindow = styled.div<{ $width: string; $height: string }>`
     width: ${({ $width }) => $width};
     height: ${({ $height }) => $height};
 
-    border-radius: ${Spacing.px8};
+    border-radius: ${Spacing.px20};
   }
 `;
