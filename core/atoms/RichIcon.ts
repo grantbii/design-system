@@ -1,1 +1,1 @@
-export * from "country-flag-icons/react/3x2";
+export * as Flag from "country-flag-icons/react/3x2";

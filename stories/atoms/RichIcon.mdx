@@ -1,14 +1,26 @@
 import { Meta } from "@storybook/addon-docs/blocks";
-import { Flags } from "../../index";
+import { RichIcon } from "../../index";
 
 <Meta title="Atoms/Rich Icon" />
 
-# Country Flags
+# Rich Icon
+
+<br />
+
+## Country Flag
 
 You can find the full gallery on:
 
 [https://catamphetamine.gitlab.io/country-flag-icons/3x2/](https://catamphetamine.gitlab.io/country-flag-icons/3x2/)
 
-## Example
+## Usage
 
-<Flags.SG width={40} />
+```tsx
+import { RichIcon } from "@grantbii/design-system";
+
+<RichIcon.Flag.SG width={40} />
+```
+
+## Preview
+
+<RichIcon.Flag.SG width={40} />

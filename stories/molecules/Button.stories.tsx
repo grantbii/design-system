@@ -1,4 +1,4 @@
-import { Button, SystemIcon, Flags } from "@/.";
+import { Button, SystemIcon, RichIcon } from "@/.";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
 const meta: Meta<typeof Button> = {
@@ -204,12 +204,14 @@ export const HrefDisabled: Story = {
   },
 };
 
+const SingaporeFlag = RichIcon.Flag.SG;
+
 export const CustomLabel: Story = {
   args: {
     onClick,
     label: (
       <span>
-        <Flags.SG width={20} /> Singapore
+        <SingaporeFlag width={20} /> Singapore
       </span>
     ),
     variant: "outline",
