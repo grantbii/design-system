@@ -35,6 +35,12 @@ The pages auto-update as you edit the files.
 
 ## Develop
 
+### Structure
+
+The actual UI components live in `core/`.
+
+Storybook stories live in `stories/`.
+
 ### Versioning
 
 Bump version number in `package.json`
@@ -55,10 +61,17 @@ cwebp -exact -lossless -progress your_image.png -o your_image.webp
 
 Bump version in `package.json`
 
-Check which files would be published with `npm publish --dry-run`
+Check which files would be published:
 
-The package is published to npm automatically with [GitHub Actions](.github/workflows/continuous-delivery.yaml).
+```bash
+npm run build
+cd dist/
+npm publish --dry-run
+```
 
-The corresponding documentation is published to GitHub pages automatically with [GitHub Actions](.github/workflows/continuous-delivery.yaml).
+When a commit is pushed to the `prod` branch, the GitHub Actions workflow `deploy-prod.yaml` will automatically:
 
-Once a commit has been made on the `prod` branch, a build would be triggered.
+- build the package with `npm run build`
+- publish the package to npm from `dist/`
+- build Storybook with `npm run build-storybook`
+- publish Storybook to GitHub Pages
