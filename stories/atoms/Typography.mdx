@@ -11,6 +11,17 @@ import { applyTypography, Color, Spacing, Typography } from "../../index";
   caption.
 </Note>
 
+## Usage
+
+```tsx
+import styled from "styled-components";
+import { applyTypography, Typography } from "@grantbii/design-system";
+
+const Title = styled.h1`
+  ${applyTypography(Typography.heading1)};
+`;
+```
+
 ## Font Family
 
 <FontFamilySection>
