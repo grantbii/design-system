@@ -12,6 +12,15 @@ export { default as PageLoader } from "./PageLoader";
 export { default as RadioButton } from "./RadioButton";
 export { default as Textarea } from "./Textarea";
 export {
+  default as Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+  type TooltipContentProps,
+  type TooltipProps,
+  type TooltipSide,
+  type TooltipTriggerProps,
+} from "./Tooltip";
+export {
   default as Toast,
   ToastProvider,
   useToast,
