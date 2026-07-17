@@ -1,204 +1,50 @@
-import { type CSSProperties, useEffect, useRef, useState } from "react";
+import type {
+  ComponentPropsWithoutRef,
+  DetailedHTMLProps,
+  SelectHTMLAttributes,
+} from "react";
 import styled from "styled-components";
-import { Color, Spacing, SystemIcon, Typography } from "../atoms";
-import { applyTypography } from "../integrations";
-import type { Option } from "../types";
+import { Color, Typography } from "../atoms";
+import { type Option } from "../types";
+
+type DropdownOption = Option &
+  Omit<ComponentPropsWithoutRef<"option">, keyof Option | "children">;
 
 export type DropdownProps = {
-  options: Option[];
-  placeholder?: string;
-  value?: string;
-  defaultValue?: string;
-  onChange?: (value: string) => void;
-  disabled?: boolean;
-  width?: CSSProperties["width"];
-  name?: string;
-  form?: string;
-};
+  options: DropdownOption[];
+  defaultLabel?: string;
+} & DetailedHTMLProps<
+  SelectHTMLAttributes<HTMLSelectElement>,
+  HTMLSelectElement
+>;
 
-const Dropdown = ({
-  options,
-  placeholder = "Select an option",
-  value,
-  defaultValue = "",
-  onChange,
-  disabled,
-  width = "100%",
-  name,
-  form,
-}: DropdownProps) => {
-  const [uncontrolledValue, setUncontrolledValue] = useState(defaultValue);
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-  const hiddenInputRef = useRef<HTMLInputElement>(null);
-  const selectedValue = value ?? uncontrolledValue;
-  const selectedOptionIndex = options.findIndex(
-    (option) => option.value === selectedValue,
-  );
-  const initialActiveOptionIndex = Math.max(0, selectedOptionIndex);
-  const [activeOptionIndex, setActiveOptionIndex] = useState(
-    initialActiveOptionIndex,
-  );
-  const triggerButtonRef = useRef<HTMLButtonElement>(null);
+const Dropdown = ({ options, defaultLabel, ...selectProps }: DropdownProps) => (
+  <Select {...selectProps}>
+    <option hidden disabled value="">
+      {defaultLabel ?? "-"}
+    </option>
 
-  useEffect(() => {
-    if (!isOpen) return;
-
-    const close = (event: PointerEvent) => {
-      if (!dropdownRef.current?.contains(event.target as Node))
-        setIsOpen(false);
-    };
-
-    document.addEventListener("pointerdown", close);
-    return () => document.removeEventListener("pointerdown", close);
-  }, [isOpen]);
-
-  useEffect(() => {
-    const formElement = hiddenInputRef.current?.form;
-    if (!formElement || value !== undefined) return;
-
-    const reset = () => {
-      setUncontrolledValue(defaultValue);
-      setIsOpen(false);
-    };
-    formElement.addEventListener("reset", reset);
-    return () => formElement.removeEventListener("reset", reset);
-  }, [defaultValue, value]);
-
-  const openOptions = (index = initialActiveOptionIndex) => {
-    if (!options.length) return;
-    setActiveOptionIndex(index);
-    setIsOpen(true);
-  };
-
-  const selectOption = (index: number) => {
-    const option = options[index];
-    if (!option) return;
-    if (value === undefined) setUncontrolledValue(option.value);
-    onChange?.(option.value);
-    setIsOpen(false);
-    triggerButtonRef.current?.focus();
-  };
-
-  return (
-    <Container
-      ref={dropdownRef}
-      $width={width}
-      onBlur={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget))
-          setIsOpen(false);
-      }}
-    >
-      <Trigger
-        ref={triggerButtonRef}
-        $isOpen={isOpen}
-        type="button"
-        disabled={disabled}
-        onClick={() => (isOpen ? setIsOpen(false) : openOptions())}
-      >
-        <span>{options[selectedOptionIndex]?.label ?? placeholder}</span>
-        <CaretDownIcon $isOpen={isOpen} />
-      </Trigger>
-
-      {name && (
-        <input
-          ref={hiddenInputRef}
-          type="hidden"
-          name={name}
-          form={form}
-          value={selectedValue}
-          disabled={disabled}
-        />
-      )}
-
-      {isOpen && (
-        <Options role="listbox" tabIndex={-1} autoFocus>
-          {options.map((option, index) => (
-            <OptionItem
-              key={option.value}
-              role="option"
-              $isActive={index === activeOptionIndex}
-              onClick={() => selectOption(index)}
-              onMouseEnter={() => setActiveOptionIndex(index)}
-            >
-              {option.label}
-            </OptionItem>
-          ))}
-        </Options>
-      )}
-    </Container>
-  );
-};
+    {options.map(({ label, ...optionProps }) => (
+      <option key={optionProps.value} {...optionProps}>
+        {label}
+      </option>
+    ))}
+  </Select>
+);
 
 export default Dropdown;
 
-const Container = styled.div<{ $width: CSSProperties["width"] }>`
-  position: relative;
-  width: ${({ $width }) =>
-    typeof $width === "number" ? `${$width}px` : $width};
-`;
+const Select = styled.select`
+  padding: 12px 16px;
+  border-radius: 8px;
 
-const Trigger = styled.button<{ $isOpen: boolean }>`
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: ${Spacing.px12};
-  width: 100%;
-  padding: ${Spacing.px12} ${Spacing.px16};
+  font-size: 16px;
+  font-weight: ${Typography.weight.medium};
+
+  background-color: transparent;
   border: 1px solid ${Color.neutral.grey2};
-  border-radius: ${Spacing.px8};
 
-  ${applyTypography(Typography.bodyPrimaryMedium)}
-
-  color: ${Color.neutral.black};
-  background: ${({ $isOpen }) =>
-    $isOpen ? Color.accent.blue3 : Color.neutral.white};
-  cursor: pointer;
-
-  > span {
-    min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  &:active {
+    background-color: ${Color.accent.blue3};
   }
-
-  &:disabled {
-    color: ${Color.typography.blackLow};
-    background: ${Color.neutral.grey4};
-    cursor: not-allowed;
-  }
-`;
-
-const CaretDownIcon = styled(SystemIcon.CaretDownIcon).attrs({ size: 20 })<{
-  $isOpen: boolean;
-}>`
-  flex: none;
-  transform: rotate(${({ $isOpen }) => ($isOpen ? "180deg" : "0")});
-`;
-
-const Options = styled.div`
-  position: absolute;
-  z-index: 1;
-  top: calc(100% + ${Spacing.px8});
-  left: 0;
-  box-sizing: border-box;
-  width: 100%;
-  max-height: 320px;
-  overflow-y: auto;
-  padding: ${Spacing.px4} 0;
-  border: 1px solid ${Color.neutral.grey3};
-  border-radius: ${Spacing.px8};
-  background: ${Color.neutral.white};
-`;
-
-const OptionItem = styled.div<{ $isActive: boolean }>`
-  padding: 10px ${Spacing.px16};
-
-  ${applyTypography(Typography.bodyPrimaryRegular)}
-
-  color: ${Color.neutral.black};
-  background: ${({ $isActive }) =>
-    $isActive ? Color.accent.yellow3 : Color.neutral.white};
-  cursor: pointer;
 `;
