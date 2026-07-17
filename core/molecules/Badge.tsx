@@ -107,17 +107,14 @@ const BaseBadge = styled.div<{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  gap: ${Spacing.px12};
 
   height: 26px;
   padding: 5px ${Spacing.px12};
-  border-radius: 100px;
-
-  font-size: 12px;
-  font-weight: ${Typography.weight.medium};
 
   color: ${(props) => props.$color};
   background-color: ${(props) => props.$defaultBackgroundColor};
+  border-radius: ${Spacing.px100};
 
   cursor: ${(props) => (props.$isClickable ? "pointer" : "auto")};
 
@@ -135,11 +132,11 @@ const BadgeContent = styled.div<{
 }>`
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: ${Spacing.px4};
 
   width: ${({ $widthPixels }) => ($widthPixels ? `${$widthPixels}px` : "auto")};
   max-width: ${({ $hasX: $closeable }) =>
-    $closeable ? "calc(100% - 20px)" : "auto"};
+    $closeable ? `calc(100% - ${Spacing.px20})` : "auto"};
 `;
 
 const IconContainer = styled.div<{ $iconSize?: string | number }>`
@@ -156,7 +153,7 @@ const BadgeLabel = styled.div`
   white-space: nowrap;
   text-overflow: ellipsis;
 
-  ${applyTypography(Typography.bodySecondaryMedium)}
+  ${applyTypography(Typography.captionMedium)}
 `;
 
 type XButtonProps = {
@@ -173,5 +170,5 @@ const BaseCloseButton = styled.button`
   display: flex;
   flex-direction: column;
 
-  min-width: 12px;
+  min-width: ${Spacing.px12};
 `;
