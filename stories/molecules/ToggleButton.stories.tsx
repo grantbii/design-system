@@ -3,9 +3,6 @@ import {
   ToggleButton,
   ToggleButtonGroup,
   ToggleButtonGroupItem,
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
 } from "@/.";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { expect, userEvent, within } from "storybook/test";
@@ -74,19 +71,6 @@ export const Icon: Story = {
     await userEvent.click(toggleButton);
     await expect(toggleButton).toHaveAttribute("data-state", "off");
   },
-};
-
-export const WithTooltip: Story = {
-  render: (args) => (
-    <Tooltip>
-      <TooltipTrigger>
-        <ToggleButton {...args}>
-          <SystemIcon.BookmarkSimpleIcon />
-        </ToggleButton>
-      </TooltipTrigger>
-      <TooltipContent sideOffset={8}>Bookmark</TooltipContent>
-    </Tooltip>
-  ),
 };
 
 export const Text: Story = {
