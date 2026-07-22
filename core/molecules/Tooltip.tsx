@@ -87,10 +87,8 @@ export const TooltipTrigger = ({ children }: TooltipTriggerProps) => {
       ref={tooltipTriggerContainerRef}
       data-slot="tooltip-trigger"
       onMouseEnter={() => setIsOpen(true)}
-      onMouseLeave={() => {
-        if (
-          !tooltipTriggerContainerRef.current?.contains(document.activeElement)
-        )
+      onMouseLeave={(event) => {
+        if (!event.currentTarget.querySelector(":focus-visible"))
           setIsOpen(false);
       }}
       onFocus={() => setIsOpen(true)}
