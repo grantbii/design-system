@@ -255,7 +255,7 @@ const ToastContainer = styled.div<{
   gap: ${Spacing.px16};
 
   box-sizing: border-box;
-  width: ${({ $compact }) => ($compact ? "300px" : "400px")};
+  width: ${({ $compact }) => ($compact ? "300px" : "350px")};
   max-width: calc(100vw - ${Spacing.px40});
   min-height: ${({ $compact }) => ($compact ? "44px" : "64px")};
   padding: ${Spacing.px12};
