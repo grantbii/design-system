@@ -1,4 +1,10 @@
-import { type CSSProperties, useEffect, useRef, useState } from "react";
+import {
+  type CSSProperties,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import styled from "styled-components";
 import { Color, Spacing, SystemIcon, Typography } from "../atoms";
 import { applyTypography } from "../integrations";
@@ -29,7 +35,9 @@ const Dropdown = ({
 }: DropdownProps) => {
   const [uncontrolledValue, setUncontrolledValue] = useState(defaultValue);
   const [isOpen, setIsOpen] = useState(false);
+  const [opensUpward, setOpensUpward] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const optionsRef = useRef<HTMLDivElement>(null);
   const hiddenInputRef = useRef<HTMLInputElement>(null);
   const selectedValue = value ?? uncontrolledValue;
   const selectedOptionIndex = options.findIndex(
@@ -64,6 +72,19 @@ const Dropdown = ({
     formElement.addEventListener("reset", reset);
     return () => formElement.removeEventListener("reset", reset);
   }, [defaultValue, value]);
+
+  useLayoutEffect(() => {
+    if (!isOpen) return;
+
+    const triggerRect = triggerButtonRef.current?.getBoundingClientRect();
+    const optionsHeight = optionsRef.current?.getBoundingClientRect().height;
+    if (!triggerRect || optionsHeight === undefined) return;
+
+    const gap = Number.parseFloat(Spacing.px8);
+    const spaceAbove = triggerRect.top - gap;
+    const spaceBelow = window.innerHeight - triggerRect.bottom - gap;
+    setOpensUpward(optionsHeight > spaceBelow && spaceAbove > spaceBelow);
+  }, [isOpen, options.length]);
 
   const openOptions = (index = initialActiveOptionIndex) => {
     if (!options.length) return;
@@ -112,7 +133,13 @@ const Dropdown = ({
       )}
 
       {isOpen && (
-        <Options role="listbox" tabIndex={-1} autoFocus>
+        <Options
+          ref={optionsRef}
+          role="listbox"
+          tabIndex={-1}
+          autoFocus
+          $opensUpward={opensUpward}
+        >
           {options.map((option, index) => (
             <OptionItem
               key={option.value}
@@ -177,10 +204,13 @@ const CaretDownIcon = styled(SystemIcon.CaretDownIcon).attrs({ size: 20 })<{
   transform: rotate(${({ $isOpen }) => ($isOpen ? "180deg" : "0")});
 `;
 
-const Options = styled.div`
+const Options = styled.div<{ $opensUpward: boolean }>`
   position: absolute;
   z-index: 1;
-  top: calc(100% + ${Spacing.px8});
+  top: ${({ $opensUpward }) =>
+    $opensUpward ? "auto" : `calc(100% + ${Spacing.px8})`};
+  bottom: ${({ $opensUpward }) =>
+    $opensUpward ? `calc(100% + ${Spacing.px8})` : "auto"};
   left: 0;
   box-sizing: border-box;
   width: 100%;
