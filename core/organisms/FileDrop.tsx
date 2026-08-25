@@ -132,7 +132,7 @@ const DropzoneSubtitle = styled.p<{ $isHighlighted?: boolean }>`
   text-align: center;
 
   color: ${({ $isHighlighted = false }) =>
-    $isHighlighted ? Color.accent.yellow1 : Color.typography.blackLow};
+    $isHighlighted ? "#007877" : Color.typography.blackLow};
 
   ${applyTypography(Typography.bodySecondaryRegular)}
 `;
