@@ -180,7 +180,6 @@ const ModalFooter = ({
 }: ModalFooterProps) => {
   const { queryText } = useGrantMatchContext();
   const hasQuery = queryText.trim() !== "" || files.length > 0;
-
   return (
     <BaseModalFooter>
       <Button
@@ -190,11 +189,11 @@ const ModalFooter = ({
         size="small"
       />
 
-      <Button
+      <FindGrantsButton
         label="Find My Grants"
         disabled={!hasQuery}
         onClick={onClickFind}
-        variant="secondary"
+        variant="primary"
         size="small"
       />
     </BaseModalFooter>
@@ -207,4 +206,16 @@ const BaseModalFooter = styled.div`
   gap: ${Spacing.px12};
 
   padding: ${Spacing.px16} ${Spacing.px20};
+`;
+
+const FindGrantsButton = styled(Button)`
+  width: 197px;
+  color: ${Color.typography.whiteHigh};
+  background-color: #0c2d5e;
+  border: 0;
+
+  &:hover:not(:disabled) {
+    color: ${Color.typography.whiteHigh};
+    background-color: #12438b;
+  }
 `;
