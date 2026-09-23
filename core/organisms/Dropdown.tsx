@@ -10,6 +10,19 @@ import { Color, Spacing, SystemIcon, Typography } from "../atoms";
 import { applyTypography } from "../integrations";
 import type { Option } from "../types";
 
+const DROPDOWN_COLORS = {
+  border: "#009493",
+  defaultBorder: "#8A949C",
+  filledBorder: "#313F48",
+  defaultText: "#5B6770",
+  navy: "#092247",
+  hover: "#E6FBFA",
+  selected: "#C1F5F4",
+  menuBorder: "#EBF0F4",
+} as const;
+
+export type DropdownSize = "small" | "medium";
+
 export type DropdownProps = {
   options: Option[];
   placeholder?: string;
@@ -17,6 +30,7 @@ export type DropdownProps = {
   defaultValue?: string;
   onChange?: (value: string) => void;
   disabled?: boolean;
+  size?: DropdownSize;
   width?: CSSProperties["width"];
   name?: string;
   form?: string;
@@ -28,6 +42,7 @@ const Dropdown = ({
   value,
   defaultValue = "",
   onChange,
+  size = "medium",
   disabled,
   width = "100%",
   name,
@@ -43,10 +58,7 @@ const Dropdown = ({
   const selectedOptionIndex = options.findIndex(
     (option) => option.value === selectedValue,
   );
-  const initialActiveOptionIndex = Math.max(0, selectedOptionIndex);
-  const [activeOptionIndex, setActiveOptionIndex] = useState(
-    initialActiveOptionIndex,
-  );
+  const isFilled = selectedOptionIndex >= 0;
   const triggerButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -80,15 +92,14 @@ const Dropdown = ({
     const optionsHeight = optionsRef.current?.getBoundingClientRect().height;
     if (!triggerRect || optionsHeight === undefined) return;
 
-    const gap = Number.parseFloat(Spacing.px8);
+    const gap = Number.parseFloat(Spacing.px4);
     const spaceAbove = triggerRect.top - gap;
     const spaceBelow = window.innerHeight - triggerRect.bottom - gap;
     setOpensUpward(optionsHeight > spaceBelow && spaceAbove > spaceBelow);
   }, [isOpen, options.length]);
 
-  const openOptions = (index = initialActiveOptionIndex) => {
+  const openOptions = () => {
     if (!options.length) return;
-    setActiveOptionIndex(index);
     setIsOpen(true);
   };
 
@@ -112,9 +123,13 @@ const Dropdown = ({
     >
       <Trigger
         ref={triggerButtonRef}
+        $isFilled={isFilled}
         $isOpen={isOpen}
+        $size={size}
         type="button"
         disabled={disabled}
+        aria-expanded={isOpen}
+        aria-haspopup="listbox"
         onClick={() => (isOpen ? setIsOpen(false) : openOptions())}
       >
         <span>{options[selectedOptionIndex]?.label ?? placeholder}</span>
@@ -144,9 +159,9 @@ const Dropdown = ({
             <OptionItem
               key={option.value}
               role="option"
-              $isActive={index === activeOptionIndex}
+              aria-selected={option.value === selectedValue}
+              $isSelected={option.value === selectedValue}
               onClick={() => selectOption(index)}
-              onMouseEnter={() => setActiveOptionIndex(index)}
             >
               {option.label}
             </OptionItem>
@@ -165,22 +180,44 @@ const Container = styled.div<{ $width: CSSProperties["width"] }>`
     typeof $width === "number" ? `${$width}px` : $width};
 `;
 
-const Trigger = styled.button<{ $isOpen: boolean }>`
+const Trigger = styled.button<{
+  $isFilled: boolean;
+  $isOpen: boolean;
+  $size: DropdownSize;
+}>`
   box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: ${Spacing.px12};
+  gap: ${Spacing.px8};
   width: 100%;
-  padding: ${Spacing.px12} ${Spacing.px16};
-  border: 1px solid ${Color.neutral.grey2};
+  height: ${({ $size }) => ($size === "medium" ? "46px" : "40px")};
+  padding: ${({ $size }) =>
+    $size === "medium" ? `${Spacing.px12} ${Spacing.px16}` : `10px 14px`};
+  border: 1px solid
+    ${({ $isFilled, $isOpen }) =>
+      $isOpen
+        ? DROPDOWN_COLORS.border
+        : $isFilled
+          ? DROPDOWN_COLORS.filledBorder
+          : DROPDOWN_COLORS.defaultBorder};
   border-radius: ${Spacing.px8};
 
-  ${applyTypography(Typography.bodyPrimaryMedium)}
+  ${({ $isFilled, $isOpen, $size }) =>
+    applyTypography(
+      $size === "medium"
+        ? $isOpen || $isFilled
+          ? Typography.bodyPrimaryMedium
+          : Typography.bodyPrimaryRegular
+        : $isOpen || $isFilled
+          ? Typography.bodySecondaryMedium
+          : Typography.bodySecondaryRegular,
+    )}
+  line-height: ${({ $size }) => ($size === "medium" ? "22px" : "19px")};
 
-  color: ${Color.neutral.black};
-  background: ${({ $isOpen }) =>
-    $isOpen ? Color.accent.blue3 : Color.neutral.white};
+  color: ${({ $isFilled, $isOpen }) =>
+    $isOpen || $isFilled ? DROPDOWN_COLORS.navy : DROPDOWN_COLORS.defaultText};
+  background: ${Color.neutral.white};
   cursor: pointer;
 
   > span {
@@ -190,9 +227,37 @@ const Trigger = styled.button<{ $isOpen: boolean }>`
     white-space: nowrap;
   }
 
+  &:hover:not(:disabled):not([aria-expanded="true"]) {
+    ${({ $size }) =>
+      applyTypography(
+        $size === "medium"
+          ? Typography.bodyPrimaryRegular
+          : Typography.bodySecondaryRegular,
+      )}
+    color: ${DROPDOWN_COLORS.defaultText};
+    border-color: ${DROPDOWN_COLORS.filledBorder};
+
+    > svg {
+      color: ${DROPDOWN_COLORS.navy};
+    }
+  }
+
+  &:focus-visible:not([aria-expanded="true"]) {
+    ${({ $size }) =>
+      applyTypography(
+        $size === "medium"
+          ? Typography.bodyPrimaryRegular
+          : Typography.bodySecondaryRegular,
+      )}
+    color: ${DROPDOWN_COLORS.navy};
+    border-color: ${DROPDOWN_COLORS.border};
+    outline: none;
+  }
+
   &:disabled {
     color: ${Color.typography.blackLow};
     background: ${Color.neutral.grey4};
+    border-color: ${Color.neutral.grey2};
     cursor: not-allowed;
   }
 `;
@@ -208,27 +273,45 @@ const Options = styled.div<{ $opensUpward: boolean }>`
   position: absolute;
   z-index: 1;
   top: ${({ $opensUpward }) =>
-    $opensUpward ? "auto" : `calc(100% + ${Spacing.px8})`};
+    $opensUpward ? "auto" : `calc(100% + ${Spacing.px4})`};
   bottom: ${({ $opensUpward }) =>
-    $opensUpward ? `calc(100% + ${Spacing.px8})` : "auto"};
+    $opensUpward ? `calc(100% + ${Spacing.px4})` : "auto"};
   left: 0;
   box-sizing: border-box;
   width: 100%;
   max-height: 320px;
   overflow-y: auto;
   padding: ${Spacing.px4} 0;
-  border: 1px solid ${Color.neutral.grey3};
+  border: 1px solid ${DROPDOWN_COLORS.menuBorder};
   border-radius: ${Spacing.px8};
   background: ${Color.neutral.white};
+  box-shadow: 0 2px 4px rgba(9, 34, 71, 0.04);
 `;
 
-const OptionItem = styled.div<{ $isActive: boolean }>`
+const OptionItem = styled.div<{ $isSelected: boolean }>`
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 39px;
   padding: 10px ${Spacing.px16};
+  gap: 10px;
 
-  ${applyTypography(Typography.bodyPrimaryRegular)}
+  ${({ $isSelected }) =>
+    applyTypography(
+      $isSelected
+        ? Typography.bodySecondaryMedium
+        : Typography.bodySecondaryRegular,
+    )}
+  line-height: 19px;
 
-  color: ${Color.neutral.black};
-  background: ${({ $isActive }) =>
-    $isActive ? Color.accent.yellow3 : Color.neutral.white};
+  color: ${DROPDOWN_COLORS.navy};
+  background: ${({ $isSelected }) =>
+    $isSelected ? DROPDOWN_COLORS.selected : Color.neutral.white};
   cursor: pointer;
+
+  &:hover:not([aria-selected="true"]) {
+    ${applyTypography(Typography.bodySecondaryRegular)}
+    background: ${DROPDOWN_COLORS.hover};
+  }
 `;
