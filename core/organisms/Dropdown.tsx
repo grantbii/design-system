@@ -15,6 +15,9 @@ const DROPDOWN_COLORS = {
   defaultBorder: "#8A949C",
   filledBorder: "#313F48",
   defaultText: "#5B6770",
+  disabledBackground: "#F6F8F9",
+  disabledBorder: "#CFD7DC",
+  error: "#C02318",
   navy: "#092247",
   hover: "#E6FBFA",
   selected: "#C1F5F4",
@@ -30,6 +33,7 @@ export type DropdownProps = {
   defaultValue?: string;
   onChange?: (value: string) => void;
   disabled?: boolean;
+  hasError?: boolean;
   size?: DropdownSize;
   width?: CSSProperties["width"];
   name?: string;
@@ -44,6 +48,7 @@ const Dropdown = ({
   onChange,
   size = "medium",
   disabled,
+  hasError = false,
   width = "100%",
   name,
   form,
@@ -123,6 +128,7 @@ const Dropdown = ({
     >
       <Trigger
         ref={triggerButtonRef}
+        $hasError={hasError}
         $isFilled={isFilled}
         $isOpen={isOpen}
         $size={size}
@@ -130,6 +136,7 @@ const Dropdown = ({
         disabled={disabled}
         aria-expanded={isOpen}
         aria-haspopup="listbox"
+        aria-invalid={hasError || undefined}
         onClick={() => (isOpen ? setIsOpen(false) : openOptions())}
       >
         <span>{options[selectedOptionIndex]?.label ?? placeholder}</span>
@@ -181,6 +188,7 @@ const Container = styled.div<{ $width: CSSProperties["width"] }>`
 `;
 
 const Trigger = styled.button<{
+  $hasError: boolean;
   $isFilled: boolean;
   $isOpen: boolean;
   $size: DropdownSize;
@@ -195,28 +203,32 @@ const Trigger = styled.button<{
   padding: ${({ $size }) =>
     $size === "medium" ? `${Spacing.px12} ${Spacing.px16}` : `10px 14px`};
   border: 1px solid
-    ${({ $isFilled, $isOpen }) =>
-      $isOpen
-        ? DROPDOWN_COLORS.border
-        : $isFilled
-          ? DROPDOWN_COLORS.filledBorder
-          : DROPDOWN_COLORS.defaultBorder};
+    ${({ $hasError, $isFilled, $isOpen }) =>
+      $hasError
+        ? DROPDOWN_COLORS.error
+        : $isOpen
+          ? DROPDOWN_COLORS.border
+          : $isFilled
+            ? DROPDOWN_COLORS.filledBorder
+            : DROPDOWN_COLORS.defaultBorder};
   border-radius: ${Spacing.px8};
 
-  ${({ $isFilled, $isOpen, $size }) =>
+  ${({ $hasError, $isFilled, $isOpen, $size }) =>
     applyTypography(
       $size === "medium"
-        ? $isOpen || $isFilled
+        ? !$hasError && ($isOpen || $isFilled)
           ? Typography.bodyPrimaryMedium
           : Typography.bodyPrimaryRegular
-        : $isOpen || $isFilled
+        : !$hasError && ($isOpen || $isFilled)
           ? Typography.bodySecondaryMedium
           : Typography.bodySecondaryRegular,
     )}
   line-height: ${({ $size }) => ($size === "medium" ? "22px" : "19px")};
 
-  color: ${({ $isFilled, $isOpen }) =>
-    $isOpen || $isFilled ? DROPDOWN_COLORS.navy : DROPDOWN_COLORS.defaultText};
+  color: ${({ $hasError, $isFilled, $isOpen }) =>
+    $hasError || $isOpen || $isFilled
+      ? DROPDOWN_COLORS.navy
+      : DROPDOWN_COLORS.defaultText};
   background: ${Color.neutral.white};
   cursor: pointer;
 
@@ -227,7 +239,9 @@ const Trigger = styled.button<{
     white-space: nowrap;
   }
 
-  &:hover:not(:disabled):not([aria-expanded="true"]) {
+  &:hover:not(:disabled):not([aria-expanded="true"]):not(
+      [aria-invalid="true"]
+    ) {
     ${({ $size }) =>
       applyTypography(
         $size === "medium"
@@ -242,7 +256,7 @@ const Trigger = styled.button<{
     }
   }
 
-  &:focus-visible:not([aria-expanded="true"]) {
+  &:focus-visible:not([aria-expanded="true"]):not([aria-invalid="true"]) {
     ${({ $size }) =>
       applyTypography(
         $size === "medium"
@@ -255,9 +269,15 @@ const Trigger = styled.button<{
   }
 
   &:disabled {
-    color: ${Color.typography.blackLow};
-    background: ${Color.neutral.grey4};
-    border-color: ${Color.neutral.grey2};
+    ${({ $size }) =>
+      applyTypography(
+        $size === "medium"
+          ? Typography.bodyPrimaryRegular
+          : Typography.bodySecondaryRegular,
+      )}
+    color: ${DROPDOWN_COLORS.defaultText};
+    background: ${DROPDOWN_COLORS.disabledBackground};
+    border-color: ${DROPDOWN_COLORS.disabledBorder};
     cursor: not-allowed;
   }
 `;
