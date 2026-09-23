@@ -36,6 +36,7 @@ const meta: Meta<typeof DropdownExample> = {
     placeholder: "Select grant objective",
     defaultValue: "",
     disabled: false,
+    hasError: false,
     size: "medium",
     width: 320,
     name: "objective",
@@ -71,6 +72,11 @@ const meta: Meta<typeof DropdownExample> = {
     },
     disabled: {
       description: "Disables the dropdown trigger and form value.",
+      table: { defaultValue: { summary: "false" } },
+      control: "boolean",
+    },
+    hasError: {
+      description: "Displays the error state on the dropdown trigger.",
       table: { defaultValue: { summary: "false" } },
       control: "boolean",
     },
@@ -123,20 +129,19 @@ export const Filled: Story = {
   },
 };
 
-export const FilledSmall: Story = {
+export const ErrorState: Story = {
   args: {
-    defaultValue: Objective.PROCESS_REDESIGN,
-    size: "small",
+    hasError: true,
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    disabled: true,
   },
 };
 
 export const Uncontrolled: Story = {};
-
-export const Small: Story = {
-  args: {
-    size: "small",
-  },
-};
 
 export const FitContent: Story = {
   args: {
