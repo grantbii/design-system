@@ -36,6 +36,7 @@ const meta: Meta<typeof DropdownExample> = {
     placeholder: "Select grant objective",
     defaultValue: "",
     disabled: false,
+    size: "medium",
     width: 320,
     name: "objective",
     onChange: fn(),
@@ -73,6 +74,12 @@ const meta: Meta<typeof DropdownExample> = {
       table: { defaultValue: { summary: "false" } },
       control: "boolean",
     },
+    size: {
+      description: "Trigger size.",
+      table: { defaultValue: { summary: '"medium"' } },
+      control: "radio",
+      options: ["small", "medium"],
+    },
     width: {
       description: "Width of the trigger and dropdown container.",
       table: { defaultValue: { summary: '"100%"' } },
@@ -103,10 +110,33 @@ export const Controlled: Story = {
     await userEvent.click(trigger);
     await userEvent.click(canvas.getAllByRole("option")[0]);
     await expect(trigger).not.toHaveTextContent("Select grant objective");
+    await expect(canvas.getAllByRole("option")[0]).toHaveAttribute(
+      "aria-selected",
+      "true",
+    );
+  },
+};
+
+export const Filled: Story = {
+  args: {
+    defaultValue: Objective.PROCESS_REDESIGN,
+  },
+};
+
+export const FilledSmall: Story = {
+  args: {
+    defaultValue: Objective.PROCESS_REDESIGN,
+    size: "small",
   },
 };
 
 export const Uncontrolled: Story = {};
+
+export const Small: Story = {
+  args: {
+    size: "small",
+  },
+};
 
 export const FitContent: Story = {
   args: {
