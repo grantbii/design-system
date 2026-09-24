@@ -242,13 +242,18 @@ const Trigger = styled.button<{
   &:hover:not(:disabled):not([aria-expanded="true"]):not(
       [aria-invalid="true"]
     ) {
-    ${({ $size }) =>
+    ${({ $isFilled, $size }) =>
       applyTypography(
         $size === "medium"
-          ? Typography.bodyPrimaryRegular
-          : Typography.bodySecondaryRegular,
+          ? $isFilled
+            ? Typography.bodyPrimaryMedium
+            : Typography.bodyPrimaryRegular
+          : $isFilled
+            ? Typography.bodySecondaryMedium
+            : Typography.bodySecondaryRegular,
       )}
-    color: ${DROPDOWN_COLORS.defaultText};
+    color: ${({ $isFilled }) =>
+      $isFilled ? DROPDOWN_COLORS.navy : DROPDOWN_COLORS.defaultText};
     border-color: ${DROPDOWN_COLORS.filledBorder};
 
     > svg {
