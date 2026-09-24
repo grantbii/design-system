@@ -8,6 +8,11 @@ type ExampleProps = DropdownProps & {
   controlled: boolean;
 };
 
+const dropdownOptions = enumToOptions(Objective).slice(0, 5);
+const optionsWithDisabledRow = dropdownOptions.map((option, index) =>
+  index === 2 ? { ...option, disabled: true } : option,
+);
+
 const DropdownExample = ({ controlled, onChange, ...props }: ExampleProps) => {
   const [value, setValue] = useState(props.defaultValue ?? "");
 
@@ -32,7 +37,7 @@ const meta: Meta<typeof DropdownExample> = {
   tags: ["autodocs"],
   args: {
     controlled: false,
-    options: enumToOptions(Objective).slice(0, 5),
+    options: dropdownOptions,
     placeholder: "Select grant objective",
     defaultValue: "",
     disabled: false,
@@ -138,6 +143,20 @@ export const ErrorState: Story = {
 export const Disabled: Story = {
   args: {
     disabled: true,
+  },
+};
+
+export const DisabledRow: Story = {
+  args: {
+    options: optionsWithDisabledRow,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button"));
+    await expect(canvas.getAllByRole("option")[2]).toHaveAttribute(
+      "aria-disabled",
+      "true",
+    );
   },
 };
 

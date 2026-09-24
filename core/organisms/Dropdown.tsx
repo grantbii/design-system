@@ -110,7 +110,7 @@ const Dropdown = ({
 
   const selectOption = (index: number) => {
     const option = options[index];
-    if (!option) return;
+    if (!option || option.disabled) return;
     if (value === undefined) setUncontrolledValue(option.value);
     onChange?.(option.value);
     setIsOpen(false);
@@ -166,7 +166,9 @@ const Dropdown = ({
             <OptionItem
               key={option.value}
               role="option"
+              aria-disabled={option.disabled || undefined}
               aria-selected={option.value === selectedValue}
+              $isDisabled={option.disabled ?? false}
               $isSelected={option.value === selectedValue}
               onClick={() => selectOption(index)}
             >
@@ -313,7 +315,10 @@ const Options = styled.div<{ $opensUpward: boolean }>`
   box-shadow: 0 2px 4px rgba(9, 34, 71, 0.04);
 `;
 
-const OptionItem = styled.div<{ $isSelected: boolean }>`
+const OptionItem = styled.div<{
+  $isDisabled: boolean;
+  $isSelected: boolean;
+}>`
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -322,20 +327,25 @@ const OptionItem = styled.div<{ $isSelected: boolean }>`
   padding: 10px ${Spacing.px16};
   gap: 10px;
 
-  ${({ $isSelected }) =>
+  ${({ $isDisabled, $isSelected }) =>
     applyTypography(
-      $isSelected
-        ? Typography.bodySecondaryMedium
-        : Typography.bodySecondaryRegular,
+      $isDisabled || !$isSelected
+        ? Typography.bodySecondaryRegular
+        : Typography.bodySecondaryMedium,
     )}
   line-height: 19px;
 
-  color: ${DROPDOWN_COLORS.navy};
-  background: ${({ $isSelected }) =>
-    $isSelected ? DROPDOWN_COLORS.selected : Color.neutral.white};
-  cursor: pointer;
+  color: ${({ $isDisabled }) =>
+    $isDisabled ? DROPDOWN_COLORS.filledBorder : DROPDOWN_COLORS.navy};
+  background: ${({ $isDisabled, $isSelected }) =>
+    $isDisabled
+      ? DROPDOWN_COLORS.menuBorder
+      : $isSelected
+        ? DROPDOWN_COLORS.selected
+        : Color.neutral.white};
+  cursor: ${({ $isDisabled }) => ($isDisabled ? "not-allowed" : "pointer")};
 
-  &:hover:not([aria-selected="true"]) {
+  &:hover:not([aria-disabled="true"]):not([aria-selected="true"]) {
     ${applyTypography(Typography.bodySecondaryRegular)}
     background: ${DROPDOWN_COLORS.hover};
   }
